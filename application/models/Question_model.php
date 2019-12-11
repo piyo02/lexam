@@ -143,12 +143,28 @@ class Question_model extends MY_Model
         $this->limit( $limit );
       }
       $this->offset( $start );
-      $this->order_by($this->table.'.id', 'asc');
+      $this->order_by($this->table.'.id', 'desc');
       return $this->fetch_data();
   }
-  public function question_by_questionnaire( $questionnaire_id = NULL )
+  public function question_by_questionnaire_id( $start = 0, $limit = NULL, $questionnaire_id = NULL )
   {
-    
+    $this->select($this->table . '.*');
+    $this->select('test_answer.type as type_option');
+    $this->select('test_answer.answer');
+    $this->select('test_answer.value');
+    $this->join(
+      'test_answer',
+      'test_answer.question_id = question.id',
+      'inner'
+    );
+    $this->questions( $start, $limit );
+    return $this;
+  }
+  public function record_count_by_questionnaire_id( $questionnaire_id = NULL )
+  {
+    $this->db->distinct();
+    $this->db->where('questionnaire_id', $questionnaire_id);
+		return $this->db->count_all_results( $this->table );
   }
 }
 ?>

@@ -55,6 +55,15 @@
                     $form['value'] =  ( isset( $attr['value'] )  ) ? $attr['value'] : $value;
                     echo form_textarea( $form );
                     break;
+                case 'ckeditor':
+                    $value = ((isset($data) && ($data != NULL))   ? (isset($data->$form_name) ? $data->$form_name : '') : '');
+                    $form['rows'] = "5";
+                    $form['value'] = (isset($attr['value'])) ? $attr['value'] : $value;
+                    $form['id'] = 'editor';
+                    echo '<div class="form-group">';
+                    echo form_textarea($form);
+                    echo '</div>';
+                    break;
                 case 'multiple_file':
                     $form['multiple'] = "";
                 case 'file':
