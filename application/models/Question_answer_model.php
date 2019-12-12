@@ -20,10 +20,12 @@ class Question_answer_model extends MY_Model
   public function create( $data )
   {
       // Filter the data passed
-      $data = $this->_filter_data($this->table, $data);
+      // $data = $this->_filter_data($this->table, $data);
 
-      $this->db->insert($this->table, $data);
-      $id = $this->db->insert_id($this->table . '_id_seq');
+      // $this->db->insert($this->table, $data);    
+      $this->db->insert_batch($this->table, $data);
+
+      // $id = $this->db->insert_id($this->table . '_id_seq');
     
       if( isset($id) )
       {
@@ -31,7 +33,7 @@ class Question_answer_model extends MY_Model
         return $id;
       }
       $this->set_error("gagal");
-          return FALSE;
+      return FALSE;
   }
   /**
    * update

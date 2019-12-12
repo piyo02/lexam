@@ -16,51 +16,59 @@ class Question_services
   public function get_table_config( $_page, $start_number = 1 )
   {
       $table["header"] = array(
-        'name' => 'Nama Group',
-        'description' => 'Deskripsi',
+        'text' => 'Soal',
+        'answer' => 'Jawaban',
       );
       $table["number"] = $start_number;
       $table[ "action" ] = array(
-              array(
-                "name" => 'Edit',
-                "type" => "modal_form",
-                "modal_id" => "edit_",
-                "url" => site_url( $_page."edit/"),
-                "button_color" => "primary",
-                "param" => "id",
-                "form_data" => array(
-                    "id" => array(
-                        'type' => 'hidden',
-                        'label' => "id",
-                    ),
-                    "name" => array(
-                        'type' => 'text',
-                        'label' => "Nama Group",
-                    ),
-                    "description" => array(
-                        'type' => 'textarea',
-                        'label' => "Deskripsi",
-                    ),
-                ),
-                "title" => "Group",
-                "data_name" => "name",
-              ),
-              array(
-                "name" => 'X',
-                "type" => "modal_delete",
-                "modal_id" => "delete_",
-                "url" => site_url( $_page."delete/"),
-                "button_color" => "danger",
-                "param" => "id",
-                "form_data" => array(
-                  "id" => array(
-                    'type' => 'hidden',
-                    'label' => "id",
-                  ),
-                ),
-                "title" => "Group",
-                "data_name" => "name",
-              ),
+		array(
+			"name" => 'Detail',
+			"type" => "link",
+			"modal_id" => "edit_",
+			"url" => site_url( $_page."detail/"),
+			"button_color" => "success",
+			"param" => "id",
+		  ),	  
+		array(
+			"name" => 'Edit',
+			"type" => "modal_form",
+			"modal_id" => "edit_",
+			"url" => site_url( $_page."edit/"),
+			"button_color" => "primary",
+			"param" => "id",
+			"form_data" => array(
+				"id" => array(
+					'type' => 'hidden',
+					'label' => "id",
+				),
+				"name" => array(
+					'type' => 'text',
+					'label' => "Nama Group",
+				),
+				"description" => array(
+					'type' => 'textarea',
+					'label' => "Deskripsi",
+				),
+			),
+			"title" => "Group",
+			"data_name" => "name",
+		),
+		array(
+			"name" => 'X',
+			"type" => "modal_delete",
+			"modal_id" => "delete_",
+			"url" => site_url( $_page."delete/"),
+			"button_color" => "danger",
+			"param" => "id",
+			"form_data" => array(
+				"id" => array(
+				'type' => 'hidden',
+				'label' => "id",
+				),
+			),
+			"title" => "Group",
+			"data_name" => "code",
+		),
     );
     return $table;
   }
@@ -190,7 +198,7 @@ class Question_services
 	public function get_form_image_question()
 	{
 		$_data["form_data"] = array(
-			"gambar" => array(
+			"image" => array(
 				'type' => 'file',
 				'label' => "Soal gambar",
 			),

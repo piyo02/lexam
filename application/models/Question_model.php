@@ -148,15 +148,17 @@ class Question_model extends MY_Model
   }
   public function question_by_questionnaire_id( $start = 0, $limit = NULL, $questionnaire_id = NULL )
   {
+    $this->select('CONCAT("'.base_url('uploads/answer/').'", "", "image") AS image_answer');
     $this->select($this->table . '.*');
-    $this->select('test_answer.type as type_option');
-    $this->select('test_answer.answer');
-    $this->select('test_answer.value');
+    $this->select('question_answer.type as type_option');
+    $this->select('question_answer.answer');
+    $this->select('question_answer.value');
     $this->join(
-      'test_answer',
-      'test_answer.question_id = question.id',
+      'question_answer',
+      'question_answer.question_id = question.id',
       'inner'
     );
+    $this->where('question_answer.value >', 0);
     $this->questions( $start, $limit );
     return $this;
   }

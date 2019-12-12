@@ -13,8 +13,10 @@ class Question extends Teacher_Controller {
 		$this->load->model(array(
 			'group_model',
 			'question_model',
+			'question_answer_model',
 			'questionnaire_model',
 		));
+		$this->data[ "menu_list_id" ] =  'questionnaire_index';
 
 	}
 	public function questionnaire($questionnaire_id)
@@ -38,7 +40,7 @@ class Question extends Teacher_Controller {
 		$table = $this->services->get_table_config( $this->current_page );
 		$table[ "rows" ] = $this->question_model->question_by_questionnaire_id( $pagination['start_record'], $pagination['limit_per_page'], $questionnaire_id )->result();
 		// var_dump( $table[ "rows" ] ); die;
-		$table = $this->load->view('templates/tables/plain_table', $table, true);
+		$table = $this->load->view('templates/tables/plain_table_question', $table, true);
 		$this->data[ "contents" ] = $table;
 		$add_menu = array(
 			"name" => "Tambah Soal",
@@ -70,11 +72,6 @@ class Question extends Teacher_Controller {
 					'label' => "Tipe Jawaban",
 					'value' => $questionnaire_id
 				),
-				// 'p' => array(
-				// 	'type' => 'hidden',
-				// 	'label' => "Tipe Jawaban",
-				// 	'value' => 1
-				// ),
 			),
 			'data' => NULL
 		);
@@ -107,18 +104,22 @@ class Question extends Teacher_Controller {
         if ($this->form_validation->run() === TRUE )
         {
 			$code = $this->generate_code();
+			var_dump($this->upload_image($code)); die;
+		
 			
 			//method get question
 			$method_question = "get_".$this->input->post('type')."_question";
 			$question = $this->$method_question($code);
-			$question_id = $this->question_model->create($question);
+			// $question_id = $this->question_model->create( $question );
 
 			//method get option
+			$question_id = 1;
 			$method_option = "get_".$this->input->post('type_option')."_option";
 			$option = $this->$method_option($question_id);
-			$this->test_answer;
+			$result = $this->question_answer_model->create( $option );
+			// var_dump($option); die;
 			
-			if( $this->group_model->create( $data ) ){
+			if( $result ){
 				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->group_model->messages() ) );
 			}else{
 				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->group_model->errors() ) );
@@ -221,11 +222,11 @@ class Question extends Teacher_Controller {
 		for ($i = 0; $i < 5; $i++) {
 			$_option['question_id'] = $question_id;
 			$_option['type']    = 'text';
-			$_option['option'] = $this->input->post('option_' . $i);
+			$_option['answer'] = $this->input->post('option_' . $i);
 
-			$_option['skor']    = 0;
+			$_option['value']    = 0;
 			if (null !== $this->input->post('option_5') && $this->input->post('option_5') == $i)
-				$_option['skor'] = 1;
+				$_option['value'] = 1;
 			if (null !== $this->input->post('data_' . $i))
 				$_option['id'] = $this->input->post('data_' . $i);
 			$_data_option[] = $_option;
@@ -256,24 +257,30 @@ class Question extends Teacher_Controller {
 	}
 	public function upload_image($code)
 	{
-		$config['file_name'] 		=  $_FILES['image']['name'].$code."_".time();
+		$file = $_FILES['image'];
+
+		$config['file_name'] 		=  $_FILES['image']['name']."_".$code."_".time();
 		$config['upload_path']		= './uploads/question/';
 		$config['allowed_types']    = 'gif|jpg|png|jpeg';
 		$config['overwrite']		= "true";
 		$config['max_size']			= 20000000;
 		// var_dump($config); die;
-		// $_FILES['gambar']['name']     = $id . '_' . time() . '_' . $file['name'];
-		// $_FILES['gambar']['type']     = $file['type'];
-		// $_FILES['gambar']['tmp_name'] = $file['tmp_name'];
-		// $_FILES['gambar']['error']    = $file['error'];
-		// $_FILES['gambar']['size']     = $file['size'];
-
+		
+		// $_FILES['image']['name']     = $_FILES['image']['name']."_".$code."_".time();
+		// $_FILES['image']['type']     = $file['type'];
+		// $_FILES['image']['tmp_name'] = $file['tmp_name'];
+		// $_FILES['image']['error']    = $file['error'];
+		// $_FILES['image']['size']     = $file['size'];
+		// var_dump($_FILES); die;
 
 		$this->load->library('upload', $config);
-		if ( ! $this->upload->do_upload( $file ) )
+		// var_dump($this->load->library('upload', $config));
+		// var_dump($this->upload->do_multi_upload( 'image' ));
+		// die;
+		if ( ! $this->upload->do_upload( 'image' ) )
 		{
-			$this->set_error( $this->upload->display_errors() );
-			$this->set_error( 'upload_unsuccessful' );
+			// $this->set_error( $this->upload->display_errors() );
+			// $this->set_error( 'upload_unsuccessful' );
 			return FALSE;
 		}
 		else
