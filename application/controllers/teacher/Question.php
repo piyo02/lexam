@@ -258,27 +258,20 @@ class Question extends Teacher_Controller {
 	public function upload_image($code)
 	{
 		$file = $_FILES['image'];
+		$upload_path = 'uploads/question/';
 
-		$config['file_name'] 		=  $_FILES['image']['name']."_".$code."_".time();
-		$config['upload_path']		= './uploads/question/';
+		$config['file_name'] 		=  $code."_".time() . "_" . $_FILES['image']['name'];
+		$config['upload_path']		= './' . $upload_path;
 		$config['allowed_types']    = 'gif|jpg|png|jpeg';
 		$config['overwrite']		= "true";
 		$config['max_size']			= 20000000;
-		// var_dump($config); die;
-		
-		// $_FILES['image']['name']     = $_FILES['image']['name']."_".$code."_".time();
-		// $_FILES['image']['type']     = $file['type'];
-		// $_FILES['image']['tmp_name'] = $file['tmp_name'];
-		// $_FILES['image']['error']    = $file['error'];
-		// $_FILES['image']['size']     = $file['size'];
-		// var_dump($_FILES); die;
+		var_dump($config);
 
 		$this->load->library('upload', $config);
-		// var_dump($this->load->library('upload', $config));
-		// var_dump($this->upload->do_multi_upload( 'image' ));
-		// die;
-		if ( ! $this->upload->do_upload( 'image' ) )
+		
+		if ( ! $this->upload->do_upload( "image" ) )
 		{
+			var_dump($this->upload->display_errors()); die;
 			// $this->set_error( $this->upload->display_errors() );
 			// $this->set_error( 'upload_unsuccessful' );
 			return FALSE;
@@ -287,6 +280,7 @@ class Question extends Teacher_Controller {
 		{
 			$file_data = $this->upload->data();
 			$data['image'] = $file_data['file_name'];
+			var_dump('oke'); die;
 			$success = TRUE;
 		}
 	}
