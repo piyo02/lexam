@@ -71,7 +71,7 @@ class Question_model extends MY_Model
   {
     //foreign
     //delete_foreign( $data_param. $models[]  )
-    if( !$this->delete_foreign( $data_param, ['menu_model'] ) )
+    if( !$this->delete_foreign( $data_param, ['question_answer_model'] ) )
     {
       $this->set_error("gagal");//('group_delete_unsuccessful');
       return FALSE;
@@ -148,7 +148,8 @@ class Question_model extends MY_Model
   }
   public function question_by_questionnaire_id( $start = 0, $limit = NULL, $questionnaire_id = NULL )
   {
-    $this->select('CONCAT("'.base_url('uploads/answer/').'", "", "image") AS image_answer');
+    $this->select('CONCAT("'.base_url('uploads/question/').'", "", question.image) AS image_quest');
+    $this->select('CONCAT("'.base_url('uploads/answer/').'", "", question_answer.answer) AS image_answer');
     $this->select($this->table . '.*');
     $this->select('question_answer.type as type_option');
     $this->select('question_answer.answer');

@@ -29,30 +29,14 @@ class Question_services
 			"button_color" => "success",
 			"param" => "id",
 		  ),	  
-		array(
-			"name" => 'Edit',
-			"type" => "modal_form",
-			"modal_id" => "edit_",
-			"url" => site_url( $_page."edit/"),
-			"button_color" => "primary",
-			"param" => "id",
-			"form_data" => array(
-				"id" => array(
-					'type' => 'hidden',
-					'label' => "id",
-				),
-				"name" => array(
-					'type' => 'text',
-					'label' => "Nama Group",
-				),
-				"description" => array(
-					'type' => 'textarea',
-					'label' => "Deskripsi",
-				),
-			),
-			"title" => "Group",
-			"data_name" => "name",
-		),
+		// array(
+		// 	"name" => 'Edit',
+		// 	"type" => "link",
+		// 	"modal_id" => "edit_",
+		// 	"url" => site_url( $_page."edit/"),
+		// 	"button_color" => "primary",
+		// 	"param" => "id",
+		// ),
 		array(
 			"name" => 'X',
 			"type" => "modal_delete",
@@ -62,8 +46,12 @@ class Question_services
 			"param" => "id",
 			"form_data" => array(
 				"id" => array(
-				'type' => 'hidden',
-				'label' => "id",
+					'type' => 'hidden',
+					'label' => "id",
+				),
+				"questionnaire_id" => array(
+					'type' => 'hidden',
+					'label' => "questionnaire_id",
 				),
 			),
 			"title" => "Group",
@@ -153,7 +141,7 @@ class Question_services
 				'rules' =>  'trim|required',
 			),
 			array(
-				'field' => 'skor',
+				'field' => 'value',
 				'label' => 'Nilai Jawaban',
 				'rules' =>  'trim|required',
 			),
@@ -247,8 +235,8 @@ class Question_services
 				'label' => $opsi[$i],
 			);
 			if ($data) {
-				$_data["form_data"]['option_' . $i]['value'] = $data[$i]->jawaban;
-				if ($data[$i]->skor == 1)
+				$_data["form_data"]['option_' . $i]['value'] = $data[$i]->answer;
+				if ($data[$i]->value == 1)
 					$value = $i;
 				$_data["form_data"]['data_' . $i] = array(
 					'type' => 'hidden',
@@ -258,7 +246,7 @@ class Question_services
 				$_data["form_data"]['type'] = array(
 					'type' => 'hidden',
 					'label' => 'type option',
-					'value' => 'teks'
+					'value' => 'text'
 				);
 			}
 		}
@@ -330,13 +318,13 @@ class Question_services
 			'type' => 'text',
 			'label' => "Jawaban *panjang karakter hanya 255",
 		);
-		$_data["form_data"]["skor"] = array(
+		$_data["form_data"]["value"] = array(
 			'type' => 'number',
 			'label' => "Skor",
 		);
 		if ($data) {
 			$_data["form_data"]['option_4']['value'] = $data[0]->jawaban;
-			$_data["form_data"]['skor']['value'] = $data[0]->skor;
+			$_data["form_data"]['value']['value'] = $data[0]->value;
 			$_data["form_data"]['data_4'] = array(
 				'type' => 'hidden',
 				'label' => "id",
@@ -364,13 +352,13 @@ class Question_services
 			'readonly' => 'readonly',
 			'value' => 'Soal esai'
 		);
-		$_data["form_data"]['skor'] = array(
+		$_data["form_data"]['value'] = array(
 			'type' => 'number',
 			'label' => "Skor",
 		);
 		if ($data) {
 			$_data["form_data"]['option_4']['type'] = 'hidden';
-			$_data["form_data"]['skor']['value'] = $data[0]->skor;
+			$_data["form_data"]['value']['value'] = $data[0]->value;
 			$_data["form_data"]['data_4'] = array(
 				'type' => 'hidden',
 				'label' => "id",

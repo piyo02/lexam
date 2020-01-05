@@ -103,28 +103,26 @@ class Question extends Teacher_Controller {
 		$this->form_validation->set_rules( 'text', 'Soal', 'required|trim' );
         if ($this->form_validation->run() === TRUE )
         {
+			$questionnaire_id = $this->input->post('questionnaire_id');
 			$code = $this->generate_code();
-			var_dump($this->upload_image($code)); die;
-		
 			
 			//method get question
 			$method_question = "get_".$this->input->post('type')."_question";
 			$question = $this->$method_question($code);
-			// $question_id = $this->question_model->create( $question );
-
+			$question_id = $this->question_model->create( $question );
 			//method get option
-			$question_id = 1;
+			// $question_id = 1;
 			$method_option = "get_".$this->input->post('type_option')."_option";
-			$option = $this->$method_option($question_id);
+			$option = $this->$method_option($question_id, $code);
 			$result = $this->question_answer_model->create( $option );
 			// var_dump($option); die;
 			
 			if( $result ){
-				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->group_model->messages() ) );
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->question_model->messages() ) );
 			}else{
-				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->group_model->errors() ) );
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->question_model->errors() ) );
 			}
-			redirect( site_url($this->current_page)  );
+			redirect( site_url($this->current_page . 'questionnaire/' . $questionnaire_id) );
 		}
         else
         {
@@ -179,31 +177,44 @@ class Question extends Teacher_Controller {
 
 			$data_param['id'] = $this->input->post( 'id' );
 
-			if( $this->group_model->update( $data, $data_param  ) ){
-				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->group_model->messages() ) );
+			if( $this->question_model->update( $data, $data_param  ) ){
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->question_model->messages() ) );
 			}else{
-				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->group_model->errors() ) );
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->question_model->errors() ) );
 			}
 		}
         else
         {
-          $this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->group_model->errors() : $this->session->flashdata('message')));
-          if(  validation_errors() || $this->group_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
+			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->question_model->errors() : $this->session->flashdata('message')));
+			if(  validation_errors() || $this->question_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
+		  
+			#################################################################3
+			$alert = $this->session->flashdata('alert');
+			$this->data["questionnaire_id"] = $questionnaire_id;
+			$this->data["key"] = $this->input->get('key', FALSE);
+			$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
+			$this->data["current_page"] = $this->current_page;
+			$this->data["block_header"] = "Daftar Soal";
+			$this->data["header"] = "Edit Soal";
+			$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
+			$this->render( "teacher/question/add_question" );
 		}
 		
 		redirect( site_url($this->current_page)  );
 	}
 
 	public function delete(  ) {
-		if( !($_POST) ) redirect( site_url($this->current_page) );
-	  
+		if( !($_POST) ) redirect( site_url($this->parent_page . 'questionnaire') );
+		$questionnaire_id = $this->input->post('questionnaire_id');
+
 		$data_param['id'] 	= $this->input->post('id');
-		if( $this->group_model->delete( $data_param ) ){
-		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->group_model->messages() ) );
+		// var_dump($this->input->post('questionnaire_id')); die;
+		if( $this->question_model->delete( $data_param ) ){
+		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->question_model->messages() ) );
 		}else{
-		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->group_model->errors() ) );
+		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->question_model->errors() ) );
 		}
-		redirect( site_url($this->current_page)  );
+		redirect( site_url($this->current_page . 'questionnaire/' . $questionnaire_id)  );
 	}
 	
 	private function get_text_question($code)
@@ -217,7 +228,7 @@ class Question extends Teacher_Controller {
 		return $data;
 	
 	}
-	public function get_text_option($question_id)
+	public function get_text_option($question_id, $code = null)
 	{
 		for ($i = 0; $i < 5; $i++) {
 			$_option['question_id'] = $question_id;
@@ -235,15 +246,62 @@ class Question extends Teacher_Controller {
 	}
 	private function get_image_question($code)
 	{
+		$questionnaire_id = $this->input->post('questionnaire_id');
 		$data = [
 			'code' => $code,
-			'bank_soal_id' => $this->input->get('b'),
+			'questionnaire_id' => $questionnaire_id,
 			'type' => 'gambar',
 			'text' => $this->input->post('text'),
 		];
 		$data['image'] = $this->upload_image($code);
+		if( ! $data['image'])
+		{
+			echo 1;
+			$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, 'Gagal Membuat Soal, Cek Kembali Gambar yang di Upload' ) );
+			redirect( site_url($this->current_page . '/questionnaire/' . $questionnaire_id) );
+		}
 		return $data;
 	}
+	public function get_image_option($question_id, $code)
+	{
+		for ($i = 0; $i < 5; $i++) {
+			
+			$_option['question_id'] = $question_id;
+			$_option['type']    = 'image';
+			$_option['answer'] = $this->upload_image_option( $code, $i );
+
+			$_option['value']    = 0;
+			if (null !== $this->input->post('option_5') && $this->input->post('option_5') == $i)
+				$_option['value'] = 1;
+			if (null !== $this->input->post('data_' . $i))
+				$_option['id'] = $this->input->post('data_' . $i);
+			$_data_option[] = $_option;
+		}
+		return $_data_option;
+	}
+
+	public function get_short_answer_option($question_id, $code)
+	{
+		$data[] = [
+			'question_id' => $question_id,
+			'type' => 'short_answer',
+			'answer' => $this->input->post('option_4'),
+			'value' => $this->input->post('value'),
+		];
+		return $data;
+	}
+
+	public function get_essay_option($question_id, $code)
+	{
+		$data[] = [
+			'question_id' => $question_id,
+			'type' => 'short_answer',
+			'answer' => $this->input->post('option_4'),
+			'value' => $this->input->post('value'),
+		];
+		return $data;
+	}
+
 	private function generate_code()
 	{
 		$data = $this->question_model->question_by_questionnaire_id(0, NULL, $this->input->get('questionnaire_id'))->row();
@@ -257,21 +315,19 @@ class Question extends Teacher_Controller {
 	}
 	public function upload_image($code)
 	{
-		$file = $_FILES['image'];
+		$upload = $this->config->item('upload', 'ion_auth');
+
+		$file = $_FILES[ 'image' ];
 		$upload_path = 'uploads/question/';
 
-		$config['file_name'] 		=  $code."_".time() . "_" . $_FILES['image']['name'];
-		$config['upload_path']		= './' . $upload_path;
-		$config['allowed_types']    = 'gif|jpg|png|jpeg';
-		$config['overwrite']		= "true";
-		$config['max_size']			= 20000000;
-		var_dump($config);
-
+		$config 				= $upload;
+		$config['file_name'] 	=  $code."_".time() . "_" . $file['name'];
+		$config['upload_path']	= './' . $upload_path;
+		
 		$this->load->library('upload', $config);
 		
-		if ( ! $this->upload->do_upload( "image" ) )
+		if ( ! $this->upload->do_upload( 'image' ) )
 		{
-			var_dump($this->upload->display_errors()); die;
 			// $this->set_error( $this->upload->display_errors() );
 			// $this->set_error( 'upload_unsuccessful' );
 			return FALSE;
@@ -279,9 +335,32 @@ class Question extends Teacher_Controller {
 		else
 		{
 			$file_data = $this->upload->data();
-			$data['image'] = $file_data['file_name'];
-			var_dump('oke'); die;
-			$success = TRUE;
+			return $file_data['file_name'];
+		}
+	}
+	public function upload_image_option( $code, $index = 0 )
+	{
+		$upload = $this->config->item('upload', 'ion_auth');
+
+		$file = $_FILES[ 'option' ];
+		$upload_path = 'uploads/answer/';
+
+		$config 				= $upload;
+		$config['file_name'] 	=  time() . "_" . $file['name'][ $index ];
+		$config['upload_path']	= './' . $upload_path;
+		
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_multi_upload( 'option' ) )
+		{
+			// $this->set_error( $this->upload->display_errors() );
+			// $this->set_error( 'upload_unsuccessful' );
+			return FALSE;
+		}
+		else
+		{
+			$file_data = $this->upload->data();
+			return $file_data['file_name'];
 		}
 	}
 }

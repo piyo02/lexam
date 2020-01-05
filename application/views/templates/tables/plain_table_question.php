@@ -28,7 +28,7 @@
                                         $image = "";
                                         $question = $row->$key;
                                         if ($row->image != NULL)
-                                            $image = '<img src="' . $row->image_answer . '" width="150px" height="150px">';
+                                            $image = '<img src="' . $row->image_quest . '" width="150px" height="150px">';
                                         $attr =  '<div>
                                                         <div>
                                                             <p><b>Kode: ' . $row->code . '</b></p>
