@@ -103,6 +103,8 @@ class Question_model extends MY_Model
    */
   public function question( $id = NULL  )
   {
+    $this->select($this->table . '.*');
+    $this->select('CONCAT("'.base_url('uploads/question/').'", "", question.image) AS image_quest');
       if (isset($id))
       {
         $this->where($this->table.'.id', $id);

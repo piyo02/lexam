@@ -141,5 +141,19 @@ class Question_answer_model extends MY_Model
       return $this->fetch_data();
   }
 
+  public function question_answer_by_question_id( $question_id = NULL  )
+  {
+      if (isset($question_id))
+      {
+        $this->where($this->table.'.question_id', $question_id);
+      }
+
+      $this->order_by($this->table.'.id', 'desc');
+
+      $this->question_answers(  );
+
+      return $this;
+  }
+
 }
 ?>

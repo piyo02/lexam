@@ -159,9 +159,81 @@ class Question extends Teacher_Controller {
 			$this->data["block_header"] = "Tambah Soal";
 			$this->data["header"] = "Tambah Soal";
 			$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
-			$this->render( "teacher/question/add_question" );
+			$this->render( "teacher/question/add" );
 		}
 		
+	}
+
+	public function detail( $question_id )
+	{
+		$question = $this->question_model->question( $question_id )->row();
+		$option = $this->question_answer_model->question_answer_by_question_id( $question_id )->result();
+		$this->data['question'] = $question;
+		// var_dump($option); die;
+
+		//id, type, answer, value
+		$edit_quest = array(
+			"name" => "Edit",
+			"modal_id" => "edit_question_",
+			"button_color" => "primary",
+			"url" => site_url( $this->current_page."edit"),
+			"form_data" => array(
+				"id" => array(
+					'type' => 'hidden',
+					'label' => "id soal",
+					'value' => $question->id
+				),
+				"text" => array(
+					'type' => 'ckeditor',
+					'label' => "Soal",
+					'value' => $question->text
+				),
+			),
+			'data' => NULL
+		);
+		$edit_quest = $this->load->view('templates/actions/modal_form_lg', $edit_quest, true ); 
+		$this->data['edit_quest'] = $edit_quest;
+
+		if($question->type == 'image') {
+			$edit_image_quest = array(
+				"name" => "Edit",
+				"modal_id" => "edit_image_question_",
+				"button_color" => "primary",
+				"url" => site_url( $this->current_page."edit"),
+				"form_data" => array(
+					"id" => array(
+						'type' => 'hidden',
+						'label' => "id soal",
+						'value' => $question->id
+					),
+					"image_old" => array(
+						'type' => 'hidden',
+						'label' => "gambar",
+						'value' => $question->image
+					),
+					"image" => array(
+						'type' => 'file',
+						'label' => "Gambar",
+					),
+				),
+				'data' => NULL
+			);
+			$edit_image_quest = $this->load->view('templates/actions/modal_form_multipart', $edit_image_quest, true ); 
+			$this->data['edit_image_quest'] = $edit_image_quest;
+		}
+		
+
+
+		#################################################################3
+		$alert = $this->session->flashdata('alert');
+		$this->data["question_id"] = $question_id;
+		$this->data["key"] = $this->input->get('key', FALSE);
+		$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
+		$this->data["current_page"] = $this->current_page;
+		$this->data["block_header"] = "Detail Soal";
+		$this->data["header"] = "Detail Soal";
+		$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
+		$this->render( "teacher/question/detail" );
 	}
 
 	public function edit(  )
@@ -185,19 +257,8 @@ class Question extends Teacher_Controller {
 		}
         else
         {
-			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->question_model->errors() : $this->session->flashdata('message')));
-			if(  validation_errors() || $this->question_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
-		  
-			#################################################################3
-			$alert = $this->session->flashdata('alert');
-			$this->data["questionnaire_id"] = $questionnaire_id;
-			$this->data["key"] = $this->input->get('key', FALSE);
-			$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
-			$this->data["current_page"] = $this->current_page;
-			$this->data["block_header"] = "Daftar Soal";
-			$this->data["header"] = "Edit Soal";
-			$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
-			$this->render( "teacher/question/add_question" );
+          $this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->question_model->errors() : $this->session->flashdata('message')));
+          if(  validation_errors() || $this->question_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
 		}
 		
 		redirect( site_url($this->current_page)  );
@@ -250,7 +311,7 @@ class Question extends Teacher_Controller {
 		$data = [
 			'code' => $code,
 			'questionnaire_id' => $questionnaire_id,
-			'type' => 'gambar',
+			'type' => 'image',
 			'text' => $this->input->post('text'),
 		];
 		$data['image'] = $this->upload_image($code);
