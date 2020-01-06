@@ -56,6 +56,37 @@
                 </div>
                 <?php echo (isset($edit_quest)) ? $edit_quest : '';  ?>
               </div>
+              <div class="content mt-4">
+                <?php 
+                $label = ['A', 'B', 'C', 'D', 'E'];
+                $i = 0;
+                foreach ($options as $key => $option) : ?>
+                  <p class="mt-3 ml-1"><?= $label[$i] . ". " . $option->answer ?></p>
+                <?php
+                    $edit_quest = array(
+                      "name" => "Edit",
+                      "modal_id" => "edit_option_$option->id",
+                      "button_color" => "primary",
+                      "url" => $url . 'edit',
+                      "form_data" => array(
+                        "id" => array(
+                          'type' => 'hidden',
+                          'label' => "id option",
+                          'value' => $option->id
+                        ),
+                        "answer" => array(
+                          'type' => 'text',
+                          'label' => "Option $label[$i]",
+                          'value' => $option->answer
+                        ),
+                      ),
+                      'data' => NULL
+                    );
+                    echo $this->load->view('templates/actions/modal_form_lg', $edit_quest, true ); 
+
+                $i++;
+              endforeach; ?>
+              </div>
               <!--  -->
             </div>
           </div>

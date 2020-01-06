@@ -166,10 +166,14 @@ class Question extends Teacher_Controller {
 
 	public function detail( $question_id )
 	{
+		$this->data['url'] = site_url( $this->current_page);
+
 		$question = $this->question_model->question( $question_id )->row();
-		$option = $this->question_answer_model->question_answer_by_question_id( $question_id )->result();
 		$this->data['question'] = $question;
-		// var_dump($option); die;
+
+		$options = $this->question_answer_model->question_answer_by_question_id( $question_id )->result();
+		$this->data['options'] = $options;
+		// var_dump($options); die;
 
 		//id, type, answer, value
 		$edit_quest = array(
@@ -395,6 +399,10 @@ class Question extends Teacher_Controller {
 		}
 		else
 		{
+			if(NULL !== $this->input->post('image_old')){
+				if($this->input->post('image_old') != 'default.jpg')
+					@unlink( $config['upload_path'].$file_name );
+			}
 			$file_data = $this->upload->data();
 			return $file_data['file_name'];
 		}
@@ -403,11 +411,16 @@ class Question extends Teacher_Controller {
 	{
 		$upload = $this->config->item('upload', 'ion_auth');
 
-		$file = $_FILES[ 'option' ];
+		$file = $_FILES[ 'option' ]['name'][$index];
+		if($file != 'null'){
+			$filename = time() . "_" . $file;
+		} else {
+			$filename = 'default.jpg';
+		}
 		$upload_path = 'uploads/answer/';
 
 		$config 				= $upload;
-		$config['file_name'] 	=  time() . "_" . $file['name'][ $index ];
+		$config['file_name'] 	= $filename;
 		$config['upload_path']	= './' . $upload_path;
 		
 		$this->load->library('upload', $config);
