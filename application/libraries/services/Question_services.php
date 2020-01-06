@@ -49,6 +49,22 @@ class Question_services
 					'type' => 'hidden',
 					'label' => "id",
 				),
+				"type" => array(
+					'type' => 'hidden',
+					'label' => "id",
+				),
+				"type_option" => array(
+					'type' => 'hidden',
+					'label' => "id",
+				),
+				"image_quest_old" => array(
+					'type' => 'hidden',
+					'label' => "id",
+				),
+				"image_opt_old" => array(
+					'type' => 'hidden',
+					'label' => "id",
+				),
 				"questionnaire_id" => array(
 					'type' => 'hidden',
 					'label' => "questionnaire_id",

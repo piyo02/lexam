@@ -150,6 +150,8 @@ class Question_model extends MY_Model
   }
   public function question_by_questionnaire_id( $start = 0, $limit = NULL, $questionnaire_id = NULL )
   {
+    $this->select('question.image AS image_quest_old');
+    $this->select('question_answer.answer AS image_opt_old');
     $this->select('CONCAT("'.base_url('uploads/question/').'", "", question.image) AS image_quest');
     $this->select('CONCAT("'.base_url('uploads/answer/').'", "", question_answer.answer) AS image_answer');
     $this->select($this->table . '.*');

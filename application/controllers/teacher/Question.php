@@ -315,7 +315,15 @@ class Question extends Teacher_Controller {
 		$questionnaire_id = $this->input->post('questionnaire_id');
 
 		$data_param['id'] 	= $this->input->post('id');
-		// var_dump($this->input->post('questionnaire_id')); die;
+
+		if($this->input->post('type') == 'image')
+			if($this->input->post('image_quest_old') != 'default.jpg')
+				@unlink( './uploads/question/' . $this->input->post('image_quest_old') );
+		
+		if($this->input->post('type_option') == 'image')
+			if($this->input->post('image_quest_old') != 'default.jpg')
+				@unlink( './uploads/answer/' . $this->input->post('image_opt_old') );
+
 		if( $this->question_model->delete( $data_param ) ){
 		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->question_model->messages() ) );
 		}else{
