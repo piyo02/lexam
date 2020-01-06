@@ -62,6 +62,22 @@ class Question_answer_model extends MY_Model
     $this->set_message("berhasil");
     return TRUE;
   }
+  public function update_answer( $data, $data_param  )
+  {
+    $this->db->update_batch($this->table, $data, $data_param );
+    if ($this->db->trans_status() === FALSE)
+    {
+      $this->db->trans_rollback();
+
+      $this->set_error("gagal");
+      return FALSE;
+    }
+
+    $this->db->trans_commit();
+
+    $this->set_message("berhasil");
+    return TRUE;
+  }
   /**
    * delete
    *
@@ -143,6 +159,9 @@ class Question_answer_model extends MY_Model
 
   public function question_answer_by_question_id( $question_id = NULL  )
   {
+    $this->select('*');
+    $this->select('CONCAT("'.base_url('uploads/answer/').'", "", question_answer.answer) AS image_answer');
+    $this->select('answer AS image_old');
       if (isset($question_id))
       {
         $this->where($this->table.'.question_id', $question_id);

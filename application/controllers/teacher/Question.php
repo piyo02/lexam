@@ -180,12 +180,17 @@ class Question extends Teacher_Controller {
 			"name" => "Edit",
 			"modal_id" => "edit_question_",
 			"button_color" => "primary",
-			"url" => site_url( $this->current_page."edit"),
+			"url" => site_url( $this->current_page."edit_quest"),
 			"form_data" => array(
 				"id" => array(
 					'type' => 'hidden',
 					'label' => "id soal",
 					'value' => $question->id
+				),
+				"code" => array(
+					'type' => 'hidden',
+					'label' => "code soal",
+					'value' => $question->code
 				),
 				"text" => array(
 					'type' => 'ckeditor',
@@ -195,39 +200,30 @@ class Question extends Teacher_Controller {
 			),
 			'data' => NULL
 		);
-		$edit_quest = $this->load->view('templates/actions/modal_form_lg', $edit_quest, true ); 
+		if($question->type == 'image') {
+			$edit_quest['form_data']['image_old'] = array(
+				'type' => 'hidden',
+				'label' => "gambar",
+				'value' => $question->image
+			);
+			$edit_quest['form_data']['image'] = array(
+				'type' => 'file',
+				'label' => "Gambar",
+			);
+		}
+		$edit_quest = $this->load->view('templates/actions/modal_form_multipart_lg', $edit_quest, true ); 
 		$this->data['edit_quest'] = $edit_quest;
 
-		if($question->type == 'image') {
-			$edit_image_quest = array(
-				"name" => "Edit",
-				"modal_id" => "edit_image_question_",
-				"button_color" => "primary",
-				"url" => site_url( $this->current_page."edit"),
-				"form_data" => array(
-					"id" => array(
-						'type' => 'hidden',
-						'label' => "id soal",
-						'value' => $question->id
-					),
-					"image_old" => array(
-						'type' => 'hidden',
-						'label' => "gambar",
-						'value' => $question->image
-					),
-					"image" => array(
-						'type' => 'file',
-						'label' => "Gambar",
-					),
-				),
-				'data' => NULL
-			);
-			$edit_image_quest = $this->load->view('templates/actions/modal_form_multipart', $edit_image_quest, true ); 
-			$this->data['edit_image_quest'] = $edit_image_quest;
-		}
 		
+		$btn_back = array(
+			"name" => "Kembali",
+			"button_color" => "primary",
+			"url" => site_url($this->current_page . "questionnaire/" . $question->questionnaire_id),
+		);
 
+		$btn_back = $this->load->view('templates/actions/link', $btn_back, true);
 
+		$this->data["header_button"] =  $btn_back;
 		#################################################################3
 		$alert = $this->session->flashdata('alert');
 		$this->data["question_id"] = $question_id;
@@ -240,17 +236,19 @@ class Question extends Teacher_Controller {
 		$this->render( "teacher/question/detail" );
 	}
 
-	public function edit(  )
+	public function edit_quest(  )
 	{
 		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
 
 		// echo var_dump( $data );return;
-		$this->form_validation->set_rules( $this->services->validation_config() );
+		$this->form_validation->set_rules( 'text', 'Soal', 'required|trim' );
         if ($this->form_validation->run() === TRUE )
         {
-			$data['name'] = $this->input->post( 'name' );
-			$data['description'] = $this->input->post( 'description' );
-
+			$data['text'] = $this->input->post( 'text' );
+			if(NULL != $_FILES['image']['name']){
+				$code = $this->input->post( 'code' );
+				$data['image'] = $this->upload_image($code);
+			}
 			$data_param['id'] = $this->input->post( 'id' );
 
 			if( $this->question_model->update( $data, $data_param  ) ){
@@ -265,7 +263,51 @@ class Question extends Teacher_Controller {
           if(  validation_errors() || $this->question_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
 		}
 		
-		redirect( site_url($this->current_page)  );
+		redirect( site_url( $this->current_page . 'detail/' . $data_param['id'] ) );
+	}
+
+	public function edit_answer(  )
+	{
+		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
+
+		// echo var_dump( $data );return;
+		$this->form_validation->set_rules( 'id', 'Option', 'required|trim' );
+        if ($this->form_validation->run() === TRUE )
+        {
+			$question_id = $this->input->post( 'question_id' );
+			if($this->input->post( 'type' )){
+				$data = array(
+					array(
+						'id' => $this->input->post( 'id' ),
+						'value' => 1,
+					),
+					array(
+						'id' => $this->input->post( 'id_old' ),
+						'value' => 0,
+					),
+				);
+			}else {
+				$data = array(
+					array(
+						'id' => $this->input->post( 'id' ),
+						'value' => $this->input->post( 'value' ),
+					)
+				);
+			}
+
+			if( $this->question_answer_model->update_answer( $data, 'id'  ) ){
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->question_model->messages() ) );
+			}else{
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->question_model->errors() ) );
+			}
+		}
+        else
+        {
+          $this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->question_model->errors() : $this->session->flashdata('message')));
+          if(  validation_errors() || $this->question_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
+		}
+		
+		redirect( site_url( $this->current_page . 'detail/' . $question_id ) );
 	}
 
 	public function delete(  ) {
@@ -360,7 +402,7 @@ class Question extends Teacher_Controller {
 	{
 		$data[] = [
 			'question_id' => $question_id,
-			'type' => 'short_answer',
+			'type' => 'essay',
 			'answer' => $this->input->post('option_4'),
 			'value' => $this->input->post('value'),
 		];
@@ -378,12 +420,12 @@ class Question extends Teacher_Controller {
 		}
 		return $code;
 	}
-	public function upload_image($code)
+	public function upload_image($code, $userfile = 'image', $path = 'question/')
 	{
 		$upload = $this->config->item('upload', 'ion_auth');
 
-		$file = $_FILES[ 'image' ];
-		$upload_path = 'uploads/question/';
+		$file = $_FILES[ $userfile ];
+		$upload_path = 'uploads/' . $path;
 
 		$config 				= $upload;
 		$config['file_name'] 	=  $code."_".time() . "_" . $file['name'];
@@ -391,7 +433,7 @@ class Question extends Teacher_Controller {
 		
 		$this->load->library('upload', $config);
 		
-		if ( ! $this->upload->do_upload( 'image' ) )
+		if ( ! $this->upload->do_upload( $userfile ) )
 		{
 			// $this->set_error( $this->upload->display_errors() );
 			// $this->set_error( 'upload_unsuccessful' );
@@ -401,7 +443,7 @@ class Question extends Teacher_Controller {
 		{
 			if(NULL !== $this->input->post('image_old')){
 				if($this->input->post('image_old') != 'default.jpg')
-					@unlink( $config['upload_path'].$file_name );
+					@unlink( $config['upload_path'].$this->input->post('image_old') );
 			}
 			$file_data = $this->upload->data();
 			return $file_data['file_name'];
@@ -409,11 +451,12 @@ class Question extends Teacher_Controller {
 	}
 	public function upload_image_option( $code, $index = 0 )
 	{
+		$label = ['A', 'B', 'C', 'D', 'E'];
 		$upload = $this->config->item('upload', 'ion_auth');
 
 		$file = $_FILES[ 'option' ]['name'][$index];
 		if($file != 'null'){
-			$filename = time() . "_" . $file;
+			$filename = $label[$index] . '_' . time() . "_" . $file;
 		} else {
 			$filename = 'default.jpg';
 		}
@@ -434,7 +477,7 @@ class Question extends Teacher_Controller {
 		else
 		{
 			$file_data = $this->upload->data();
-			return $file_data['file_name'];
+			return $filename;
 		}
 	}
 }
