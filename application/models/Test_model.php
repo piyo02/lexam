@@ -138,10 +138,28 @@ class Test_model extends MY_Model
    */
   public function tests( $start = 0 , $limit = NULL )
   {
+    $this->select($this->table . '.*');
+    $this->select('classroom.name AS classroom_name');
+    $this->select('courses.name AS course_name');
       if (isset( $limit ))
       {
         $this->limit( $limit );
       }
+      $this->join(
+        'users',
+        'users.id = test.user_id',
+        'inner'
+      );
+      $this->join(
+        'classroom',
+        'classroom.id = test.classroom_id',
+        'inner'
+      );
+      $this->join(
+        'courses',
+        'courses.id = test.course_id',
+        'inner'
+      );
       $this->offset( $start );
       $this->order_by($this->table.'.id', 'asc');
       return $this->fetch_data();
