@@ -105,7 +105,7 @@ class Student_profile_model extends MY_Model
   {
     if (isset($id))
     {
-      $this->where($this->table.'.id', $id);
+      $this->where($this->table.'.user_id', $id);
     }
     $this->order_by($this->table.'.id', 'asc');
     return $this->fetch_data();

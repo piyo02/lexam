@@ -115,29 +115,30 @@ class Test_model extends MY_Model
 
       return $this;
   }
-  // /**
-  //  * tests
-  //  *
-  //  *
-  //  * @return static
-  //  * @author madukubah
-  //  */
-  // public function tests(  )
-  // {
+  public function test_by_classroom_id( $classroom_id = NULL, $school_id = NULL  )
+  {
+      if (isset($classroom_id))
+      {
+        $this->where($this->table.'.classroom_id', $classroom_id);
+      }
+      if($school_id)
+        $this->where('teacher_profile.school_id', $school_id);
       
-  //     $this->order_by($this->table.'.id', 'asc');
-  //     return $this->fetch_data();
-  // }
+      $this->join(
+        'teacher_profile',
+        'teacher_profile.user_id = test.user_id',
+        'inner'
+      );
+      $this->order_by($this->table.'.id', 'desc');
 
-  /**
-   * tests
-   *
-   *
-   * @return static
-   * @author madukubah
-   */
+      $this->tests(  );
+
+      return $this;
+  }
+
   public function tests( $start = 0 , $limit = NULL )
   {
+    $this->select('CONCAT( users.first_name, " ", users.last_name ) as user_fullname');
     $this->select($this->table . '.*');
     $this->select('classroom.name AS classroom_name');
     $this->select('courses.name AS course_name');

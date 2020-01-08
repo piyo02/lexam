@@ -32,6 +32,15 @@ class Result_test_services
                 "data_name" => "name",
               ),
               array(
+                "name" => 'Analisa Soal',
+                "type" => "link",
+                "url" => site_url( "teacher/analysis/test/"),
+                "button_color" => "success",
+                "param" => "test_id",
+                "title" => "Group",
+                "data_name" => "name",
+              ),
+              array(
                 "name" => 'Detail',
                 "type" => "link",
                 "url" => site_url( $_page."detail/"),
