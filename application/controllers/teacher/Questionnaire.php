@@ -18,6 +18,7 @@ class Questionnaire extends Teacher_Controller {
 			'questionnaire_model',
 			'teacher_course_model',
 			'classroom_model',
+			'question_answer_model',
 		));
 		$this->school_id = $this->ion_auth->get_school_id_for_teacher();
 		$this->user_id = $this->session->userdata('user_id');
@@ -134,5 +135,15 @@ class Questionnaire extends Teacher_Controller {
 		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->questionnaire_model->errors() ) );
 		}
 		redirect( site_url($this->current_page)  );
+	}
+
+	public function count_type( $questionnaire_id = null )
+	{
+		$id = $this->input->post('id');
+		// $id = $questionnaire_id;
+		$data['multiple_choice'] = $this->question_answer_model->get_num_type($id, 'text', 'image')->num_rows();
+		$data['short_answer'] = $this->question_answer_model->get_num_type($id, 'short_answer')->num_rows();
+		$data['essay'] = $this->question_answer_model->get_num_type($id, 'essay')->num_rows();
+		echo json_encode($data);
 	}
 }

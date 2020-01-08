@@ -20,10 +20,11 @@ class Question_reference_model extends MY_Model
   public function create( $data )
   {
       // Filter the data passed
-      $data = $this->_filter_data($this->table, $data);
+      // $data = $this->_filter_data($this->table, $data);
 
-      $this->db->insert($this->table, $data);
-      $id = $this->db->insert_id($this->table . '_id_seq');
+      $this->db->insert_batch($this->table, $data);
+      // $this->db->insert($this->table, $data);
+      // $id = $this->db->insert_id($this->table . '_id_seq');
     
       if( isset($id) )
       {
@@ -70,13 +71,6 @@ class Question_reference_model extends MY_Model
   public function delete( $data_param  )
   {
     //foreign
-    //delete_foreign( $data_param. $models[]  )
-    if( !$this->delete_foreign( $data_param, ['menu_model'] ) )
-    {
-      $this->set_error("gagal");//('question_reference_delete_unsuccessful');
-      return FALSE;
-    }
-    //foreign
     $this->db->trans_begin();
 
     $this->db->delete($this->table, $data_param );
@@ -109,6 +103,25 @@ class Question_reference_model extends MY_Model
       }
 
       $this->limit(1);
+      $this->order_by($this->table.'.id', 'desc');
+
+      $this->question_references(  );
+
+      return $this;
+  }
+  public function question_reference_by_test_id( $test_id = NULL  )
+  {
+    $this->select($this->table . '.*');
+    $this->select('questionnaire.name AS questionnaire_name');
+      if (isset($test_id))
+      {
+        $this->where($this->table.'.test_id', $test_id);
+      }
+      $this->join(
+        'questionnaire',
+        'questionnaire.id = '. $this->table . '.questionnaire_id',
+        'inner'
+      );
       $this->order_by($this->table.'.id', 'desc');
 
       $this->question_references(  );

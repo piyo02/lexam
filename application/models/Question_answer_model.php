@@ -173,6 +173,24 @@ class Question_answer_model extends MY_Model
 
       return $this;
   }
-
+  
+  public function get_num_type( $questionnaire_id = null, $condition = null, $condition2 = null )
+  {
+    $this->db->select('DISTINCT(question.id)');
+    $this->db->select($this->table . '.type');
+    $this->db->select('question.questionnaire_id');
+    $this->db->join(
+      'question',
+      'question.id = question_answer.question_id',
+      'inner'
+    );
+    $this->db->where('question.questionnaire_id', $questionnaire_id);
+    
+    if( $condition )
+      $this->db->where('question_answer.type', $condition);
+    if( $condition2 )
+      $this->db->or_where('question_answer.type', $condition2);
+    return $this->db->get( $this->table );
+  }
 }
 ?>

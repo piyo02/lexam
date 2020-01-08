@@ -71,7 +71,7 @@ class Test_model extends MY_Model
   {
     //foreign
     //delete_foreign( $data_param. $models[]  )
-    if( !$this->delete_foreign( $data_param, ['menu_model'] ) )
+    if( !$this->delete_foreign( $data_param, ['question_reference_model'] ) )
     {
       $this->set_error("gagal");//('group_delete_unsuccessful');
       return FALSE;

@@ -43,12 +43,12 @@
 
   
 
-          <?php echo form_open( site_url( 'teacher/test/add?cr=' . $cr ) );  ?>
           <div class="row">
             <div class="col-lg-7 col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <?php echo (isset($content_add)) ? $content_add : '';  ?>
+                        <?php echo (isset($content)) ? $content : '';  ?>
+                        <?php echo (isset($edit_test)) ? $edit_test : '';  ?>
                     </div>
                 </div>
             </div>
@@ -56,40 +56,24 @@
                 <div class="card">
                     <div class="card-body">
                         <p>Referensi Soal</p>
-                        <input type="hidden" name="cr" value="<?= $cr ?>">
-                        <?php for ($i=0; $i < $cr; $i++) : ?>
+                        <?php for ($i=0; $i < count($references); $i++) : ?>
                           <div class="content mb-3">
                             <div class="row">
                               <div class="col-6">
                                 <label for="">Bank Soal</label>
-                                <?php
-                                  $form = array(
-                                    'name' => 'questionnaire_id_' . $i,
-                                    'id' => 'questionnaire_id_' . $i,
-                                    'type' => 'select',
-                                    'class' => 'form-control',
-                                    'options' => $list_questionnaire
-                                  );
-                                  echo form_dropdown($form);
-                                ?>
+                                <input type="text" name="" id="" class="form-control form-control-sm" value="<?= $references[$i]->questionnaire_name ?>" readonly>
                               </div>
                               <div class="col-2">
                                 <label for="">PG</label>
-                                <select name="multiple_choice_<?= $i ?>" id="multiple_choice_<?= $i ?>" class="form-control">
-                                  <option value=""></option>
-                                </select>
+                                <input type="text" name="" id="" class="form-control form-control-sm" value="<?= $references[$i]->multiple_choice ?>" readonly>
                               </div>
                               <div class="col-2">
                                 <label for="">Isian</label>
-                                <select name="short_answer_<?= $i ?>" id="short_answer_<?= $i ?>" class="form-control">
-                                  <option value=""></option>
-                                </select>
+                                <input type="text" name="" id="" class="form-control form-control-sm" value="<?= $references[$i]->short_answer ?>" readonly>
                               </div>
                               <div class="col-2">
                                 <label for="">Esai</label>
-                                <select name="essay_<?= $i ?>" id="essay_<?= $i ?>" class="form-control">
-                                  <option value=""></option>
-                                </select>
+                                <input type="text" name="" id="" class="form-control form-control-sm" value="<?= $references[$i]->essay ?>" readonly>
                               </div>
                             </div>
                           </div>
@@ -98,19 +82,13 @@
                 </div>
             </div>
           </div>
-          <button class="btn btn-bold btn-success btn-sm mb-5" style="margin-left: 5px;" type="submit">
-                Tambah
-          </button>
-          <!-- <p><?= $cr ?></p> -->
-          <?php echo form_close()  ?>
-
         </div>
       </div>
     </div>
   </section>
 </div>
 
-<?php for ($i = 0; $i < $cr; $i++) : ?>
+<?php for ($i = 0; $i < count($references); $i++) : ?>
     <script>
         $(document).ready(function() {
             $('#questionnaire_id_' + <?= $i ?>).change(function() {

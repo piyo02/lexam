@@ -39,7 +39,7 @@ class Test_services
       $table["header"] = array(
         'name' => 'Nama Ulangan',
         'classroom_name' => 'Kelas',
-        'duration' => 'Durasi',
+        'date' => 'Tanggal',
       );
       $table["number"] = $start_number;
       $table[ "action" ] = array(
@@ -89,8 +89,8 @@ class Test_services
           'rules' =>  'trim|required',
         ),
         array(
-          'field' => 'time_start',
-          'label' => 'Waktu Mulai',
+          'field' => 'date',
+          'label' => 'Tanggal',
           'rules' =>  'trim|required',
         ),
         array(
@@ -113,43 +113,128 @@ class Test_services
     return $config;
   }
 
-  public function form_data( $user_id = null, $edu_ladder_id = null )
+  public function form_data( $user_id = null, $edu_ladder_id = null, $data = null )
   {
+
+    if($data){
+      $id = $data->id;
+      $name = $data->name;
+      $classroom_id = $data->classroom_id;
+      $course_id = $data->course_id;
+      $date = $data->date;
+      $duration = $data->duration;
+      $kkm = $data->kkm;
+      $max_value = $data->max_value;
+
+    } else {
+      $id = null;
+      $name = null;
+      $classroom_id = null;
+      $course_id = null;
+      $date = null;
+      $duration = null;
+      $kkm = null;
+      $max_value = null;
+    }
+    
     $list_course = $this->list_course( $user_id );
     $list_classroom = $this->list_classroom( $edu_ladder_id );
     $form_data = array(
+      'id' => array(
+        'type' => 'hidden',
+        'label' => 'id Ulangan',
+        'value' => $id
+      ),
       'name' => array(
         'type' => 'text',
         'label' => 'Nama Ulangan',
+        'value' => $name
       ),
       'classroom_id' => array(
         'type' => 'select',
         'label' => 'Kelas',
-        'options' => $list_classroom
+        'options' => $list_classroom,
+        'selected' => $classroom_id
       ),
       'course_id' => array(
         'type' => 'select',
         'label' => 'Mata Pelajaran',
-        'options' => $list_course
+        'options' => $list_course,
+        'selected' => $course_id
       ),
-      'time_start' => array(
-        'type' => 'text',
+      'date' => array(
+        'type' => 'date',
         'label' => 'Waktu Mulai',
+        'value' => $date
       ),
       'duration' => array(
         'type' => 'number',
         'label' => 'Durasi',
+        'value' => $duration
       ),
       'kkm' => array(
         'type' => 'number',
         'label' => 'Nilai KKM',
+        'value' => $kkm
       ),
       'max_value' => array(
         'type' => 'number',
         'label' => 'Nilai Maksimal',
+        'value' => $max_value
       ),
     );
 
+    return $form_data;
+  }
+
+  public function form_data_readonly( $data = null )
+  {
+    $id = $data->id;
+    $name = $data->name;
+    $classroom_name = $data->classroom_name;
+    $course_name = $data->course_name;
+    $date = $data->date;
+    $duration = $data->duration;
+    $kkm = $data->kkm;
+    $max_value = $data->max_value;
+  
+    $form_data = array(
+      'name' => array(
+        'type' => 'text',
+        'label' => 'Nama Ulangan',
+        'value' => $name
+      ),
+      'classroom_id' => array(
+        'type' => 'text',
+        'label' => 'Kelas',
+        'value' => $classroom_name
+      ),
+      'course_id' => array(
+        'type' => 'text',
+        'label' => 'Mata Pelajaran',
+        'value' => $course_name
+      ),
+      'date' => array(
+        'type' => 'text',
+        'label' => 'Waktu Mulai',
+        'value' => $date
+      ),
+      'duration' => array(
+        'type' => 'number',
+        'label' => 'Durasi',
+        'value' => $duration
+      ),
+      'kkm' => array(
+        'type' => 'number',
+        'label' => 'Nilai KKM',
+        'value' => $kkm
+      ),
+      'max_value' => array(
+        'type' => 'number',
+        'label' => 'Nilai Maksimal',
+        'value' => $max_value
+      ),
+    );
     return $form_data;
   }
 }

@@ -14,6 +14,8 @@ class Test extends Teacher_Controller {
 		$this->services = new Test_services;
 		$this->load->model(array(
 			'test_model',
+			'questionnaire_model',
+			'question_reference_model',
 		));
 		$this->data[ "menu_list_id" ] =  'test_index';
 		$this->user_id = $this->session->userdata('user_id');
@@ -39,12 +41,19 @@ class Test extends Teacher_Controller {
 		$this->data[ "contents" ] = $table;
 		$add_menu = array(
 			"name" => "Tambah Ulangan",
+			"modal_id" => "add_test_",
 			"button_color" => "primary",
 			"url" => site_url( $this->current_page."add/"),
+			"form_data" => array(
+				"cr" => array(
+					'type' => 'number',
+					'label' => "Banyak Referensi",
+				),
+			),
 			'data' => NULL
 		);
 
-		$add_menu= $this->load->view('templates/actions/link', $add_menu, true ); 
+		$add_menu= $this->load->view('templates/actions/modal_form_get', $add_menu, true ); 
 
 		$this->data[ "header_button" ] =  $add_menu;
 		// return;
@@ -69,7 +78,7 @@ class Test extends Teacher_Controller {
 			$data['user_id'] = $this->user_id;
 
 			$data['name'] = $this->input->post( 'name' );
-			$data['time_start'] = $this->input->post( 'time_start' );
+			$data['date'] = $this->input->post( 'date' );
 			$data['duration'] = $this->input->post( 'duration' );
 			$data['kkm'] = $this->input->post( 'kkm' );
 			$data['max_value'] = $this->input->post( 'max_value' );
@@ -77,14 +86,20 @@ class Test extends Teacher_Controller {
 			$data['course_id'] = $this->input->post( 'course_id' );
 			
 			$test_id = $this->test_model->create( $data );
+			
+			$cr = $this->input->post( 'cr' );
 
-			$ref['test_id'] = $test_id;
-			$ref['questionnaire_id'] = '';
-			$ref['multiple_choice'] = '';
-			$ref['short_answer'] = '';
-			$ref['essay'] = '';
+			for ($i=0; $i < $cr; $i++) { 
+				$ref[] = array(
+					'test_id' => $test_id,	
+					'questionnaire_id' => $this->input->post( 'questionnaire_id_' . $i ),	
+					'multiple_choice' => $this->input->post( 'multiple_choice_' . $i ),	
+					'short_answer' => $this->input->post( 'short_answer_' . $i ),	
+					'essay' => $this->input->post( 'essay_' . $i ),	
+				);
+			}
 
-			if( $test_id ){
+			if( $test_id && $this->question_reference_model->create( $ref ) ){
 				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->test_model->messages() ) );
 			}else{
 				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->test_model->errors() ) );
@@ -96,6 +111,15 @@ class Test extends Teacher_Controller {
 			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->test_model->errors() ? $this->test_model->errors() : $this->session->flashdata('message')));
 			if(  validation_errors() || $this->test_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
 		  
+			$questionnaires = $this->questionnaire_model->questionnaires_by_user_id( $this->user_id )->result();
+
+			$list_questionnaire[] = "-- Pilih Bank Soal --";
+			foreach ($questionnaires as $key => $questionnaire) {
+				$list_questionnaire[ $questionnaire->id ] = $questionnaire->name;
+			}
+
+			$this->data['list_questionnaire'] = $list_questionnaire;
+
 			$form_data['form_data'] = $this->services->form_data( $this->user_id, $this->edu_ladder_id );
 			$this->data['content_add'] = $this->load->view('templates/form/plain_form', $form_data, true);
 
@@ -112,6 +136,7 @@ class Test extends Teacher_Controller {
 			// return;
 			#################################################################3
 			$alert = $this->session->flashdata('alert');
+			$this->data["cr"] = $this->input->get('cr');
 			$this->data["key"] = $this->input->get('key', FALSE);
 			$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
 			$this->data["current_page"] = $this->current_page;
@@ -122,7 +147,61 @@ class Test extends Teacher_Controller {
 		}		
 	}
 
-	public function edit(  )
+	public function detail( $test_id = null)
+	{
+		$questionnaires = $this->questionnaire_model->questionnaires_by_user_id( $this->user_id )->result();
+
+		$list_questionnaire[] = "-- Pilih Bank Soal --";
+		foreach ($questionnaires as $key => $questionnaire) {
+			$list_questionnaire[ $questionnaire->id ] = $questionnaire->name;
+		}
+
+		$this->data['list_questionnaire'] = $list_questionnaire;
+
+		$test = $this->test_model->test( $test_id )->row();
+
+		$form_data['form_data'] = $this->services->form_data_readonly( $test );
+		$this->data['content'] = $this->load->view('templates/form/plain_form_readonly', $form_data, true);
+
+		$edit_test = array(
+			"name" => "Edit",
+			"modal_id" => "edit_test_",
+			"button_color" => "success",
+			"url" => site_url( $this->current_page."edit_test/"),
+			"form_data" => $this->services->form_data( $this->user_id, $this->edu_ladder_id, $test ),
+			'data' => NULL
+		);
+
+		$edit_test = $this->load->view('templates/actions/modal_form', $edit_test, true ); 
+		$this->data[ "edit_test" ] =  $edit_test;
+
+		$references = $this->question_reference_model->question_reference_by_test_id( $test_id )->result();
+		$this->data['references'] = $references;
+		// var_dump($references); die;
+		$btn_back = array(
+			"name" => "Kembali",
+			"button_color" => "primary",
+			"url" => site_url( $this->current_page),
+			'data' => NULL
+		);
+
+		$btn_back= $this->load->view('templates/actions/link', $btn_back, true ); 
+
+		$this->data[ "header_button" ] =  $btn_back;
+		// return;
+		#################################################################3
+		$alert = $this->session->flashdata('alert');
+		$this->data["cr"] = $this->input->get('cr');
+		$this->data["key"] = $this->input->get('key', FALSE);
+		$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
+		$this->data["current_page"] = $this->current_page;
+		$this->data["block_header"] = "Ulangan";
+		$this->data["header"] = "Edit Ulangan";
+		$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
+		$this->render( "teacher/test/detail" );
+	}
+
+	public function edit_test(  )
 	{
 		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
 
@@ -131,7 +210,12 @@ class Test extends Teacher_Controller {
         if ($this->form_validation->run() === TRUE )
         {
 			$data['name'] = $this->input->post( 'name' );
-			$data['description'] = $this->input->post( 'description' );
+			$data['classroom_id'] = $this->input->post( 'classroom_id' );
+			$data['course_id'] = $this->input->post( 'course_id' );
+			$data['date'] = $this->input->post( 'date' );
+			$data['duration'] = $this->input->post( 'duration' );
+			$data['kkm'] = $this->input->post( 'kkm' );
+			$data['max_value'] = $this->input->post( 'max_value' );
 
 			$data_param['id'] = $this->input->post( 'id' );
 
@@ -147,7 +231,7 @@ class Test extends Teacher_Controller {
           if(  validation_errors() || $this->test_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
 		}
 		
-		redirect( site_url($this->current_page)  );
+		redirect( site_url($this->current_page . 'detail/' . $data_param['id']) );
 	}
 
 	public function delete(  ) {
