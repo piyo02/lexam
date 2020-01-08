@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Result_test extends Teacher_Controller {
+class Result_test extends Student_Controller {
 	private $user_id = null;
 	private $services = null;
     private $name = null;
-    private $parent_page = 'teacher';
-	private $current_page = 'teacher/result_test/';
+    private $parent_page = 'student';
+	private $current_page = 'student/result_test/';
 	
 	public function __construct(){
 		parent::__construct();
