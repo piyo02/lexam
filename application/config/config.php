@@ -24,6 +24,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/lexam/';
+// $config['base_url'] = 'https://lexam.akar-z.com/';
 
 /*
 |--------------------------------------------------------------------------
