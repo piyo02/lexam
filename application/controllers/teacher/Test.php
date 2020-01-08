@@ -78,7 +78,7 @@ class Test extends Teacher_Controller {
 			$data['user_id'] = $this->user_id;
 
 			$data['name'] = $this->input->post( 'name' );
-			$data['date'] = $this->input->post( 'date' );
+			$data['date'] = date('Y-m-d', strtotime($this->input->post( 'date' )));
 			$data['duration'] = $this->input->post( 'duration' );
 			$data['kkm'] = $this->input->post( 'kkm' );
 			$data['max_value'] = $this->input->post( 'max_value' );
@@ -191,7 +191,7 @@ class Test extends Teacher_Controller {
 		// return;
 		#################################################################3
 		$alert = $this->session->flashdata('alert');
-		$this->data["cr"] = $this->input->get('cr');
+		$this->data[ "url" ] =  site_url( $this->current_page."edit_ref/");
 		$this->data["key"] = $this->input->get('key', FALSE);
 		$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
 		$this->data["current_page"] = $this->current_page;
@@ -212,7 +212,7 @@ class Test extends Teacher_Controller {
 			$data['name'] = $this->input->post( 'name' );
 			$data['classroom_id'] = $this->input->post( 'classroom_id' );
 			$data['course_id'] = $this->input->post( 'course_id' );
-			$data['date'] = $this->input->post( 'date' );
+			$data['date'] = date('Y-m-d', strtotime($this->input->post( 'date' )));
 			$data['duration'] = $this->input->post( 'duration' );
 			$data['kkm'] = $this->input->post( 'kkm' );
 			$data['max_value'] = $this->input->post( 'max_value' );
@@ -232,6 +232,37 @@ class Test extends Teacher_Controller {
 		}
 		
 		redirect( site_url($this->current_page . 'detail/' . $data_param['id']) );
+	}
+
+	public function edit_ref(  )
+	{
+		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
+
+		// echo var_dump( $data );return;
+		$this->form_validation->set_rules( 'id', 'Referensi Soal', 'required' );
+        if ($this->form_validation->run() === TRUE )
+        {
+			$index = $this->input->post( 'index' );
+			$data['questionnaire_id'] = $this->input->post( 'questionnaire_id_' . $index );
+			$data['multiple_choice'] = $this->input->post( 'multiple_choice_' . $index );
+			$data['short_answer'] = $this->input->post( 'short_answer_' . $index );
+			$data['essay'] = $this->input->post( 'essay_' . $index );
+
+			$data_param['id'] = $this->input->post( 'id' );
+			$test_id = $this->input->post( 'test_id' );
+			if( $this->question_reference_model->update( $data, $data_param  ) ){
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->question_reference_model->messages() ) );
+			}else{
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->question_reference_model->errors() ) );
+			}
+		}
+        else
+        {
+          $this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->test_model->errors() : $this->session->flashdata('message')));
+          if(  validation_errors() || $this->test_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
+		}
+		
+		redirect( site_url($this->current_page . 'detail/' . $test_id) );
 	}
 
 	public function delete(  ) {

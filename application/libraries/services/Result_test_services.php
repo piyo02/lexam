@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Group_services
+class Result_test_services
 {
 
 
@@ -16,32 +16,27 @@ class Group_services
   public function get_table_config( $_page, $start_number = 1 )
   {
       $table["header"] = array(
-        'name' => 'Nama Group',
-        'description' => 'Deskripsi',
+        'name' => 'Nama Ulangan',
+        'classroom_name' => 'Kelas',
+        'total' => 'Jumlah Siswa'
       );
       $table["number"] = $start_number;
       $table[ "action" ] = array(
               array(
-                "name" => 'Edit',
-                "type" => "modal_form",
-                "modal_id" => "edit_",
-                "url" => site_url( $_page."edit/"),
+                "name" => 'Cetak Hasil',
+                "type" => "link",
+                "url" => site_url( $_page."export/"),
+                "button_color" => "success",
+                "param" => "test_id",
+                "title" => "Group",
+                "data_name" => "name",
+              ),
+              array(
+                "name" => 'Detail',
+                "type" => "link",
+                "url" => site_url( $_page."detail/"),
                 "button_color" => "primary",
-                "param" => "id",
-                "form_data" => array(
-                    "id" => array(
-                        'type' => 'hidden',
-                        'label' => "id",
-                    ),
-                    "name" => array(
-                        'type' => 'text',
-                        'label' => "Nama Group",
-                    ),
-                    "description" => array(
-                        'type' => 'textarea',
-                        'label' => "Deskripsi",
-                    ),
-                ),
+                "param" => "test_id",
                 "title" => "Group",
                 "data_name" => "name",
               ),
@@ -61,6 +56,42 @@ class Group_services
                 "title" => "Group",
                 "data_name" => "name",
               ),
+    );
+    return $table;
+  }
+  public function get_table_result_config( $_page, $start_number = 1 )
+  {
+      $table["header"] = array(
+        'user_fullname' => 'Nama Siswa',
+        'value' => 'Nilai',
+      );
+      $table["number"] = $start_number;
+      $table[ "action" ] = array(
+        array(
+          "name" => 'Review',
+          "type" => "link",
+          "url" => site_url( $_page."review/"),
+          "button_color" => "success",
+          "param" => "user_id",
+          "title" => "Group",
+          "data_name" => "name",
+        ),
+        array(
+          "name" => 'X',
+          "type" => "modal_delete",
+          "modal_id" => "delete_",
+          "url" => site_url( $_page."delete/"),
+          "button_color" => "danger",
+          "param" => "id",
+          "form_data" => array(
+            "id" => array(
+              'type' => 'hidden',
+              'label' => "id",
+            ),
+          ),
+          "title" => "Group",
+          "data_name" => "name",
+        ),
     );
     return $table;
   }

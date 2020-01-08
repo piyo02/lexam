@@ -40,9 +40,6 @@
               </div>
             </div>
           </div>
-
-  
-
           <div class="row">
             <div class="col-lg-7 col-sm-12">
                 <div class="card">
@@ -77,6 +74,56 @@
                               </div>
                             </div>
                           </div>
+                          <?php 
+                            $data = array(
+                              "name" => "Edit",
+                              "modal_id" => "edit_ref_" . $i,
+                              "button_color" => "primary",
+                              "url" => $url,
+                              "form_data" => array(
+                                'test_id' => array(
+                                  'type' => 'hidden',
+                                  'label' => "Bank Soal",
+                                  'value' => $references[$i]->test_id,
+                                ),
+                                "id" => array(
+                                  'type' => 'hidden',
+                                  'label' => "Bank Soal",
+                                  'value' => $references[$i]->id,
+                                ),
+                                "index" => array(
+                                  'type' => 'hidden',
+                                  'label' => "Bank Soal",
+                                  'value' => $i,
+                                ),
+                                "questionnaire_id_$i" => array(
+                                  'type' => 'select',
+                                  'label' => "Bank Soal",
+                                  'options' => $list_questionnaire,
+                                  'selected' => $references[$i]->questionnaire_id
+                                ),
+                                "multiple_choice_$i" => array(
+                                  'type' => 'select',
+                                  'label' => "Pilihan Ganda",
+                                  'options' => array(),
+                                ),
+                                "short_answer_$i" => array(
+                                  'type' => 'select',
+                                  'label' => "Isian",
+                                  'options' => array(),
+                                  'selected' => $references[$i]->short_answer
+                                ),
+                                "essay_$i" => array(
+                                  'type' => 'select',
+                                  'label' => "Esai",
+                                  'options' => array(),
+                                  'selected' => $references[$i]->essay
+                                ),
+                              ),
+                              'data' => NULL
+                            );
+                            echo $this->load->view('templates/actions/modal_form', $data, true);
+                          ?>
                         <?php endfor; ?>
                     </div>
                 </div>
@@ -124,6 +171,58 @@
                     }
                 });
             })
+        });
+    </script>
+    <script>
+      function getOption(select, index) {
+            var questionnaire_id = $(select).val();
+            console.log(questionnaire_id);
+            $.ajax({
+                type: 'POST', //method
+                url: '<?= base_url('teacher/questionnaire/count_type') ?>', //action
+                data: {
+                    id: questionnaire_id
+                }, //data yang dikrim ke action $_POST['id']
+                dataType: 'json',
+                async: false,
+                success: function(data) {
+                    var html_multiple_choice = '<option value=""> - </option>';
+                    var html_short_answer = '<option value=""> - </option>';
+                    var html_essay = '<option value=""> - </option>';
+
+                    var i;
+                    for (i = 1; i <= data.multiple_choice; i++) {
+                      if(i == <?= $references[$i]->multiple_choice ?>){
+                        html_multiple_choice += '<option value="' + i + '"' + ' selected>' + i + '</option>'
+                      }else{
+                        html_multiple_choice += '<option value="' + i + '"' + '>' + i + '</option>'
+                      }
+                    }
+                    for (i = 1; i <= data.short_answer; i++) {
+                      if(i == <?= $references[$i]->short_answer ?>){
+                        html_short_answer += '<option value="' + i + '"' + ' selected>' + i + '</option>'
+                      }else{
+                        html_short_answer += '<option value="' + i + '"' + '>' + i + '</option>'
+                      }
+                    }
+                    for (i = 1; i <= data.essay; i++) {
+                      if(i == <?= $references[$i]->essay ?>){
+                        html_essay += '<option value="' + i + '"' + ' selected>' + i + '</option>'
+                      }else{
+                        html_essay += '<option value="' + i + '"' + '>' + i + '</option>'
+                      }
+                    }
+                    console.log(data);
+                    $('#multiple_choice_' + index).html(html_multiple_choice);
+                    $('#short_answer_' + index).html(html_short_answer);
+                    $('#essay_' + index).html(html_essay);
+                }
+            });
+        }
+        $(document).ready(function() {
+            if($('#questionnaire_id_' + <?= $i ?>).val() != ''){
+               getOption($('#questionnaire_id_' + <?= $i ?>), <?= $i ?>);
+            }
         });
     </script>
 <?php endfor; ?>

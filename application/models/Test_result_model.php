@@ -147,5 +147,49 @@ class Test_result_model extends MY_Model
       return $this->fetch_data();
   }
 
+  public function test_result_by_teacher_id( $teacher_id = NULL  )
+  {
+    $this->db->select('COUNT(*) AS total');
+    $this->db->select($this->table . '.test_id');
+    $this->db->select('test.user_id');
+    $this->db->select('classroom.name AS classroom_name');
+      if (isset($teacher_id))
+      {
+        $this->db->where('test.user_id', $teacher_id);
+      }
+      $this->db->join(
+        'test_result',
+        'test_result.test_id = test.id',
+        'inner'
+      );
+      $this->db->join(
+        'classroom',
+        'classroom.id = test.classroom_id',
+        'inner'
+      );
+      $this->db->group_by('test_result.test_id');
+      return $this->db->get('test');
+  }
+  public function test_result_by_test_id( $test_id = NULL )
+  {
+    $this->db->select($this->table . '.*');
+    $this->db->select('CONCAT( users.first_name, " ", users.last_name ) as user_fullname');
+      if (isset($test_id))
+      {
+        $this->db->where('test_id', $test_id);
+      }
+      $this->db->join(
+        'test',
+        'test.id = test_result.test_id',
+        'inner'
+      );
+      $this->db->join(
+        'users',
+        'users.id = test_result.user_id',
+        'inner'
+      );
+      return $this->db->get($this->table);
+  }
+
 }
 ?>

@@ -164,6 +164,8 @@ class Question_model extends MY_Model
       'inner'
     );
     $this->where('question_answer.value >', 0);
+    if( $questionnaire_id )
+      $this->db->where('questionnaire_id', $questionnaire_id);
     $this->questions( $start, $limit );
     return $this;
   }

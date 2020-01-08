@@ -164,7 +164,7 @@ class Test_services
       ),
       'date' => array(
         'type' => 'date',
-        'label' => 'Waktu Mulai',
+        'label' => 'Tanggal',
         'value' => $date
       ),
       'duration' => array(
@@ -216,7 +216,7 @@ class Test_services
       ),
       'date' => array(
         'type' => 'text',
-        'label' => 'Waktu Mulai',
+        'label' => 'Tanggal',
         'value' => $date
       ),
       'duration' => array(

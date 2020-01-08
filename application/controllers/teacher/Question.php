@@ -23,7 +23,7 @@ class Question extends Teacher_Controller {
 	{
 		if(!$questionnaire_id) redirect(site_url('teacher/questionnaire'));
 		//bank soal
-		$questionnaire = $this->questionnaire_model->questionnaire($questionnaire_id)->row();
+		$questionnaire = $this->questionnaire_model->questionnaire( $questionnaire_id )->row();
 		// var_dump($questionnaire); die;
 
 		$page = ($this->uri->segment(4 + 1)) ? ($this->uri->segment(4 + 1) -  1 ) : 0;
