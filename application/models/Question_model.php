@@ -105,39 +105,25 @@ class Question_model extends MY_Model
   {
     $this->select($this->table . '.*');
     $this->select('CONCAT("'.base_url('uploads/question/').'", "", question.image) AS image_quest');
-      if (isset($id))
+    $this->select('question_answer.type as type_option');
+    $this->select('question_answer.answer');
+    $this->select('CONCAT("'.base_url('uploads/answer/').'", "", question_answer.answer) AS image_answer');
+    if (isset($id))
       {
         $this->where($this->table.'.id', $id);
       }
-
-      $this->limit(1);
+      $this->join(
+        'question_answer',
+        'question_answer.question_id = question.id',
+        'inner'
+      );
       $this->order_by($this->table.'.id', 'desc');
 
       $this->questions(  );
 
       return $this;
   }
-  // /**
-  //  * questions
-  //  *
-  //  *
-  //  * @return static
-  //  * @author madukubah
-  //  */
-  // public function questions(  )
-  // {
-      
-  //     $this->order_by($this->table.'.id', 'asc');
-  //     return $this->fetch_data();
-  // }
 
-  /**
-   * questions
-   *
-   *
-   * @return static
-   * @author madukubah
-   */
   public function questions( $start = 0 , $limit = NULL )
   {
       if (isset( $limit ))

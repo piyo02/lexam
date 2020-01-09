@@ -128,27 +128,6 @@ class Question_reference_model extends MY_Model
 
       return $this;
   }
-  // /**
-  //  * question_references
-  //  *
-  //  *
-  //  * @return static
-  //  * @author madukubah
-  //  */
-  // public function question_references(  )
-  // {
-      
-  //     $this->order_by($this->table.'.id', 'asc');
-  //     return $this->fetch_data();
-  // }
-
-  /**
-   * question_references
-   *
-   *
-   * @return static
-   * @author madukubah
-   */
   public function question_references( $start = 0 , $limit = NULL )
   {
       if (isset( $limit ))
@@ -159,6 +138,19 @@ class Question_reference_model extends MY_Model
       $this->order_by($this->table.'.id', 'asc');
       return $this->fetch_data();
   }
-
+  
+  public function get_total_references( $test_id = null, $questionnaire_id = null )
+  {
+    $this->db->select_sum('multiple_choice');
+    $this->db->select_sum('short_answer');
+    $this->db->select_sum('essay');
+    
+    if($test_id)
+      $this->db->where('test_id', $test_id);
+    if($questionnaire_id)
+      $this->db->where('questionnaire_id', $questionnaire_id);
+    
+    return $this->db->get( $this->table );
+  }
 }
 ?>

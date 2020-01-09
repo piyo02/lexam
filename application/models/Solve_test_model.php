@@ -115,27 +115,24 @@ class Solve_test_model extends MY_Model
 
       return $this;
   }
-  // /**
-  //  * solve_tests
-  //  *
-  //  *
-  //  * @return static
-  //  * @author madukubah
-  //  */
-  // public function solve_tests(  )
-  // {
-      
-  //     $this->order_by($this->table.'.id', 'asc');
-  //     return $this->fetch_data();
-  // }
 
-  /**
-   * solve_tests
-   *
-   *
-   * @return static
-   * @author madukubah
-   */
+  public function solve_test_by_student_id( $test_id = NULL, $user_id = NULL  )
+  {
+      if (isset($user_id))
+      {
+        $this->where($this->table.'.user_id', $user_id);
+      }
+      if (isset($test_id))
+      {
+        $this->where($this->table.'.test_id', $test_id);
+      }
+      $this->order_by($this->table.'.id', 'desc');
+
+      $this->solve_tests(  );
+
+      return $this;
+  }
+
   public function solve_tests( $start = 0 , $limit = NULL )
   {
       if (isset( $limit ))

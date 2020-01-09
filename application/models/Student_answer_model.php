@@ -19,12 +19,8 @@ class Student_answer_model extends MY_Model
    */
   public function create( $data )
   {
-      // Filter the data passed
-      $data = $this->_filter_data($this->table, $data);
-
-      $this->db->insert($this->table, $data);
-      $id = $this->db->insert_id($this->table . '_id_seq');
-    
+      $this->db->insert_batch($this->table, $data);
+   
       if( isset($id) )
       {
         $this->set_message("berhasil");
@@ -103,39 +99,34 @@ class Student_answer_model extends MY_Model
    */
   public function student_answer( $id = NULL  )
   {
-      if (isset($id))
-      {
-        $this->where($this->table.'.id', $id);
-      }
+    if (isset($id))
+    {
+      $this->where($this->table.'.id', $id);
+    }
 
-      $this->limit(1);
-      $this->order_by($this->table.'.id', 'desc');
+    $this->limit(1);
+    $this->order_by($this->table.'.id', 'desc');
 
-      $this->student_answers(  );
+    $this->student_answers(  );
 
-      return $this;
+    return $this;
   }
-  // /**
-  //  * student_answers
-  //  *
-  //  *
-  //  * @return static
-  //  * @author madukubah
-  //  */
-  // public function student_answers(  )
-  // {
-      
-  //     $this->order_by($this->table.'.id', 'asc');
-  //     return $this->fetch_data();
-  // }
+  public function student_answer_by_test_id( $test_id = null, $user_id )
+  {
+    if (isset($test_id))
+    {
+      $this->where($this->table.'.test_id', $test_id);
+    }
+    if (isset($user_id))
+    {
+      $this->where($this->table.'.user_id', $user_id);
+    }
+    $this->order_by($this->table.'.id', 'desc');
 
-  /**
-   * student_answers
-   *
-   *
-   * @return static
-   * @author madukubah
-   */
+    $this->student_answers(  );
+
+    return $this;
+  }
   public function student_answers( $start = 0 , $limit = NULL )
   {
       if (isset( $limit ))

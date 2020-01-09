@@ -125,27 +125,6 @@ class Question_answer_model extends MY_Model
 
       return $this;
   }
-  // /**
-  //  * question_answers
-  //  *
-  //  *
-  //  * @return static
-  //  * @author madukubah
-  //  */
-  // public function question_answers(  )
-  // {
-      
-  //     $this->order_by($this->table.'.id', 'asc');
-  //     return $this->fetch_data();
-  // }
-
-  /**
-   * question_answers
-   *
-   *
-   * @return static
-   * @author madukubah
-   */
   public function question_answers( $start = 0 , $limit = NULL )
   {
       if (isset( $limit ))
@@ -191,6 +170,54 @@ class Question_answer_model extends MY_Model
     if( $condition2 )
       $this->db->or_where('question_answer.type', $condition2);
     return $this->db->get( $this->table );
+  }
+  public function question_id_mc( $questionnaire_id, $limit )
+  {
+    $this->db->select('DISTINCT(question.id)');
+    $this->db->join(
+      'question',
+      'question.id = question_answer.question_id',
+      'join'
+    );
+    if($questionnaire_id)
+      $this->db->where( 'questionnaire_id', $questionnaire_id );
+
+    $this->db->where('(`question_answer`.`type` = "text" OR `question_answer`.`type` = "image")');
+    $this->db->order_by('id', 'RANDOM');
+    return $this->db->get($this->table, $limit);
+  }
+
+  public function question_id_sa( $questionnaire_id, $limit )
+  {
+    $this->db->select('DISTINCT(question.id)');
+    $this->db->join(
+      'question',
+      'question.id = question_answer.question_id',
+      'join'
+    );
+    if($questionnaire_id)
+      $this->db->where( 'questionnaire_id', $questionnaire_id );
+      
+    $this->db->where('question_answer.type', 'short_answer');
+    $this->db->order_by('id', 'RANDOM');
+    return $this->db->get($this->table, $limit);
+  }
+
+
+  public function question_id_es( $questionnaire_id, $limit )
+  {
+    $this->db->select('DISTINCT(question.id)');
+    $this->db->join(
+      'question',
+      'question.id = question_answer.question_id',
+      'join'
+    );
+    if($questionnaire_id)
+      $this->db->where( 'questionnaire_id', $questionnaire_id );
+
+    $this->db->where('question_answer.type', 'essay');
+    $this->db->order_by('id', 'RANDOM');
+    return $this->db->get($this->table, $limit);
   }
 }
 ?>
