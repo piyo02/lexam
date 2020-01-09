@@ -104,6 +104,7 @@ class Question_model extends MY_Model
   public function question( $id = NULL  )
   {
     $this->select($this->table . '.*');
+    $this->select('question_answer.id AS option_id');
     $this->select('CONCAT("'.base_url('uploads/question/').'", "", question.image) AS image_quest');
     $this->select('question_answer.type as type_option');
     $this->select('question_answer.answer');

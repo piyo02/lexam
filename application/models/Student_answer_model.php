@@ -111,7 +111,7 @@ class Student_answer_model extends MY_Model
 
     return $this;
   }
-  public function student_answer_by_test_id( $test_id = null, $user_id )
+  public function student_answer_by_test_id( $test_id = null, $user_id = null, $question_id = null )
   {
     if (isset($test_id))
     {
@@ -120,6 +120,10 @@ class Student_answer_model extends MY_Model
     if (isset($user_id))
     {
       $this->where($this->table.'.user_id', $user_id);
+    }
+    if (isset($question_id))
+    {
+      $this->where($this->table.'.question_id', $question_id);
     }
     $this->order_by($this->table.'.id', 'desc');
 

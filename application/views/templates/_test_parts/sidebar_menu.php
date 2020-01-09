@@ -36,8 +36,8 @@
               $i = 1;
               foreach( $datas as $key => $data ) :
               ?>
-
                 <div class="col-4">
+                  <form id="question_<?= $i ?>" action="<?= base_url('student/test/test') ?>" method="get">
                 <?php
                 if(!$data->answer)
                   $btn = 'btn-default'; //soal belum di jawab
@@ -46,16 +46,18 @@
                 if($data->uncertain)
                   $btn = 'btn-warning'; //soal sudah di jawab dan ragu-ragu
                 ?>
-                  <a href="<?= base_url('student/test/' . 'test?number=' . $i . '&id=' . $data->question_id ) ?>" style="color: black" class="mb-3 w-100 btn btn-sm btn <?= $btn ?>"><?= $i . ' ' . $data->choice ?></a>
+                  <input type="hidden" name="number" value="<?= $i ?>">
+                  <input type="hidden" name="id" value="<?= $data->question_id ?>">
+                  <button type="submit" style="color: black" class="mb-3 w-100 btn btn-sm btn <?= $btn ?>"><?= $i . ' ' . $data->choice ?></button>
+                  </form>
                 </div>
-
         <?php 
         $i++;  
       endforeach;
               
             }
           
-            print_menus( $_menus );
+            print_menus( $lists_question );
           ?>
             </div>
         </ul>

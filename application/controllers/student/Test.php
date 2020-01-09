@@ -54,6 +54,13 @@ class Test extends Student_Controller {
 		//session test id
 		$session['test_id'] = $test_id;
 		$this->session->set_userdata( $session );
+		
+		// apakah siswa sudah pernah mengerjakan atau belum
+		$solve_test = $this->solve_test_model->solve_test_by_student_id( $test_id, $this->user_id )->row();
+		if( $solve_test ){
+			redirect('student/test/test');
+		}
+
 		// input db solve test siswa
 		$solve_test = [
 			'user_id' => $this->user_id,
@@ -142,9 +149,75 @@ class Test extends Student_Controller {
 		$this->data["number"] = $number;
 		// $this->data["total_questions"] = $total_questions;
 		$this->data["questions"] = $questions;
-		
-		$this->data[ "_menus" ] = $lists_question;
+		// var_dump($questions); die;
+		$this->data[ "lists_question" ] = $lists_question;
 		$this->render( "student/solve", 'test_master' );
 		
+	}
+
+	public function answer()
+	{
+		$test_id = $this->session->userdata( 'test_id' );
+		$question_id = $this->input->post( 'question_id' );
+		$data_param = [
+			'user_id' => $this->user_id,
+			'test_id' => $test_id,
+			'question_id' => $question_id,
+		];
+		
+		$type_option = $this->input->post('type_option');
+
+		if( $type_option == 'image' || $type_option == 'text'){
+			$answer = $this->input->post('answer');
+			
+			$separate = strpos($answer, '-');
+			$choice = substr($answer, ($separate + 1));
+			$answer = substr($answer, 0, $separate);
+		}else {
+			$answer = $this->input->post('answer');
+			$choice = '';
+		}
+		$data = array(
+			'choice' => $choice,
+			'answer' => $answer,
+			'uncertain' => 0,
+		);
+		$student_answer = $this->student_answer_model->update( $data, $data_param );
+		echo json_encode($data);
+	}
+	public function uncertain()
+	{
+		$test_id = $this->session->userdata( 'test_id' );
+		$question_id = $this->input->post( 'question_id' );
+		$data_param = [
+			'user_id' => $this->user_id,
+			'test_id' => $test_id,
+			'question_id' => $question_id,
+		];
+		
+		$type_option = $this->input->post('type_option');
+
+		if( $type_option == 'image' || $type_option == 'text'){
+			$answer = $this->input->post('answer');
+			
+			$separate = strpos($answer, '-');
+			$choice = substr($answer, ($separate + 1));
+			$answer = substr($answer, 0, $pisah);
+		}else {
+			$answer = $this->input->post('answer');
+			$choice = '';
+		}
+		$data = array(
+			'choice' => $choice,
+			'answer' => $answer,
+			'uncertain' => 1,
+		);
+		$student_answer = $this->student_answer_model->update( $data, $data_param );
+		echo json_encode($data);
+	}
+
+	public function examination()
+	{
+		# code...
 	}
 }

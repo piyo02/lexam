@@ -138,10 +138,17 @@ class School_model extends MY_Model
    */
   public function schools( $start = 0 , $limit = NULL )
   {
+    $this->select($this->table . '.*');
+    $this->select('edu_ladder.name AS edu_ladder_name');
       if (isset( $limit ))
       {
         $this->limit( $limit );
       }
+      $this->join(
+        'edu_ladder',
+        'edu_ladder.id = school.edu_ladder_id',
+        'inner'
+      );
       $this->offset( $start );
       $this->order_by($this->table.'.id', 'asc');
       return $this->fetch_data();
