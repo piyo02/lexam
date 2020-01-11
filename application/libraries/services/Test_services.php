@@ -23,10 +23,10 @@ class Test_services
 		}
 		return $list_course;
 	}
-	public function list_classroom( $edu_ladder_id = null )
+	public function list_classroom( $school_id = null )
 	{
     $this->load->model('classroom_model');
-		$classrooms = $this->classroom_model->classrooms_by_edu_ladder( 0, null, $edu_ladder_id)->result();
+		$classrooms = $this->classroom_model->classrooms_by_school_id( 0, null, $school_id)->result();
 		$list_classroom[''] = "-- Pilih Kelas --";
 		foreach ($classrooms as $key => $classroom) {
 			$list_classroom[$classroom->id] = $classroom->name;
@@ -113,7 +113,7 @@ class Test_services
     return $config;
   }
 
-  public function form_data( $user_id = null, $edu_ladder_id = null, $data = null )
+  public function form_data( $user_id = null, $school_id = null, $data = null )
   {
 
     if($data){
@@ -138,7 +138,7 @@ class Test_services
     }
     
     $list_course = $this->list_course( $user_id );
-    $list_classroom = $this->list_classroom( $edu_ladder_id );
+    $list_classroom = $this->list_classroom( $school_id );
     $form_data = array(
       'id' => array(
         'type' => 'hidden',

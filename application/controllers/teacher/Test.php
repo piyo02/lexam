@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Test extends Teacher_Controller {
+	private $school_id = null;
 	private $user_id = null;
 	private $edu_ladder_id = null;
 	private $services = null;
@@ -18,6 +19,7 @@ class Test extends Teacher_Controller {
 			'question_reference_model',
 		));
 		$this->data[ "menu_list_id" ] =  'test_index';
+		$this->school_id = $this->ion_auth->get_school_id_for_teacher();
 		$this->user_id = $this->session->userdata('user_id');
 		$this->edu_ladder_id = $this->ion_auth->get_edu_ladder_id('user_id');
 	}
@@ -120,7 +122,7 @@ class Test extends Teacher_Controller {
 
 			$this->data['list_questionnaire'] = $list_questionnaire;
 
-			$form_data['form_data'] = $this->services->form_data( $this->user_id, $this->edu_ladder_id );
+			$form_data['form_data'] = $this->services->form_data( $this->user_id, $this->school_id );
 			$this->data['content_add'] = $this->load->view('templates/form/plain_form', $form_data, true);
 
 			$btn_back = array(
@@ -168,7 +170,7 @@ class Test extends Teacher_Controller {
 			"modal_id" => "edit_test_",
 			"button_color" => "success",
 			"url" => site_url( $this->current_page."edit_test/"),
-			"form_data" => $this->services->form_data( $this->user_id, $this->edu_ladder_id, $test ),
+			"form_data" => $this->services->form_data( $this->user_id, $this->school_id, $test ),
 			'data' => NULL
 		);
 

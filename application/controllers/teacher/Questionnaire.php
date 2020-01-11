@@ -38,7 +38,7 @@ class Questionnaire extends Teacher_Controller {
 		//set pagination
 		if ($pagination['total_records'] > 0 ) $this->data['pagination_links'] = $this->setPagination($pagination);
 		#################################################################3
-		$table = $this->services->get_table_config( $this->current_page, 1, $this->user_id, $this->edu_ladder_id );
+		$table = $this->services->get_table_config( $this->current_page, 1, $this->user_id, $this->school_id );
 		$table[ "rows" ] = $this->questionnaire_model->questionnaires_by_user_id( $pagination['start_record'], $pagination['limit_per_page'], $this->user_id )->result();
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
@@ -47,7 +47,7 @@ class Questionnaire extends Teacher_Controller {
 			"modal_id" => "add_questionnaire_",
 			"button_color" => "primary",
 			"url" => site_url( $this->current_page."add/"),
-			"form_data" => $this->services->get_form_data($this->user_id, $this->edu_ladder_id),
+			"form_data" => $this->services->get_form_data($this->user_id, $this->school_id),
 			'data' => NULL
 		);
 

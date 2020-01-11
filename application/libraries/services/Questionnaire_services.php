@@ -22,17 +22,17 @@ class Questionnaire_services
 		}
 		return $list_course;
 	}
-	public function list_classroom( $edu_ladder_id = null )
+	public function list_classroom( $school_id = null )
 	{
     $this->load->model('classroom_model');
-		$classrooms = $this->classroom_model->classrooms_by_edu_ladder( 0, null, $edu_ladder_id)->result();
+		$classrooms = $this->classroom_model->classrooms_by_school_id( 0, null, $school_id)->result();
 		$list_classroom[''] = "-- Pilih Kelas --";
 		foreach ($classrooms as $key => $classroom) {
 			$list_classroom[$classroom->id] = $classroom->name;
 		}
 		return $list_classroom;
 	}
-  public function get_table_config( $_page, $start_number = 1, $user_id = null, $edu_ladder_id = null )
+  public function get_table_config( $_page, $start_number = 1, $user_id = null, $school_id = null )
   {
     $table["header"] = array(
       'name' => 'Nama Bank Soal',
@@ -65,7 +65,7 @@ class Questionnaire_services
           "classroom_id" => array(
             'type' => 'select',
             'label' => "Kelas",
-            'options' => $this->list_classroom( $edu_ladder_id ),
+            'options' => $this->list_classroom( $school_id ),
     
           ),
           "course_id" => array(
@@ -148,13 +148,13 @@ class Questionnaire_services
     
     return $config;
   }
-  public function get_form_data($user_id = null, $edu_ladder_id = null)
+  public function get_form_data($user_id = null, $school_id = null)
   {
     $form_data = array(
       "classroom_id" => array(
         'type' => 'select',
         'label' => "Kelas",
-        'options' => $this->list_classroom( $edu_ladder_id ),
+        'options' => $this->list_classroom( $school_id ),
 
       ),
       "course_id" => array(
