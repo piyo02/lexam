@@ -151,5 +151,34 @@ class Student_profile_model extends MY_Model
     $this->db->where('group_id', '4');
     return $this->db->get($this->table);
   }
+
+  public function student_by_classroom_id( $start = 0, $limit = NULL, $school_id = null, $classroom_id = null )
+  {
+    $this->select('users.*');
+    $this->select([
+      'users.id as id',
+      'users.id as user_id',
+      'users.image as image_file',
+      'CONCAT( users.first_name, " ", users.last_name ) as user_fullname',
+      'CONCAT( "'.base_url('uploads/users_photo/').'", image ) as image',
+    ]);
+    if (isset( $limit ))
+    {
+      $this->limit( $limit );
+    }
+    $this->join(
+      'users',
+      'users.id = student_profile.user_id',
+      'inner'
+    );
+    if( $school_id )
+      $this->where( $this->table . '.school_id', $school_id );
+    if( $classroom_id )
+      $this->where( $this->table . '.classroom_id', $classroom_id );
+
+    $this->offset( $start );
+    $this->order_by($this->table.'.id', 'asc');
+    return $this->fetch_data();
+  }
 }
 ?>

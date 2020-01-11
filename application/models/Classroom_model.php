@@ -139,14 +139,14 @@ class Classroom_model extends MY_Model
   public function classrooms( $start = 0 , $limit = NULL )
   {
     $this->select('classroom.*');
-    $this->select('edu_ladder.name AS edu_ladder_name');
+    $this->select('school.name AS school_name');
     if (isset( $limit ))
     {
       $this->limit( $limit );
     }
     $this->join(
-      'edu_ladder',
-      'edu_ladder.id = classroom.edu_ladder_id',
+      'school',
+      'school.id = classroom.school_id',
       'join'
     );
     $this->offset( $start );
@@ -154,22 +154,22 @@ class Classroom_model extends MY_Model
     return $this->fetch_data();
   }
 
-  public function classrooms_by_edu_ladder( $start = 0 , $limit = NULL, $edu_ladder_id = NULL )
+  public function classrooms_by_school_id( $start = 0 , $limit = NULL, $school_id = NULL )
   {
     $this->select('classroom.*');
-    $this->select('edu_ladder.name AS edu_ladder_name');
+    $this->select('school.name AS school_name');
     if (isset( $limit ))
     {
       $this->limit( $limit );
     }
     $this->join(
-      'edu_ladder',
-      'edu_ladder.id = classroom.edu_ladder_id',
+      'school',
+      'school.id = classroom.school_id',
       'join'
     );
-    if (isset($edu_ladder_id))
+    if (isset($school_id))
       {
-        $this->where($this->table.'.edu_ladder_id', $edu_ladder_id);
+        $this->where($this->table.'.school_id', $school_id);
       }
     $this->offset( $start );
     $this->order_by($this->table.'.id', 'asc');

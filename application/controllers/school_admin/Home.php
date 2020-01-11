@@ -49,7 +49,7 @@ class Home extends School_admin_Controller {
 		$this->data["header_button"] =  $add_menu;
 		
 		$this->data["teachers"] =  $this->teacher_profile_model->teacher_by_school_id( $this->school_id )->num_rows();
-		$this->data["classrooms"] =  $this->classroom_model->classrooms_by_edu_ladder( 0, null, $this->edu_ladder_id )->num_rows();
+		$this->data["classrooms"] =  $this->classroom_model->classrooms_by_school_id( 0, null, $this->school_id )->num_rows();
 		$this->data["courses"] =  $this->courses_model->courses_by_school_id( $this->school_id )->num_rows();
 		$this->data["students"] =  $this->student_profile_model->student_by_school_id( $this->school_id )->num_rows();
 

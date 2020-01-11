@@ -161,14 +161,32 @@ class User_services
 		);
     return $table;
   }
+  public function get_table_classroom_config( $_page, $start_number = 1 )
+  {
+	// sesuaikan nama tabel header yang akan d tampilkan dengan nama atribut dari tabel yang ada dalam database
+    $table["header"] = array(
+			// 'username' => 'username',
+			'name' => 'Kelas',
+			'description' => 'Deskripsi',
+		  );
+		  $table["number"] = $start_number ;
+		  $table[ "action" ] = array(
+			array(
+			  "name" => "Detail",
+			  "type" => "link",
+			  "url" => site_url($_page."classroom/"),
+			  "button_color" => "primary",
+			  "param" => "id",
+			),
+		);
+    return $table;
+  }
   public function get_table_student_config( $_page, $start_number = 1 )
   {
 	// sesuaikan nama tabel header yang akan d tampilkan dengan nama atribut dari tabel yang ada dalam database
     $table["header"] = array(
 			// 'username' => 'username',
-			'group_name' => 'Group',
 			'user_fullname' => 'Nama Lengkap',
-			'classroom_name' => 'Kelas',
 			'phone' => 'No Telepon',
 			'address' => 'Alamat',
 			'email' => 'Email',

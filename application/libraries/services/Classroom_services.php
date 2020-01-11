@@ -16,7 +16,6 @@ class Classroom_services
   public function get_table_config( $_page, $start_number = 1 )
   {
       $table["header"] = array(
-        'edu_ladder_name' => 'Jenjang Pendidikan',
         'name' => 'Nama Kelas',
         'description' => 'Deskripsi',
       );
@@ -36,7 +35,7 @@ class Classroom_services
                     ),
                     "name" => array(
                         'type' => 'text',
-                        'label' => "Nama Group",
+                        'label' => "Nama Kelas",
                     ),
                     "description" => array(
                         'type' => 'textarea',
@@ -46,22 +45,22 @@ class Classroom_services
                 "title" => "Group",
                 "data_name" => "name",
               ),
-              // array(
-              //   "name" => 'X',
-              //   "type" => "modal_delete",
-              //   "modal_id" => "delete_",
-              //   "url" => site_url( $_page."delete/"),
-              //   "button_color" => "danger",
-              //   "param" => "id",
-              //   "form_data" => array(
-              //     "id" => array(
-              //       'type' => 'hidden',
-              //       'label' => "id",
-              //     ),
-              //   ),
-              //   "title" => "Group",
-              //   "data_name" => "name",
-              // ),
+              array(
+                "name" => 'X',
+                "type" => "modal_delete",
+                "modal_id" => "delete_",
+                "url" => site_url( $_page."delete/"),
+                "button_color" => "danger",
+                "param" => "id",
+                "form_data" => array(
+                  "id" => array(
+                    'type' => 'hidden',
+                    'label' => "id",
+                  ),
+                ),
+                "title" => "Group",
+                "data_name" => "name",
+              ),
     );
     return $table;
   }

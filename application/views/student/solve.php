@@ -114,7 +114,7 @@
 <!-- tombol jawab -->
 <script>
   function answer(number) {
-    // console.log($('textarea[name=answer]').val() == '')
+    // console.log($('textarea[id=editor]').html())
     var student_answer = $('input:radio[name=answer]:checked').val();
     if (student_answer == undefined)
         var student_answer = $('textarea[name=answer]').val();

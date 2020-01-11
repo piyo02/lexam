@@ -17,6 +17,7 @@ class Users extends School_admin_Controller
 		$this->services = new User_services;
 		$this->load->model(array(
 			'group_model',
+			'classroom_model',
 			'student_profile_model',
 			'teacher_profile_model',
 		));
@@ -84,23 +85,13 @@ class Users extends School_admin_Controller
 	}
 	public function users( $users_group = NULL )
 	{		 // 
-		 $page = ($this->uri->segment(4 + 1)) ? ($this->uri->segment(4 + 1) - 1) : 0;
-		 //pagination parameter
-		 $pagination['base_url'] = base_url( $this->current_page ) .'/index';
-		 $pagination['total_records'] = $this->ion_auth->record_count() ;
-		 $pagination['limit_per_page'] = 10;
-		 $pagination['start_record'] = $page*$pagination['limit_per_page'];
-		 $pagination['uri_segment'] = 4;
-		 //set pagination
-		 if ($pagination['total_records']>0) $this->data['pagination_links'] = $this->setPagination($pagination);
-		
 		 if($users_group == 3){
 			$table = $this->services->get_table_teacher_config( $this->current_page );
 			$table[ "rows" ] = $this->teacher_profile_model->teacher_by_school_id($this->school_id)->result();
 		}
 		if($users_group == 4){
-			$table = $this->services->get_table_student_config( $this->current_page );
-			$table[ "rows" ] = $this->student_profile_model->student_by_school_id($this->school_id)->result();
+			$table = $this->services->get_table_classroom_config( $this->current_page );
+			$table[ "rows" ] = $this->classroom_model->classrooms_by_school_id(0, null, $this->school_id)->result();
 		}
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
@@ -113,7 +104,8 @@ class Users extends School_admin_Controller
 			"button_color" => "primary",	
 			"data" => NULL,
 		);
-		$this->data[ "header_button" ] =  $this->load->view('templates/actions/link', $link_add, TRUE ); ;
+		if($users_group != 4)
+			$this->data[ "header_button" ] =  $this->load->view('templates/actions/link', $link_add, TRUE ); ;
 		#################################################################3
 		$alert = $this->session->flashdata('alert');
 		$this->data["key"] = $this->input->get('key', FALSE);
@@ -124,48 +116,56 @@ class Users extends School_admin_Controller
 		$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
 		$this->render( "templates/contents/plain_content" );
 	}
-	// public function index( $user_groups = NULL )
-	// {
-	// 	$this->data[ "menu_list_id" ] = "users_".$user_groups ; 
-	// 	// echo $this->data[ "menu_list_id" ] ; return;
-	// 	// 
-	// 	 $page = ($this->uri->segment(4)) ? ($this->uri->segment(4) - 1) : 0;
-	// 	 //pagination parameter
-	// 	 $pagination['base_url'] = base_url( $this->current_page ) .'/index';
-	// 	 $pagination['total_records'] = $this->ion_auth->record_count() ;
-	// 	 $pagination['limit_per_page'] = 10;
-	// 	 $pagination['start_record'] = $page*$pagination['limit_per_page'];
-	// 	 $pagination['uri_segment'] = 4;
-	// 	 //set pagination
-	// 	 if ($pagination['total_records']>0) $this->data['pagination_links'] = $this->setPagination($pagination);
+	public function classroom( $classroom_id )
+	{
+		$users_group = 4;
+		$classroom = $this->classroom_model->classroom( $classroom_id )->row();
 
-	// 	$table = $this->services->get_table_config( $this->current_page );
-	// 	$table[ "rows" ] = $this->ion_auth->users_limit( $pagination['limit_per_page'], $pagination['start_record'] , $user_groups )->result();
-	// 	$table = $this->load->view('templates/tables/plain_table', $table, true);
-	// 	$this->data[ "contents" ] = $table;
+		$page = ($this->uri->segment(4 + 1)) ? ($this->uri->segment(4 + 1) -  1 ) : 0;
+		// echo $page; return;
+        //pagination parameter
+        $pagination['base_url'] = base_url( $this->current_page ) .'/classroom';
+        $pagination['total_records'] = $this->group_model->record_count() ;
+        $pagination['limit_per_page'] = 10;
+        $pagination['start_record'] = $page*$pagination['limit_per_page'];
+        $pagination['uri_segment'] = 5;
+		//set pagination
+		if ($pagination['total_records'] > 0 ) $this->data['pagination_links'] = $this->setPagination($pagination);
 
-	// 	$link_add = 
-	// 	array(
-	// 		"name" => "Tambah",
-	// 		"type" => "link",
-	// 		"url" => site_url( $this->current_page."create/"),
-	// 		"button_color" => "primary",	
-	// 		"data" => NULL,
-	// 	);
-	// 	// $this->data[ "header_button" ] =  $this->load->view('templates/actions/link', $link_add, TRUE ); ;
-	// 	#################################################################3
-	// 	$alert = $this->session->flashdata('alert');
-	// 	$this->data["key"] = $this->input->get('key', FALSE);
-	// 	$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
-	// 	$this->data["current_page"] = $this->current_page;
-	// 	$this->data["block_header"] = "";//$this->_user_groups[ $user_groups ];
-	// 	$this->data["header"] = "";//$this->_user_groups[ $user_groups ];
-	// 	$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
-	// 	$this->render( "templates/contents/plain_content" );
-	// }
+		$table = $this->services->get_table_student_config( $this->current_page, $pagination['start_record'] );
+		$table[ "rows" ] = $this->student_profile_model->student_by_classroom_id( $pagination['start_record'], $pagination['limit_per_page'], $this->school_id, $classroom_id )->result();
+		// var_dump($table[ "rows" ]); die;
+		$table = $this->load->view('templates/tables/plain_table', $table, true);
+		$this->data[ "contents" ] = $table;
+
+		$link_add = 
+		array(
+			"name" => "Tambah Siswa",
+			"type" => "link",
+			"url" => site_url( $this->current_page."add/" . $users_group . '?classroom_id=' . $classroom_id ),
+			"button_color" => "primary",	
+			"data" => NULL,
+		);
+		$this->data[ "header_button" ] =  $this->load->view('templates/actions/link', $link_add, TRUE ); ;
+		#################################################################3
+		$alert = $this->session->flashdata('alert');
+		$this->data["key"] = $this->input->get('key', FALSE);
+		$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
+		$this->data["current_page"] = $this->current_page;
+		$this->data["block_header"] = "User Management";
+		$this->data["header"] = "Siswa " . $classroom->name;
+		$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
+		$this->render( "templates/contents/plain_content" );
+	}
 
 	public function add($users_group = null)
-  {
+	{
+		$list_classroom[] = '-- Pilih Kelas Perwalian --';
+		$classrooms = $this->classroom_model->classrooms_by_school_id( 0, null, $this->school_id )->result();
+		foreach ($classrooms as $key => $classroom) {
+			$list_classroom[$classroom->id] = $classroom->name;
+		}
+
 		$tables = $this->config->item('tables', 'ion_auth');
     $identity_column = $this->config->item('identity', 'ion_auth');
     $this->form_validation->set_rules( $this->ion_auth->get_validation_config() );
@@ -217,7 +217,15 @@ class Users extends School_admin_Controller
 
         $this->teacher_profile_model->create( $teacher_profile );
       }
-      
+	  
+	  if( $this->input->post('classroom_id') ){
+			$data['user_id'] = $user_id;
+		
+			$data_param['id'] = $this->input->post('classroom_id');
+
+			$this->classroom_model->update( $data, $data_param );
+	  }
+
       $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->ion_auth->messages() ) );
       // redirect( s_ite_url( $this->current_page.$this->ion_auth->group( $group_id )->row()->name)  );
       redirect( site_url( $this->current_page  )  );
@@ -246,6 +254,11 @@ class Users extends School_admin_Controller
 				'type' => 'text',
 				'label' => 'NIP',
 			),
+			'classroom_id' => array(
+				'type' => 'select',
+				'label' => 'Kelas',
+				'options' => $list_classroom
+			),
 			"users_group" => array(
 				'type' => 'hidden',
 				'label' => 'users_group',
@@ -259,16 +272,9 @@ class Users extends School_admin_Controller
 				'value' => $this->school_id,
 			),
 			"classroom_id" => array(
-				'type' => 'select',
+				'type' => 'hidden',
 				'label' => 'Kelas',
-				'options' => array(
-					1 => "X IPA 1",
-					2 => "X IPS 1",
-					3 => "XI IPA 1",
-					4 => "XI IPS 1",
-					5 => "XII IPA 1",
-					6 => "XII IPS 1",
-				)
+				'value' => $this->input->get( "classroom_id" ),
 			),
 			"users_group" => array(
 				'type' => 'hidden',

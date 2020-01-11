@@ -34,7 +34,7 @@ class Classroom extends School_admin_Controller {
 		if ($pagination['total_records'] > 0 ) $this->data['pagination_links'] = $this->setPagination($pagination);
 		#################################################################3
 		$table = $this->services->get_table_config( $this->current_page );
-		$table[ "rows" ] = $this->classroom_model->classrooms_by_edu_ladder( $pagination['start_record'], $pagination['limit_per_page'], $this->edu_ladder_id )->result();
+		$table[ "rows" ] = $this->classroom_model->classrooms_by_school_id( $pagination['start_record'], $pagination['limit_per_page'], $this->school_id )->result();
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
 		$add_menu = array(
@@ -43,10 +43,10 @@ class Classroom extends School_admin_Controller {
 			"button_color" => "primary",
 			"url" => site_url( $this->current_page."add/"),
 			"form_data" => array(
-				"edu_ladder_id" => array(
+				"school_id" => array(
 					'type' => 'hidden',
 					'label' => "Jenjang Pendidikan",
-					'value' => $this->edu_ladder_id,
+					'value' => $this->school_id,
 				),
 				"name" => array(
 					'type' => 'text',
@@ -86,7 +86,7 @@ class Classroom extends School_admin_Controller {
 		$this->form_validation->set_rules( $this->services->validation_config() );
         if ($this->form_validation->run() === TRUE )
         {
-			$data['edu_ladder_id'] = $this->input->post( 'edu_ladder_id' );
+			$data['school_id'] = $this->input->post( 'school_id' );
 			$data['name'] = $this->input->post( 'name' );
 			$data['description'] = $this->input->post( 'description' );
 
