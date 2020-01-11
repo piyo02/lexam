@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 08 Jan 2020 pada 23.51
+-- Generation Time: 11 Jan 2020 pada 22.37
 -- Versi Server: 5.7.28-0ubuntu0.18.04.4
 -- PHP Version: 7.2.24-0ubuntu0.18.04.1
 
@@ -28,7 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `classroom` (
   `id` int(10) UNSIGNED NOT NULL,
-  `edu_ladder_id` int(10) UNSIGNED NOT NULL,
+  `school_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -37,13 +38,12 @@ CREATE TABLE `classroom` (
 -- Dumping data untuk tabel `classroom`
 --
 
-INSERT INTO `classroom` (`id`, `edu_ladder_id`, `name`, `description`) VALUES
-(1, 3, 'X IPA 1', 'Kelas 10'),
-(2, 3, 'X IPS 1', 'Kelas 10'),
-(3, 3, 'XI IPA 1', 'Kelas 11'),
-(4, 3, 'XI IPS 1', 'Kelas 11'),
-(5, 3, 'XII IPA 1', 'Kelas 12'),
-(6, 3, 'XII IPS 1', 'Kelas 12');
+INSERT INTO `classroom` (`id`, `school_id`, `user_id`, `name`, `description`) VALUES
+(1, 1, NULL, 'X IPA 1', 'Kelas 10'),
+(2, 1, NULL, 'X IPS 1', 'Kelas 10'),
+(3, 1, NULL, 'XI IPA 1', 'Kelas 11'),
+(4, 1, NULL, 'XI IPS 1', 'Kelas 11'),
+(5, 1, NULL, 'XII IPA 1', 'Kelas 12');
 
 -- --------------------------------------------------------
 
@@ -85,7 +85,11 @@ CREATE TABLE `edu_ladder` (
 INSERT INTO `edu_ladder` (`id`, `name`, `description`) VALUES
 (1, 'SD', 'Sekolah Dasar'),
 (2, 'SMP ', 'Sekolah Menengah Pertama'),
-(3, 'SMA', 'Sekolah Menengah Atas');
+(3, 'SMA', 'Sekolah Menengah Atas'),
+(4, 'MI', 'SD islami'),
+(5, 'MTs', 'Madrasah Tsanawiyah'),
+(6, 'MA', 'Madrasah Aliyah'),
+(7, 'SMK', 'Sekolah Kejuruan');
 
 -- --------------------------------------------------------
 
@@ -154,7 +158,7 @@ INSERT INTO `menus` (`id`, `menu_id`, `name`, `link`, `list_id`, `icon`, `status
 (107, 2, 'Beranda', 'uadmin/home', 'home_index', 'home', 1, 1, '-'),
 (108, 2, 'Pengguna', 'uadmin/users', 'users_index', 'home', 1, 2, '-'),
 (109, 3, 'Beranda', 'teacher/home', 'home_index', 'home', 1, 1, '-'),
-(110, 3, 'Mata Pelajaran', 'teacher/courses', 'courses_index', 'book', 1, 1, '-'),
+(110, 3, 'Mata Pelajaran', 'teacher/courses', 'courses_index', 'book', 0, 1, '-'),
 (111, 3, 'Ulangan', 'teacher/ulangan', 'teacher_ulangan', 'tasks', 1, 1, '-'),
 (112, 111, 'Bank Soal', 'teacher/questionnaire', 'questionnaire_index', 'th', 1, 1, '-'),
 (113, 111, 'Ulangan', 'teacher/test', 'test_index', 'file-signature', 1, 1, '-'),
@@ -166,10 +170,11 @@ INSERT INTO `menus` (`id`, `menu_id`, `name`, `link`, `list_id`, `icon`, `status
 (122, 121, 'Mata Pelajaran', 'school_admin/courses', 'courses_index', 'home', 1, 1, '-'),
 (123, 121, 'Kelas', 'school_admin/classroom', 'classroom_index', 'home', 1, 1, '-'),
 (124, 5, 'Pengguna', 'school_admin/users', 'users_index', 'home', 1, 1, '-'),
-(125, 4, 'Daftar Ulangan', 'student/list_test', 'student_list_test', 'file-signature', 1, 1, '-'),
+(125, 4, 'Daftar Ulangan', 'student/list_test', 'student_list_test', 'tasks', 1, 1, '-'),
 (126, 125, 'Ulangan', 'student/test', 'test_index', 'file-signature', 1, 1, '-'),
 (127, 125, 'Histori', 'student/history', 'history_index', 'history', 1, 1, '-'),
-(128, 4, 'Hasil', 'student/result_test', 'result_test_index', 'wave-square', 1, 1, '-');
+(128, 4, 'Hasil', 'student/result_test', 'result_test_index', 'wave-square', 1, 1, '-'),
+(129, 2, 'Sekolah', 'uadmin/schools', 'schools_index', 'home', 1, 1, '-');
 
 -- --------------------------------------------------------
 
@@ -332,6 +337,13 @@ CREATE TABLE `solve_test` (
   `time_start` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `solve_test`
+--
+
+INSERT INTO `solve_test` (`id`, `user_id`, `test_id`, `time_start`) VALUES
+(1, 19, 4, 1578548866);
+
 -- --------------------------------------------------------
 
 --
@@ -343,11 +355,21 @@ CREATE TABLE `student_answer` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `test_id` int(10) UNSIGNED NOT NULL,
   `question_id` int(10) UNSIGNED NOT NULL,
-  `choice` int(1) NOT NULL,
-  `answer` text NOT NULL,
-  `skor` int(11) NOT NULL,
-  `uncertaion` int(1) NOT NULL
+  `choice` char(1) DEFAULT NULL,
+  `answer` text,
+  `skor` int(11) DEFAULT NULL,
+  `uncertain` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `student_answer`
+--
+
+INSERT INTO `student_answer` (`id`, `user_id`, `test_id`, `question_id`, `choice`, `answer`, `skor`, `uncertain`) VALUES
+(5, 19, 4, 11, 'C', '', NULL, 1),
+(6, 19, 4, 1, 'B', '', NULL, 1),
+(7, 19, 4, 12, NULL, NULL, NULL, NULL),
+(8, 19, 4, 19, '', 'Soal esai', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -481,11 +503,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `phone`, `image`, `address`) VALUES
-(1, '127.0.0.1', 'admin@fixl.com', '$2y$12$XpBgMvQ5JzfvN3PTgf/tA.XwxbCOs3mO0a10oP9/11qi1NUpv46.u', 'admin@fixl.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1578496764, 1, 'Admin', 'istrator', '081342989185', 'USER_1_1571554027.jpeg', 'admin'),
-(13, '::1', 'uadmin@gmail.com', '$2y$10$78SZyvKRKMU7nPCew9w4nOpEUmJ1SeTV4L4ZG2NXXSfbEaswqoepq', 'uadmin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1568678256, 1578489058, 1, 'admin', 'Dinas', '00', 'USER_13_1568678463.jpg', 'jln mutiara no 8'),
-(17, '::1', 'smanam@gmail.com', '$2y$10$NIx.vGJvX.a/6J1/Yha1beTeSpb8xvMr5q2mbgpcZ2/2gOMk5.KIS', 'smanam@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575916410, 1578455718, 1, 'Admin SMA', 'Negeri 6 Kendari', '081234567890', 'USER_17_1578449627.jpg', 'Jalan Banda'),
-(18, '::1', 'zidni@gmail.com', '$2y$10$554DNYTB6fzLJoaWdKsFwOSt5v88LAdqO1SlxqRB1JjTYrvT4yMky', 'zidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575919985, 1578497965, 1, 'Al Zidni', 'Kasim', '081232578168', 'USER_18_1577108725.jpg', 'BTN Graha Mandiri Permai Blok K/07'),
-(19, '::1', 'alzidni@gmail.com', '$2y$10$CpC0kMgMDYXYtag4Ba4pEe2KMzz2WKsVi4Tk.csIUi6dtrcTsO1oa', 'alzidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575920027, 1578497936, 1, 'Al Zidni', 'Kasim', '081232578167', 'USER_19_1578497304.jpg', 'BTN Graha Mandiri Permai Blok K/07');
+(1, '127.0.0.1', 'admin@fixl.com', '$2y$12$XpBgMvQ5JzfvN3PTgf/tA.XwxbCOs3mO0a10oP9/11qi1NUpv46.u', 'admin@fixl.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1578751303, 1, 'Admin', 'istrator', '081342989185', 'USER_1_1571554027.jpeg', 'admin'),
+(13, '::1', 'uadmin@gmail.com', '$2y$10$78SZyvKRKMU7nPCew9w4nOpEUmJ1SeTV4L4ZG2NXXSfbEaswqoepq', 'uadmin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1568678256, 1578583682, 1, 'admin', 'Dinas', '00', 'USER_13_1568678463.jpg', 'jln mutiara no 8'),
+(17, '::1', 'smanam@gmail.com', '$2y$10$NIx.vGJvX.a/6J1/Yha1beTeSpb8xvMr5q2mbgpcZ2/2gOMk5.KIS', 'smanam@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575916410, 1578751336, 1, 'Admin SMA', 'Negeri 6 Kendari', '081234567890', 'USER_17_1578449627.jpg', 'Jalan Banda'),
+(18, '::1', 'zidni@gmail.com', '$2y$10$554DNYTB6fzLJoaWdKsFwOSt5v88LAdqO1SlxqRB1JjTYrvT4yMky', 'zidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575919985, 1578720596, 1, 'Al Zidni', 'Kasim', '081232578168', 'USER_18_1577108725.jpg', 'BTN Graha Mandiri Permai Blok K/07'),
+(19, '::1', 'alzidni@gmail.com', '$2y$10$CpC0kMgMDYXYtag4Ba4pEe2KMzz2WKsVi4Tk.csIUi6dtrcTsO1oa', 'alzidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575920027, 1578720870, 1, 'Al Zidni', 'Kasim', '081232578167', 'USER_19_1578497304.jpg', 'BTN Graha Mandiri Permai Blok K/07');
 
 -- --------------------------------------------------------
 
@@ -519,7 +541,8 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 --
 ALTER TABLE `classroom`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `edu_ladder_id` (`edu_ladder_id`);
+  ADD KEY `classroom_ibfk_1` (`school_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `courses`
@@ -621,7 +644,8 @@ ALTER TABLE `student_answer`
 ALTER TABLE `student_profile`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `school_id` (`school_id`);
+  ADD KEY `school_id` (`school_id`),
+  ADD KEY `classroom_id` (`classroom_id`);
 
 --
 -- Indexes for table `teacher_course`
@@ -693,7 +717,7 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `edu_ladder`
 --
 ALTER TABLE `edu_ladder`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -708,7 +732,7 @@ ALTER TABLE `login_attempts`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 --
 -- AUTO_INCREMENT for table `question`
 --
@@ -743,12 +767,12 @@ ALTER TABLE `school_admin`
 -- AUTO_INCREMENT for table `solve_test`
 --
 ALTER TABLE `solve_test`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `student_answer`
 --
 ALTER TABLE `student_answer`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `student_profile`
 --
@@ -792,7 +816,8 @@ ALTER TABLE `users_groups`
 -- Ketidakleluasaan untuk tabel `classroom`
 --
 ALTER TABLE `classroom`
-  ADD CONSTRAINT `classroom_ibfk_1` FOREIGN KEY (`edu_ladder_id`) REFERENCES `edu_ladder` (`id`);
+  ADD CONSTRAINT `classroom_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`),
+  ADD CONSTRAINT `classroom_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `courses`
@@ -854,7 +879,8 @@ ALTER TABLE `student_answer`
 --
 ALTER TABLE `student_profile`
   ADD CONSTRAINT `student_profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `student_profile_ibfk_2` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`);
+  ADD CONSTRAINT `student_profile_ibfk_2` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`),
+  ADD CONSTRAINT `student_profile_ibfk_3` FOREIGN KEY (`classroom_id`) REFERENCES `classroom` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `teacher_course`
