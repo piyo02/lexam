@@ -15,26 +15,38 @@ class Result_test extends Student_Controller {
 			'group_model',
 			'test_result_model',
 			'test_model',
+			'student_profile_model',
+			'courses_model',
 		));
 		$this->user_id = $this->session->userdata('user_id');
 		$this->data['menu_list_id'] = 'result_test_index';
 	}
 	public function index()
 	{
+		$student = $this->student_profile_model->student_profile( $this->user_id )->row();
+
+		$courses = $this->courses_model->courses_by_school_id( $student->school_id )->result();
+		foreach ($courses as $key => $course) {
+			$list_course[$course->id] = $course->name;
+		}
+
+		$course_id = $this->input->get('course_id');
+		$course_id || $course_id = $courses[0]->id;
+
 		$table = $this->services->get_table_config( $this->current_page );
-		$table[ "rows" ] = $this->test_result_model->test_result_by_teacher_id( $this->user_id )->result();
+		$table[ "rows" ] = $this->test_result_model->test_result_by_course_id( $this->user_id, $course_id )->result();
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
-		$this->data[ "contents" ] = $table;
-		$export_btn = array(
-			"name" => "Cetak Hasil",
-			"button_color" => "success",
-			"url" => site_url( $this->current_page."export/"),
-			'data' => NULL
+
+		$form_data['form_data'] = array(
+			'course_id' => array(
+				'type' => 'select',
+				'label' => 'Mata Pelajaran',
+				'options' => $list_course,
+				'selected' => $course_id
+			),
 		);
-
-		$export_btn= $this->load->view('templates/actions/link', $export_btn, true ); 
-
-		$this->data[ "header_button" ] =  $export_btn;
+		$form_data = $this->load->view('templates/form/plain_form_horizontal', $form_data , TRUE ) ;
+		$this->data[ "contents" ] = $form_data;
 		// return;
 		#################################################################3
 		$alert = $this->session->flashdata('alert');
@@ -43,8 +55,8 @@ class Result_test extends Student_Controller {
 		$this->data["current_page"] = $this->current_page;
 		$this->data["block_header"] = "Ulangan";
 		$this->data["header"] = "Hasil Ulangan";
-		$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
-		$this->render( "templates/contents/plain_content" );
+		$this->data["sub_header"] = '';
+		$this->render( "student/result_test" );
 	}
 
 

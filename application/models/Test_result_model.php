@@ -190,6 +190,29 @@ class Test_result_model extends MY_Model
       );
       return $this->db->get($this->table);
   }
+  public function test_result_by_course_id( $user_id = null, $course_id = null )
+  {
+    $this->select($this->table . '.*' );
+    $this->select('test.course_id' );
+    if (isset($user_id))
+    {
+      $this->where($this->table.'.user_id', $user_id);
+    }
+    if (isset($course_id))
+    {
+      $this->where('test.course_id', $course_id);
+    }
+    $this->join(
+      'test',
+      'test.id = test_result.test_id',
+      'inner'
+    );
+    $this->order_by($this->table.'.id', 'desc');
+
+    $this->test_results(  );
+
+    return $this;
+  }
 
 }
 ?>
