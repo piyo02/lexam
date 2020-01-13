@@ -69,14 +69,6 @@ class Solve_test_model extends MY_Model
    */
   public function delete( $data_param  )
   {
-    //foreign
-    //delete_foreign( $data_param. $models[]  )
-    if( !$this->delete_foreign( $data_param, ['menu_model'] ) )
-    {
-      $this->set_error("gagal");//('group_delete_unsuccessful');
-      return FALSE;
-    }
-    //foreign
     $this->db->trans_begin();
 
     $this->db->delete($this->table, $data_param );

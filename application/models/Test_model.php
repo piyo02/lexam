@@ -129,6 +129,12 @@ class Test_model extends MY_Model
         'teacher_profile.user_id = test.user_id',
         'inner'
       );
+      $this->join(
+        'test_result',
+        'test_result.test_id = test.id',
+        'left'
+      );
+      $this->where('test_result.value IS NULL');
       $this->order_by($this->table.'.id', 'desc');
 
       $this->tests(  );

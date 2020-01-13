@@ -20,6 +20,7 @@ class Test extends Student_Controller {
 			'student_profile_model',
 			'solve_test_model',
 			'student_answer_model',
+			'test_result_model',
 		));
 		$this->data[ "menu_list_id" ] =  'test_index';
 		$this->user_id = $this->session->userdata('user_id');
@@ -128,24 +129,10 @@ class Test extends Student_Controller {
 		}
 		// var_dump( $test_id ); 
 		
-		$btn_confirm = array(
-			"name" => "Selesai",
-			"modal_id" => "finish",
-			"button_color" => "success",
-			"url" => site_url( $this->current_page . "finish/"),
-			"messages" => 'Apakah anda yakin telah selesai mengerjakan ' . $test->name . ' ?',
-			"form_data" => array(),
-			'data' => NULL
-		);
-	  
-		$btn_confirm = $this->load->view('templates/actions/modal_form_messages', $btn_confirm, true ); 
-		$this->data['btn_confirm'] = $btn_confirm;
-		
 		$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
 		$this->data["current_page"] = $this->current_page;
 		$this->data["solve_test"] = $solve_test;
 		$this->data["test"] = $test;
-		$this->data["btn_confirm"] =  $btn_confirm;
 		$this->data["number"] = $number;
 		// $this->data["total_questions"] = $total_questions;
 		$this->data["questions"] = $questions;
@@ -202,7 +189,7 @@ class Test extends Student_Controller {
 			
 			$separate = strpos($answer, '-');
 			$choice = substr($answer, ($separate + 1));
-			$answer = substr($answer, 0, $pisah);
+			$answer = substr($answer, 0, $separate);
 		}else {
 			$answer = $this->input->post('answer');
 			$choice = '';
@@ -216,8 +203,76 @@ class Test extends Student_Controller {
 		echo json_encode($data);
 	}
 
-	public function examination()
+	public function assessment()
 	{
-		# code...
+		$test_id = $this->session->userdata( 'test_id' );
+		$test = $this->test_model->test( $test_id )->row();
+		
+		$value = $this->check( $test->max_value );
+		$data = [
+			'user_id' 	 => $this->user_id,
+			'test_id' => $test_id,
+		];
+		
+		//hapus data kerja siswa
+		if ( $solve_test = $this->solve_test_model->solve_test_by_student_id( $test_id, $this->user_id )->row() ) {
+			
+			$data_param['test_id'] = $test_id;
+			$data_param['user_id'] = $this->user_id;
+			
+			// $this->solve_test_model->delete( $data_param );
+		}
+		
+		$data['value'] = $value['value'];
+		$this->test_result_model->create($data);
+		
+		$this->data["value"] = $value;
+		$this->data["test"] = $test;
+
+		//hapus session
+		$this->session->unset_userdata('test_id');
+		$this->render("student/test/confirm");
+	}
+
+	public function check( $max_value = 100 )
+	{
+		$test_id = $this->session->userdata('test_id');
+		$data_param = [
+			'test_id' => $this->session->userdata('test_id'),
+			'user_id' => $this->user_id,
+		];
+
+		$answers = $this->student_answer_model->student_answer_by_test_id( $test_id, $this->user_id )->result();
+		$value = 0;
+		$correct = 0;
+		foreach ($answers as $key => $answer) {
+			if ($answer->choice) {
+				$choice = $this->question_answer_model->question_answer( $answer->answer )->row();
+				$skor = $choice->value;
+				if ($skor)
+				$correct++;
+				$value += 1;
+			} 
+			else {
+				$choice = $this->question_answer_model->question_answer_by_question_id( $answer->question_id )->row();
+				if ($answer->answer == $choice->answer) {
+					$skor = $choice->value;
+					$correct++;
+				} else {
+					$skor = 0;
+				}
+				$value += $choice->value;
+			}
+			$data['skor'] = $skor;
+			$data_param['id'] = $answer->id;
+			$this->student_answer_model->update($data, $data_param);
+		}
+		$skor = $this->student_answer_model->get_skor( $this->user_id, $test_id )->row();
+		$data = [
+			'value' => $skor->skor / $value * $max_value,
+			'correct' => $correct,
+			'total_quest' => count($answers),
+		];
+		return $data;
 	}
 }

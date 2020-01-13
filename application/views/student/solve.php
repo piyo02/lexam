@@ -1,3 +1,28 @@
+<?php
+  if( isset( $solve_test ) && isset( $test->duration ) ){
+    
+    $start = $solve_test->time_start;
+    $time_elapsed = time() - $start;
+    $time = (int) $test->duration;
+
+    $temp_hours = $time * 60 - $time_elapsed;
+    $temp_minutes = (int) ($temp_hours / 60);
+    $temp_seconds = $temp_hours % 60;
+
+    if ($temp_minutes < 60) {
+        $hours   = 0;
+        $minutes = $temp_minutes;
+        $seconds = $temp_seconds;
+    } else {
+        $hours   = (int) ($temp_minutes / 60);
+        $minutes = $temp_minutes % 60;
+        $seconds = $temp_seconds;
+    }
+
+    // var_dump($temp_minutes); die;
+  }
+?>
+
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -100,6 +125,30 @@
   </section>
 </div>
 
+<div class="modal fade" id="finish" role="dialog">
+  <div class="modal-dialog">
+  <!-- Modal content-->
+    <div class="modal-content">
+      <form id="formConfirm" action="http://localhost/lexam/student/test/finish/" method="post" accept-charset="utf-8">
+        <div class="modal-header">
+          <h5 class="modal-title">Selesai</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Apakah anda yakin telah selesai mengerjakan <?= $test->name ?> ?                
+          <br>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn  btn-success">Ok</button>
+          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- tombol kembali -->
 <script>
   function back(number) {
@@ -114,7 +163,7 @@
 <!-- tombol jawab -->
 <script>
   function answer(number) {
-    // console.log($('textarea[id=editor]').html())
+    console.log($('input:radio[name=answer]:checked').val());
     var student_answer = $('input:radio[name=answer]:checked').val();
     if (student_answer == undefined)
         var student_answer = $('textarea[name=answer]').val();
@@ -212,30 +261,30 @@
 </script>
 
 <!-- script timer -->
-<!-- <script>
+<script>
   $(document).ready(function() {
-    var detik = <?= $detik; ?>;
-    var menit = <?= $menit; ?>;
-    var jam = <?= $jam; ?>;
+    var seconds = <?php echo $seconds; ?>;
+    var minutes = <?php echo $minutes; ?>;
+    var hours = <?php echo $hours; ?>;
 
-    function hitung() {
-        setTimeout(hitung, 1000);
+    function timer() {
+        setTimeout(timer, 1000);
 
         $('#timer').html(
-            '<h4 class="text-danger" align="center">' + jam + ' jam : ' + menit + ' menit : ' + detik + ' detik</h4>'
+            '<h4 class="text-danger" align="center">' + hours + ' jam : ' + minutes + ' menit : ' + seconds + ' detik</h4>'
         );
 
-        detik--;
+        seconds--;
 
-        if (detik < 0) {
-            detik = 59;
-            menit--;
+        if (seconds < 0) {
+            seconds = 59;
+            minutes--;
 
-            if (menit < 0) {
-                menit = 59;
-                jam--;
+            if (minutes < 0) {
+                minutes = 59;
+                hours--;
 
-                if (jam < 0) {
+                if (hours < 0) {
                     clearInterval();
                     var formSoal = document.getElementById('formSoal');
                     formSoal.submit();
@@ -252,13 +301,13 @@
             url: '<?= base_url('siswa/tes/working') ?>',
             success: function(data) {
                 if (data == 0) {
-                    var formSoal = document.getElementById('formSoal');
-                    formSoal.submit();
+                    // var formConfirm = document.getElementById('formConfirm');
+                    // formConfirm.submit();
                 }
             }
         })
     }
     work();
-    hitung();
+    timer();
   });
-</script> -->
+</script>

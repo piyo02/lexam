@@ -64,7 +64,10 @@
       </nav>
       <!-- /.sidebar-menu -->
       <div class="text-center">
-        <?= $btn_confirm; ?>
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" style="margin-left: 5px;" data-target="#finish">
+          Selesai
+        </button>
+        <!-- Modal Delete-->
       </div>
     </div>
     <!-- /.sidebar -->

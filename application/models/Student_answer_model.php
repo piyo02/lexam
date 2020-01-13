@@ -142,5 +142,20 @@ class Student_answer_model extends MY_Model
       return $this->fetch_data();
   }
 
+  public function get_skor( $user_id = null, $test_id = null )
+  {
+    $this->select('SUM(skor) AS skor');
+    if (isset($test_id))
+    {
+      $this->where($this->table.'.test_id', $test_id);
+    }
+    if (isset($user_id))
+    {
+      $this->where($this->table.'.user_id', $user_id);
+    }
+    $this->student_answers(  );
+
+    return $this;
+  }
 }
 ?>

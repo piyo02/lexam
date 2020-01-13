@@ -298,7 +298,7 @@ class Users extends School_admin_Controller
 
 		$this->data[ "contents" ] =  $form_data;
       
-		$this->render( "templates/contents/plain_content_form" );
+		$this->render( "school_admin/user/add" );
     }
 	}
 
