@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/table-css/style.css">
 
     <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="manifest" href="<?= base_url() ?>manifest.json">
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="<?= base_url('assets/') ?>plugins/ckeditor/ckeditor.js"></script>

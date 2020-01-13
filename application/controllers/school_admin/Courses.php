@@ -142,4 +142,10 @@ class Courses extends School_admin_Controller {
 		}
 		redirect( site_url($this->current_page)  );
 	}
+
+	public function getCourses()
+	{
+		$courses = $this->courses_model->courses_by_school_id( 0, null, $this->school_id )->result();
+		echo json_encode($courses);
+	}
 }

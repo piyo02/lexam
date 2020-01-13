@@ -19,7 +19,9 @@ class Users extends School_admin_Controller
 			'group_model',
 			'classroom_model',
 			'student_profile_model',
+			'courses_model',
 			'teacher_profile_model',
+			'teacher_course_model',
 		));
 		$this->_user_groups = array(
 			"farmer" => 'Petani',
@@ -222,8 +224,20 @@ class Users extends School_admin_Controller
 			$data['user_id'] = $user_id;
 		
 			$data_param['id'] = $this->input->post('classroom_id');
-
 			$this->classroom_model->update( $data, $data_param );
+	  }
+
+	  if( $total_course = $this->input->post('total_course') ){
+		$data = array();
+		for ($i=0; $i < $total_course; $i++) { 
+			$data[] = array(
+				'user_id' => $user_id,
+				'course_id' => $this->input->post( 'course_id_' . $i )
+			);
+			var_dump( $this->input->post( 'course_id_' . $i ) ); die;
+		}	
+		
+		$this->teacher_course_model->create_batch( $data );
 	  }
 
       $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->ion_auth->messages() ) );
@@ -242,7 +256,7 @@ class Users extends School_admin_Controller
 		$this->data["current_page"] = $this->current_page;
 		$this->data["block_header"] = "Tambah User ";
 		$this->data["header"] = "Tambah User ";
-		$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
+		$this->data["sub_header"] = '';
 
 		$form_teacher['form_data'] = array(
 			"school_id" => array(

@@ -283,7 +283,7 @@ class User_services
 			  'value' => $this->form_validation->set_value('email', $this->email),			  
 			),
 			"address" => array(
-				'type' => 'text',
+				'type' => 'textarea',
 				'label' => "Alamat",
 				'value' => $this->form_validation->set_value('address', $this->address),			  
 			  ),

@@ -33,6 +33,17 @@ class Teacher_course_model extends MY_Model
       $this->set_error("gagal");
           return FALSE;
   }
+  public function create_batch( $data )
+  {
+    $this->db->insert_batch($this->table, $data);
+    if( isset($id) )
+    {
+      $this->set_message("berhasil");
+      return $id;
+    }
+    $this->set_error("gagal");
+    return FALSE;
+  }
   /**
    * update
    *

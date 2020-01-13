@@ -19,6 +19,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url('assets/') ?>dist/css/adminlte.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/table-css/style.css">
+    <link rel="manifest" href="<?= base_url() ?>manifest.json">
 
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">

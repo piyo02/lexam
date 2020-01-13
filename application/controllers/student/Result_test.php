@@ -25,7 +25,7 @@ class Result_test extends Student_Controller {
 	{
 		$student = $this->student_profile_model->student_profile( $this->user_id )->row();
 
-		$courses = $this->courses_model->courses_by_school_id( $student->school_id )->result();
+		$courses = $this->courses_model->courses_by_school_id( 0, null, $student->school_id )->result();
 		foreach ($courses as $key => $course) {
 			$list_course[$course->id] = $course->name;
 		}
