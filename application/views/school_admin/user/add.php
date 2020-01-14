@@ -12,7 +12,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-8 col-sm-12">
+        <div class="col-12">
           <div class="card">
             <div class="card-header">
               <div class="col-12">
@@ -51,16 +51,14 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-sm-12">
+      </div>
+      <div class="row">
+        <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="float-right">
-                        <input type="hidden" id="total_course" name="total_course" value="0">
-                        <a href="#" class="btn btn-primary btn-sm" onclick="addCourse()" id="btn-add-course">Tambah Mapel</a>
-                    </div>
-                </div>
                 <div class="card-body">
-                  <div class="" id="add-course"></div>
+                  <div class="col-lg-4 col-sm-12">
+                    <?php echo (isset($form_course)) ? $form_course : '';  ?>
+                  </div>
                 </div>
             </div>
         </div>

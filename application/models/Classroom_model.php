@@ -115,6 +115,20 @@ class Classroom_model extends MY_Model
 
       return $this;
   }
+  public function classroom_by_user_id( $user_id = NULL  )
+  {
+      if (isset($user_id))
+      {
+        $this->where($this->table.'.user_id', $user_id);
+      }
+
+      $this->limit(1);
+      $this->order_by($this->table.'.id', 'desc');
+
+      $this->classrooms(  );
+
+      return $this;
+  }
   // /**
   //  * classrooms
   //  *

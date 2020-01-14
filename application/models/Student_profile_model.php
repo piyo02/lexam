@@ -101,12 +101,19 @@ class Student_profile_model extends MY_Model
    * @return static
    * @author madukubah
    */
-  public function student_profile( $id = NULL )
+  public function student_profile( $user_id = NULL )
   {
-    if (isset($id))
+    $this->select($this->table . '.*');
+    $this->select('classroom.name AS classroom_name');
+    if (isset($user_id))
     {
-      $this->where($this->table.'.user_id', $id);
+      $this->where($this->table.'.user_id', $user_id);
     }
+    $this->join(
+      'classroom',
+      'classroom.id = student_profile.classroom_id',
+      'inner'
+    );
     $this->order_by($this->table.'.id', 'asc');
     return $this->fetch_data();
   }

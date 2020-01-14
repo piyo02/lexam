@@ -148,7 +148,33 @@ class Users extends School_admin_Controller
 			"button_color" => "primary",	
 			"data" => NULL,
 		);
-		$this->data[ "header_button" ] =  $this->load->view('templates/actions/link', $link_add, TRUE ); ;
+		$btn_add =  $this->load->view('templates/actions/link', $link_add, TRUE ); ;
+
+		$btn_export = array(
+			"name" => "Import Siswa",
+			'modal_id' => 'btn_import_',
+			"url" => site_url( 'import/import_student/' ),
+			"button_color" => "success",	
+			"form_data" => array(
+				'file' => array(
+					'type' => 'file',
+					'label' => 'File Import',
+				),
+				'classroom_id' => array(
+					'type' => 'hidden',
+					'label' => 'Id Kelas',
+					'value' => $classroom_id
+				),
+				'school_id' => array(
+					'type' => 'hidden',
+					'label' => 'Id Sekolah',
+					'value' => $this->school_id,
+				),
+			),
+			"data" => NULL,
+		);
+		$btn_export =  $this->load->view('templates/actions/modal_form_multipart', $btn_export, TRUE );
+		$this->data[ "header_button" ] =  $btn_export . ' ' . $btn_add;
 		#################################################################3
 		$alert = $this->session->flashdata('alert');
 		$this->data["key"] = $this->input->get('key', FALSE);
@@ -166,6 +192,11 @@ class Users extends School_admin_Controller
 		$classrooms = $this->classroom_model->classrooms_by_school_id( 0, null, $this->school_id )->result();
 		foreach ($classrooms as $key => $classroom) {
 			$list_classroom[$classroom->id] = $classroom->name;
+		}
+
+		$courses = $this->courses_model->courses_by_school_id( 0, null, $this->school_id )->result();
+		foreach ($courses as $key => $course) {
+			$list_course[$course->id] = $course->name;
 		}
 
 		$tables = $this->config->item('tables', 'ion_auth');
@@ -227,18 +258,15 @@ class Users extends School_admin_Controller
 			$this->classroom_model->update( $data, $data_param );
 	  }
 
-	  if( $total_course = $this->input->post('total_course') ){
-		$data = array();
-		for ($i=0; $i < $total_course; $i++) { 
-			$data[] = array(
-				'user_id' => $user_id,
-				'course_id' => $this->input->post( 'course_id_' . $i )
-			);
-			var_dump( $this->input->post( 'course_id_' . $i ) ); die;
-		}	
-		
-		$this->teacher_course_model->create_batch( $data );
+	  if( $this->input->post('course_id') ){
+		$teacher_course = array(
+			'user_id' => $user_id,
+			'course_id' => $this->input->post( 'course_id' )
+		);
 	  }
+
+	
+		$this->teacher_course_model->create( $teacher_course );
 
       $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->ion_auth->messages() ) );
       // redirect( s_ite_url( $this->current_page.$this->ion_auth->group( $group_id )->row()->name)  );
@@ -272,6 +300,11 @@ class Users extends School_admin_Controller
 				'type' => 'select',
 				'label' => 'Kelas',
 				'options' => $list_classroom
+			),
+			'course_id' => array(
+				'type' => 'select',
+				'label' => 'Mata Pelajaran yang Diajar',
+				'options' => $list_course,
 			),
 			"users_group" => array(
 				'type' => 'hidden',
@@ -318,10 +351,21 @@ class Users extends School_admin_Controller
 
 	public function edit( $user_id = NULL )
     {
+		$list_classroom[] = '-- Pilih Kelas --';
+		$classrooms = $this->classroom_model->classrooms_by_school_id( 0, null, $this->school_id )->result();
+		foreach ($classrooms as $key => $classroom) {
+			$list_classroom[$classroom->id] = $classroom->name;
+		}
+
+		$courses = $this->courses_model->courses_by_school_id( 0, null, $this->school_id )->result();
+		foreach ($courses as $key => $course) {
+			$list_course[$course->id] = $course->name;
+		}
+
         $tables = $this->config->item('tables', 'ion_auth');
         $identity_column = $this->config->item('identity', 'ion_auth');
         $this->form_validation->set_rules( $this->ion_auth->get_validation_config() );
-        $this->form_validation->set_rules('phone', "No Telepon", 'trim|required|is_unique[users.phone]');
+        $this->form_validation->set_rules('phone', "No Telepon", 'trim|required');
 		if ( $this->input->post('password') )
         {
             $this->form_validation->set_rules( 'password',"Kata Sandi",'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]' );            
@@ -341,11 +385,56 @@ class Users extends School_admin_Controller
               'group_id' => $this->input->post('group_id'),
             );
 			
+			if($group_id == 3){
+				$teacher_profile = array(
+					'nip' => $this->input->post('nip'),
+				);
+				$teacher_profile_param['id'] = $this->input->post('teacher_profile_id');
+				$this->teacher_profile_model->update( $teacher_profile, $teacher_profile_param );
+				$classroom_id = $this->input->post('classroom_id');
+				if($classroom_id){
+					$guardian['user_id'] = $user_id;
+					$classroom_param['id'] = $classroom_id;
+					$this->classroom_model->update( $guardian, $classroom_param );
+					
+					$old_classroom = $this->input->post('old_classroom_id');
+					if( $old_classroom && $old_classroom != $classroom_id ){
+						$guardian['user_id'] = null;
+						$classroom_param['id'] = $old_classroom;
+						$this->classroom_model->update( $guardian, $classroom_param );
+					}
+				}else {
+					$old_classroom = $this->classroom_model->classroom_by_user_id( $user_id )->row();
+					if( $old_classroom ){
+						$guardian['user_id'] = null;
+						$classroom_param['id'] = $old_classroom->id;
+						$this->classroom_model->update( $guardian, $classroom_param );
+					}
+				}
+				$total_course = $this->input->post('total_course');
+				for ($i=0; $i < $total_course; $i++) { 
+					$teacher_course[] = array(
+						'id' => $this->input->post('teacher_course_id_' . $i),
+						'course_id' => $this->input->post('course_id_' . $i),
+					);
+				}
+				$this->teacher_course_model->update_batch( $teacher_course, 'id' );
+
+			}
+			if( $group_id == 4 ){
+				$classroom_id = $this->input->post('classroom_id');
+				$student_profile = array(
+					'classroom_id' => $classroom_id
+				);
+				$student_profile_id['id'] = $this->input->post('student_profile_id');
+				$this->student_profile_model->update( $student_profile, $student_profile_id );
+			}
+
             if ( $this->input->post('password') )
             {
               $data['password'] = $this->input->post('password');
 			}
-			if( !$this->ion_auth->in_group( ["admin", "uadmin"] , $user_id ) )
+			if( !$this->ion_auth->in_group( ["admin", "uadmin", 'teacher', 'student'] , $user_id ) )
 			{
 				$identity_mode = NULL;
 			}
@@ -353,8 +442,12 @@ class Users extends School_admin_Controller
 			if ( $this->ion_auth->update( $user_id, $data, $identity_mode) )
 			{
               // redirect them back to the uadmin page if uadmin, or to the base url if non uadmin
-              $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->ion_auth->messages() ) );
-              redirect( site_url( $this->current_page  )  );
+			  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->ion_auth->messages() ) );
+			  if( $group_id == 3 ){
+				redirect( site_url( $this->current_page . 'users/' . $group_id ) );
+			  }elseif( $group_id == 4 ) {
+				  redirect( site_url( $this->current_page . 'classroom/' . $classroom_id ) );
+			  }
             }
             else
             {
@@ -387,9 +480,130 @@ class Users extends School_admin_Controller
 				  'label' => "Konfirmasi Password",
 				),
 			);
+			if( $form_data['form_data']['group_id']['selected'] == 3 ){
+				$teacher_profile = $this->teacher_profile_model->teacher_profile_by_user_id( $user_id )->row();
+				$form_teacher['form_data'] = array(
+					"school_id" => array(
+						'type' => 'hidden',
+						'label' => 'Sekolah',
+						'value' => $this->school_id,
+					),
+					"teacher_profile_id" => array(
+						'type' => 'hidden',
+						'label' => 'Sekolah',
+						'value' => $teacher_profile->id,
+					),
+					"nip" => array(
+						'type' => 'text',
+						'label' => 'NIP',
+						'value' => $teacher_profile->nip,
+					),
+				);
+				$classroom = $this->classroom_model->classroom_by_user_id( $user_id )->row();
+				$form_teacher['form_data']['classroom_id'] = array(
+					'type' => 'select',
+					'label' => 'Kelas Perwalian',
+					'options' => $list_classroom,
+				);
+				if($classroom){
+					$form_teacher['form_data']['classroom_id']['selected'] = $classroom->id;
+					$form_teacher['form_data']['old_classroom_id'] = array(
+						'type' => 'hidden',
+						'label' => 'Wali Kelas',
+						'value' => $classroom->id,
+					);
+				}
+				$courses = $this->teacher_course_model->teacher_course_by_user_id( $user_id )->result();
+				$i = 0;
+				foreach ($courses as $key => $course) {
+					$form_teacher['form_data']['teacher_course_id_' . $i ] = array(
+						'type' => 'hidden',
+						'label' => 'Mata Pelajaran yang Diajar',
+						'value' => $course->id
+					);
+					$form_teacher['form_data']['course_id_' . $i ] = array(
+						'type' => 'select',
+						'label' => 'Mata Pelajaran yang Diajar',
+						'options' => $list_course,
+						'selected' => $course->course_id
+					);
+					$i++;
+				}
+				$form_teacher['form_data']['total_course' ] = array(
+					'type' => 'hidden',
+					'label' => 'Jumlah Mata Pelajaran yang Diajar',
+					'value' => $i,
+				);
+				$form_data[ 'form_data' ] = array_merge( $form_data[ 'form_data' ] , $form_teacher[ 'form_data' ] );
+
+				$add_course = array(
+					"name" => "Tambah Mata Pelajaran",
+					'modal_id' => 'add_course_',
+					"url" => site_url( $this->current_page . 'add_teacher_course/' ),
+					"button_color" => "primary",	
+					"form_data" => array(
+						"course_id" => array(
+							'type' => 'select',
+							'label' => 'Mata Pelajaran yang Diajar',
+							'options' => $list_course,
+						),
+						'user_id' => array(
+							'type' => 'hidden',
+							'label' => 'Id User',
+							'value' => $user_id,
+						)
+					),
+					"data" => NULL,
+				);
+				$add_course =  $this->load->view('templates/actions/modal_form', $add_course, TRUE );
+	
+				$delete_course = array(
+					"name" => "Hapus Mata Pelajaran",
+					'modal_id' => 'delete_course_',
+					"url" => site_url( $this->current_page . 'delete_teacher_course/' ),
+					"button_color" => "danger",	
+					"form_data" => array(
+						"course_id" => array(
+							'type' => 'select',
+							'label' => 'Mata Pelajaran yang Diajar',
+							'options' => $list_course,
+						),
+						'user_id' => array(
+							'type' => 'hidden',
+							'label' => 'Id User',
+							'value' => $user_id,
+						)
+					),
+					"data" => NULL,
+				);
+				$delete_course =  $this->load->view('templates/actions/modal_form', $delete_course, TRUE );
+	
+				$this->data[ "header_button" ] =  $delete_course . ' ' .$add_course;
+			}
+			elseif( $form_data['form_data']['group_id']['selected'] == 4 ){
+				$student_profile = $this->student_profile_model->student_profile( $user_id )->row();
+				$form_student['form_data'] = array(
+					"classroom_id" => array(
+						'type' => 'select',
+						'label' => 'Kelas',
+						'options' => $list_classroom,
+						'selected' => $student_profile->classroom_id,
+					),
+					"student_profile_id" => array(
+						'type' => 'hidden',
+						'label' => 'student_profile Id',
+						'value' => $student_profile->id,
+					),
+				);
+				$form_data[ 'form_data' ] = array_merge( $form_data[ 'form_data' ] , $form_student[ 'form_data' ] );
+			}
 			$form_data[ 'form_data' ] = array_merge( $form_data[ 'form_data' ] , $form_password[ 'form_data' ] );
 			$form_data = $this->load->view('templates/form/plain_form', $form_data , TRUE ) ;
-            $this->data[ "contents" ] =  $form_data;
+			$this->data[ "contents" ] =  $form_data;
+			
+			
+			$alert = $this->session->flashdata('alert');
+			$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
             $this->render( "templates/contents/plain_content_form" );
         }
 	}
@@ -399,6 +613,56 @@ class Users extends School_admin_Controller
 		if( !($user_id) ) redirect(site_url('uadmin'));  
 
 		$form_data = $this->services->get_form_data_readonly(  $user_id );
+
+		if( $form_data['form_data']['group_id']['value'] == 3 ){
+			$teacher_profile = $this->teacher_profile_model->teacher_profile_by_user_id( $user_id )->row();
+			$form_teacher['form_data'] = array(
+				"school_id" => array(
+					'type' => 'hidden',
+					'label' => 'Sekolah',
+					'value' => $this->school_id,
+				),
+				"nip" => array(
+					'type' => 'text',
+					'label' => 'NIP',
+					'value' => $teacher_profile->nip,
+				),
+			);
+			$classroom = $this->classroom_model->classroom_by_user_id( $user_id )->row();
+			if($classroom){
+				$form_teacher['form_data']['classroom_id'] = array(
+					'type' => 'text',
+					'label' => 'Wali Kelas',
+					'value' => $classroom->name
+				);
+			}
+			$courses = $this->teacher_course_model->teacher_course_by_user_id( $user_id )->result();
+			foreach ($courses as $key => $course) {
+				$form_teacher['form_data']['course_id' . $course->id ] = array(
+					'type' => 'text',
+					'label' => 'Mata Pelajaran yang Diajar',
+					'value' => $course->course_name
+				);
+			}
+			$form_data[ 'form_data' ] = array_merge( $form_data[ 'form_data' ] , $form_teacher[ 'form_data' ] );
+		}
+		elseif( $form_data['form_data']['group_id']['value'] == 4 ){
+			$student_profile = $this->student_profile_model->student_profile( $user_id )->row();
+			$form_student['form_data'] = array(
+				"school_id" => array(
+					'type' => 'hidden',
+					'label' => 'Sekolah',
+					'value' => $this->school_id,
+				),
+				"classroom_id" => array(
+					'type' => 'text',
+					'label' => 'Kelas',
+					'value' => $student_profile->classroom_name,
+				),
+			);
+			$form_data[ 'form_data' ] = array_merge( $form_data[ 'form_data' ] , $form_student[ 'form_data' ] );
+		}
+
 		$form_data = $this->load->view('templates/form/plain_form_readonly', $form_data , TRUE ) ;
 
 		$this->data[ "contents" ] =  $form_data;
@@ -441,5 +705,37 @@ class Users extends School_admin_Controller
 			$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->ion_auth->errors() ) );
 		}
 		redirect( site_url( $this->current_page  )  );
+	}
+
+	public function add_teacher_course()
+	{
+		$user_id = $this->input->post('user_id');
+		$data = array(
+			'user_id' => $user_id,
+			'course_id' => $this->input->post('course_id'),
+		);
+		$this->teacher_course_model->create( $data );
+	
+		$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, 'Mata Pelajaran Berhasil ditambahkan' ) );
+		redirect( site_url( $this->current_page . 'edit/' . $user_id ) );
+	}
+
+	public function delete_teacher_course()
+	{
+		$user_id = $this->input->post('user_id');
+		$course_id = $this->input->post('course_id');
+
+		$course = $this->teacher_course_model->teacher_course_by_user_id( $user_id, $course_id )->row();
+		if($course){
+			$data_param = [
+				'user_id' => $user_id,
+				'course_id' => $course_id,
+			];
+			$this->teacher_course_model->delete( $data_param );
+			$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, 'Mata Pelajaran yang diajar Berhasil dihapus' ) );
+		}else {
+			$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, 'Mata Pelajaran Tidak diajar Oleh Guru yang Bersangkutan' ) );
+		}
+		redirect( site_url( $this->current_page . 'edit/' . $user_id ) );
 	}
 }

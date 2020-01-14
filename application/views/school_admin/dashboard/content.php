@@ -91,4 +91,16 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-3 col-sm-12">
+            <p>Untuk memudahkan dalam penginputan data siswa, Anda dapat mendownload file excel sebagai template untuk mengimport data siswa ke dalam sistem. Import data siswa berpatokan pada kelas</p>
+            <a href="<?= base_url('uploads/asset/') ?>ImportSiswa.xlsx" class="btn btn-sm btn-primary" download>Download File <br> Import Siswa</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>

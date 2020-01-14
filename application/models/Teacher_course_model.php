@@ -71,6 +71,23 @@ class Teacher_course_model extends MY_Model
     $this->set_message("berhasil");
     return TRUE;
   }
+
+  public function update_batch( $data, $data_param  )
+  {
+    $this->db->update_batch($this->table, $data, $data_param );
+    if ($this->db->trans_status() === FALSE)
+    {
+      $this->db->trans_rollback();
+
+      $this->set_error("gagal");
+      return FALSE;
+    }
+
+    $this->db->trans_commit();
+
+    $this->set_message("berhasil");
+    return TRUE;
+  }
   /**
    * delete
    *
@@ -126,7 +143,7 @@ class Teacher_course_model extends MY_Model
 
       return $this;
   }
-  public function teacher_course_by_user_id( $user_id = NULL  )
+  public function teacher_course_by_user_id( $user_id = NULL, $course_id = null  )
   {
     $this->select($this->table . '.id');
     $this->select('courses.id as course_id');
@@ -135,6 +152,10 @@ class Teacher_course_model extends MY_Model
       if (isset($user_id))
       {
         $this->where($this->table.'.user_id', $user_id);
+      }
+      if (isset($course_id))
+      {
+        $this->where($this->table.'.course_id', $course_id);
       }
       $this->order_by($this->table.'.user_id', 'desc');
       $this->join(

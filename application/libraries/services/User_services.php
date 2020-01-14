@@ -283,7 +283,7 @@ class User_services
 			  'value' => $this->form_validation->set_value('email', $this->email),			  
 			),
 			"address" => array(
-				'type' => 'textarea',
+				'type' => 'text',
 				'label' => "Alamat",
 				'value' => $this->form_validation->set_value('address', $this->address),			  
 			  ),
@@ -292,10 +292,15 @@ class User_services
 			  'label' => "Nomor Telepon",
 			  'value' => $this->form_validation->set_value('phone', $this->phone),			  
 			),
-			"group_id" => array(
+			"group_name" => array(
 				'type' => 'text',
 				'label' => "User Group",
 				'value' => $group_select[ $this->group_id ],
+			),
+			"group_id" => array(
+				'type' => 'hidden',
+				'label' => "User Group",
+				'value' => $this->group_id,
 			),
 		  );
 		return $_data;
