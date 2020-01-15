@@ -102,7 +102,7 @@
                                 case 'short_answer': 
                                 case 'essay':?>
                                     <label for="">Jawaban</label>
-                                    <textarea name="answer" id="editor" class="form-control"><?= $question->answer; ?></textarea>
+                                    <textarea name="editor" id="editor" class="form-control"><?= $question->answer; ?></textarea>
                             <?php   break;
                                 default: ?>
                                     <p><?= $question->answer; ?></p>
@@ -166,7 +166,7 @@
     console.log($('input:radio[name=answer]:checked').val());
     var student_answer = $('input:radio[name=answer]:checked').val();
     if (student_answer == undefined)
-        var student_answer = $('textarea[name=answer]').val();
+        var student_answer = CKEDITOR.instances['editor'].getData();
     if (student_answer != undefined && student_answer != '') {
         var id = $('#question_id').val();
         var type_option = $('#type_option').val();
@@ -198,7 +198,7 @@
   function uncertain(number) {
     var student_answer = $('input:radio[name=answer]:checked').val();
     if (student_answer == undefined)
-        var student_answer = $('textarea[name=answer]').val();
+        var student_answer = CKEDITOR.instances['editor'].getData();
     if (student_answer != undefined && student_answer != '') {
         var id = $('#question_id').val();
         var type_option = $('#type_option').val();
@@ -216,7 +216,7 @@
                 console.log(data);
                 if (data) {
                     setTimeout((funcntion) => {
-                        location.reload();
+                        // location.reload();
                     }, 0001);
                 }
             }
@@ -231,7 +231,7 @@
     var uncertain = $('#uncertain').val();
     var student_answer = $('input:radio[name=answer]:checked').val();
     if (student_answer == undefined)
-        var student_answer = $('textarea[name=answer]').val();
+        var student_answer = CKEDITOR.instances['editor'].getData();
     if (student_answer != undefined && student_answer != '' && uncertain != '1') {
         var id = $('#question_id').val();
         var type_option = $('#type_option').val();
@@ -262,52 +262,52 @@
 
 <!-- script timer -->
 <script>
-  $(document).ready(function() {
-    var seconds = <?php echo $seconds; ?>;
-    var minutes = <?php echo $minutes; ?>;
-    var hours = <?php echo $hours; ?>;
+  // $(document).ready(function() {
+  //   var seconds = <?php echo $seconds; ?>;
+  //   var minutes = <?php echo $minutes; ?>;
+  //   var hours = <?php echo $hours; ?>;
 
-    function timer() {
-        setTimeout(timer, 1000);
+  //   function timer() {
+  //       setTimeout(timer, 1000);
 
-        $('#timer').html(
-            '<h4 class="text-danger" align="center">' + hours + ' jam : ' + minutes + ' menit : ' + seconds + ' detik</h4>'
-        );
+  //       $('#timer').html(
+  //           '<h4 class="text-danger" align="center">' + hours + ' jam : ' + minutes + ' menit : ' + seconds + ' detik</h4>'
+  //       );
 
-        seconds--;
+  //       seconds--;
 
-        if (seconds < 0) {
-            seconds = 59;
-            minutes--;
+  //       if (seconds < 0) {
+  //           seconds = 59;
+  //           minutes--;
 
-            if (minutes < 0) {
-                minutes = 59;
-                hours--;
+  //           if (minutes < 0) {
+  //               minutes = 59;
+  //               hours--;
 
-                if (hours < 0) {
-                    clearInterval();
-                    var formSoal = document.getElementById('formSoal');
-                    formSoal.submit();
-                }
-            }
-        }
-    }
+  //               if (hours < 0) {
+  //                   clearInterval();
+  //                   var formSoal = document.getElementById('formSoal');
+  //                   formSoal.submit();
+  //               }
+  //           }
+  //       }
+  //   }
 
-    function work() {
-        setTimeout(work, 1000);
+  //   function work() {
+  //       setTimeout(work, 1000);
 
-        $.ajax({
-            type: 'GET',
-            url: '<?= base_url('siswa/tes/working') ?>',
-            success: function(data) {
-                if (data == 0) {
-                    // var formConfirm = document.getElementById('formConfirm');
-                    // formConfirm.submit();
-                }
-            }
-        })
-    }
-    work();
-    timer();
-  });
+  //       $.ajax({
+  //           type: 'GET',
+  //           url: '<?= base_url('siswa/tes/working') ?>',
+  //           success: function(data) {
+  //               if (data == 0) {
+  //                   // var formConfirm = document.getElementById('formConfirm');
+  //                   // formConfirm.submit();
+  //               }
+  //           }
+  //       })
+  //   }
+  //   work();
+  //   timer();
+  // });
 </script>

@@ -8,6 +8,12 @@ class Home extends Teacher_Controller {
 	private $current_page = 'teacher/';
 	public function __construct(){
 		parent::__construct();
+		$this->load->model(array(
+			'test_model',
+			'questionnaire_model',
+			'courses_model',
+			'test_result_model',
+		));
 
 	}
 	public function index()
