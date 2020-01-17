@@ -84,10 +84,10 @@
                         // var_dump($question->answer);
                         // var_dump(); die;
                         if( $lists_question[$number - 1]->answer == $question->option_id ){
-                                    $checked = "checked";
-                                  }else{
-                                    $checked = "";
-                                  } 
+                          $checked = "checked";
+                        }else{
+                          $checked = "";
+                        } 
                         ?>
                             <?= $label[$i] . '. ' ?><input type="radio" name="answer" id="answer" value="<?= $question->option_id . '-' . $label[$i] ?>" <?= $checked?>> 
                     </div>
@@ -102,7 +102,7 @@
                                 case 'short_answer': 
                                 case 'essay':?>
                                     <label for="">Jawaban</label>
-                                    <textarea name="editor" id="editor" class="form-control"><?= $question->answer; ?></textarea>
+                                    <textarea name="editor" id="editor" class="form-control"><?= $lists_question[$number - 1]->answer; ?></textarea>
                             <?php   break;
                                 default: ?>
                                     <p><?= $question->answer; ?></p>
@@ -216,7 +216,7 @@
                 console.log(data);
                 if (data) {
                     setTimeout((funcntion) => {
-                        // location.reload();
+                        location.reload();
                     }, 0001);
                 }
             }

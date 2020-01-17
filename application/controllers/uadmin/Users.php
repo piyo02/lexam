@@ -16,6 +16,7 @@ class Users extends Uadmin_Controller
 		$this->services = new User_services;
 		$this->load->model(array(
 			'group_model',
+			'school_model',
 			'school_admin_model',
 		));
 		$this->_user_groups = array(
@@ -112,6 +113,11 @@ class Users extends Uadmin_Controller
 		$this->form_validation->set_rules('phone', "No Telepon", 'trim|required');
 		$this->form_validation->set_rules('email', "Email", 'trim|required|is_unique[users.email]');
 
+		$schools = $this->school_model->schools()->result();
+		foreach ($schools as $key => $school) {
+			$list_school[$school->id] = $school->name;
+		}
+
 		if ( $this->form_validation->run() === TRUE )
 		{
 			$group_id = $this->input->post('group_id');
@@ -166,9 +172,7 @@ class Users extends Uadmin_Controller
 				"school_id" => array(
 					'type' => 'select',
 					'label' => 'Sekolah',
-					'options' => array(
-						1 => "SMA Negeri 6 Kendari",
-					)
+					'options' =>$list_school
 				),
 			);
 
