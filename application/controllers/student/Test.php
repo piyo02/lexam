@@ -220,7 +220,7 @@ class Test extends Student_Controller {
 			$data_param['test_id'] = $test_id;
 			$data_param['user_id'] = $this->user_id;
 			
-			// $this->solve_test_model->delete( $data_param );
+			$this->solve_test_model->delete( $data_param );
 		}
 		
 		$data['value'] = $value['value'];
@@ -231,7 +231,7 @@ class Test extends Student_Controller {
 
 		//hapus session
 		$this->session->unset_userdata('test_id');
-		$this->render("student/test/confirm");
+		$this->render("student/confirm");
 	}
 
 	public function check( $max_value = 100 )

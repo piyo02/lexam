@@ -67,8 +67,15 @@ class Question_model extends MY_Model
    * @return bool
    * @author madukubah
    */
-  public function delete( $data_param  )
+  public function delete( $data_param )
   {
+    //exists
+    if( !$this->exist_data( $data_param, ['question_answer', 'student_answer'] ) )
+    {
+      $this->set_error("Soal ini memiliki data yang penting");//('group_delete_unsuccessful');
+      return FALSE;
+    }
+
     //foreign
     //delete_foreign( $data_param. $models[]  )
     if( !$this->delete_foreign( $data_param, ['question_answer_model'] ) )
@@ -134,6 +141,12 @@ class Question_model extends MY_Model
       $this->offset( $start );
       $this->order_by($this->table.'.id', 'desc');
       return $this->fetch_data();
+  }
+  public function exist_db($data_param)
+  {
+    $this->db->select('*');
+    $this->db->where("EXISTS(SELECT id FROM " . $this->table . " WHERE questionnaire_id=" . $data_param . ")");
+    return $this->db->get($this->table);
   }
   public function question_by_questionnaire_id( $start = 0, $limit = NULL, $questionnaire_id = NULL )
   {

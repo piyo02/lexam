@@ -69,13 +69,19 @@ class Classroom_model extends MY_Model
    */
   public function delete( $data_param  )
   {
+    //exists
+    if( !$this->exist_data( $data_param, ['questionnaire', 'test'] ) )
+    {
+      $this->set_error("Data ini memiliki data yang penting");//('group_delete_unsuccessful');
+      return FALSE;
+    }
     //foreign
-    //delete_foreign( $data_param. $models[]  )
-    // if( !$this->delete_foreign( $data_param, ['menu_model'] ) )
-    // {
-    //   $this->set_error("gagal");//('group_delete_unsuccessful');
-    //   return FALSE;
-    // }
+    // delete_foreign( $data_param. $models[]  )
+    if( !$this->delete_foreign( $data_param, ['student_profile'] ) )
+    {
+      $this->set_error("gagal");//('group_delete_unsuccessful');
+      return FALSE;
+    }
     //foreign
     $this->db->trans_begin();
 

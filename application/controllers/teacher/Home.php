@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends Teacher_Controller {
+	private $user_id = null;
+	private $school_id = null;
 	private $services = null;
     private $name = null;
     private $parent_page = 'teacher';
@@ -12,12 +14,19 @@ class Home extends Teacher_Controller {
 			'test_model',
 			'questionnaire_model',
 			'courses_model',
+			'teacher_course_model',
 			'test_result_model',
 		));
-
+		$this->school_id = $this->ion_auth->get_school_id_for_teacher();
+		$this->user_id = $this->session->userdata('user_id');
 	}
 	public function index()
 	{
+		$this->data['questionnaire'] = $this->questionnaire_model->questionnaires_by_user_id( 0, NULL, $this->user_id )->num_rows();
+		$this->data['test'] = $this->test_model->tests( 0, NULL, $this->user_id )->num_rows();
+		$this->data['course'] = $this->teacher_course_model->teacher_course_by_user_id( $this->user_id )->num_rows();
+		$this->data['student'] = $this->test_result_model->test_result_by_teacher_id( $this->user_id )->num_rows();
+
 		$add_menu = array(
 			"name" => "Tambah Group",
 			"modal_id" => "add_group_",

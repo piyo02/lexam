@@ -157,6 +157,29 @@ class MY_Model extends CI_Model {
 		}
 		return TRUE;
 	}
+	/**
+	 * exist data
+	 * @param string $data_param
+	 * @param array $table
+	 * 
+	 * @return bool
+	 */
+	public function exist_data( $data_param, $tables = array() )
+	{
+		foreach ($tables as $key => $table) {
+
+			$this->db->select('*');
+			$this->db->where("EXISTS(SELECT * FROM " . $table . " WHERE " . $this->join_key . "=" . $data_param['id'] . ")");
+			$data = $this->db->get($table);
+
+			if($data)
+				return FALSE;
+		}
+		return TRUE;
+	}
+
+
+
 	/** record_count
 	 * @param string $table
 	 * @param array  $data

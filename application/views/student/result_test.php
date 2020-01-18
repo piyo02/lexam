@@ -67,8 +67,7 @@
   */
 //LINE randomly generated data
 
-var sin = [],
-    cos = []
+var sin = [];
 for (var i = 0; i < 14; i += 0.5) {
   sin.push([i, Math.sin(i)])
 }
@@ -114,7 +113,6 @@ $('#line-chart').bind('plothover', function (event, pos, item) {
   if (item) {
     var x = item.datapoint[0].toFixed(2),
         y = item.datapoint[1].toFixed(2)
-
     $('#line-chart-tooltip').html(item.series.label + ' of ' + x + ' = ' + y)
       .css({
         top : item.pageY + 5,

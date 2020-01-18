@@ -27,7 +27,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3></h3>
+                <h3><?= $questionnaire ?></h3>
 
                 <p>Bank Soal</p>
               </div>
@@ -42,7 +42,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3></h3>
+                <h3><?= $test ?></h3>
 
                 <p>Ulangan</p>
               </div>
@@ -57,7 +57,7 @@
             <!-- small box -->
             <div class="small-box bg-secondary">
               <div class="inner">
-                <h3></h3>
+                <h3><?= $course ?></h3>
 
                 <p>Mata Pelajaran</p>
               </div>
@@ -72,7 +72,7 @@
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-                <h3></h3>
+                <h3><?= $student ?></h3>
 
                 <p>Siswa</p>
               </div>

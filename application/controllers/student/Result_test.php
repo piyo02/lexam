@@ -33,10 +33,8 @@ class Result_test extends Student_Controller {
 		$course_id = $this->input->get('course_id');
 		$course_id || $course_id = $courses[0]->id;
 
-		$table = $this->services->get_table_config( $this->current_page );
-		$table[ "rows" ] = $this->test_result_model->test_result_by_course_id( $this->user_id, $course_id )->result();
-		$table = $this->load->view('templates/tables/plain_table', $table, true);
-
+		$this->data[ "results" ] = $this->test_result_model->test_result_by_course_id( $this->user_id, $course_id )->result();
+		
 		$form_data['form_data'] = array(
 			'course_id' => array(
 				'type' => 'select',

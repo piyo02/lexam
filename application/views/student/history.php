@@ -39,20 +39,22 @@
                             <div class="time-label">
                                 <span class="bg-red">Ulangan</span>
                             </div>
+                            <?php foreach ($tests as $key => $test) : ?>
                             <div>
                                 <i class="fas fa-file-alt    bg-blue"></i>
                                 <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i> 03-01-2020</span>
-                                    <h3 class="timeline-header"><a href="#">Ulangan Harian</h3>
+                                    <span class="time"><i class="fas fa-clock"></i> <?= $test->date?></span>
+                                    <div class="timeline-header"><h5><?= $test->name ?></h5></div>
                                     <div class="timeline-body">
-
+                                      <?= $test->course_name ?>
                                     </div>
                                     <div class="timeline-footer">
-                                        <a href="<?= $current_page ?>" class="btn btn-success btn-sm mr-2">Review</a>
-                                        <button class="btn btn-primary btn-sm">Nilai</button>
+                                        <a href="<?= site_url($current_page) . 'review/' . $test->test_id ?>" class="btn btn-success btn-sm mr-2">Review</a>
+                                        <button class="btn btn-primary btn-sm">Nilai : <?= $test->value?></button>
                                     </div>
                                 </div>
                             </div>
+                            <?php endforeach;?>
                             <div>
                                 <i class="fas fa-clock bg-gray"></i>
                             </div>

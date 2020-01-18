@@ -21,10 +21,9 @@ class History extends Student_Controller {
 	}
 	public function index()
 	{
-		$table = $this->services->get_table_config( $this->current_page );
-		$table[ "rows" ] = $this->test_result_model->test_result_by_teacher_id( $this->user_id )->result();
-		$table = $this->load->view('templates/tables/plain_table', $table, true);
-		$this->data[ "contents" ] = $table;
+		$tests = $this->test_result_model->test_result_by_student_id( $this->user_id )->result();
+		// var_dump($table[ "rows" ]); die;
+		$this->data[ "tests" ] = $tests;
 		
 		// return;
 		#################################################################3

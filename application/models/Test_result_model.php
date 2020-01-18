@@ -146,7 +146,25 @@ class Test_result_model extends MY_Model
       $this->order_by($this->table.'.id', 'asc');
       return $this->fetch_data();
   }
-
+  public function test_result_by_student_id( $student_id = NULL )
+  {
+    $this->db->select($this->table . '.*');
+    $this->db->select('CONCAT( users.first_name, " ", users.last_name ) as user_fullname');
+    $this->db->from(
+      "(
+        SELECT test_result.*, test.name, test.date, test.kkm, courses.name AS course_name 
+        FROM test 
+        INNER JOIN courses ON courses.id = test.course_id
+        INNER JOIN test_result ON test_result.test_id = test.id
+        ) test_result"
+    );
+    $this->db->join(
+      'users',
+      'users.id = test_result.user_id',
+      'inner'
+    );
+    return $this->db->get();
+  }
   public function test_result_by_teacher_id( $teacher_id = NULL  )
   {
     $this->db->select('COUNT(*) AS total');
@@ -194,6 +212,7 @@ class Test_result_model extends MY_Model
   {
     $this->select($this->table . '.*' );
     $this->select('test.course_id' );
+    $this->select('test.name' );
     if (isset($user_id))
     {
       $this->where($this->table.'.user_id', $user_id);

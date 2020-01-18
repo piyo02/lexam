@@ -142,7 +142,7 @@ class Test_model extends MY_Model
       return $this;
   }
 
-  public function tests( $start = 0 , $limit = NULL )
+  public function tests( $start = 0 , $limit = NULL, $user_id = NULL )
   {
     $this->select('CONCAT( users.first_name, " ", users.last_name ) as user_fullname');
     $this->select($this->table . '.*');
@@ -167,6 +167,10 @@ class Test_model extends MY_Model
         'courses.id = test.course_id',
         'inner'
       );
+      if (isset($user_id))
+      {
+        $this->where($this->table.'.user_id', $user_id);
+      }
       $this->offset( $start );
       $this->order_by($this->table.'.id', 'asc');
       return $this->fetch_data();

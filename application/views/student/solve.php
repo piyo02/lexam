@@ -129,7 +129,7 @@
   <div class="modal-dialog">
   <!-- Modal content-->
     <div class="modal-content">
-      <form id="formConfirm" action="http://localhost/lexam/student/test/finish/" method="post" accept-charset="utf-8">
+      <form id="formConfirm" action="http://localhost/lexam/student/test/assessment/" method="post" accept-charset="utf-8">
         <div class="modal-header">
           <h5 class="modal-title">Selesai</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
