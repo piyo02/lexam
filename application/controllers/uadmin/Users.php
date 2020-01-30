@@ -29,6 +29,7 @@ class Users extends Uadmin_Controller
 	}
 	public function index( $users_group = NULL )
 	{		 // 
+		$users_group = ($users_group) ? $users_group : 5;
 		 $page = ($this->uri->segment(4 + 1)) ? ($this->uri->segment(4 + 1) - 1) : 0;
 		 //pagination parameter
 		 $pagination['base_url'] = base_url( $this->current_page ) .'/index';

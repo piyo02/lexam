@@ -133,7 +133,7 @@ class MY_Model extends CI_Model {
 	 */
 	public function delete_foreign( $data_param , $models = array()  )
     {
-		$this->load->model( $models ); 	
+		$this->load->model( $models );
 
 		foreach( $models as $model )
 		{
@@ -141,13 +141,13 @@ class MY_Model extends CI_Model {
 
 				$_data_param[ $this->join_key] = $data_param["id"];
 				if( !$this->$model->delete( $_data_param ) ) return FALSE;
-				
+
 			}else{
 				foreach( $data_param as $key => $value )
 				{
 					$this->where($this->table.'.'.$key , $value );
 				}
-	
+
 				foreach( $this->fetch_data( )->result() as $item )
 				{
 					$_data_param[ $this->join_key]  = $item->id;
@@ -161,7 +161,7 @@ class MY_Model extends CI_Model {
 	 * exist data
 	 * @param string $data_param
 	 * @param array $table
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function exist_data( $data_param, $tables = array() )
@@ -380,7 +380,7 @@ class MY_Model extends CI_Model {
 
 		return $result;
 	}
-    
+
     // DATABASE BASIC OPERATIONS
 	///////////////////********************************************* *////////////////////********************************************* */
 	//FETCH DATA
@@ -460,7 +460,7 @@ class MY_Model extends CI_Model {
 		return $this;
     }
 	///////////////////********************************************* *////////////////////********************************************* */
-	
+
     // HANDLING MESSAGE AND ERROR
     /**
 	 * set_message_delimiters
@@ -659,4 +659,3 @@ class MY_Model extends CI_Model {
 		return TRUE;
 	}
 }
-

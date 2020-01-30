@@ -131,6 +131,27 @@ class Student_answer_model extends MY_Model
 
     return $this;
   }
+  public function lists_question_by_test_id( $test_id = null, $user_id = null, $question_id = null )
+  {
+    $this->select( $this->table . '.question_id' );
+    if (isset($test_id))
+    {
+      $this->where($this->table.'.test_id', $test_id);
+    }
+    if (isset($user_id))
+    {
+      $this->where($this->table.'.user_id', $user_id);
+    }
+    if (isset($question_id))
+    {
+      $this->where($this->table.'.question_id', $question_id);
+    }
+    $this->order_by($this->table.'.id', 'desc');
+
+    $this->student_answers(  );
+
+    return $this;
+  }
   public function student_answers( $start = 0 , $limit = NULL )
   {
       if (isset( $limit ))

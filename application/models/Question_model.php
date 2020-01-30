@@ -115,6 +115,7 @@ class Question_model extends MY_Model
     $this->select('CONCAT("'.base_url('uploads/question/').'", "", question.image) AS image_quest');
     $this->select('question_answer.type as type_option');
     $this->select('question_answer.answer');
+    $this->select('question_answer.value');
     $this->select('CONCAT("'.base_url('uploads/answer/').'", "", question_answer.answer) AS image_answer');
     if (isset($id))
       {

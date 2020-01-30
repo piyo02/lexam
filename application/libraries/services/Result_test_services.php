@@ -27,7 +27,7 @@ class Result_test_services
                 "type" => "link",
                 "url" => site_url( $_page."export/"),
                 "button_color" => "success",
-                "param" => "test_id",
+                "param" => "id",
                 "title" => "Group",
                 "data_name" => "name",
               ),
@@ -36,7 +36,7 @@ class Result_test_services
                 "type" => "link",
                 "url" => site_url( "teacher/analysis/test/"),
                 "button_color" => "success",
-                "param" => "test_id",
+                "param" => "id",
                 "title" => "Group",
                 "data_name" => "name",
               ),
@@ -45,7 +45,7 @@ class Result_test_services
                 "type" => "link",
                 "url" => site_url( $_page."detail/"),
                 "button_color" => "primary",
-                "param" => "test_id",
+                "param" => "id",
                 "title" => "Group",
                 "data_name" => "name",
               ),
@@ -60,6 +60,11 @@ class Result_test_services
                   "id" => array(
                     'type' => 'hidden',
                     'label' => "id",
+                  ),
+                  "param" => array(
+                    'type' => 'hidden',
+                    'label' => "id",
+                    'value' => 'test_id' 
                   ),
                 ),
                 "title" => "Group",
@@ -81,7 +86,7 @@ class Result_test_services
           "type" => "link",
           "url" => site_url( $_page."review/"),
           "button_color" => "success",
-          "param" => "user_id",
+          "param" => "id",
           "title" => "Group",
           "data_name" => "name",
         ),
@@ -97,9 +102,14 @@ class Result_test_services
               'type' => 'hidden',
               'label' => "id",
             ),
+            "param" => array(
+              'type' => 'hidden',
+              'label' => "id",
+              'value' => 'id' 
+            ),
           ),
           "title" => "Group",
-          "data_name" => "name",
+          "data_name" => "user_fullname",
         ),
     );
     return $table;

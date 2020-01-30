@@ -103,11 +103,17 @@ class Test_result_model extends MY_Model
    */
   public function test_result( $id = NULL  )
   {
+      $this->select( $this->table . '.*' );
+      $this->select( 'test.name AS name' );
       if (isset($id))
       {
         $this->where($this->table.'.id', $id);
       }
-
+      $this->join(
+        'test',
+        'test.id = test_result.test_id',
+        'inner'
+      );
       $this->limit(1);
       $this->order_by($this->table.'.id', 'desc');
 
@@ -168,8 +174,9 @@ class Test_result_model extends MY_Model
   public function test_result_by_teacher_id( $teacher_id = NULL  )
   {
     $this->db->select('COUNT(*) AS total');
-    $this->db->select($this->table . '.test_id');
+    $this->db->select($this->table . '.test_id AS id');
     $this->db->select('test.user_id');
+    $this->db->select('test.name');
     $this->db->select('classroom.name AS classroom_name');
       if (isset($teacher_id))
       {
