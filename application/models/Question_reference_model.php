@@ -113,6 +113,7 @@ class Question_reference_model extends MY_Model
   {
     $this->select($this->table . '.*');
     $this->select('questionnaire.name AS questionnaire_name');
+    $this->select('questionnaire.description AS description');
       if (isset($test_id))
       {
         $this->where($this->table.'.test_id', $test_id);

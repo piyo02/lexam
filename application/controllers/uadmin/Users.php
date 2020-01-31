@@ -36,14 +36,14 @@ class Users extends Uadmin_Controller
 		 $pagination['total_records'] = $this->ion_auth->record_count() ;
 		 $pagination['limit_per_page'] = 10;
 		 $pagination['start_record'] = $page*$pagination['limit_per_page'];
-		 $pagination['uri_segment'] = 4;
+		 $pagination['uri_segment'] = 4 + 1;
 		 //set pagination
 		 if ($pagination['total_records']>0) $this->data['pagination_links'] = $this->setPagination($pagination);
 
 		$table = $this->services->get_table_config( $this->current_page );
-		$table[ "rows" ] = $this->ion_auth->users_limit( $pagination['limit_per_page'], $pagination['start_record'] )->result();
-		unset($table[ "rows" ][0]);
-		unset($table[ "rows" ][1]);
+		$table[ "rows" ] = $this->ion_auth->users_limit( $pagination['limit_per_page'], $pagination['start_record'], $users_group )->result();
+		// unset($table[ "rows" ][0]);
+		// unset($table[ "rows" ][1]);
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
 

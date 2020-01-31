@@ -91,4 +91,14 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+  <div class="container-fluid">
+    <div class="col-sm-12 col-lg-3">
+      <div class="card">
+        <div class="card-body">
+            <p>Untuk memudahkan dalam penginputan data soal, Anda dapat mendownload file excel sebagai template untuk mengimport data soal ke dalam sistem. Import data soal berpatokan pada bank soal. Dan jenis soal yang dapat di import hanyalah soal dengan tipe jawaban pilihan ganda teks, isian singkat atau esai</p>
+            <a href="<?= base_url('uploads/asset/') ?>import-soal.xlsx" class="btn btn-sm btn-primary" download>Download File <br> Import Soal</a>
+        </div>
+      </div>
+    </div>
   </div>
+</div>

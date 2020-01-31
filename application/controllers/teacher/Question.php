@@ -78,7 +78,28 @@ class Question extends Teacher_Controller {
 
 		$add_menu= $this->load->view('templates/actions/modal_form_get', $add_menu, true ); 
 
-		$this->data[ "header_button" ] =  $add_menu;
+		$import_btn = array(
+			"name" => "Import Soal",
+			"modal_id" => "import_question_",
+			"button_color" => "success",
+			"url" => site_url( "import/import_quest"),
+			"form_data" => array(
+				"file" => array(
+					'type' => 'file',
+					'label' => "File Excel",
+				),
+				"questionnaire_id" => array(
+					'type' => 'hidden',
+					'label' => "Tipe Jawaban",
+					'value' => $questionnaire_id
+				),
+			),
+			'data' => NULL
+		);
+
+		$import_btn= $this->load->view('templates/actions/modal_form_multipart', $import_btn, true ); 
+
+		$this->data[ "header_button" ] = $import_btn . ' ' . $add_menu;
 		// return;
 		#################################################################3
 		$alert = $this->session->flashdata('alert');

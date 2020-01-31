@@ -10,7 +10,9 @@ class Result_test extends Teacher_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('services/Result_test_services');
+		$this->load->library('services/Excel_services');
 		$this->services = new Result_test_services;
+		$this->excel = new Excel_services;
 		$this->load->model(array(
 			'group_model',
 			'test_result_model',
@@ -18,6 +20,7 @@ class Result_test extends Teacher_Controller {
 			'student_answer_model',
 			'question_model',
 			'question_answer_model',
+			'question_reference_model',
 
 		));
 		$this->user_id = $this->session->userdata('user_id');
@@ -106,6 +109,96 @@ class Result_test extends Teacher_Controller {
 		$this->data["header"] = $test_result->name;
 		$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
 		$this->render( "templates/contents/plain_content" );
+	}
+
+	public function give_skor()
+	{
+		if( !($_POST) ) redirect( site_url($this->current_page) );
+		$test_result_id = $this->input->post('test_result_id');
+		$question_id = $this->input->post('question_id');
+		$data = array(
+			'skor' => $this->input->post('skor'),
+		);
+		$data_param = array(
+			'question_id' => $question_id,
+			'user_id' => $this->input->post('student_id'),
+		);
+
+		$this->student_answer_model->update( $data, $data_param );
+		redirect( site_url($this->current_page) .'review/' . $test_result_id . '?number=' . $number . '&question_id=' . $question_id );
+	}
+
+
+	public function assessment( $test_result_id = NULL )
+	{
+		if( !($test_result_id) ) redirect( site_url($this->current_page) );
+		$test_result = $this->test_result_model->test_result( $test_result_id )->row();
+		
+		$test_id = $test_result->test_id;
+		$test = $this->test_model->test( $test_id )->row();
+		
+		$value = $this->check( $test->max_value, $test_id, $test_result->user_id );
+		$data_param = [
+			'user_id' 	 => $test_result->user_id,
+			'test_id' => $test_id,
+		];
+		
+		$data['value'] = $value['value'];
+		// var_dump($data); die;
+		$this->test_result_model->update( $data, $data_param );
+		
+		redirect( site_url($this->current_page) . 'detail/'. $test_id );
+	}
+
+	public function check( $max_value = 100, $test_id = NULL, $user_id = NULL )
+	{
+		if( !($test_id) || !($user_id) ) redirect( site_url($this->current_page) );
+
+		$data_param = [
+			'test_id' => $test_id,
+			'user_id' => $user_id,
+		];
+
+		$answers = $this->student_answer_model->student_answer_by_test_id( $test_id, $user_id )->result();
+		$value = 0;
+		$correct = 0;
+		
+		foreach ($answers as $key => $answer) {
+			$choice = $this->question_answer_model->question_answer_by_question_id( $answer->question_id )->row();
+			$inc = ($choice->value) ? $choice->value : 1;
+			$value += $inc;
+		}
+		$skor = $this->student_answer_model->get_skor( $user_id, $test_id )->row();
+		$data = [
+			'value' => $skor->skor / $value * $max_value,
+			'correct' => $correct,
+			'total_quest' => count($answers),
+		];
+		return $data;
+	}
+
+	public function export( $test_id = NULL )
+	{
+		if( !($test_id) ) redirect( site_url($this->current_page) );
+		
+		$detail = $this->test_model->test( $test_id )->row();
+		$subbab = '';
+		$list_subbab = $this->question_reference_model->question_reference_by_test_id( $test_id )->result();
+		foreach ($list_subbab as $key => $list) {
+			$subbab = $subbab . ', ' .$list->description;
+		}
+
+        $detail->subbab = $subbab;
+        $detail->school_name = 'SMA NEGERI 6 KENDARI';
+        $_data = [
+            'rows' => $this->test_result_model->test_result_by_test_id( $test_id )->result(),
+            'headers' => $this->services->header_excel( $this->test_result_model->test_result_by_test_id( $test_id )->num_rows() ),
+            'title' => 'Hasil Ulangan',
+            'detail' => $detail,
+		];
+        #################################################################
+        $this->excel->excel_config($_data);
+		redirect( site_url($this->current_page) . 'detail/'. $test_id );
 	}
 
 	public function delete(  ) {

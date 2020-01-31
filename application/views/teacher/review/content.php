@@ -24,19 +24,20 @@
         <div class="row">
 
             <?php if( $question->type_option == 'image' || $question->type_option == 'text' ) : ?>
-            <div class="col-2 col-lg-1 mt-3">
                 <?php
-                if( $student_answer->answer == $question->option_id ){
-                    $checked = "checked";
-                }else { $checked = ""; } ?>
-                <?= $label[$i] . '. ' ?><input type="radio" name="answer" id="answer" value="<?= $question->option_id . '-' . $label[$i] ?>" <?= $checked?>> 
-            </div>
+                if( ($student_answer->answer == $question->option_id && $question->value ) || $question->value ){
+                    $color = "green";
+                }elseif( $student_answer->answer == $question->option_id ) { 
+                    $color = "red";
+                }else {
+                    $color = "black";
+                } ?>
             <?php endif; ?>
             
-            <div class="col-10 col-lg-11 mt-3">
+            <div class="col-10 ml-3">
             <?php switch ($question->type_option) {
                 case 'image': ?>
-                    <img src="<?= $question->image_answer; ?>" alt="Gambar Option <?= $question->code ?>" height="150">
+                    <span style="color: <?= $color ?>"><?= $label[$i] . '. ' ?></span>&nbsp&nbsp&nbsp<img src="<?= $question->image_answer; ?>" alt="Gambar Option <?= $question->code ?>" height="150">
             <?php   break;
                 case 'short_answer': 
                 case 'essay':?>
@@ -47,6 +48,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">
                                     <input type="text" name="skor" id="skor" class="form-control">
+                                    <input type="hidden" name="number" id="number" class="form-control" value="<?= $number ?>">
                                     <input type="hidden" name="test_result_id" id="test_result_id" class="form-control" value="<?= $test_result_id ?>">
                                     <input type="hidden" name="question_id" id="question_id" class="form-control" value="<?= $question_id->question_id ?>">
                                     <input type="hidden" name="student_id" id="student_id" class="form-control" value="<?= $student_id ?>">
@@ -60,11 +62,13 @@
                     </div>
             <?php   break;
                 default: ?>
-                    <p><?= $question->answer; ?></p>
+                    <span style="color: <?= $color ?>"><?= $label[$i] . '. ' ?>&nbsp&nbsp&nbsp<?= $question->answer; ?></span>
             <?php   break;
             }?>
             </div>
-
         </div>
         <?php $i++; } ?>
+        <div class="ml-3 mt-3">
+            <p><b>Skor Siswa: <?= $student_answer->skor ?></b></p>
+        </div>
 

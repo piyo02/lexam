@@ -12,8 +12,9 @@ class History extends Student_Controller {
 		$this->load->library('services/History_services');
 		$this->services = new History_services;
 		$this->load->model(array(
-			'group_model',
+			'question_model',
 			'test_result_model',
+			'student_answer_model',
 			'test_model',
 		));
 		$this->user_id = $this->session->userdata('user_id');
@@ -122,5 +123,48 @@ class History extends Student_Controller {
 		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->test_result_model->errors() ) );
 		}
 		redirect( site_url($this->current_page)  );
+	}
+
+	public function review( $test_id = NULL )
+	{
+		if( !($test_id) ) redirect( site_url($this->current_page) );
+		$test = $this->test_model->test( $test_id )->row();
+		// list soal yang dikerjakan oleh murid
+		$lists_question_id = $this->student_answer_model->lists_question_by_test_id( $test_id, $this->user_id )->result();
+
+		// konfigurasi nomor dan question_id
+		$number = ( null !== $this->input->get('number') ) ? $this->input->get('number') : 1 ;
+		$question_id = ( null !== $this->input->get('question_id') ) ? $this->input->get('question_id') : $lists_question_id[0]->question_id;
+		
+		//pertanyaan dan jawaban
+		$question = $this->question_model->question( $question_id )->result();
+
+		// jawaban siswa
+		$student_answer = $this->student_answer_model->student_answer_by_test_id( $test_id, $this->user_id, $question_id )->row();
+
+		//jika question_id adalah soal yang tidak dikerjakan siswa
+		if( !$student_answer ) redirect( site_url($this->current_page) . 'review/' . $test_id );
+		// var_dump($student_answer); die;
+
+
+		#################################################################3
+
+		$data[ "student_id" ] = $this->user_id;
+		$data[ "number" ] = $number;
+		$data[ "test_id" ] = $test_id;
+		$data[ "lists_question" ] = $lists_question_id;
+		$data[ "questions" ] = $question;
+		$data[ "student_answer" ] = $student_answer;
+		$this->data[ "contents" ] = $this->load->view('student/review', $data, true);
+
+		#################################################################3
+		$alert = $this->session->flashdata('alert');
+		$this->data["key"] = $this->input->get('key', FALSE);
+		$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
+		$this->data["current_page"] = $this->current_page . 'review/' . $test_id;
+		$this->data["block_header"] = "Hasil Ulangan";
+		$this->data["header"] = $test->name;
+		$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
+		$this->render( "templates/contents/plain_content" );
 	}
 }
