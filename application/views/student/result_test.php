@@ -42,7 +42,9 @@
                 <div class="col-sm-12 col-lg-8">
                     <div class="card">
                         <div class="card-body">
-                            <div id="line-chart" style="height: 300px;"></div>
+                          <div class="chart">
+                            <canvas id="barChart" style="height:230px; min-height:230px"></canvas>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -56,73 +58,70 @@
 <!-- FLOT CHARTS -->
 <script src="<?= base_url('assets/') ?>plugins/flot/jquery.flot.js"></script>
 <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-<script src="<?= base_url('assets/') ?>plugins/flot-old/jquery.flot.resize.min.js"></script>
+<script src="<?= base_url('assets/') ?>plugins/chart.js/Chart.min.js"></script>
+<!-- <script src="<?= base_url('assets/') ?>plugins/flot-old/jquery.flot.resize.min.js"></script> -->
 <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
-<script src="<?= base_url('assets/') ?>plugins/flot-old/jquery.flot.pie.min.js"></script>
+<!-- <script src="<?= base_url('assets/') ?>plugins/flot-old/jquery.flot.pie.min.js"></script> -->
 
 <script>
-/*
-  * LINE CHART
-  * ----------
-  */
-//LINE randomly generated data
-
-var sin = [];
-for (var i = 0; i < 14; i += 0.5) {
-  sin.push([i, Math.sin(i)])
-}
-var line_data1 = {
-  data : sin,
-  color: '#3c8dbc'
-}
-$.plot('#line-chart', [line_data1], {
-  grid  : {
-    hoverable  : true,
-    borderColor: '#f3f3f3',
-    borderWidth: 1,
-    tickColor  : '#f3f3f3'
-  },
-  series: {
-    shadowSize: 0,
-    lines     : {
-      show: true
-    },
-    points    : {
-      show: true
+  let course_id = <?= $course_id; ?>;
+  let result = null;
+  function result_test() {
+    $.ajax({
+      type: 'POST', //method
+      url: '<?= base_url('student/result_test/result_test') ?>', //action
+      data: {
+        course_id: course_id,
+      }, //data yang dikrim ke action $_POST['id']
+      dataType: 'json',
+      async: false,
+      success: function(data) {
+        console.log(data);
+        result = data;
+      }
+    });
+  }
+  result_test();
+  console.log(result);
+  var areaChartData = {
+      labels  : result.test_name,
+      datasets: [
+        {
+          label               : 'Nilai',
+          backgroundColor     : 'rgba(60,141,188,0.9)',
+          borderColor         : 'rgba(60,141,188,0.8)',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : result.value
+        },
+      ]
     }
-  },
-  lines : {
-    fill : false,
-    color: ['#3c8dbc', '#f56954']
-  },
-  yaxis : {
-    show: true
-  },
-  xaxis : {
-    show: true
-  }
-})
-//Initialize tooltip on hover
-$('<div class="tooltip-inner" id="line-chart-tooltip"></div>').css({
-  position: 'absolute',
-  display : 'none',
-  opacity : 0.8
-}).appendTo('body')
-$('#line-chart').bind('plothover', function (event, pos, item) {
+  var barChartCanvas = $('#barChart').get(0).getContext('2d')
+  var barChartData = jQuery.extend(true, {}, areaChartData)
+  var temp1 = areaChartData.datasets[0]
+  barChartData.datasets[0] = temp1
 
-  if (item) {
-    var x = item.datapoint[0].toFixed(2),
-        y = item.datapoint[1].toFixed(2)
-    $('#line-chart-tooltip').html(item.series.label + ' of ' + x + ' = ' + y)
-      .css({
-        top : item.pageY + 5,
-        left: item.pageX + 5
-      })
-      .fadeIn(200)
-  } else {
-    $('#line-chart-tooltip').hide()
+  var barChartOptions = {
+    responsive              : true,
+    maintainAspectRatio     : false,
+    datasetFill             : false,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          stepSize: 10,
+          max: 100
+        },
+      }]
+    }
   }
 
-})
-/* END LINE CHART */
+  var barChart = new Chart(barChartCanvas, {
+    type: 'bar', 
+    data: barChartData,
+    options: barChartOptions
+  })
 </script>

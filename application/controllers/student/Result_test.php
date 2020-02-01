@@ -45,6 +45,7 @@ class Result_test extends Student_Controller {
 		);
 		$form_data = $this->load->view('templates/form/plain_form_horizontal', $form_data , TRUE ) ;
 		$this->data[ "contents" ] = $form_data;
+		$this->data[ "course_id" ] = $course_id;
 		// return;
 		#################################################################3
 		$alert = $this->session->flashdata('alert');
@@ -55,61 +56,6 @@ class Result_test extends Student_Controller {
 		$this->data["header"] = "Hasil Ulangan";
 		$this->data["sub_header"] = '';
 		$this->render( "student/result_test" );
-	}
-
-
-	public function add(  )
-	{
-		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
-
-		// echo var_dump( $data );return;
-		$this->form_validation->set_rules( $this->services->validation_config() );
-        if ($this->form_validation->run() === TRUE )
-        {
-			$data['name'] = $this->input->post( 'name' );
-			$data['description'] = $this->input->post( 'description' );
-
-			if( $this->test_result_model->create( $data ) ){
-				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->test_result_model->messages() ) );
-			}else{
-				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->test_result_model->errors() ) );
-			}
-		}
-        else
-        {
-          $this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->test_result_model->errors() : $this->session->flashdata('message')));
-          if(  validation_errors() || $this->test_result_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
-		}
-		
-		redirect( site_url($this->current_page)  );
-	}
-
-	public function edit(  )
-	{
-		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
-
-		// echo var_dump( $data );return;
-		$this->form_validation->set_rules( $this->services->validation_config() );
-        if ($this->form_validation->run() === TRUE )
-        {
-			$data['name'] = $this->input->post( 'name' );
-			$data['description'] = $this->input->post( 'description' );
-
-			$data_param['id'] = $this->input->post( 'id' );
-
-			if( $this->test_result_model->update( $data, $data_param  ) ){
-				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->test_result_model->messages() ) );
-			}else{
-				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->test_result_model->errors() ) );
-			}
-		}
-        else
-        {
-          $this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->test_result_model->errors() : $this->session->flashdata('message')));
-          if(  validation_errors() || $this->test_result_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
-		}
-		
-		redirect( site_url($this->current_page)  );
 	}
 
 	public function detail( $test_id )
@@ -133,15 +79,17 @@ class Result_test extends Student_Controller {
 		$this->render( "templates/contents/plain_content" );
 	}
 
-	public function delete(  ) {
+	public function result_test(  ) {
 		if( !($_POST) ) redirect( site_url($this->current_page) );
-	  
-		$data_param['id'] 	= $this->input->post('id');
-		if( $this->test_result_model->delete( $data_param ) ){
-		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->test_result_model->messages() ) );
-		}else{
-		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->test_result_model->errors() ) );
+		
+		$course_id = $this->input->post('course_id');
+		$user_id = $this->user_id;
+
+		$tests = $this->test_result_model->test_result_by_course_id( $user_id, $course_id )->result();
+		foreach ($tests as $key => $test) {
+			$data['test_name'][] = $test->name;
+			$data['value'][] = $test->value;
 		}
-		redirect( site_url($this->current_page)  );
+		echo json_encode($data);
 	}
 }

@@ -28,11 +28,22 @@ class Test extends Student_Controller {
 
 	public function index()
 	{
+		$page = ($this->uri->segment(4)) ? ($this->uri->segment(4) -  1 ) : 0;
+		// echo $page; return;
+        //pagination parameter
+        $pagination['base_url'] = base_url( $this->current_page ) .'/index';
+        $pagination['total_records'] = $this->test_model->record_count(  ) ;
+        $pagination['limit_per_page'] = 3;
+        $pagination['start_record'] = $page*$pagination['limit_per_page'];
+        $pagination['uri_segment'] = 4;
+		//set pagination
+		if ($pagination['total_records'] > 0 ) $this->data['pagination_links'] = $this->setPagination($pagination);
+
 		$student = $this->student_profile_model->student_profile( $this->user_id )->row();
 
 		#################################################################3
 		$table = $this->services->get_table_config( $this->current_page );
-		$table[ "rows" ] = $this->test_model->test_by_classroom_id( $student->classroom_id, $student->school_id )->result();
+		$table[ "rows" ] = $this->test_model->test_by_classroom_id( $student->classroom_id, $student->school_id, $pagination['start_record'], $pagination['limit_per_page'] )->result();
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
 		

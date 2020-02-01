@@ -115,7 +115,7 @@ class Test_model extends MY_Model
 
       return $this;
   }
-  public function test_by_classroom_id( $classroom_id = NULL, $school_id = NULL  )
+  public function test_by_classroom_id( $classroom_id = NULL, $school_id = NULL, $start = 0, $limit = NULL  )
   {
       if (isset($classroom_id))
       {
@@ -137,7 +137,7 @@ class Test_model extends MY_Model
       $this->where('test_result.value IS NULL');
       $this->order_by($this->table.'.id', 'desc');
 
-      $this->tests(  );
+      $this->tests( $start, $limit );
 
       return $this;
   }
