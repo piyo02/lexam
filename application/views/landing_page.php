@@ -5,9 +5,9 @@
                     <div class="col-lg-6">
                         <div class="text-container">
                             <h1>Website Lexam <br><span id="js-rotating">Kepala Sekolah, Admin Sekolah, Guru, Murid</span></h1>
-                            <p class="p-large">Lexam adalah aplikasi berbasis website yang digunakan untuk memudahkan proses Ulangan. <i>" Let's use it now! "</i></p>
-                            <a class="btn-solid-lg page-scroll" href="#your-link"><i class="fab fa-apple"></i>APP STORE</a>
-                            <a class="btn-solid-lg page-scroll" href="#your-link"><i class="fab fa-google-play"></i>PLAY STORE</a>
+                            <p class="p-large">Lexam membantu Guru untuk memudahkan berbagai proses Ulangan dengan otomatisasi dan digitalisasi. <i>" Let's use it now! "</i></p>
+                            <a class="btn-solid-lg page-scroll" href="#contact"><i class="fas fa-phone"></i> Hubungi Kami</a>
+                            <!-- <a class="btn-solid-lg page-scroll" href="#your-link"><i class="fab fa-google-play"></i>PLAY STORE</a> -->
                         </div>
                     </div> 
                     <div class="col-lg-6">
@@ -25,66 +25,27 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="slider-container">
+                        <?php if( $testimonies ) : ?>
                         <div class="swiper-container card-slider">
                             <div class="swiper-wrapper">
+                                <?php foreach ($testimonies as $key => $testimoni) : ?>
                                 <div class="swiper-slide">
                                     <div class="card">
-                                        <img class="card-image" src="<?= base_url('users-assets/') ?>images/testimonial-1.jpg" alt="alternative">
+                                        <img class="card-image" src="<?= $testimoni->image ?>" alt="<?= $testimoni->name ?>">
                                         <div class="card-body">
-                                            <p class="testimonial-text">I just finished my trial period and was so amazed with the support and results that I purchased Leno.</p>
-                                            <p class="testimonial-author">Jude Thorn - Designer</p>
+                                            <p class="testimonial-text"><?= $testimoni->testimoni ?></p>
+                                            <p class="testimonial-author"><?= $testimoni->name ?> - <?= $testimoni->status ?></p>
                                         </div>
                                     </div>
-                                </div> 
-                                <div class="swiper-slide">
-                                    <div class="card">
-                                        <img class="card-image" src="<?= base_url('users-assets/') ?>images/testimonial-2.jpg" alt="alternative">
-                                        <div class="card-body">
-                                            <p class="testimonial-text">I don't know how I managed to get work done without Leno. The speed of this application is amazing!</p>
-                                            <p class="testimonial-author">Roy Smith - Developer</p>
-                                        </div>
-                                    </div>        
-                                </div> 
-                                <div class="swiper-slide">
-                                    <div class="card">
-                                        <img class="card-image" src="<?= base_url('users-assets/') ?>images/testimonial-3.jpg" alt="alternative">
-                                        <div class="card-body">
-                                            <p class="testimonial-text">This app has the potential of becoming a mandatory tool in every marketer's day to day operations.</p>
-                                            <p class="testimonial-author">Marsha Singer - Marketer</p>
-                                        </div>
-                                    </div>        
-                                </div> 
-                                <div class="swiper-slide">
-                                    <div class="card">
-                                        <img class="card-image" src="<?= base_url('users-assets/') ?>images/testimonial-4.jpg" alt="alternative">
-                                        <div class="card-body">
-                                            <p class="testimonial-text">Searching for a great marketing automation app was difficult but thankfully I found Leno.</p>
-                                            <p class="testimonial-author">Tim Shaw - Designer</p>
-                                        </div>
-                                    </div>
-                                </div> 
-                                <div class="swiper-slide">
-                                    <div class="card">
-                                        <img class="card-image" src="<?= base_url('users-assets/') ?>images/testimonial-5.jpg" alt="alternative">
-                                        <div class="card-body">
-                                            <p class="testimonial-text">Leno's support team is amazing. They've helped me with some issues and I am so grateful to them.</p>
-                                            <p class="testimonial-author">Lindsay Spice - Marketer</p>
-                                        </div>
-                                    </div>        
-                                </div> 
-                                <div class="swiper-slide">
-                                    <div class="card">
-                                        <img class="card-image" src="<?= base_url('users-assets/') ?>images/testimonial-6.jpg" alt="alternative">
-                                        <div class="card-body">
-                                            <p class="testimonial-text">Who would have thought that Leno can provide such amazing results in just a few weeks of use</p>
-                                            <p class="testimonial-author">Ann Black - Developer</p>
-                                        </div>
-                                    </div>        
-                                </div> 
+                                </div>     
+                                <?php endforeach; ?>
                             </div> 
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
                         </div> 
+                        <?php else : ?>
+                            <h4 class="text-center">Jadilah Pengguna yang Memberikan Testimoni Pertama Kepada Kami !!</h4>
+                        <?php endif; ?>
                     </div> 
                 </div> 
             </div> 
@@ -494,7 +455,7 @@
                                 
                                 
                                 <div class="swiper-slide">
-                                    <a href="images/screenshot-1.png" class="popup-link" data-effect="fadeIn">
+                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-1.png" class="popup-link" data-effect="fadeIn">
                                         <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-1.png" alt="alternative">
                                     </a>
                                 </div>
@@ -502,7 +463,7 @@
                                 
                                 
                                 <div class="swiper-slide">
-                                    <a href="images/screenshot-2.png" class="popup-link" data-effect="fadeIn">
+                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-2.png" class="popup-link" data-effect="fadeIn">
                                         <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-2.png" alt="alternative">
                                     </a>
                                 </div>
@@ -510,7 +471,7 @@
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="images/screenshot-3.png" class="popup-link" data-effect="fadeIn">
+                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-3.png" class="popup-link" data-effect="fadeIn">
                                         <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-3.png" alt="alternative">
                                     </a>
                                 </div>
@@ -518,7 +479,7 @@
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="images/screenshot-4.png" class="popup-link" data-effect="fadeIn">
+                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-4.png" class="popup-link" data-effect="fadeIn">
                                         <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-4.png" alt="alternative">
                                     </a>
                                 </div>
@@ -526,7 +487,7 @@
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="images/screenshot-5.png" class="popup-link" data-effect="fadeIn">
+                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-5.png" class="popup-link" data-effect="fadeIn">
                                         <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-5.png" alt="alternative">
                                     </a>
                                 </div>
@@ -534,7 +495,7 @@
                                 
                                 
                                 <div class="swiper-slide">
-                                    <a href="images/screenshot-6.png" class="popup-link" data-effect="fadeIn">
+                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-6.png" class="popup-link" data-effect="fadeIn">
                                         <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-6.png" alt="alternative">
                                     </a>
                                 </div>
@@ -542,7 +503,7 @@
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="images/screenshot-7.png" class="popup-link" data-effect="fadeIn">
+                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-7.png" class="popup-link" data-effect="fadeIn">
                                         <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-7.png" alt="alternative">
                                     </a>
                                 </div>
@@ -550,7 +511,7 @@
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="images/screenshot-8.png" class="popup-link" data-effect="fadeIn">
+                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-8.png" class="popup-link" data-effect="fadeIn">
                                         <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-8.png" alt="alternative">
                                     </a>
                                 </div>
@@ -558,7 +519,7 @@
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="images/screenshot-9.png" class="popup-link" data-effect="fadeIn">
+                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-9.png" class="popup-link" data-effect="fadeIn">
                                         <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-9.png" alt="alternative">
                                     </a>
                                 </div>
@@ -566,7 +527,7 @@
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="images/screenshot-10.png" class="popup-link" data-effect="fadeIn">
+                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-10.png" class="popup-link" data-effect="fadeIn">
                                         <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-10.png" alt="alternative">
                                     </a>
                                 </div>

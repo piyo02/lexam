@@ -262,52 +262,52 @@
 
 <!-- script timer -->
 <script>
-  // $(document).ready(function() {
-  //   var seconds = <?php echo $seconds; ?>;
-  //   var minutes = <?php echo $minutes; ?>;
-  //   var hours = <?php echo $hours; ?>;
+  $(document).ready(function() {
+    var seconds = <?php echo $seconds; ?>;
+    var minutes = <?php echo $minutes; ?>;
+    var hours = <?php echo $hours; ?>;
 
-  //   function timer() {
-  //       setTimeout(timer, 1000);
+    function timer() {
+        setTimeout(timer, 1000);
 
-  //       $('#timer').html(
-  //           '<h4 class="text-danger" align="center">' + hours + ' jam : ' + minutes + ' menit : ' + seconds + ' detik</h4>'
-  //       );
+        $('#timer').html(
+            '<h4 class="text-danger" align="center">' + hours + ' jam : ' + minutes + ' menit : ' + seconds + ' detik</h4>'
+        );
 
-  //       seconds--;
+        seconds--;
 
-  //       if (seconds < 0) {
-  //           seconds = 59;
-  //           minutes--;
+        if (seconds < 0) {
+            seconds = 59;
+            minutes--;
 
-  //           if (minutes < 0) {
-  //               minutes = 59;
-  //               hours--;
+            if (minutes < 0) {
+                minutes = 59;
+                hours--;
 
-  //               if (hours < 0) {
-  //                   clearInterval();
-  //                   var formSoal = document.getElementById('formSoal');
-  //                   formSoal.submit();
-  //               }
-  //           }
-  //       }
-  //   }
+                if (hours < 0) {
+                    clearInterval();
+                    var formSoal = document.getElementById('formConfirm');
+                    formSoal.submit();
+                }
+            }
+        }
+    }
 
-  //   function work() {
-  //       setTimeout(work, 1000);
+    // function work() {
+    //     setTimeout(work, 1000);
 
-  //       $.ajax({
-  //           type: 'GET',
-  //           url: '<?= base_url('siswa/tes/working') ?>',
-  //           success: function(data) {
-  //               if (data == 0) {
-  //                   // var formConfirm = document.getElementById('formConfirm');
-  //                   // formConfirm.submit();
-  //               }
-  //           }
-  //       })
-  //   }
-  //   work();
-  //   timer();
-  // });
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '<?= base_url('student/tes/assessment') ?>',
+    //         success: function(data) {
+    //             if (data == 0) {
+    //                 var formConfirm = document.getElementById('formConfirm');
+    //                 formConfirm.submit();
+    //             }
+    //         }
+    //     })
+    // }
+    // work();
+    timer();
+  });
 </script>

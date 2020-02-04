@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <meta name="description" content="Mobile app HTML landing page template to help you build a great online presence for your app which will convert visitors into users">
+    <meta name="description" content="Lexam, Ulangan tidak lagi menghabiskan banyak waktu Anda">
     <meta name="author" content="Inovatik">
     
 	<meta property="og:site_name" content="" /> 
