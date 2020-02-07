@@ -938,27 +938,27 @@ input[type='checkbox'] {
 	line-height: 3.5rem;
 }
 
-.tabs #tab-1 .card.left-pane .text-wrapper {
+.tabs #tab-1 .card.left-pane .text-wrapper, .tabs #tab-4 .card.left-pane .text-wrapper {
 	display: inline-block;
 	width: 75%;
 }
 
-.tabs #tab-1 .card.left-pane .card-icon {
+.tabs #tab-1 .card.left-pane .card-icon, .tabs #tab-4 .card.left-pane .card-icon {
 	float: left;
 	margin-right: 1rem;
 }
 
-.tabs #tab-1 img {
+.tabs #tab-1 img, .tabs #tab-4 img {
 	display: block;
 	margin: 2rem auto 3rem auto;
 }
 
-.tabs #tab-1 .card.right-pane .text-wrapper {
+.tabs #tab-1 .card.right-pane .text-wrapper, .tabs #tab-4 .card.right-pane .text-wrapper {
 	display: inline-block;
 	width: 75%;
 }
 
-.tabs #tab-1 .card.right-pane .card-icon {
+.tabs #tab-1 .card.right-pane .card-icon, .tabs #tab-4 .card.right-pane .card-icon {
 	margin-right: 1rem;
 }
 
@@ -1644,7 +1644,7 @@ a:hover.back-to-top {
 		line-height: 4.5rem;
 	}
 
-	.tabs #tab-1 .card.left-pane .text-wrapper {
+	.tabs #tab-1 .card.left-pane .text-wrapper, .tabs #tab-4 .card.left-pane .text-wrapper {
 		width: 85%;
 	}
 
@@ -1801,22 +1801,24 @@ a:hover.back-to-top {
 		padding: 1rem 0 1.5rem 0;
 	}
 	
-	.tabs #tab-1 .card.left-pane {
+	.tabs #tab-1 .card.left-pane, .tabs #tab-4 .card.left-pane {
 		text-align: right;
 	}
 
 	.tabs #tab-1 .card.left-pane .text-wrapper,
-	.tabs #tab-1 .card.right-pane .text-wrapper {
+	.tabs #tab-1 .card.right-pane .text-wrapper,
+	.tabs #tab-4 .card.left-pane .text-wrapper,
+	.tabs #tab-4 .card.right-pane .text-wrapper {
 		width: 68%;
 	}
 
-	.tabs #tab-1 .card.left-pane .card-icon {
+	.tabs #tab-1 .card.left-pane .card-icon, .tabs #tab-4 .card.left-pane .card-icon {
 		float: none;
 		margin-right: 0;
 		margin-left: 1rem;
 	}
 
-	.tabs #tab-1 img {
+	.tabs #tab-1 img, .tabs #tab-4 img {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
@@ -1980,20 +1982,25 @@ a:hover.back-to-top {
 		padding-bottom: 6.5rem;
 	}
 
-	.tabs #tab-1 .card.first {
+	.tabs #tab-1 .card.first,
+	.tabs #tab-4 .card.first {
 		margin-top: 4.25rem;
 	}
 
-	.tabs #tab-1 .card {
+	.tabs #tab-1 .card,
+	.tabs #tab-4 .card {
 		margin-bottom: 0.75rem;
 	}
 
 	.tabs #tab-1 .card.left-pane .text-wrapper,
-	.tabs #tab-1 .card.right-pane .text-wrapper {
+	.tabs #tab-1 .card.right-pane .text-wrapper
+	.tabs #tab-4 .card.left-pane .text-wrapper,
+	.tabs #tab-4 .card.right-pane .text-wrapper {
 		width: 73%;
 	}
 
-	.tabs #tab-1 img {
+	.tabs #tab-1 img,
+	.tabs #tab-4 img {
 		margin-top: 0;
 	}
 

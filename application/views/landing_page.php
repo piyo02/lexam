@@ -56,8 +56,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>FEATURES</h2>
-                    <div class="p-heading p-large">Leno was designed based on input from personal development coaches and popular trainers so it offers all</div>
+                    <h2>Fitur</h2>
+                    <div class="p-heading p-large">Lexam menyediakan fitur berbeda untuk tiap-tiap golongan usernya.</div>
                 </div> 
             </div> 
             <div class="row">
@@ -65,13 +65,16 @@
                 
                 <ul class="nav nav-tabs" id="lenoTabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="nav-tab-1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true"><i class="fas fa-cog"></i>CONFIGURING</a>
+                        <a class="nav-link active" id="nav-tab-1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true"><i class="fas fa-id-badge"></i>Kepala Sekolah</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="nav-tab-2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false"><i class="fas fa-binoculars"></i>TRACKING</a>
+                        <a class="nav-link" id="nav-tab-2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false"><i class="fas fa-school"></i>Admin Sekolah</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="nav-tab-3" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false"><i class="fas fa-search"></i>MONITORING</a>
+                        <a class="nav-link" id="nav-tab-3" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false"><i class="fas fa-chalkboard-teacher"></i>Guru</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-tab-4" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false"><i class="fas fa-user-graduate"></i>Siswa</a>
                     </li>
                 </ul>
                 
@@ -90,7 +93,7 @@
                                     <div class="card left-pane first">
                                         <div class="card-body">
                                             <div class="text-wrapper">
-                                                <h4 class="card-title">Goal Setting</h4>
+                                                <h4 class="card-title">Perkembangan Siswa</h4>
                                                 <p>Like any self improving process, everything starts with setting your goals and committing to them</p>
                                             </div>
                                             <div class="card-icon">
@@ -101,7 +104,7 @@
                                     <div class="card left-pane">
                                         <div class="card-body">
                                             <div class="text-wrapper">
-                                                <h4 class="card-title">Visual Editor</h4>
+                                                <h4 class="card-title">Hasil Ulangan</h4>
                                                 <p>Leno provides a well designed and ergonomic visual editor for you to edit your notes and input data</p>
                                             </div>
                                             <div class="card-icon">
@@ -137,7 +140,7 @@
                                                 <i class="far fa-calendar-check"></i>
                                             </div>
                                             <div class="text-wrapper">
-                                                <h4 class="card-title">Calendar Input</h4>
+                                                <h4 class="card-title">Monitoring Pembelajaran</h4>
                                                 <p>Schedule your appointments, meetings and periodical evaluations using the provided in-app calendar option</p>
                                             </div>
                                         </div>
@@ -186,8 +189,8 @@
                                 
                                 <div class="col-md-8">
                                     <div class="text-area">
-                                        <h3>Track Result Based On Your</h3>
-                                        <p>After you've configured the app and settled on the data gathering techniques you can not start the information trackers and start collecting those <a class="turquoise" href="#your-link">interesting details</a>. You can always change them.</p>
+                                        <h3>Admin Sekolah</h3>
+                                        <p>Admin Sekolah mengatur urusan Administrasi Sekolah</p>
                                     </div> 
                                     
                                     <div class="icon-cards-area">
@@ -196,7 +199,7 @@
                                                     <i class="fas fa-cube"></i>
                                                 </div>
                                                 <div class="card-body">
-                                                    <h4 class="card-title">Good Foundation</h4>
+                                                    <h4 class="card-title">Kelas</h4>
                                                     <p>Get a solid foundation for your self development efforts. Try Leno mobile app for any mobile platform</p>
                                                 </div>
                                             </div>
@@ -205,7 +208,7 @@
                                                     <i class="far fa-bookmark"></i>
                                                 </div>
                                                 <div class="card-body">
-                                                    <h4 class="card-title">Easy Reading</h4>
+                                                    <h4 class="card-title">Mata Pelajaran</h4>
                                                     <p>Reading focus mode for long form articles, ebooks and other materials which involve large text areas</p>
                                                 </div>
                                             </div>
@@ -214,7 +217,7 @@
                                                     <i class="far fa-calendar-check"></i>
                                                 </div>
                                                 <div class="card-body">
-                                                    <h4 class="card-title">Calendar Input</h4>
+                                                    <h4 class="card-title">Guru</h4>
                                                     <p>Schedule your appointments, meetings and periodical evaluations using the provided in-app calendar option</p>
                                                 </div>
                                             </div>
@@ -223,7 +226,7 @@
                                                     <i class="far fa-file-code"></i>
                                                 </div>
                                                 <div class="card-body">
-                                                    <h4 class="card-title">Visual Editor</h4>
+                                                    <h4 class="card-title">Siswa</h4>
                                                     <p>Leno provides a well designed and ergonomic visual editor for you to edit your notes and input data</p>
                                                 </div>
                                             </div>
@@ -249,7 +252,7 @@
                                                 <i class="far fa-calendar-check"></i>
                                             </div>
                                             <div class="card-body">
-                                                <h4 class="card-title">Calendar Input</h4>
+                                                <h4 class="card-title">Analisa Ulangan</h4>
                                                 <p>Schedule your appointments, meetings and periodical evaluations using the provided in-app calendar option</p>
                                             </div>
                                         </div>
@@ -258,7 +261,7 @@
                                                 <i class="far fa-file-code"></i>
                                             </div>
                                             <div class="card-body">
-                                                <h4 class="card-title">Visual Editor</h4>
+                                                <h4 class="card-title">Ulangan</h4>
                                                 <p>Leno provides a well designed and ergonomic visual editor for you to edit your notes and input data</p>
                                             </div>
                                         </div>
@@ -267,7 +270,7 @@
                                                 <i class="fas fa-cube"></i>
                                             </div>
                                             <div class="card-body">
-                                                <h4 class="card-title">Good Foundation</h4>
+                                                <h4 class="card-title">Bank Soal</h4>
                                                 <p>Get a solid foundation for your self development efforts. Try Leno mobile app for any mobile platform</p>
                                             </div>
                                         </div>
@@ -276,7 +279,7 @@
                                                 <i class="far fa-bookmark"></i>
                                             </div>
                                             <div class="card-body">
-                                                <h4 class="card-title">Easy Reading</h4>
+                                                <h4 class="card-title">Hasil Ulangan</h4>
                                                 <p>Reading focus mode for long form articles, ebooks and other materials which involve large text areas</p>
                                             </div>
                                         </div>
@@ -299,9 +302,75 @@
                         </div> 
                     </div>
                     
+                    <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab-4">
+                        <div class="container">
+                            <div class="row">
+                                
+                                
+                                <div class="col-lg-4">
+                                    <div class="card left-pane first">
+                                        <div class="card-body">
+                                            <div class="text-wrapper">
+                                                <h4 class="card-title">Perkembangan Siswa</h4>
+                                                <p>Like any self improving process, everything starts with setting your goals and committing to them</p>
+                                            </div>
+                                            <div class="card-icon">
+                                                <i class="far fa-compass"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card left-pane">
+                                        <div class="card-body">
+                                            <div class="text-wrapper">
+                                                <h4 class="card-title">Hasil Ulangan</h4>
+                                                <p>Leno provides a well designed and ergonomic visual editor for you to edit your notes and input data</p>
+                                            </div>
+                                            <div class="card-icon">
+                                                <i class="far fa-file-code"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                
+                                <div class="col-lg-4">
+                                    <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/features-iphone-1.png" alt="alternative">
+                                </div>
+                                
+                                
+                                
+                                <div class="col-lg-4">
+                                    <div class="card right-pane first">
+                                        <div class="card-body">
+                                            <div class="card-icon">
+                                                <i class="far fa-calendar-check"></i>
+                                            </div>
+                                            <div class="text-wrapper">
+                                                <h4 class="card-title">Ulangan Online</h4>
+                                                <p>Schedule your appointments, meetings and periodical evaluations using the provided in-app calendar option</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card right-pane">
+                                        <div class="card-body">
+                                            <div class="card-icon">
+                                                <i class="far fa-bookmark"></i>
+                                            </div>
+                                            <div class="text-wrapper">
+                                                <h4 class="card-title">Lorem, ipsum dolor.</h4>
+                                                <p>Reading focus mode for long form articles, ebooks and other materials which involve large text areas</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                            </div> 
+                        </div> 
+                    </div> 
 
                 </div> 
-                
 
             </div> 
         </div> 
@@ -315,136 +384,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2>PREVIEW</h2>
-                    <div class="p-heading p-large">Target the right customers for your business with the help of Leno's patented segmentation technology</div>
+                    <div class="p-heading p-large">Klik gambar untuk memperbesar</div>
                 </div> 
             </div> 
-            <div class="row">
-                <div class="col-lg-12">
-
-                    
-                    <div class="image-container">
-                        <div class="video-wrapper">
-                            <a class="popup-youtube" href="https://www.youtube.com/watch?v=fLCjQJCekTs" data-effect="fadeIn">
-                                <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/video-frame.jpg" alt="alternative">
-                                <span class="video-play-button">
-                                    <span></span>
-                                </span>
-                            </a>
-                        </div> 
-                    </div> 
-                    
-
-                </div> 
-            </div> 
-        </div> 
-    </div> 
-    
-
-
-    
-    <div id="details" class="basic-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/details-1-iphone.png" alt="alternative">
-                </div> 
-                <div class="col-lg-6">
-                    <div class="text-container">
-                        <h3>Goals Setting</h3>
-                        <p>Leno can easily help you track your personal development evolution if you take the time to properly setup your goals at the beginning of the training process. Check out the details</p>
-                        <a class="btn-solid-reg popup-with-move-anim" href="#details-lightbox-1">LIGHTBOX</a>
-                    </div> 
-                </div> 
-            </div> 
-        </div> 
-    </div> 
-    
-
-
-    
-    <div class="basic-3">
-        <div class="second">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="text-container">
-                            <h3>Calendar Input</h3>
-                            <p>The calendar input function enables the user to setup training, meditation and relaxation sessions with ease. Just open the feature and start setting up your time as you desire</p>
-                            <a class="btn-solid-reg popup-with-move-anim" href="#details-lightbox-2">LIGHTBOX</a>
-                        </div> 
-                    </div> 
-                    <div class="col-lg-6">
-                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/details-2-iphone.png" alt="alternative">
-                    </div> 
-                </div> 
-            </div> 
-        </div> 
-    </div> 
-    
-
-
-    
-	
-	<div id="details-lightbox-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
-		<div class="row">
-			<button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
-			<div class="col-lg-6">
-				<img class="img-fluid" src="<?= base_url('users-assets/') ?>images/details-lightbox-1.png" alt="alternative">
-			</div>
-			<div class="col-lg-6">
-				<h3>Goals Setting</h3>
-				<hr>
-                <p>Leno can easily help you track your personal development evolution if you take the time to set it up.</p>
-                <h4>User Feedback</h4>
-                <p>This is a great app which can help you save time and make your live easier. And it will help improve your productivity levels.</p>
-                <p>You should definitely give it a try when you need a good app.</p>
-				<table>
-					<tr><td class="icon-cell"><i class="fas fa-desktop"></i></td><td>Responsive layout</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-bullhorn"></i></td><td>Distinctive CTAs</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-image"></i></td><td>Image gallery slider</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-envelope"></i></td><td>Contact forms</td></tr>
-					<tr><td class="icon-cell"><i class="fab fa-font-awesome-flag"></i></td><td>FontAwesome icons</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-code"></i></td><td>Well-structured code</td></tr>
-				</table>
-				<a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#details">BACK</a> 
-			</div>
-		</div> 
-    </div> 
-    
-    
-    
-    <div id="details-lightbox-2" class="lightbox-basic zoom-anim-dialog mfp-hide">
-		<div class="row">
-			<button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
-			<div class="col-lg-6">
-				<img class="img-fluid" src="<?= base_url('users-assets/') ?>images/details-lightbox-2.png" alt="alternative">
-			</div>
-			<div class="col-lg-6">
-				<h3>Calendar Input</h3>
-				<hr>
-                <p>The calendar input function enables the user to setup training, meditation and relaxation sessions with ease.</p>
-                <h4>User Feedback</h4>
-                <p>This is a great app which can help you save time and make your live easier. And it will help improve your productivity levels.</p>
-                <p>You should definitely give it a try when you need a good app.</p>
-				<table>
-					<tr><td class="icon-cell"><i class="fas fa-desktop"></i></td><td>Responsive layout</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-bullhorn"></i></td><td>Distinctive CTAs</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-image"></i></td><td>Image gallery slider</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-envelope"></i></td><td>Contact forms</td></tr>
-					<tr><td class="icon-cell"><i class="fab fa-font-awesome-flag"></i></td><td>FontAwesome icons</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-code"></i></td><td>Well-structured code</td></tr>
-				</table>
-				<a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#details">BACK</a>
-			</div>
-		</div> 
-    </div> 
-    
-    
-
-
-    
-    <div class="slider-2">
-        <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     
@@ -549,31 +491,6 @@
         </div> 
     </div> 
     
-
-
-    
-    <div class="basic-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-xl-5">
-                    <div class="text-container">
-                        <h2>Download <span class="blue">Leno</span></h2>
-                        <p class="p-large">Target the right customers for your business with the help of Leno's patented technology and increase conversion figures in less than 2 weeks</p>
-                        <a class="btn-solid-lg" href="#your-link"><i class="fab fa-apple"></i>APP STORE</a>
-                        <a class="btn-solid-lg" href="#your-link"><i class="fab fa-google-play"></i>PLAY STORE</a>
-                    </div> 
-                </div> 
-                <div class="col-lg-6 col-xl-7">
-                    <div class="image-container">
-                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/download.png" alt="alternative">
-                    </div> 
-                </div> 
-            </div> 
-        </div> 
-    </div> 
-    
-
-
     
     <div class="counter">
         <div class="container">
@@ -583,20 +500,20 @@
                     
                     <div id="counter">
                         <div class="cell">
-                            <div class="counter-value number-count" data-count="231">1</div>
-                            <p class="counter-info">Happy Users</p>
+                            <div class="counter-value number-count" data-count="<?= $schools ?>">1</div>
+                            <p class="counter-info">Pengguna Sekolah</p>
                         </div>
                         <div class="cell">
-                            <div class="counter-value number-count" data-count="85">1</div>
-                            <p class="counter-info">Issues Solved</p>
+                            <div class="counter-value number-count" data-count="<?= $tests ?>">1</div>
+                            <p class="counter-info">Ulangan</p>
                         </div>
                         <div class="cell">
-                            <div class="counter-value number-count" data-count="59">1</div>
-                            <p class="counter-info">Good Reviews</p>
+                            <div class="counter-value number-count" data-count="<?= $teachers ?>">1</div>
+                            <p class="counter-info">Guru</p>
                         </div>
                         <div class="cell">
-                            <div class="counter-value number-count" data-count="127">1</div>
-                            <p class="counter-info">Case Studies</p>
+                            <div class="counter-value number-count" data-count="<?= $students ?>">1</div>
+                            <p class="counter-info">Siswa</p>
                         </div>
                     </div>
                     
@@ -615,9 +532,9 @@
                 <div class="col-lg-12">
                     <h2>KONTAK</h2>
                     <ul class="list-unstyled li-space-lg">
-                        <li class="address">Lorem ipsum dolor sit amet consectetur adipisicing.</li>
-                        <li><i class="fas fa-map-marker-alt"></i>Jalan</li>
-                        <li><i class="fas fa-phone"></i><a class="blue" href="tel:081232578168">+62 812 325 781 68</a></li>
+                        <li class="address">Tertarik untuk menggunakan lexam? Hubungi Kami.</li>
+                        <li><i class="fas fa-map-marker-alt"></i>BTN GRAHA MANDIRI PERMAI BLOK K/7, Punggolaka, Puuwatu, Kendari</li><br>
+                        <li><i class="fas fa-phone"></i><a class="blue" href="tel:081232578168">+62 812 325 781 68</a></li><br>
                         <li><i class="fas fa-envelope"></i><a class="blue" href="mailto:alzidni2000@gmail.com">alzidni2000@gmail.com</a></li>
                     </ul>
                 </div> 
@@ -633,8 +550,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="footer-col">
-                        <h4>About Leno</h4>
-                        <p>We're passionate about creating the best mobile apps for personal development</p>
+                        <h4>Tentang Lexam</h4>
+                        <p>Memudahan proses Ulangan untuk membantu tiap guru di Indonesia adalah misi kami dalam mengembangkan Lexam. </p>
                     </div>
                 </div> 
                 <div class="col-md-4">
@@ -643,13 +560,13 @@
                     <div class="footer-col last">
                         <h4>Social Media</h4>
                         <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://www.facebook.com/alwani.es.7">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-facebook-f fa-stack-1x"></i>
                             </a>
                         </span>
                         <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://www.instagram.com/zdn.dev/">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-instagram fa-stack-1x"></i>
                             </a>
