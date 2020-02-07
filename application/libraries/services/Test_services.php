@@ -53,6 +53,15 @@ class Test_services
                 "data_name" => "name",
               ),
               array(
+                "name" => 'Pengerjaan',
+                "type" => "link",
+                "url" => site_url( $_page."work/"),
+                "button_color" => "success",
+                "param" => "id",
+                "title" => "Group",
+                "data_name" => "name",
+              ),
+              array(
                 "name" => 'X',
                 "type" => "modal_delete",
                 "modal_id" => "delete_",
@@ -63,6 +72,70 @@ class Test_services
                   "id" => array(
                     'type' => 'hidden',
                     'label' => "id",
+                  ),
+                  "model" => array(
+                    'type' => 'hidden',
+                    'label' => "model",
+                    'value' => "test_model",
+                  ),
+                ),
+                "title" => "Group",
+                "data_name" => "name",
+              ),
+    );
+    return $table;
+  }
+  public function get_table_solve_config( $_page, $start_number = 1 )
+  {
+      $table["header"] = array(
+        'student_name' => 'Nama Siswa',
+        'date' => 'Waktu Mulai',
+      );
+      $table["number"] = $start_number;
+      $table[ "action" ] = array(
+              array(
+                "name" => 'Status',
+                "type" => "modal_form",
+                "url" => site_url( $_page."break/"),
+                "button_color" => "primary",
+                "param" => "id",
+                "form_data" => array(
+                  "id" => array(
+                    'type' => 'hidden',
+                    'label' => "id",
+                  ),
+                  "test_id" => array(
+                    'type' => 'hidden',
+                    'label' => "id",
+                  ),
+                  "is_break" => array(
+                    'type' => 'select',
+                    'label' => "Status",
+                    'options' => array(
+                      '0' => 'Berhentikan',
+                      '1' => 'Aktifkan',
+                    )
+                  )
+                ),
+                "title" => "Group",
+                "data_name" => "name",
+              ),
+              array(
+                "name" => 'X',
+                "type" => "modal_delete",
+                "modal_id" => "delete_",
+                "url" => site_url( $_page."delete_work/"),
+                "button_color" => "danger",
+                "param" => "id",
+                "form_data" => array(
+                  "id" => array(
+                    'type' => 'hidden',
+                    'label' => "id",
+                  ),
+                  "model" => array(
+                    'type' => 'hidden',
+                    'label' => "model",
+                    'value' => "solve_test_model",
                   ),
                 ),
                 "title" => "Group",

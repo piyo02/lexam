@@ -110,6 +110,11 @@ class Solve_test_model extends MY_Model
 
   public function solve_test_by_student_id( $test_id = NULL, $user_id = NULL  )
   {
+    $this->select( $this->table . '.*' );
+    $this->select( $this->table . '.time_start AS date' );
+    $this->select( 'CONCAT( users.first_name, " ", users.last_name ) as student_name' );
+    $this->select( 'test.name AS test_name' );
+    $this->select( 'test.duration' );
       if (isset($user_id))
       {
         $this->where($this->table.'.user_id', $user_id);
@@ -118,6 +123,16 @@ class Solve_test_model extends MY_Model
       {
         $this->where($this->table.'.test_id', $test_id);
       }
+      $this->join(
+        'users',
+        'users.id = solve_test.user_id',
+        'inner'
+      );
+      $this->join(
+        'test',
+        'test.id = solve_test.test_id',
+        'inner'
+      );
       $this->order_by($this->table.'.id', 'desc');
 
       $this->solve_tests(  );

@@ -17,6 +17,7 @@ class Test extends Teacher_Controller {
 			'test_model',
 			'questionnaire_model',
 			'question_reference_model',
+			'solve_test_model',
 		));
 		$this->data[ "menu_list_id" ] =  'test_index';
 		$this->school_id = $this->ion_auth->get_school_id_for_teacher();
@@ -203,6 +204,27 @@ class Test extends Teacher_Controller {
 		$this->render( "teacher/test/detail" );
 	}
 
+	public function work( $test_id = NULL )
+	{
+		if( !($test_id) ) redirect(site_url(  $this->current_page ));  
+
+		$table = $this->services->get_table_solve_config( $this->current_page );
+		$table[ "rows" ] = $this->solve_test_model->solve_test_by_student_id( $test_id )->result();
+		$table = $this->load->view('templates/tables/plain_table', $table, true);
+		$this->data[ "contents" ] = $table;
+
+		#################################################################3
+		$alert = $this->session->flashdata('alert');
+		$this->data[ "url" ] =  site_url( $this->current_page."edit_ref/");
+		$this->data["key"] = $this->input->get('key', FALSE);
+		$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
+		$this->data["current_page"] = $this->current_page;
+		$this->data["block_header"] = "Ulangan";
+		$this->data["header"] = "Pengerjaan Ulangan";
+		$this->data["sub_header"] = 'Klik Tombol Action Untuk Aksi Lebih Lanjut';
+		$this->render( "templates/contents/plain_content" );
+	}
+
 	public function edit_test(  )
 	{
 		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
@@ -266,12 +288,40 @@ class Test extends Teacher_Controller {
 		
 		redirect( site_url($this->current_page . 'detail/' . $test_id) );
 	}
+	public function break(  )
+	{
+		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
+
+		// echo var_dump( $data );return;
+		$this->form_validation->set_rules( 'id', 'Ulangan', 'required' );
+        if ($this->form_validation->run() === TRUE )
+        {
+			$test_id = $this->input->post( 'test_id' );
+			$data['is_break'] = $this->input->post( 'is_break' );
+
+			$data_param['id'] = $this->input->post( 'id' );
+			if( $this->solve_test_model->update( $data, $data_param  ) ){
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->solve_test_model->messages() ) );
+			}else{
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->solve_test_model->errors() ) );
+			}
+		}
+        else
+        {
+          $this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->test_model->errors() : $this->session->flashdata('message')));
+          if(  validation_errors() || $this->test_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
+		}
+		
+		redirect( site_url($this->current_page . 'work/' . $test_id) );
+	}
 
 	public function delete(  ) {
 		if( !($_POST) ) redirect( site_url($this->current_page) );
-	  
+		 
+		$model 	= $this->input->post('model');
+
 		$data_param['id'] 	= $this->input->post('id');
-		if( $this->test_model->delete( $data_param ) ){
+		if( $this->$model->delete( $data_param ) ){
 		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->test_model->messages() ) );
 		}else{
 		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->test_model->errors() ) );
