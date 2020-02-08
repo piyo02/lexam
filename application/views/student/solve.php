@@ -270,6 +270,7 @@
     function timer() {
         setTimeout(timer, 1000);
 
+        is_break();
         $('#timer').html(
             '<h4 class="text-danger" align="center">' + hours + ' jam : ' + minutes + ' menit : ' + seconds + ' detik</h4>'
         );
@@ -293,20 +294,19 @@
         }
     }
 
-    // function work() {
-    //     setTimeout(work, 1000);
-
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '<?= base_url('student/tes/assessment') ?>',
-    //         success: function(data) {
-    //             if (data == 0) {
-    //                 var formConfirm = document.getElementById('formConfirm');
-    //                 formConfirm.submit();
-    //             }
-    //         }
-    //     })
-    // }
+    function is_break() {
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('student/test/is_break') ?>',
+            success: function(data) {
+              console.log(data)
+                if (data == 1) {
+                    var formConfirm = document.getElementById('formConfirm');
+                    formConfirm.submit();
+                }
+            }
+        })
+    }
     // work();
     timer();
   });

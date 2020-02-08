@@ -28,18 +28,18 @@ class Test extends Student_Controller {
 
 	public function index()
 	{
+		$student = $this->student_profile_model->student_profile( $this->user_id )->row();
 		$page = ($this->uri->segment(4)) ? ($this->uri->segment(4) -  1 ) : 0;
 		// echo $page; return;
         //pagination parameter
         $pagination['base_url'] = base_url( $this->current_page ) .'/index';
-        $pagination['total_records'] = $this->test_model->record_count(  ) ;
+        $pagination['total_records'] = $this->test_model->test_by_classroom_id( $student->classroom_id, $student->school_id )->num_rows();
         $pagination['limit_per_page'] = 3;
         $pagination['start_record'] = $page*$pagination['limit_per_page'];
         $pagination['uri_segment'] = 4;
 		//set pagination
 		if ($pagination['total_records'] > 0 ) $this->data['pagination_links'] = $this->setPagination($pagination);
 
-		$student = $this->student_profile_model->student_profile( $this->user_id )->row();
 
 		#################################################################3
 		$table = $this->services->get_table_config( $this->current_page );
@@ -285,5 +285,17 @@ class Test extends Student_Controller {
 			'total_quest' => count($answers),
 		];
 		return $data;
+	}
+
+	public function is_break(  )
+	{
+		$user_id = $this->session->userdata('user_id');
+		$solve = $this->solve_test_model->solve_test_by_student_id( NULL, $user_id )->row();
+
+		if( $solve->is_break == 1 ){
+			echo json_encode( 1 );
+		}else {
+			echo json_encode( 0 );
+		}
 	}
 }

@@ -89,12 +89,13 @@ class Test_services
   {
       $table["header"] = array(
         'student_name' => 'Nama Siswa',
-        'date' => 'Waktu Mulai',
+        'time' => 'Waktu Mulai',
       );
       $table["number"] = $start_number;
       $table[ "action" ] = array(
               array(
                 "name" => 'Status',
+                "modal_id" => "status_",
                 "type" => "modal_form",
                 "url" => site_url( $_page."break/"),
                 "button_color" => "primary",
@@ -112,8 +113,8 @@ class Test_services
                     'type' => 'select',
                     'label' => "Status",
                     'options' => array(
-                      '0' => 'Berhentikan',
-                      '1' => 'Aktifkan',
+                      '1' => 'Berhentikan',
+                      '0' => 'Aktifkan',
                     )
                   )
                 ),

@@ -22,12 +22,12 @@
                         <td data-title="<?= $value ?>">
                             <?php
                                     $attr = "";
-                                    if (is_numeric($row->$key) && ($key != 'phone' && $key != 'username'))
+                                    if (is_numeric($row->$key) && ($key != 'phone' && $key != 'username' && $key == 'date'))
                                         $attr = number_format($row->$key);
                                     else
                                         $attr = $row->$key;
                                     if ($key == 'create_date' || $key == 'time')
-                                        $attr =  date("d/m/Y", $row->$key);
+                                        $attr =  date("d/m/Y H:i:sa", $row->$key );
 
                                     echo $attr;
                                     ?>

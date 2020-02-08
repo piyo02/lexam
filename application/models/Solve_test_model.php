@@ -111,7 +111,7 @@ class Solve_test_model extends MY_Model
   public function solve_test_by_student_id( $test_id = NULL, $user_id = NULL  )
   {
     $this->select( $this->table . '.*' );
-    $this->select( $this->table . '.time_start AS date' );
+    $this->select( $this->table . '.time_start AS time' );
     $this->select( 'CONCAT( users.first_name, " ", users.last_name ) as student_name' );
     $this->select( 'test.name AS test_name' );
     $this->select( 'test.duration' );
