@@ -23,7 +23,7 @@
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-sm-12 col-md-6 col-lg-3">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
@@ -38,7 +38,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-sm-12 col-md-6 col-lg-3">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
@@ -53,7 +53,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-sm-12 col-md-6 col-lg-3">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
             <!-- small box -->
             <div class="small-box bg-secondary">
               <div class="inner">
@@ -68,7 +68,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-sm-12 col-md-6 col-lg-3">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">

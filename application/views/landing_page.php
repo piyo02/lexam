@@ -12,7 +12,7 @@
                     </div> 
                     <div class="col-lg-6">
                         <div class="image-container">
-                            <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/header-iphone.png" alt="alternative">
+                            <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/front.png" alt="alternative">
                         </div> 
                     </div> 
                 </div> 
@@ -182,7 +182,7 @@
 
                                 
                                 <div class="col-md-4">
-                                    <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/features-iphone-2.png" alt="alternative">
+                                    <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/dashboard-admin-school.png" alt="alternative">
                                 </div>
                                 
                                 
@@ -294,7 +294,7 @@
 
                                 
                                 <div class="col-md-4">
-                                    <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/features-iphone-3.png" alt="alternative">
+                                    <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/menu-guru.png" alt="alternative">
                                 </div>
                                 
                                     
@@ -335,7 +335,7 @@
 
                                 
                                 <div class="col-lg-4">
-                                    <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/features-iphone-1.png" alt="alternative">
+                                    <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/history.png" alt="alternative">
                                 </div>
                                 
                                 
@@ -397,83 +397,136 @@
                                 
                                 
                                 <div class="swiper-slide">
-                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-1.png" class="popup-link" data-effect="fadeIn">
-                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-1.png" alt="alternative">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/beranda-guru.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/beranda-guru.png" alt="alternative">
                                     </a>
                                 </div>
                                 
                                 
                                 
                                 <div class="swiper-slide">
-                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-2.png" class="popup-link" data-effect="fadeIn">
-                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-2.png" alt="alternative">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/buat-ulangan.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/buat-ulangan.png" alt="alternative">
                                     </a>
                                 </div>
                                 
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-3.png" class="popup-link" data-effect="fadeIn">
-                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-3.png" alt="alternative">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/daftar-soal.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/daftar-soal.png" alt="alternative">
                                     </a>
                                 </div>
                                 
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-4.png" class="popup-link" data-effect="fadeIn">
-                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-4.png" alt="alternative">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/daftar-ulangan.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/daftar-ulangan.png" alt="alternative">
                                     </a>
                                 </div>
                                 
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-5.png" class="popup-link" data-effect="fadeIn">
-                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-5.png" alt="alternative">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/dashboard-admin-school.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/dashboard-admin-school.png" alt="alternative">
                                     </a>
                                 </div>
                                 
                                 
                                 
                                 <div class="swiper-slide">
-                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-6.png" class="popup-link" data-effect="fadeIn">
-                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-6.png" alt="alternative">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/grafik-nilai.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/grafik-nilai.png" alt="alternative">
                                     </a>
                                 </div>
                                 
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-7.png" class="popup-link" data-effect="fadeIn">
-                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-7.png" alt="alternative">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/history.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/history.png" alt="alternative">
                                     </a>
                                 </div>
                                 
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-8.png" class="popup-link" data-effect="fadeIn">
-                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-8.png" alt="alternative">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/kelas.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/kelas.png" alt="alternative">
                                     </a>
                                 </div>
                                 
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-9.png" class="popup-link" data-effect="fadeIn">
-                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-9.png" alt="alternative">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/landing-page.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/landing-page.png" alt="alternative">
                                     </a>
                                 </div>
                                 
 
                                 
                                 <div class="swiper-slide">
-                                    <a href="<?= base_url('users-assets/') ?>images/screenshot-10.png" class="popup-link" data-effect="fadeIn">
-                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/screenshot-10.png" alt="alternative">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/mapel.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/mapel.png" alt="alternative">
                                     </a>
                                 </div>
                                 
+                                <div class="swiper-slide">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/menu-guru.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/menu-guru.png" alt="alternative">
+                                    </a>
+                                </div>
+                                
+                                
+                                
+                                <div class="swiper-slide">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/menu-siswa.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/menu-siswa.png" alt="alternative">
+                                    </a>
+                                </div>
+                                
+
+                                
+                                <div class="swiper-slide">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/penilaian.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/penilaian.png" alt="alternative">
+                                    </a>
+                                </div>
+                                
+
+                                
+                                <div class="swiper-slide">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/penilaian-2.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/penilaian-2.png" alt="alternative">
+                                    </a>
+                                </div>
+                                
+
+                                
+                                <div class="swiper-slide">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/tambah-bank-soal.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/tambah-bank-soal.png" alt="alternative">
+                                    </a>
+                                </div>
+                                
+                                
+                                
+                                <div class="swiper-slide">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/tambah-guru.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/tambah-guru.png" alt="alternative">
+                                    </a>
+                                </div>
+                                
+
+                                
+                                <div class="swiper-slide">
+                                    <a href="<?= base_url('users-assets/') ?>images/preview/tambah-ulangan.png" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" src="<?= base_url('users-assets/') ?>images/preview/tambah-ulangan.png" alt="alternative">
+                                    </a>
+                                </div>
                                 
                             </div> 
 
