@@ -301,8 +301,18 @@
             success: function(data) {
               console.log(data)
                 if (data == 1) {
-                    var formConfirm = document.getElementById('formConfirm');
-                    formConfirm.submit();
+                  $.ajax({
+                      type: 'POST', //method
+                      url: '<?= base_url('student/test/break') ?>', //action
+                      data: {
+                        break: 1,
+                      }, //data yang dikrim ke action $_POST['id']
+                      dataType: 'json',
+                      async: false,
+                      success: function(data) {
+                        document.location.href = <?= site_url('student/test/break') ?>
+                      }
+                  });
                 }
             }
         })
@@ -310,4 +320,31 @@
     // work();
     timer();
   });
+</script>
+<script>
+  $(window).blur(function () {
+    alert('Anda membuka tab lain. Anda otomatis akan diberhentikan');
+    $.ajax({
+      type: 'POST',
+      url: '<?= base_url('student/test/is_break') ?>',
+      success: function(data) {
+        console.log(data)
+        if (data == 1) {
+          $.ajax({
+            type: 'POST', //method
+            url: '<?= base_url('student/test/break') ?>', //action
+            data: {
+              break: 1,
+            }, //data yang dikrim ke action $_POST['id']
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+              document.location.href = <?= site_url('student/test/break') ?>
+            }
+          });
+        }
+      }
+    })
+  });
+
 </script>

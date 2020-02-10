@@ -317,16 +317,28 @@ class Test extends Student_Controller {
 
 	public function break()
 	{
-		if( !$this->session->userdata( 'time_break' ) ){
-			$session['time_break'] = time();
-			$this->session->set_userdata( $session );
+		$this->form_validation->set_rules( 'break', 'Diberhentikan', 'required' );
+        if ($this->form_validation->run() === TRUE )
+        {
+			$data['user_id'] = $this->user_id;
+			$data['course_id'] = $this->input->post( 'course_id' );
+
+			$this->teacher_course_model->create( $data );
+			redirect('student/test/break')
 		}
+        else
+        {
+			if( !$this->session->userdata( 'time_break' ) ){
+				$session['time_break'] = time();
+				$this->session->set_userdata( $session );
+			}
 
-		$test_id = $this->session->userdata( 'test_id' );
-		$test = $this->test_model->test( $test_id )->row();
+			$test_id = $this->session->userdata( 'test_id' );
+			$test = $this->test_model->test( $test_id )->row();
 
-		$this->data['test'] = $test;
-		$this->render("student/break");
+			$this->data['test'] = $test;
+			$this->render("student/break");
+		}
 		
 	}
 }

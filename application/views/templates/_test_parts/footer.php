@@ -76,18 +76,6 @@
 <script>
     CKEDITOR.replace('editor');
 </script>
-<script>
-  $(window).on('focus', function () {
-    console.log(0);
-    // alert('You switched the tab');
-  });
-
-  $(window).on('blur', function () {
-    console.log(1);
-    alert('You switched the tab');
-
-  });
-</script>
 </body>
 
 </html>
