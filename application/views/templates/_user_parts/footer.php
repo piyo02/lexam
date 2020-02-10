@@ -20,10 +20,10 @@
 
 
 <script>
-$(window).on('blur', function () {
-    console.log(1);
-    alert('You switched the tab');
-});
+// $(window).on('blur', function () {
+//     console.log(1);
+//     alert('You switched the tab');
+// });
 
 // $(window).blur(function () {
 //     alert('You switched the tab');

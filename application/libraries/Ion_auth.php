@@ -715,4 +715,20 @@ class Ion_auth
 		$school = $this->school_model->school( $school_id )->row();
 		return $school->edu_ladder_id;
 	}
+	
+	public function is_guardian(  )
+	{
+		$user_id = $this->get_user_id();
+		
+		$this->load->model('classroom_model');
+		$classroom = $this->classroom_model->classroom_by_user_id( $user_id )->row();
+
+		if( $classroom ){
+			return $classroom->id;
+		}else {
+			return FALSE;
+		}
+
+		
+	}
 }

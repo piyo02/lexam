@@ -63,13 +63,28 @@ class Test extends Student_Controller {
 	{
 		$test_id = $this->input->post( 'id' );
 		
+		if( !$test_id ) redirect( $this->current_page );
+
 		//session test id
 		$session['test_id'] = $test_id;
 		$this->session->set_userdata( $session );
 		
 		// apakah siswa sudah pernah mengerjakan atau belum
 		$solve_test = $this->solve_test_model->solve_test_by_student_id( $test_id, $this->user_id )->row();
-		if( $solve_test ){
+		if( $solve_test->is_break ){ //jika sedang di hentikan
+			redirect('student/test/break'); //lempar ke halaman break
+		}
+		elseif( $solve_test ){
+			$extra_time = $this->session->userdata('time_break');
+
+			if( $extra_time ){
+
+				$update['time_start'] = $solve_test->time_start + ( time() - $extra_time );
+				$data_param['id'] = $solve_test->id;
+				$this->solve_test_model->update( $update, $data_param );
+
+			}
+			
 			redirect('student/test/test');
 		}
 
@@ -289,6 +304,7 @@ class Test extends Student_Controller {
 
 	public function is_break(  )
 	{
+		
 		$user_id = $this->session->userdata('user_id');
 		$solve = $this->solve_test_model->solve_test_by_student_id( NULL, $user_id )->row();
 
@@ -297,5 +313,20 @@ class Test extends Student_Controller {
 		}else {
 			echo json_encode( 0 );
 		}
+	}
+
+	public function break()
+	{
+		if( !$this->session->userdata( 'time_break' ) ){
+			$session['time_break'] = time();
+			$this->session->set_userdata( $session );
+		}
+
+		$test_id = $this->session->userdata( 'test_id' );
+		$test = $this->test_model->test( $test_id )->row();
+
+		$this->data['test'] = $test;
+		$this->render("student/break");
+		
 	}
 }

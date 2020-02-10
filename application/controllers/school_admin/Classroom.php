@@ -13,8 +13,8 @@ class Classroom extends School_admin_Controller {
 		$this->load->library('services/Classroom_services');
 		$this->services = new Classroom_services;
 		$this->load->model(array(
-			'group_model',
 			'classroom_model',
+			'class_ladder_model',
 		));
 		$this->data[ "menu_list_id" ] =  'classroom_index';
 		$this->school_id = $this->ion_auth->get_school_id();
@@ -22,6 +22,10 @@ class Classroom extends School_admin_Controller {
 	}
 	public function index()
 	{
+		$class_ladders = $this->class_ladder_model->class_ladders()->result();
+		foreach ($class_ladders as $key => $class_ladder) {
+			$list_class_ladders[ $class_ladder->id ] = $class_ladder->name;
+		}
 		$page = ($this->uri->segment(4)) ? ($this->uri->segment(4) -  1 ) : 0;
 		// echo $page; return;
         //pagination parameter
@@ -47,6 +51,11 @@ class Classroom extends School_admin_Controller {
 					'type' => 'hidden',
 					'label' => "Jenjang Pendidikan",
 					'value' => $this->school_id,
+				),
+				"class_ladder_id" => array(
+					'type' => 'select',
+					'label' => "Jenjang Kelas",
+					'options' => $list_class_ladders,
 				),
 				"name" => array(
 					'type' => 'text',

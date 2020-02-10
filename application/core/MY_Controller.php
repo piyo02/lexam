@@ -161,7 +161,22 @@ class Teacher_Controller extends User_Controller
     		$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->lang->line('login_must_admin') ) );
     		redirect(site_url('/auth/login'));
     	}else{
-      }
+			$is_guardian = $this->ion_auth->is_guardian();
+			if( $is_guardian ){
+				$this->data['_menus'][] = (object) array(
+					'id' => 300,
+					'menu_id' => 3,
+					'name' => 'Kelas Perwalian',
+					'link' => 'teacher/guardian',
+					'list_id' => 'guardian_index',
+					'icon' => "home",
+					'status' => 1,
+					'position' => 1,
+					'description' => '-',
+					'branch' => array(),
+				);
+			}
+		}
     }
 
     protected function render($the_view = NULL, $template = 'admin_master'){

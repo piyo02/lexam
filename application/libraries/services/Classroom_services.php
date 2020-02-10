@@ -12,9 +12,20 @@ class Classroom_services
   {
     return get_instance()->$var;
   }
-  
+  public function list_class_ladders()
+  {
+    $this->load->model( 'class_ladder_model' );
+
+    $class_ladders = $this->class_ladder_model->class_ladders()->result();
+		foreach ($class_ladders as $key => $class_ladder) {
+			$list_class_ladders[ $class_ladder->id ] = $class_ladder->name;
+    }
+
+    return $list_class_ladders;
+  }
   public function get_table_config( $_page, $start_number = 1 )
   {
+    $list_class_ladders = $this->list_class_ladders();
       $table["header"] = array(
         'name' => 'Nama Kelas',
         'description' => 'Deskripsi',
@@ -32,6 +43,11 @@ class Classroom_services
                     "id" => array(
                         'type' => 'hidden',
                         'label' => "id",
+                    ),
+                    "class_ladder_id" => array(
+                      'type' => 'select',
+                      'label' => "Jenjang Kelas",
+                      'options' => $list_class_ladders,
                     ),
                     "name" => array(
                         'type' => 'text',
