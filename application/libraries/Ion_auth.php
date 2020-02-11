@@ -701,6 +701,15 @@ class Ion_auth
 		$school = $this->teacher_profile_model->teacher_profile_by_user_id( $user_id )->row();
 		return $school->school_id;
 	}
+
+	public function get_school_id_for_headmaster() 
+	{
+		$user_id = $this->get_user_id();
+		$this->load->model('headmaster_profile_model');
+
+		$school = $this->headmaster_profile_model->headmaster_profile_by_user_id( $user_id )->row();
+		return $school->school_id;
+	}
 	
 	public function get_edu_ladder_id($teacher = null) 
 	{

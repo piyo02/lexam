@@ -69,7 +69,7 @@
   function result_test() {
     $.ajax({
       type: 'POST', //method
-      url: '<?= base_url('teacher/guardian/result_test/') . $student_id ?>', //action
+      url: '<?= base_url( $current_page ) . $student_id ?>', //action
       data: {
         course_id: course_id,
       }, //data yang dikrim ke action $_POST['id']

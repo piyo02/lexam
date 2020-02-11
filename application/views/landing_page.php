@@ -93,11 +93,11 @@
                                     <div class="card left-pane first">
                                         <div class="card-body">
                                             <div class="text-wrapper">
-                                                <h4 class="card-title">Perkembangan Siswa</h4>
-                                                <p>Like any self improving process, everything starts with setting your goals and committing to them</p>
+                                                <h4 class="card-title">Monitoring Pembelajaran</h4>
+                                                <p>Monitoring hasil pembelajaran dapat dengan mudah dilakukan dengan memperhatikan hasil dari para siswa dalam menyelesaikan ulangan yang diadakan.</p>
                                             </div>
                                             <div class="card-icon">
-                                                <i class="far fa-compass"></i>
+                                                <i class="far fa-calendar-check"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -105,21 +105,10 @@
                                         <div class="card-body">
                                             <div class="text-wrapper">
                                                 <h4 class="card-title">Hasil Ulangan</h4>
-                                                <p>Leno provides a well designed and ergonomic visual editor for you to edit your notes and input data</p>
+                                                <p>Hasil Ulangan tiap siswa ditampilkan dalam grafik yang mudah dipahami dan dapat pula mereview jawaban dari para siswa.</p>
                                             </div>
                                             <div class="card-icon">
                                                 <i class="far fa-file-code"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card left-pane">
-                                        <div class="card-body">
-                                            <div class="text-wrapper">
-                                                <h4 class="card-title">Refined Options</h4>
-                                                <p>Each option packaged in the app's menus is provided in order to improve your personal development status</p>
-                                            </div>
-                                            <div class="card-icon">
-                                                <i class="far fa-gem"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -137,33 +126,22 @@
                                     <div class="card right-pane first">
                                         <div class="card-body">
                                             <div class="card-icon">
-                                                <i class="far fa-calendar-check"></i>
+                                                <i class="fas fa-chart-line"></i>
                                             </div>
                                             <div class="text-wrapper">
-                                                <h4 class="card-title">Monitoring Pembelajaran</h4>
-                                                <p>Schedule your appointments, meetings and periodical evaluations using the provided in-app calendar option</p>
+                                                <h4 class="card-title">Perkembangan Siswa</h4>
+                                                <p>Monitoring perkembangan siswa dari grafik hasil ulangan siswa tersebut.</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card right-pane">
                                         <div class="card-body">
                                             <div class="card-icon">
-                                                <i class="far fa-bookmark"></i>
+                                                <i class="fas fa-crown"></i>
                                             </div>
                                             <div class="text-wrapper">
-                                                <h4 class="card-title">Easy Reading</h4>
-                                                <p>Reading focus mode for long form articles, ebooks and other materials which involve large text areas</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card right-pane">
-                                        <div class="card-body">
-                                            <div class="card-icon">
-                                                <i class="fas fa-cube"></i>
-                                            </div>
-                                            <div class="text-wrapper">
-                                                <h4 class="card-title">Good Foundation</h4>
-                                                <p>Get a solid foundation for your self development efforts. Try Leno mobile app for any mobile platform</p>
+                                                <h4 class="card-title">Siswa Berbakat</h4>
+                                                <p>Menemukan siswa berbakat diantara seluruh siswa yang ada di sekolah Anda dapat dengan mudah dilakukan dengan aplikasi Lexam ini.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -196,38 +174,38 @@
                                     <div class="icon-cards-area">
                                             <div class="card">
                                                 <div class="card-icon">
-                                                    <i class="fas fa-cube"></i>
+                                                    <i class="fas fa-id-badge"></i>
                                                 </div>
                                                 <div class="card-body">
                                                     <h4 class="card-title">Kelas</h4>
-                                                    <p>Get a solid foundation for your self development efforts. Try Leno mobile app for any mobile platform</p>
+                                                    <p>Anda dapat menentukan sendiri jumlah kelas sesuai yang Anda inginkan.</p>
                                                 </div>
                                             </div>
                                             <div class="card">
                                                 <div class="card-icon">
-                                                    <i class="far fa-bookmark"></i>
+                                                    <i class="fas fa-book"></i>
                                                 </div>
                                                 <div class="card-body">
                                                     <h4 class="card-title">Mata Pelajaran</h4>
-                                                    <p>Reading focus mode for long form articles, ebooks and other materials which involve large text areas</p>
+                                                    <p>Custom Mata Pelajaran bukanlah hal yang sulit dilakukan menggunakan Lexam.</p>
                                                 </div>
                                             </div>
                                             <div class="card">
                                                 <div class="card-icon">
-                                                    <i class="far fa-calendar-check"></i>
+                                                    <i class="fas fa-chalkboard-teacher"></i>
                                                 </div>
                                                 <div class="card-body">
                                                     <h4 class="card-title">Guru</h4>
-                                                    <p>Schedule your appointments, meetings and periodical evaluations using the provided in-app calendar option</p>
+                                                    <p>Daftarkan guru yang ada di sekolah Anda sesuai dengan yang Anda inginkan.</p>
                                                 </div>
                                             </div>
                                             <div class="card">
                                                 <div class="card-icon">
-                                                    <i class="far fa-file-code"></i>
+                                                    <i class="fas fa-graduation-cap"></i>
                                                 </div>
                                                 <div class="card-body">
                                                     <h4 class="card-title">Siswa</h4>
-                                                    <p>Leno provides a well designed and ergonomic visual editor for you to edit your notes and input data</p>
+                                                    <p>Maksimalkan akses seluruh siswa untuk menggunakan aplikasi ini agar perkembangan setiap siswa dapat dimaksimalkan.</p>
                                                 </div>
                                             </div>
                                     </div> 
@@ -253,7 +231,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <h4 class="card-title">Analisa Ulangan</h4>
-                                                <p>Schedule your appointments, meetings and periodical evaluations using the provided in-app calendar option</p>
+                                                <p>Dengan Lexam, analisa ulangan dilakukan otomatis, sehingga Guru memiliki waktu luang untuk mempersiapkan pembelajaran selanjutnya.</p>
                                             </div>
                                         </div>
                                         <div class="card">
@@ -262,7 +240,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <h4 class="card-title">Ulangan</h4>
-                                                <p>Leno provides a well designed and ergonomic visual editor for you to edit your notes and input data</p>
+                                                <p>Buat Bank Soal, Buat Ulangannya, Siswa yang Anda ajar siap untuk mengerjakan Ulangan tersebut. Kerjasama antar-siswa akan berkurang karena soal akan diacak.</p>
                                             </div>
                                         </div>
                                         <div class="card">
@@ -271,24 +249,20 @@
                                             </div>
                                             <div class="card-body">
                                                 <h4 class="card-title">Bank Soal</h4>
-                                                <p>Get a solid foundation for your self development efforts. Try Leno mobile app for any mobile platform</p>
+                                                <p>Dokumentasi Soal? Dengan Lexam bukan masalah lagi, bank soal tersebut dapat dipakai berulang-ulang.</p>
                                             </div>
                                         </div>
                                         <div class="card">
                                             <div class="card-icon">
-                                                <i class="far fa-bookmark"></i>
+                                                <i class="fas fa-file-invoice"></i>
                                             </div>
                                             <div class="card-body">
                                                 <h4 class="card-title">Hasil Ulangan</h4>
-                                                <p>Reading focus mode for long form articles, ebooks and other materials which involve large text areas</p>
+                                                <p>Dengan satu tombol, hasil ulangan dalam bentuk Excel dapat anda miliki di handphone dan laptop anda.</p>
                                             </div>
                                         </div>
                                     </div> 
                                     
-                                    <div class="text-area">
-                                        <h3>Monitoring Tools Evaluation</h3>
-                                        <p>Monitor the evolution of your finances and health state using tools integrated in Leno. The generated real time reports can be filtered based on any <a class="turquoise" href="#your-link">desired criteria</a>.</p>
-                                    </div> 
                                 </div> 
                                 
 
@@ -312,7 +286,7 @@
                                         <div class="card-body">
                                             <div class="text-wrapper">
                                                 <h4 class="card-title">Perkembangan Siswa</h4>
-                                                <p>Like any self improving process, everything starts with setting your goals and committing to them</p>
+                                                <p>Memantau perkembangan diri dengan Lexam dapat dilakukan dengan mudah</p>
                                             </div>
                                             <div class="card-icon">
                                                 <i class="far fa-compass"></i>
@@ -323,10 +297,10 @@
                                         <div class="card-body">
                                             <div class="text-wrapper">
                                                 <h4 class="card-title">Hasil Ulangan</h4>
-                                                <p>Leno provides a well designed and ergonomic visual editor for you to edit your notes and input data</p>
+                                                <p>Ditampilkan dengan grafik yang mudah di pahami, dan sehingga siswa dapat lebih peduli dengan hasil ulangannya.</p>
                                             </div>
                                             <div class="card-icon">
-                                                <i class="far fa-file-code"></i>
+                                                <i class="far fa-file-signature"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -348,18 +322,7 @@
                                             </div>
                                             <div class="text-wrapper">
                                                 <h4 class="card-title">Ulangan Online</h4>
-                                                <p>Schedule your appointments, meetings and periodical evaluations using the provided in-app calendar option</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card right-pane">
-                                        <div class="card-body">
-                                            <div class="card-icon">
-                                                <i class="far fa-bookmark"></i>
-                                            </div>
-                                            <div class="text-wrapper">
-                                                <h4 class="card-title">Lorem, ipsum dolor.</h4>
-                                                <p>Reading focus mode for long form articles, ebooks and other materials which involve large text areas</p>
+                                                <p>Ulangan Online, Penilaian Otomatis, Pelajari Pembahasan kapanpun dimanapun.</p>
                                             </div>
                                         </div>
                                     </div>

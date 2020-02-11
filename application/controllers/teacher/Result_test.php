@@ -98,6 +98,7 @@ class Result_test extends Teacher_Controller {
 		$data[ "lists_question" ] = $lists_question_id;
 		$data[ "questions" ] = $question;
 		$data[ "student_answer" ] = $student_answer;
+		$data["current_page"] = $this->current_page . 'review/' . $test_result_id;
 		$this->data[ "contents" ] = $this->load->view('teacher/review/content', $data, true);
 
 		#################################################################3

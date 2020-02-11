@@ -1,6 +1,6 @@
 <div class="row justify-content-end">
     <?php $num = 1; foreach ($lists_question as $key => $question_id) : ?>
-        <a href="<?= site_url('teacher/result_test/review/') , $test_result_id . '?number=' . $num . '&question_id=' . $question_id->question_id ?>" class="ml-2 btn btn-sm btn-success"><?= $num ?></a>
+        <a href="<?= site_url( $current_page ) . '?number=' . $num . '&question_id=' . $question_id->question_id ?>" class="ml-2 btn btn-sm btn-success"><?= $num ?></a>
     <?php $num++; endforeach;?>
 </div>
 </div>
@@ -43,7 +43,7 @@
                 case 'essay':?>
                     <label for="">Jawaban</label>
                     <textarea name="editor" id="editor" class="form-control"><?= $student_answer->answer; ?></textarea>
-                    <div class="form-group mt-3">
+                    <div class="form-group mt-3" style="display: <?php echo ( isset( $display ) )? $display : 'block' ?>">
                         <form action="<?= site_url('teacher/result_test/give_skor/') ?>" method="post">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">

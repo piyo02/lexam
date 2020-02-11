@@ -100,7 +100,7 @@ class Guardian extends Teacher_Controller {
 			$this->data["key"] = $this->input->get('key', FALSE);
 			$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
 			$this->data["student_id"] = $student_id;
-			$this->data["current_page"] = $this->current_page;
+			$this->data["current_page"] = $this->current_page . 'result_test/';
 			$this->data["block_header"] = "Ulangan";
 			$this->data["header"] = "Hasil Ulangan";
 			$this->data["sub_header"] = '';
