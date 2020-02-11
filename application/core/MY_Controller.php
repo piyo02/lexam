@@ -135,6 +135,23 @@ class Uadmin_Controller extends User_Controller
   	}
 }
 
+class Headmaster_Controller extends User_Controller
+{
+	public function __construct()
+	{
+      parent::__construct();
+    	if( !$this->ion_auth->in_group( 'headmaster' ) ){
+			$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->lang->line('login_must_admin') ) );
+    		redirect(site_url('/auth/login'));
+    	}else{
+      }
+    }
+
+    protected function render($the_view = NULL, $template = 'admin_master'){
+  		parent::render($the_view, $template);
+  	}
+}
+
 class School_admin_Controller extends User_Controller
 {
 	public function __construct()

@@ -324,7 +324,7 @@ class Test extends Student_Controller {
 			$data['course_id'] = $this->input->post( 'course_id' );
 
 			$this->teacher_course_model->create( $data );
-			redirect('student/test/break')
+			redirect('student/test/break');
 		}
         else
         {
