@@ -582,7 +582,7 @@
                             </a>
                         </span>
                         <span class="fa-stack">
-                            <a href="https://www.instagram.com/zdn.dev/">
+                            <a href="https://www.instagram.com/zidnikuy/">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-instagram fa-stack-1x"></i>
                             </a>

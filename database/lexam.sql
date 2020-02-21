@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 11 Jan 2020 pada 22.37
--- Versi Server: 5.7.28-0ubuntu0.18.04.4
--- PHP Version: 7.2.24-0ubuntu0.18.04.1
+-- Generation Time: 21 Feb 2020 pada 16.16
+-- Versi Server: 5.7.29-0ubuntu0.18.04.1
+-- PHP Version: 7.2.24-0ubuntu0.18.04.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -30,6 +30,7 @@ CREATE TABLE `classroom` (
   `id` int(10) UNSIGNED NOT NULL,
   `school_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED DEFAULT NULL,
+  `class_ladder_id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -38,12 +39,54 @@ CREATE TABLE `classroom` (
 -- Dumping data untuk tabel `classroom`
 --
 
-INSERT INTO `classroom` (`id`, `school_id`, `user_id`, `name`, `description`) VALUES
-(1, 1, NULL, 'X IPA 1', 'Kelas 10'),
-(2, 1, NULL, 'X IPS 1', 'Kelas 10'),
-(3, 1, NULL, 'XI IPA 1', 'Kelas 11'),
-(4, 1, NULL, 'XI IPS 1', 'Kelas 11'),
-(5, 1, NULL, 'XII IPA 1', 'Kelas 12');
+INSERT INTO `classroom` (`id`, `school_id`, `user_id`, `class_ladder_id`, `name`, `description`) VALUES
+(1, 1, 18, 4, 'X IPA 1', 'Kelas 10'),
+(2, 1, NULL, 5, 'X IPS 1', 'Kelas 10'),
+(3, 1, NULL, 6, 'XI IPA 1', 'Kelas 11'),
+(4, 1, NULL, 7, 'XI IPS 1', 'Kelas 11'),
+(5, 1, 20, 8, 'XII IPA 1', 'Kelas 12');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `class_ladder`
+--
+
+CREATE TABLE `class_ladder` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `class_ladder`
+--
+
+INSERT INTO `class_ladder` (`id`, `name`, `description`) VALUES
+(1, 'Kelas VII', '-'),
+(2, 'Kelas VIII', '-'),
+(3, 'Kelas IX', '-'),
+(4, 'Kelas X MIPA', '-'),
+(5, 'Kelas X IPS', '-'),
+(6, 'Kelas X IBB', '-'),
+(7, 'Kelas XI MIPA', '-'),
+(8, 'Kelas XI IPS', '-'),
+(9, 'Kelas XI IBB', '-'),
+(10, 'Kelas XII MIPA', '-'),
+(11, 'Kelas XII IPS', '-'),
+(12, 'Kelas XII IBB', '-');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `comment`
+--
+
+CREATE TABLE `comment` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `comment` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -112,7 +155,28 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 (2, 'uadmin', 'user admin'),
 (3, 'teacher', 'User guru'),
 (4, 'student', 'User Siswa'),
-(5, 'school_admin', 'Admin Sekolah');
+(5, 'school_admin', 'Admin Sekolah'),
+(6, 'headmaster', '-');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `headmaster_profile`
+--
+
+CREATE TABLE `headmaster_profile` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `school_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
+  `nip` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `headmaster_profile`
+--
+
+INSERT INTO `headmaster_profile` (`id`, `school_id`, `user_id`, `nip`) VALUES
+(1, 1, 27, '192 168 0 10');
 
 -- --------------------------------------------------------
 
@@ -174,7 +238,13 @@ INSERT INTO `menus` (`id`, `menu_id`, `name`, `link`, `list_id`, `icon`, `status
 (126, 125, 'Ulangan', 'student/test', 'test_index', 'file-signature', 1, 1, '-'),
 (127, 125, 'Histori', 'student/history', 'history_index', 'history', 1, 1, '-'),
 (128, 4, 'Hasil', 'student/result_test', 'result_test_index', 'wave-square', 1, 1, '-'),
-(129, 2, 'Sekolah', 'uadmin/schools', 'schools_index', 'home', 1, 1, '-');
+(129, 2, 'Sekolah', 'uadmin/schools', 'schools_index', 'home', 1, 1, '-'),
+(130, 2, 'Testimoni', 'uadmin/testimoni', 'testimoni_index', 'home', 1, 1, '-'),
+(131, 2, 'Jenjang Kelas', 'uadmin/class_ladder', 'class_ladder_index', 'home', 1, 1, '-'),
+(132, 6, 'Siswa', 'headmaster/student', 'student_index', 'home', 1, 1, '-'),
+(133, 6, 'Guru', 'headmaster/teacher', 'teacher_index', 'home', 1, 1, '-'),
+(134, 6, 'Pemeringkatan', 'headmaster/ranking', 'ranking_index', 'home', 1, 1, '-'),
+(135, 2, 'Kepala Sekolah', 'uadmin/headmaster', 'headmaster_index', 'home', 1, 1, '-');
 
 -- --------------------------------------------------------
 
@@ -200,7 +270,11 @@ INSERT INTO `question` (`id`, `code`, `questionnaire_id`, `type`, `text`, `image
 (1, 'S-1', 1, 'text', '<p>soal pertama</p>', NULL, NULL),
 (11, 'S-3', 1, 'image', '<p>a</p>', 'S-3_1578212008_533093.jpg', NULL),
 (12, 'S-4', 1, 'image', '<p>soa</p>', 'S-4_1578212113_533090.jpg', NULL),
-(19, 'S-8', 1, 'text', '<p>soal esai</p>', NULL, NULL);
+(19, 'S-8', 1, 'text', '<p>soal esai</p>', NULL, NULL),
+(4355, 'S-1', 2, 'text', 'soal pilihan ganda', NULL, NULL),
+(4356, 'S-2', 2, 'text', 'soal isian singkat', NULL, NULL),
+(4357, 'S-3', 2, 'text', 'deskripsikan diri anda', NULL, NULL),
+(4358, 'S-4', 1, 'text', '<p>soal perdana</p>', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -260,7 +334,19 @@ INSERT INTO `question_answer` (`id`, `question_id`, `type`, `answer`, `value`) V
 (68, 12, 'text', 'c', 0),
 (69, 12, 'text', 'd', 0),
 (70, 12, 'text', 'e', 0),
-(82, 19, 'short_answer', 'Soal esai', 10);
+(80, 19, 'short_answer', 'Soal Esai', 10),
+(21743, 4355, 'text', 'pilihan a', 0),
+(21744, 4355, 'text', 'pilihan b', 0),
+(21745, 4355, 'text', 'pilihan c', 0),
+(21746, 4355, 'text', 'pilihan d', 1),
+(21747, 4355, 'text', 'pilihan e', 0),
+(21748, 4356, 'short_answer', 'jawab saja sembarang', 6),
+(21749, 4357, 'essay', 'deskripsi diri', 50),
+(21750, 4358, 'text', 'ini pilihan', 0),
+(21751, 4358, 'text', 'ini juga', 0),
+(21752, 4358, 'text', 'ini lagi', 0),
+(21753, 4358, 'text', 'dan ini juga', 1),
+(21754, 4358, 'text', 'ini juga', 0);
 
 -- --------------------------------------------------------
 
@@ -282,7 +368,18 @@ CREATE TABLE `question_reference` (
 --
 
 INSERT INTO `question_reference` (`id`, `test_id`, `questionnaire_id`, `multiple_choice`, `short_answer`, `essay`) VALUES
-(3, 4, 1, 3, 1, 0);
+(3, 4, 1, 3, 1, 0),
+(4, 5, 2, 1, 1, 1),
+(5, 6, 2, 1, 1, 1),
+(6, 7, 2, 1, 1, 1),
+(7, 8, 2, 1, 1, 1),
+(8, 9, 2, 1, 1, 1),
+(9, 10, 2, 1, 1, 1),
+(10, 11, 2, 1, 1, 1),
+(11, 12, 2, 1, 1, 1),
+(12, 13, 1, 3, 1, 0),
+(13, 13, 2, 1, 1, 1),
+(14, 13, 1, 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -334,15 +431,9 @@ CREATE TABLE `solve_test` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `test_id` int(10) UNSIGNED NOT NULL,
-  `time_start` int(11) NOT NULL
+  `time_start` int(11) NOT NULL,
+  `is_break` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `solve_test`
---
-
-INSERT INTO `solve_test` (`id`, `user_id`, `test_id`, `time_start`) VALUES
-(1, 19, 4, 1578548866);
 
 -- --------------------------------------------------------
 
@@ -366,10 +457,22 @@ CREATE TABLE `student_answer` (
 --
 
 INSERT INTO `student_answer` (`id`, `user_id`, `test_id`, `question_id`, `choice`, `answer`, `skor`, `uncertain`) VALUES
-(5, 19, 4, 11, 'C', '', NULL, 1),
-(6, 19, 4, 1, 'B', '', NULL, 1),
-(7, 19, 4, 12, NULL, NULL, NULL, NULL),
-(8, 19, 4, 19, '', 'Soal esai', NULL, 0);
+(5, 19, 4, 11, 'D', '64', 0, 0),
+(6, 19, 4, 1, 'E', '5', 1, 0),
+(7, 19, 4, 12, 'C', '68', 0, 0),
+(8, 19, 4, 19, '', '<p>Jawabanku di ganti</p>', 5, 1),
+(9, 19, 5, 4355, 'C', '21745', 0, 0),
+(10, 19, 5, 4356, '', '<p>abc</p>', 0, 0),
+(11, 19, 5, 4357, '', '<p>oke gaes</p>', 0, 0),
+(12, 19, 6, 4355, 'D', '21746', 1, 0),
+(13, 19, 6, 4356, NULL, NULL, 0, NULL),
+(14, 19, 6, 4357, NULL, NULL, 0, NULL),
+(15, 19, 7, 4355, NULL, NULL, 0, NULL),
+(16, 19, 7, 4356, NULL, NULL, 0, NULL),
+(17, 19, 7, 4357, NULL, NULL, 0, NULL),
+(18, 19, 8, 4355, NULL, NULL, 0, NULL),
+(19, 19, 8, 4356, NULL, NULL, 0, NULL),
+(20, 19, 8, 4357, NULL, NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -389,7 +492,10 @@ CREATE TABLE `student_profile` (
 --
 
 INSERT INTO `student_profile` (`id`, `user_id`, `school_id`, `classroom_id`) VALUES
-(2, 19, 1, 5);
+(2, 19, 1, 5),
+(10, 24, 1, 5),
+(11, 25, 1, 5),
+(12, 26, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -408,8 +514,8 @@ CREATE TABLE `teacher_course` (
 --
 
 INSERT INTO `teacher_course` (`id`, `user_id`, `course_id`) VALUES
-(4, 18, 3),
-(5, 18, 4);
+(5, 18, 4),
+(6, 20, 3);
 
 -- --------------------------------------------------------
 
@@ -429,7 +535,8 @@ CREATE TABLE `teacher_profile` (
 --
 
 INSERT INTO `teacher_profile` (`id`, `user_id`, `school_id`, `nip`) VALUES
-(2, 18, 1, '192 168 1 1');
+(2, 18, 1, '192 168 1 2'),
+(3, 20, 1, '192 168 1 1');
 
 -- --------------------------------------------------------
 
@@ -454,7 +561,30 @@ CREATE TABLE `test` (
 --
 
 INSERT INTO `test` (`id`, `user_id`, `classroom_id`, `course_id`, `name`, `date`, `duration`, `kkm`, `max_value`) VALUES
-(4, 18, 5, 3, 'Ulangan Harian', '2020-08-05', 60, 75, 100);
+(4, 18, 5, 3, 'Ulangan Harian', '2020-08-05', 60, 75, 100),
+(5, 18, 5, 4, 'Ulangan 1', '2020-02-01', 60, 75, 100),
+(6, 18, 5, 4, 'Ulangan 2', '2020-02-01', 60, 75, 100),
+(7, 18, 5, 4, 'Ulangan 3', '2020-02-01', 60, 75, 100),
+(8, 18, 5, 4, 'Ulangan 4', '2020-02-01', 5, 75, 100),
+(9, 18, 5, 4, 'Ulangan 5', '2020-02-01', 60, 75, 100),
+(10, 18, 5, 4, 'Ulangan 6', '2020-02-01', 60, 75, 100),
+(11, 18, 5, 4, 'Ulangan 7', '2020-02-01', 60, 75, 100),
+(12, 18, 5, 4, 'Ulangan 8', '2020-02-01', 60, 75, 100),
+(13, 18, 5, 4, 'MIID TEST', '2020-02-26', 60, 75, 100);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `testimoni`
+--
+
+CREATE TABLE `testimoni` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `testimoni` text NOT NULL,
+  `image` varchar(255) DEFAULT 'default.jpg'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -466,8 +596,19 @@ CREATE TABLE `test_result` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `test_id` int(10) UNSIGNED NOT NULL,
-  `value` int(11) NOT NULL
+  `value` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `test_result`
+--
+
+INSERT INTO `test_result` (`id`, `user_id`, `test_id`, `value`) VALUES
+(2, 19, 4, 46.1538),
+(3, 19, 5, 0),
+(4, 19, 6, 1.75439),
+(5, 19, 7, 0),
+(6, 19, 8, 0);
 
 -- --------------------------------------------------------
 
@@ -503,11 +644,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `phone`, `image`, `address`) VALUES
-(1, '127.0.0.1', 'admin@fixl.com', '$2y$12$XpBgMvQ5JzfvN3PTgf/tA.XwxbCOs3mO0a10oP9/11qi1NUpv46.u', 'admin@fixl.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1578751303, 1, 'Admin', 'istrator', '081342989185', 'USER_1_1571554027.jpeg', 'admin'),
-(13, '::1', 'uadmin@gmail.com', '$2y$10$78SZyvKRKMU7nPCew9w4nOpEUmJ1SeTV4L4ZG2NXXSfbEaswqoepq', 'uadmin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1568678256, 1578583682, 1, 'admin', 'Dinas', '00', 'USER_13_1568678463.jpg', 'jln mutiara no 8'),
-(17, '::1', 'smanam@gmail.com', '$2y$10$NIx.vGJvX.a/6J1/Yha1beTeSpb8xvMr5q2mbgpcZ2/2gOMk5.KIS', 'smanam@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575916410, 1578751336, 1, 'Admin SMA', 'Negeri 6 Kendari', '081234567890', 'USER_17_1578449627.jpg', 'Jalan Banda'),
-(18, '::1', 'zidni@gmail.com', '$2y$10$554DNYTB6fzLJoaWdKsFwOSt5v88LAdqO1SlxqRB1JjTYrvT4yMky', 'zidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575919985, 1578720596, 1, 'Al Zidni', 'Kasim', '081232578168', 'USER_18_1577108725.jpg', 'BTN Graha Mandiri Permai Blok K/07'),
-(19, '::1', 'alzidni@gmail.com', '$2y$10$CpC0kMgMDYXYtag4Ba4pEe2KMzz2WKsVi4Tk.csIUi6dtrcTsO1oa', 'alzidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575920027, 1578720870, 1, 'Al Zidni', 'Kasim', '081232578167', 'USER_19_1578497304.jpg', 'BTN Graha Mandiri Permai Blok K/07');
+(1, '127.0.0.1', 'admin@fixl.com', '$2y$12$XpBgMvQ5JzfvN3PTgf/tA.XwxbCOs3mO0a10oP9/11qi1NUpv46.u', 'admin@fixl.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1581429829, 1, 'Admin', 'istrator', '081342989185', 'USER_1_1571554027.jpeg', 'admin'),
+(13, '::1', 'uadmin@gmail.com', '$2y$10$78SZyvKRKMU7nPCew9w4nOpEUmJ1SeTV4L4ZG2NXXSfbEaswqoepq', 'uadmin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1568678256, 1581399273, 1, 'admin', 'Dinas', '00', 'USER_13_1568678463.jpg', 'jln mutiara no 8'),
+(17, '::1', 'smanam@gmail.com', '$2y$10$NIx.vGJvX.a/6J1/Yha1beTeSpb8xvMr5q2mbgpcZ2/2gOMk5.KIS', 'smanam@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575916410, 1581426702, 1, 'Admin SMA', 'Negeri 6 Kendari', '081234567890', 'USER_17_1578449627.jpg', 'Jalan Banda'),
+(18, '::1', 'zidni@gmail.com', '$2y$10$554DNYTB6fzLJoaWdKsFwOSt5v88LAdqO1SlxqRB1JjTYrvT4yMky', 'zidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575919985, 1582195895, 1, 'Al Zidni', 'Kasim', '081232578168', 'USER_18_1577108725.jpg', 'BTN Graha Mandiri Permai Blok K/07'),
+(19, '::1', 'alzidni@gmail.com', '$2y$10$CpC0kMgMDYXYtag4Ba4pEe2KMzz2WKsVi4Tk.csIUi6dtrcTsO1oa', 'alzidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575920027, 1581259813, 1, 'Al Zidni', 'Kasim', '081232578167', 'USER_19_1578497304.jpg', 'BTN Graha Mandiri Permai Blok K/07'),
+(20, '::1', 'abdul_samad@gmail.com', '$2y$10$fDq9A4muW0tMHxEFTOOelergR2R0jGgsOcUV1yOY8dCNatoqhkrbq', 'abdul_samad@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578920748, 1581426876, 1, 'Abdul Samad', 'S.Pd., M.Pd', '0321241414', 'default.jpg', 'Lorong Koila Puuwatu'),
+(24, '::1', 'fiki@gmail.com', '$2y$10$zqQMQTEzCquoNaxgTUoNAOQFUOcCukdnTaqgge1YE0sjWBY04/AKq', 'fiki@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, NULL, 1, 'Muh. Fiki', 'Ramadhan', '081234567890', 'default.jpg', 'Lorong Koila'),
+(25, '::1', 'beni@gmail.com', '$2y$10$MN.fwpricYHFfD8/IZgzHuYI8yYHD4QHM4PmMRxWsbziQitZuDnk.', 'beni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, NULL, 1, 'Muh. Benni', 'Barakati', '081234567890', 'default.jpg', 'Jalan THR'),
+(26, '::1', 'sindy@gmail.com', '$2y$10$XG9D8wqpEyQwrAZmDL4D5e2Ji6yaJdQYL.8UcIhU7PiyIcDYZ5Zpi', 'sindy@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, NULL, 1, 'Sindy M.', 'Konggoasa', '081234567890', 'default.jpg', 'Jalan Konggoasa'),
+(27, '::1', 'headmaster@gmail.com', '$2y$10$KpIBh8M3Te9JAypcooL94.bEkUNMi8ghUcCmPJDLQJMCbByxQVzVi', 'headmaster@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1581400377, 1582195687, 1, 'Kepala Sekolah', 'ku', '081232578168', 'default.jpg', 'jalan');
 
 -- --------------------------------------------------------
 
@@ -529,8 +675,13 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (1, 1, 1),
 (29, 13, 2),
 (33, 17, 5),
-(34, 18, 3),
-(35, 19, 4);
+(64, 18, 3),
+(35, 19, 4),
+(36, 20, 3),
+(40, 24, 4),
+(41, 25, 4),
+(63, 26, 4),
+(68, 27, 6);
 
 --
 -- Indexes for dumped tables
@@ -542,7 +693,20 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 ALTER TABLE `classroom`
   ADD PRIMARY KEY (`id`),
   ADD KEY `classroom_ibfk_1` (`school_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `class_ladder_id` (`class_ladder_id`);
+
+--
+-- Indexes for table `class_ladder`
+--
+ALTER TABLE `class_ladder`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `courses`
@@ -562,6 +726,14 @@ ALTER TABLE `edu_ladder`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `headmaster_profile`
+--
+ALTER TABLE `headmaster_profile`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `school_id` (`school_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `login_attempts`
@@ -673,6 +845,12 @@ ALTER TABLE `test`
   ADD KEY `course_id` (`course_id`);
 
 --
+-- Indexes for table `testimoni`
+--
+ALTER TABLE `testimoni`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `test_result`
 --
 ALTER TABLE `test_result`
@@ -707,7 +885,17 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `classroom`
 --
 ALTER TABLE `classroom`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `class_ladder`
+--
+ALTER TABLE `class_ladder`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `courses`
 --
@@ -722,7 +910,12 @@ ALTER TABLE `edu_ladder`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `headmaster_profile`
+--
+ALTER TABLE `headmaster_profile`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `login_attempts`
 --
@@ -732,12 +925,12 @@ ALTER TABLE `login_attempts`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4359;
 --
 -- AUTO_INCREMENT for table `questionnaire`
 --
@@ -747,12 +940,12 @@ ALTER TABLE `questionnaire`
 -- AUTO_INCREMENT for table `question_answer`
 --
 ALTER TABLE `question_answer`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21755;
 --
 -- AUTO_INCREMENT for table `question_reference`
 --
 ALTER TABLE `question_reference`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `school`
 --
@@ -767,47 +960,52 @@ ALTER TABLE `school_admin`
 -- AUTO_INCREMENT for table `solve_test`
 --
 ALTER TABLE `solve_test`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `student_answer`
 --
 ALTER TABLE `student_answer`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `student_profile`
 --
 ALTER TABLE `student_profile`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `teacher_course`
 --
 ALTER TABLE `teacher_course`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `teacher_profile`
 --
 ALTER TABLE `teacher_profile`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `test`
 --
 ALTER TABLE `test`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT for table `testimoni`
+--
+ALTER TABLE `testimoni`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `test_result`
 --
 ALTER TABLE `test_result`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -817,13 +1015,21 @@ ALTER TABLE `users_groups`
 --
 ALTER TABLE `classroom`
   ADD CONSTRAINT `classroom_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`),
-  ADD CONSTRAINT `classroom_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `classroom_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `classroom_ibfk_3` FOREIGN KEY (`class_ladder_id`) REFERENCES `class_ladder` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `courses`
 --
 ALTER TABLE `courses`
   ADD CONSTRAINT `courses_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `headmaster_profile`
+--
+ALTER TABLE `headmaster_profile`
+  ADD CONSTRAINT `headmaster_profile_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`),
+  ADD CONSTRAINT `headmaster_profile_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `question`
