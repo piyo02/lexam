@@ -129,8 +129,9 @@ class Headmaster_profile_model extends MY_Model
       'users.image as image_file',
       'CONCAT( users.first_name, " ", users.last_name ) as user_fullname',
       'CONCAT( "'.base_url('uploads/users_photo/').'", image ) as image',
-      'school.name AS school_name'
-    ]);
+      'school.name AS school_name',
+      'groups.description  as group_name',
+      ]);
     $this->db->join(
       'users',
       'users.id = headmaster_profile.user_id',
@@ -139,6 +140,16 @@ class Headmaster_profile_model extends MY_Model
     $this->db->join(
       'school',
       'school.id = headmaster_profile.school_id',
+      'inner'
+    );
+    $this->db->join(
+      'users_groups',
+      'users_groups.user_id = users.id',
+      'inner'
+    );
+    $this->db->join(
+      'groups',
+      'groups.id = users_groups.group_id',
       'inner'
     );
     $this->db->order_by($this->table.'.id', 'asc');

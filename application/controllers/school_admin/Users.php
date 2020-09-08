@@ -19,6 +19,7 @@ class Users extends School_admin_Controller
 			'group_model',
 			'classroom_model',
 			'student_profile_model',
+			'headmaster_profile_model',
 			'courses_model',
 			'teacher_profile_model',
 			'teacher_course_model',
@@ -94,6 +95,10 @@ class Users extends School_admin_Controller
 		if($users_group == 4){
 			$table = $this->services->get_table_classroom_config( $this->current_page );
 			$table[ "rows" ] = $this->classroom_model->classrooms_by_school_id(0, null, $this->school_id)->result();
+		}
+		if($users_group == 6){
+			$table = $this->services->get_table_config( $this->current_page );
+			$table[ "rows" ] = $this->headmaster_profile_model->headmasters( $this->school_id )->result();
 		}
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
