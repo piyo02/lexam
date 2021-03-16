@@ -696,6 +696,11 @@ class Users extends School_admin_Controller
 				'teacher_profile_model',
 				'questionnaire_model',
 			);
+		
+			$data['user_id'] = NULL;
+			$data_param = $this->classroom_model->classroom_by_user_id( $id_user )->row();
+		
+			$this->classroom_model->update( $data, $data_param );
 		}
 		if($group_id == 4){
 			$models = array(
@@ -707,6 +712,12 @@ class Users extends School_admin_Controller
 		if( $this->ion_auth->delete_user( $id_user, $models ) ){
 			$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->ion_auth->messages() ) );
 		}else{
+			if($group_id == 3 ){
+				$data['user_id'] = $id_user;
+				$data_param = $this->classroom_model->classroom( $data_param['id'] )->row();
+			
+				$this->classroom_model->update( $data, $data_param );
+			}
 			$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->ion_auth->errors() ) );
 		}
 		redirect( site_url( $this->current_page  )  );

@@ -10,7 +10,7 @@
                 echo $this->session->flashdata('alert');
             } ?>
             <?php echo form_open(""); ?>
-            <label class="col-md-7" for="nama_lengkap">Email: </label>
+            <label class="col-md-7" for="identity">Email: </label>
             <div class="input-group mb-3">
                 <input type="text" class="form-control" name="identity" id="identity" placeholder="Email">
                 <div class="input-group-append">
@@ -20,10 +20,10 @@
                 </div>
             </div>
             <div class="row">
-                <label class="col-md-7" for="nama_lengkap">Password: </label>
-                <p class="mb-1 col-md-5">
+                <label class="col-md-7" for="user_password">Password: </label>
+                <!-- <p class="mb-1 col-md-5">
                     <a href="#">Lupa password?</a>
-                </p>
+                </p> -->
             </div>
             <div class="input-group mb-3">
                 <input type="password" class="form-control" name="user_password" id="user_password" placeholder="password">
@@ -34,7 +34,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-8"></div>
+                <div class="col-8">
+                    <div class="">
+                        <input type="checkbox" id="remember_me" name="remember_me">
+                        <label for="remember_me">
+                            Remember Me
+                        </label>
+                    </div>
+                </div>
                 <div class="col-4">
                     <button type="submit" class="btn btn-primary btn-block">Login</button>
                 </div>

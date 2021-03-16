@@ -16,6 +16,7 @@ class Home extends Public_Controller {
 	}
 	public function index()
 	{
+		redirect( site_url('auth/login') );
 		// TODO : tampilkan landing page bagi user yang belum daftar
 		$this->data['schools'] = $this->school_model->record_count();
 		$this->data['tests'] = $this->test_model->record_count();

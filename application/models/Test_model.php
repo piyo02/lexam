@@ -115,8 +115,11 @@ class Test_model extends MY_Model
 
       return $this;
   }
-  public function test_by_classroom_id( $classroom_id = NULL, $school_id = NULL, $start = 0, $limit = NULL  )
+  public function test_by_classroom_id( $classroom_id = NULL, $school_id = NULL, $student_id = NULL, $start = 0, $limit = NULL  )
   {
+    if($student_id){
+      $this->select("(SELECT value FROM test_result WHERE test_result.test_id = test.id AND test_result.user_id = $student_id) result_student");
+    }
       if (isset($classroom_id))
       {
         $this->where($this->table.'.classroom_id', $classroom_id);
@@ -129,12 +132,12 @@ class Test_model extends MY_Model
         'teacher_profile.user_id = test.user_id',
         'inner'
       );
-      $this->join(
-        'test_result',
-        'test_result.test_id = test.id',
-        'left'
-      );
-      $this->where('test_result.value IS NULL');
+      // $this->join(
+      //   'test_result',
+      //   'test_result.test_id = test.id',
+      //   'left'
+      // );
+      // $this->where('test_result.value IS NULL');
       $this->order_by($this->table.'.id', 'desc');
 
       $this->tests( $start, $limit );

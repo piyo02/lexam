@@ -919,6 +919,7 @@ class Ion_auth_model extends MY_Model
 
 		$query = $this->db->select( $this->identity_column . ', email, id, password, active, last_login, first_name, last_name, CONCAT( "'.base_url('uploads/users_photo/').'", image ) as image')
 						  ->where($this->identity_column, $identity)
+						//   ->where('is_login', '0')
 						  ->limit(1)
 						  ->order_by('id', 'desc')
 						  ->get($this->tables['users']);

@@ -169,6 +169,7 @@ class Test_result_model extends MY_Model
       'users.id = test_result.user_id',
       'inner'
     );
+    $this->db->where('test_result.user_id', $student_id);
     return $this->db->get();
   }
   public function test_result_by_teacher_id( $teacher_id = NULL  )

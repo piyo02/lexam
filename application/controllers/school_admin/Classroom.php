@@ -96,6 +96,7 @@ class Classroom extends School_admin_Controller {
         if ($this->form_validation->run() === TRUE )
         {
 			$data['school_id'] = $this->input->post( 'school_id' );
+			$data['class_ladder_id'] = $this->input->post( 'class_ladder_id' );
 			$data['name'] = $this->input->post( 'name' );
 			$data['description'] = $this->input->post( 'description' );
 

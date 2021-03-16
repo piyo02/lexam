@@ -197,8 +197,9 @@
 <script>
   function uncertain(number) {
     var student_answer = $('input:radio[name=answer]:checked').val();
-    if (student_answer == undefined)
-        var student_answer = CKEDITOR.instances['editor'].getData();
+    if (student_answer == undefined && CKEDITOR.instances['editor'] !== undefined){
+      var student_answer = CKEDITOR.instances['editor'].getData();
+    }
     if (student_answer != undefined && student_answer != '') {
         var id = $('#question_id').val();
         var type_option = $('#type_option').val();
@@ -262,6 +263,7 @@
 
 <!-- script timer -->
 <script>
+  console.log('timer')
   $(document).ready(function() {
     var seconds = <?php echo $seconds; ?>;
     var minutes = <?php echo $minutes; ?>;
@@ -299,20 +301,8 @@
             type: 'POST',
             url: '<?= base_url('student/test/is_break') ?>',
             success: function(data) {
-              console.log(data)
                 if (data == 1) {
-                  $.ajax({
-                      type: 'POST', //method
-                      url: '<?= base_url('student/test/break') ?>', //action
-                      data: {
-                        break: 1,
-                      }, //data yang dikrim ke action $_POST['id']
-                      dataType: 'json',
-                      async: false,
-                      success: function(data) {
-                        document.location.href = <?= site_url('student/test/break') ?>
-                      }
-                  });
+                  document.location.href = "<?= site_url('student/test/break') ?>"
                 }
             }
         })
@@ -339,7 +329,7 @@
             dataType: 'json',
             async: false,
             success: function(data) {
-              document.location.href = <?= site_url('student/test/break') ?>
+              document.location.href = "<?= site_url('student/test/break') ?>"
             }
           });
         }

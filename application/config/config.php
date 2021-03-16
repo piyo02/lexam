@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/lexam/';
+$config['base_url'] = 'http://192.168.1.134/lexam/';
 // $config['base_url'] = 'https://lexam.akar-z.com/';
 
 /*

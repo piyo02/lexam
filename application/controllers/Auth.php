@@ -7,8 +7,8 @@ class Auth extends Public_Controller
                 parent::__construct();
                 $this->load->library( array( 'form_validation' ) ); 
                 $this->load->helper('form');
-                $this->config->load('ion_auth', TRUE);
                 $this->load->helper(array('url', 'language'));
+                $this->config->load('ion_auth', TRUE);
                 $this->lang->load('auth');
         }
 
@@ -23,7 +23,7 @@ class Auth extends Public_Controller
                         // echo $this->input->post('user_password');
                         $identity_mode = ( is_numeric( $this->input->post('identity') ) ) ? "phone" : NULL;
                         // return;
-                        if ( $this->ion_auth->login( $this->input->post('identity'), $this->input->post('user_password') , FALSE, $identity_mode  ))
+                        if ( $this->ion_auth->login( $this->input->post('identity'), $this->input->post('user_password'), $this->input->post('remember_me'), $identity_mode  ))
                         {
                                 //if the login is successful
                                 //redirect them back to the home page
@@ -52,6 +52,22 @@ class Auth extends Public_Controller
                                 redirect('auth/login', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
                         }
                 }else{
+                        $user_remember = $this->ion_auth->login_remembered_user();
+                        if( $user_remember ){
+                                $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->ion_auth->messages() ) );
+
+                                // echo $this->ion_auth->messages();return;
+
+                                if( $this->ion_auth->is_admin()) redirect(site_url('/admin'));
+
+                                if( $this->ion_auth->in_group( 'uadmin' ) ) redirect(site_url('/uadmin'));
+                                if( $this->ion_auth->in_group( 'school_admin' ) ) redirect(site_url('/school_admin'));
+                                if( $this->ion_auth->in_group( 'teacher' ) ) redirect(site_url('/teacher'));
+                                if( $this->ion_auth->in_group( 'student' ) ) redirect(site_url('/student/test'));
+                                if( $this->ion_auth->in_group( 'headmaster' ) ) redirect(site_url('/headmaster/student'));
+
+                                redirect( site_url('/user') , 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+                        }
                         $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
                         if(  validation_errors() || $this->ion_auth->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
                         $this->render( "V_login_page" );

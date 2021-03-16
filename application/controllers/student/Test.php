@@ -43,7 +43,7 @@ class Test extends Student_Controller {
 
 		#################################################################3
 		$table = $this->services->get_table_config( $this->current_page );
-		$table[ "rows" ] = $this->test_model->test_by_classroom_id( $student->classroom_id, $student->school_id, $pagination['start_record'], $pagination['limit_per_page'] )->result();
+		$table[ "rows" ] = $this->test_model->test_by_classroom_id( $student->classroom_id, $student->school_id, $this->user_id, $pagination['start_record'], $pagination['limit_per_page'] )->result();
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
 		
@@ -162,7 +162,6 @@ class Test extends Student_Controller {
 		$this->data["number"] = $number;
 		// $this->data["total_questions"] = $total_questions;
 		$this->data["questions"] = $questions;
-		// var_dump($questions); die;
 		$this->data[ "lists_question" ] = $lists_question;
 		$this->render( "student/solve", 'test_master' );
 		
@@ -317,14 +316,18 @@ class Test extends Student_Controller {
 
 	public function break()
 	{
-		$this->form_validation->set_rules( 'break', 'Diberhentikan', 'required' );
-        if ($this->form_validation->run() === TRUE )
+		// $this->form_validation->set_rules( 'break', 'Diberhentikan', 'required' );
+        // if ($this->form_validation->run() === TRUE )
+		if ($_POST )
         {
-			$data['user_id'] = $this->user_id;
-			$data['course_id'] = $this->input->post( 'course_id' );
+			echo json_encode("break");
+			// echo json_encode($this->user_id);
+			// $data_param['user_id'] = $this->user_id;
+			// $data_param['test_id'] = $_POST['id'];
+			// $data['is_break'] = 1;
 
-			$this->teacher_course_model->create( $data );
-			redirect('student/test/break');
+			// $this->solve_test_model->update( $data, $data_param );
+			// redirect('student/test/break');
 		}
         else
         {

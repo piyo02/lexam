@@ -171,7 +171,6 @@ class MY_Model extends CI_Model {
 			$this->db->select('*');
 			$this->db->where("EXISTS(SELECT * FROM " . $table . " WHERE " . $this->join_key . "=" . $data_param['id'] . ")");
 			$data = $this->db->get($table);
-
 			if($data)
 				return FALSE;
 		}

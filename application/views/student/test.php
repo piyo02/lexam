@@ -44,22 +44,24 @@
                       </div>
                       <div class="col-lg-2">
                       <?php
-                        $add_menu = array(
-                          "name" => "Kerjakan",
-                          "modal_id" => "solve_test_" . $row->id,
-                          "button_color" => "success",
-                          "url" => site_url( $current_page . "solve/"),
-                          "messages" => 'Apakah anda yakin ingin mengerjakan ' . $row->name . ' ?',
-                          "form_data" => array(
-                            "id" => array(
-                              'type' => 'hidden',
-                              'label' => "Test Id",
-                              'value' => $row->id
+                        if($row->result_student == NULL){
+                          $add_menu = array(
+                            "name" => "Kerjakan",
+                            "modal_id" => "solve_test_" . $row->id,
+                            "button_color" => "success",
+                            "url" => site_url( $current_page . "solve/"),
+                            "messages" => 'Apakah anda yakin ingin mengerjakan ' . $row->name . ' ?',
+                            "form_data" => array(
+                              "id" => array(
+                                'type' => 'hidden',
+                                'label' => "Test Id",
+                                'value' => $row->id
+                              ),
                             ),
-                          ),
-                          'data' => NULL
-                        );
-                        echo $this->load->view('templates/actions/modal_form_messages', $add_menu, true ); 
+                            'data' => NULL
+                          );
+                          echo $this->load->view('templates/actions/modal_form_messages', $add_menu, true ); 
+                        }
                       ?>
                       </div>
                     </div>

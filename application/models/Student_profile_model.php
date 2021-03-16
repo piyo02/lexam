@@ -168,6 +168,7 @@ class Student_profile_model extends MY_Model
       'users.image as image_file',
       'CONCAT( users.first_name, " ", users.last_name ) as user_fullname',
       'CONCAT( "'.base_url('uploads/users_photo/').'", image ) as image',
+      '(SELECT group_id FROM users_groups WHERE user_id = student_profile.user_id ) group_id'
     ]);
     if (isset( $limit ))
     {
