@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.6.6deb5ubuntu0.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 21 Feb 2020 pada 16.16
--- Versi Server: 5.7.29-0ubuntu0.18.04.1
--- PHP Version: 7.2.24-0ubuntu0.18.04.2
+-- Generation Time: 16 Mar 2021 pada 16.47
+-- Versi Server: 5.7.33-0ubuntu0.18.04.1
+-- PHP Version: 7.2.24-0ubuntu0.18.04.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -40,11 +40,11 @@ CREATE TABLE `classroom` (
 --
 
 INSERT INTO `classroom` (`id`, `school_id`, `user_id`, `class_ladder_id`, `name`, `description`) VALUES
-(1, 1, 18, 4, 'X IPA 1', 'Kelas 10'),
+(1, 1, NULL, 4, 'X IPA 1', 'Kelas 10'),
 (2, 1, NULL, 5, 'X IPS 1', 'Kelas 10'),
 (3, 1, NULL, 6, 'XI IPA 1', 'Kelas 11'),
 (4, 1, NULL, 7, 'XI IPS 1', 'Kelas 11'),
-(5, 1, 20, 8, 'XII IPA 1', 'Kelas 12');
+(5, 1, NULL, 8, 'XII IPA 1', 'Kelas 12');
 
 -- --------------------------------------------------------
 
@@ -191,6 +191,15 @@ CREATE TABLE `login_attempts` (
   `time` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data untuk tabel `login_attempts`
+--
+
+INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
+(3, '192.168.1.191', 'farisadnanadrian072@gmail.com', 1615881497),
+(4, '192.168.1.191', 'farisadnanadrian072@gmail.com', 1615881517),
+(5, '192.168.1.191', 'farisadnanadrian072@gmail.com', 1615881535);
+
 -- --------------------------------------------------------
 
 --
@@ -243,7 +252,7 @@ INSERT INTO `menus` (`id`, `menu_id`, `name`, `link`, `list_id`, `icon`, `status
 (131, 2, 'Jenjang Kelas', 'uadmin/class_ladder', 'class_ladder_index', 'home', 1, 1, '-'),
 (132, 6, 'Siswa', 'headmaster/student', 'student_index', 'home', 1, 1, '-'),
 (133, 6, 'Guru', 'headmaster/teacher', 'teacher_index', 'home', 1, 1, '-'),
-(134, 6, 'Pemeringkatan', 'headmaster/ranking', 'ranking_index', 'home', 1, 1, '-'),
+(134, 6, 'Pemeringkatan', 'headmaster/ranking', 'ranking_index', 'home', 0, 1, '-'),
 (135, 2, 'Kepala Sekolah', 'uadmin/headmaster', 'headmaster_index', 'home', 1, 1, '-');
 
 -- --------------------------------------------------------
@@ -274,7 +283,12 @@ INSERT INTO `question` (`id`, `code`, `questionnaire_id`, `type`, `text`, `image
 (4355, 'S-1', 2, 'text', 'soal pilihan ganda', NULL, NULL),
 (4356, 'S-2', 2, 'text', 'soal isian singkat', NULL, NULL),
 (4357, 'S-3', 2, 'text', 'deskripsikan diri anda', NULL, NULL),
-(4358, 'S-4', 1, 'text', '<p>soal perdana</p>', NULL, NULL);
+(4358, 'S-4', 1, 'text', '<p>soal perdana</p>', NULL, NULL),
+(4359, 'S-5', 3, 'text', '<p>Soal Mudah</p>', NULL, NULL),
+(4362, 'S-6', 1, 'image', '<p>Sebuah balok kecil mempunyai dimensi panjang , lebar dan tinggi seperti yang ditunjukkan oleh jangka sorong seperti di bawah ini. Volume dari balok tersebut adalah ....</p>', 'S-6_1615882724_soal-3.png', NULL),
+(4363, 'S-7', 5, 'image', '<p>Sebuah balok kecil mempunyai dimensi panjang , lebar dan tinggi seperti yang ditunjukkan oleh jangka sorong seperti di bawah ini. Volume dari balok tersebut adalah ....</p>', 'S-7_1615883392_soal-3.png', NULL),
+(4364, 'S-8', 5, 'image', '<p>Gambar berikut adalah pengukuran massa benda dengan menggunakan neraca Ohauss lengan tiga. Hasil pengukuran massa yang benar adalah.....</p>', 'S-8_1615883474_soal4.png', NULL),
+(4365, 'S-9', 5, 'text', 'The bills are folded in an origami style in a_______', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -298,7 +312,13 @@ CREATE TABLE `questionnaire` (
 
 INSERT INTO `questionnaire` (`id`, `user_id`, `classroom_id`, `course_id`, `name`, `description`, `status`) VALUES
 (1, 18, 5, 3, 'Bank Soal Matematika Kelas XII IPA 1', 'Materi Algoritma', 1),
-(2, 18, 5, 4, 'Bank Soal Biologi Kelas XII IPA 1', 'Bank Soal Mid', 1);
+(2, 18, 5, 4, 'Bank Soal Biologi Kelas XII IPA 1', 'Bank Soal Mid', 1),
+(3, 20, 2, 3, 'Bank Soal Matematika Kelas X IPS 1', '-', 1),
+(4, 18, 1, 4, 'Bank Soal Biologi', '-', 1),
+(5, 18, 5, 4, 'Paket 1', '-', 0),
+(6, 18, 5, 4, 'Paket 2', '-', 0),
+(7, 18, 5, 4, 'P1', '-', 0),
+(8, 18, 5, 4, 'Paket 3', '-', 0);
 
 -- --------------------------------------------------------
 
@@ -329,11 +349,6 @@ INSERT INTO `question_answer` (`id`, `question_id`, `type`, `answer`, `value`) V
 (63, 11, 'text', 'c', 1),
 (64, 11, 'text', 'd', 0),
 (65, 11, 'text', 'r', 0),
-(66, 12, 'text', 'a', 0),
-(67, 12, 'text', 'b', 1),
-(68, 12, 'text', 'c', 0),
-(69, 12, 'text', 'd', 0),
-(70, 12, 'text', 'e', 0),
 (80, 19, 'short_answer', 'Soal Esai', 10),
 (21743, 4355, 'text', 'pilihan a', 0),
 (21744, 4355, 'text', 'pilihan b', 0),
@@ -346,7 +361,32 @@ INSERT INTO `question_answer` (`id`, `question_id`, `type`, `answer`, `value`) V
 (21751, 4358, 'text', 'ini juga', 0),
 (21752, 4358, 'text', 'ini lagi', 0),
 (21753, 4358, 'text', 'dan ini juga', 1),
-(21754, 4358, 'text', 'ini juga', 0);
+(21754, 4358, 'text', 'ini juga', 0),
+(21755, 4359, 'text', 'A', 0),
+(21756, 4359, 'text', 'B', 0),
+(21757, 4359, 'text', 'C', 0),
+(21758, 4359, 'text', 'D', 1),
+(21759, 4359, 'text', 'E', 0),
+(21770, 4362, 'text', '43,1 cm3', 0),
+(21771, 4362, 'text', '43,2 cm3', 1),
+(21772, 4362, 'text', '43,3 cm3', 0),
+(21773, 4362, 'text', '43,4 cm3', 0),
+(21774, 4362, 'text', '43,5 cm3', 0),
+(21775, 4363, 'text', '43,1 cm3 ', 1),
+(21776, 4363, 'text', '43,2 cm3 ', 0),
+(21777, 4363, 'text', '43,3 cm3 ', 0),
+(21778, 4363, 'text', '43,4 cm3 ', 0),
+(21779, 4363, 'text', '43,5 cm3 ', 0),
+(21780, 4364, 'text', '350 gram ', 0),
+(21781, 4364, 'text', '321,5 gram', 0),
+(21782, 4364, 'text', '240 gram', 1),
+(21783, 4364, 'text', '173 gram', 0),
+(21784, 4364, 'text', '170,3 gram ', 0),
+(21785, 4365, 'text', 'there-dimensionals frame', 0),
+(21786, 4365, 'text', 'Three-Dimensional frame', 1),
+(21787, 4365, 'text', 'Three-Dimensional frame', 0),
+(21788, 4365, 'text', 'Three-frames dimensional', 0),
+(21789, 4365, 'text', 'Three-frames dimensional', 0);
 
 -- --------------------------------------------------------
 
@@ -379,7 +419,8 @@ INSERT INTO `question_reference` (`id`, `test_id`, `questionnaire_id`, `multiple
 (11, 12, 2, 1, 1, 1),
 (12, 13, 1, 3, 1, 0),
 (13, 13, 2, 1, 1, 1),
-(14, 13, 1, 2, 0, 0);
+(14, 13, 1, 2, 0, 0),
+(15, 14, 5, 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -435,6 +476,14 @@ CREATE TABLE `solve_test` (
   `is_break` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `solve_test`
+--
+
+INSERT INTO `solve_test` (`id`, `user_id`, `test_id`, `time_start`, `is_break`) VALUES
+(3, 19, 12, 1615277079, 0),
+(5, 26, 4, 1615780454, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -472,7 +521,38 @@ INSERT INTO `student_answer` (`id`, `user_id`, `test_id`, `question_id`, `choice
 (17, 19, 7, 4357, NULL, NULL, 0, NULL),
 (18, 19, 8, 4355, NULL, NULL, 0, NULL),
 (19, 19, 8, 4356, NULL, NULL, 0, NULL),
-(20, 19, 8, 4357, NULL, NULL, 0, NULL);
+(20, 19, 8, 4357, NULL, NULL, 0, NULL),
+(30, 19, 9, 4355, NULL, NULL, 0, NULL),
+(31, 19, 9, 4356, NULL, NULL, 0, NULL),
+(32, 19, 9, 4357, NULL, NULL, 0, NULL),
+(33, 19, 10, 4355, 'A', '21743', 0, 0),
+(34, 19, 10, 4356, NULL, NULL, 0, NULL),
+(35, 19, 10, 4357, NULL, NULL, 0, NULL),
+(36, 19, 11, 4355, NULL, NULL, 0, NULL),
+(37, 19, 11, 4356, NULL, NULL, 0, NULL),
+(38, 19, 11, 4357, NULL, NULL, 0, NULL),
+(39, 19, 12, 4355, 'C', '21745', NULL, 1),
+(40, 19, 12, 4356, NULL, NULL, NULL, NULL),
+(41, 19, 12, 4357, NULL, NULL, NULL, NULL),
+(42, 26, 13, 12, NULL, NULL, 0, NULL),
+(43, 26, 13, 4358, 'A', '21750', 0, 0),
+(44, 26, 13, 11, NULL, NULL, 0, NULL),
+(45, 26, 13, 1, NULL, NULL, 0, NULL),
+(46, 26, 13, 4355, NULL, NULL, 0, NULL),
+(47, 26, 13, 11, NULL, NULL, 0, NULL),
+(48, 26, 13, 1, NULL, NULL, 0, NULL),
+(49, 26, 13, 4358, 'A', '21750', 0, 0),
+(50, 26, 13, 12, NULL, NULL, 0, NULL),
+(51, 26, 13, 19, NULL, NULL, 0, NULL),
+(52, 26, 13, 4356, NULL, NULL, 0, NULL),
+(53, 26, 13, 19, NULL, NULL, 0, NULL),
+(54, 26, 13, 4357, '', '<p>sdfsldf</p>', 0, 0),
+(55, 26, 4, 12, NULL, NULL, NULL, NULL),
+(56, 26, 4, 4358, NULL, NULL, NULL, NULL),
+(57, 26, 4, 11, NULL, NULL, NULL, NULL),
+(58, 26, 4, 19, NULL, NULL, NULL, NULL),
+(59, 19, 14, 4364, 'A', '21780', 0, 1),
+(60, 19, 14, 4363, 'C', '21777', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -495,7 +575,8 @@ INSERT INTO `student_profile` (`id`, `user_id`, `school_id`, `classroom_id`) VAL
 (2, 19, 1, 5),
 (10, 24, 1, 5),
 (11, 25, 1, 5),
-(12, 26, 1, 5);
+(12, 26, 1, 5),
+(13, 29, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -570,7 +651,8 @@ INSERT INTO `test` (`id`, `user_id`, `classroom_id`, `course_id`, `name`, `date`
 (10, 18, 5, 4, 'Ulangan 6', '2020-02-01', 60, 75, 100),
 (11, 18, 5, 4, 'Ulangan 7', '2020-02-01', 60, 75, 100),
 (12, 18, 5, 4, 'Ulangan 8', '2020-02-01', 60, 75, 100),
-(13, 18, 5, 4, 'MIID TEST', '2020-02-26', 60, 75, 100);
+(13, 18, 5, 4, 'MIID TEST', '2020-02-26', 60, 75, 100),
+(14, 18, 5, 4, 'Ulangan Fisika', '2021-03-16', 5, 75, 100);
 
 -- --------------------------------------------------------
 
@@ -608,7 +690,12 @@ INSERT INTO `test_result` (`id`, `user_id`, `test_id`, `value`) VALUES
 (3, 19, 5, 0),
 (4, 19, 6, 1.75439),
 (5, 19, 7, 0),
-(6, 19, 8, 0);
+(6, 19, 8, 0),
+(10, 19, 9, 0),
+(11, 19, 10, 0),
+(12, 19, 11, 0),
+(13, 26, 13, 0),
+(14, 19, 14, 0);
 
 -- --------------------------------------------------------
 
@@ -631,6 +718,7 @@ CREATE TABLE `users` (
   `remember_code` varchar(255) DEFAULT NULL,
   `created_on` int(11) UNSIGNED NOT NULL,
   `last_login` int(11) UNSIGNED DEFAULT NULL,
+  `is_login` int(11) NOT NULL DEFAULT '0',
   `active` tinyint(1) UNSIGNED DEFAULT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
@@ -643,17 +731,18 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `phone`, `image`, `address`) VALUES
-(1, '127.0.0.1', 'admin@fixl.com', '$2y$12$XpBgMvQ5JzfvN3PTgf/tA.XwxbCOs3mO0a10oP9/11qi1NUpv46.u', 'admin@fixl.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1581429829, 1, 'Admin', 'istrator', '081342989185', 'USER_1_1571554027.jpeg', 'admin'),
-(13, '::1', 'uadmin@gmail.com', '$2y$10$78SZyvKRKMU7nPCew9w4nOpEUmJ1SeTV4L4ZG2NXXSfbEaswqoepq', 'uadmin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1568678256, 1581399273, 1, 'admin', 'Dinas', '00', 'USER_13_1568678463.jpg', 'jln mutiara no 8'),
-(17, '::1', 'smanam@gmail.com', '$2y$10$NIx.vGJvX.a/6J1/Yha1beTeSpb8xvMr5q2mbgpcZ2/2gOMk5.KIS', 'smanam@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575916410, 1581426702, 1, 'Admin SMA', 'Negeri 6 Kendari', '081234567890', 'USER_17_1578449627.jpg', 'Jalan Banda'),
-(18, '::1', 'zidni@gmail.com', '$2y$10$554DNYTB6fzLJoaWdKsFwOSt5v88LAdqO1SlxqRB1JjTYrvT4yMky', 'zidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575919985, 1582195895, 1, 'Al Zidni', 'Kasim', '081232578168', 'USER_18_1577108725.jpg', 'BTN Graha Mandiri Permai Blok K/07'),
-(19, '::1', 'alzidni@gmail.com', '$2y$10$CpC0kMgMDYXYtag4Ba4pEe2KMzz2WKsVi4Tk.csIUi6dtrcTsO1oa', 'alzidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575920027, 1581259813, 1, 'Al Zidni', 'Kasim', '081232578167', 'USER_19_1578497304.jpg', 'BTN Graha Mandiri Permai Blok K/07'),
-(20, '::1', 'abdul_samad@gmail.com', '$2y$10$fDq9A4muW0tMHxEFTOOelergR2R0jGgsOcUV1yOY8dCNatoqhkrbq', 'abdul_samad@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578920748, 1581426876, 1, 'Abdul Samad', 'S.Pd., M.Pd', '0321241414', 'default.jpg', 'Lorong Koila Puuwatu'),
-(24, '::1', 'fiki@gmail.com', '$2y$10$zqQMQTEzCquoNaxgTUoNAOQFUOcCukdnTaqgge1YE0sjWBY04/AKq', 'fiki@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, NULL, 1, 'Muh. Fiki', 'Ramadhan', '081234567890', 'default.jpg', 'Lorong Koila'),
-(25, '::1', 'beni@gmail.com', '$2y$10$MN.fwpricYHFfD8/IZgzHuYI8yYHD4QHM4PmMRxWsbziQitZuDnk.', 'beni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, NULL, 1, 'Muh. Benni', 'Barakati', '081234567890', 'default.jpg', 'Jalan THR'),
-(26, '::1', 'sindy@gmail.com', '$2y$10$XG9D8wqpEyQwrAZmDL4D5e2Ji6yaJdQYL.8UcIhU7PiyIcDYZ5Zpi', 'sindy@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, NULL, 1, 'Sindy M.', 'Konggoasa', '081234567890', 'default.jpg', 'Jalan Konggoasa'),
-(27, '::1', 'headmaster@gmail.com', '$2y$10$KpIBh8M3Te9JAypcooL94.bEkUNMi8ghUcCmPJDLQJMCbByxQVzVi', 'headmaster@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1581400377, 1582195687, 1, 'Kepala Sekolah', 'ku', '081232578168', 'default.jpg', 'jalan');
+INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `is_login`, `active`, `first_name`, `last_name`, `phone`, `image`, `address`) VALUES
+(1, '127.0.0.1', 'admin@fixl.com', '$2y$12$XpBgMvQ5JzfvN3PTgf/tA.XwxbCOs3mO0a10oP9/11qi1NUpv46.u', 'admin@fixl.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1615871695, 0, 1, 'Admin', 'istrator', '081232578168', 'USER_1_1614003280.png', 'admin'),
+(13, '::1', 'uadmin@gmail.com', '$2y$10$78SZyvKRKMU7nPCew9w4nOpEUmJ1SeTV4L4ZG2NXXSfbEaswqoepq', 'uadmin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1568678256, 1615780755, 0, 1, 'admin', 'Dinas', '00', 'USER_13_1568678463.jpg', 'jln mutiara no 8'),
+(17, '::1', 'smanam@gmail.com', '$2y$10$NIx.vGJvX.a/6J1/Yha1beTeSpb8xvMr5q2mbgpcZ2/2gOMk5.KIS', 'smanam@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575916410, 1615884111, 0, 1, 'Admin SMA', 'Negeri 6 Kendari', '081234567890', 'USER_17_1578449627.jpg', 'Jalan Banda'),
+(18, '::1', 'zidni@gmail.com', '$2y$10$554DNYTB6fzLJoaWdKsFwOSt5v88LAdqO1SlxqRB1JjTYrvT4yMky', 'zidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575919985, 1615884433, 0, 1, 'Al Zidni', 'Kasim', '081232578168', 'USER_18_1577108725.jpg', 'BTN Graha Mandiri Permai Blok K/07'),
+(19, '::1', 'alzidni@gmail.com', '$2y$10$CpC0kMgMDYXYtag4Ba4pEe2KMzz2WKsVi4Tk.csIUi6dtrcTsO1oa', 'alzidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575920027, 1615883681, 0, 1, 'Al Zidni', 'Kasim', '081232578167', 'USER_19_1615873888.png', 'BTN Graha Mandiri Permai Blok K/07'),
+(20, '::1', 'abdul_samad@gmail.com', '$2y$10$fDq9A4muW0tMHxEFTOOelergR2R0jGgsOcUV1yOY8dCNatoqhkrbq', 'abdul_samad@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578920748, 1615780235, 0, 1, 'Abdul Samad', 'S.Pd., M.Pd', '0321241414', 'default.jpg', 'Lorong Koila Puuwatu'),
+(24, '::1', 'fiki@gmail.com', '$2y$10$zqQMQTEzCquoNaxgTUoNAOQFUOcCukdnTaqgge1YE0sjWBY04/AKq', 'fiki@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, NULL, 0, 1, 'Muh. Fiki', 'Ramadhan', '081234567890', 'default.jpg', 'Lorong Koila'),
+(25, '::1', 'beni@gmail.com', '$2y$10$MN.fwpricYHFfD8/IZgzHuYI8yYHD4QHM4PmMRxWsbziQitZuDnk.', 'beni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, NULL, 0, 1, 'Muh. Benni', 'Barakati', '081234567890', 'default.jpg', 'Jalan THR'),
+(26, '::1', 'sindy@gmail.com', '$2y$10$I1JsK.p19F9j/vMmvBx40OCfeI5kmbO2Ltpi8HxYFGL370bd6rrdC', 'sindy@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, 1615780363, 0, 1, 'Sindy M.', 'Konggoasa', '081234567890', 'default.jpg', 'Jalan Konggoasa'),
+(27, '::1', 'headmaster@gmail.com', '$2y$10$KpIBh8M3Te9JAypcooL94.bEkUNMi8ghUcCmPJDLQJMCbByxQVzVi', 'headmaster@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1581400377, 1615230938, 0, 1, 'Kepala Sekolah', 'ku', '081232578168', 'default.jpg', 'jalan'),
+(29, '127.0.0.1', 'kharismayunitra@gmail.com', '$2y$10$j3fM.dzpMXtY9rT9As1x/OaufsF8IgN3FFlIff0pNvcdX8ODmQvpq', 'kharismayunitra@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1615230796, 1615230853, 0, 1, 'Kharisma', 'Yunitra', '081232678168', 'default.jpg', 'Lorong Manggis');
 
 -- --------------------------------------------------------
 
@@ -680,8 +769,9 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (36, 20, 3),
 (40, 24, 4),
 (41, 25, 4),
-(63, 26, 4),
-(68, 27, 6);
+(73, 26, 4),
+(70, 27, 6),
+(72, 29, 4);
 
 --
 -- Indexes for dumped tables
@@ -920,7 +1010,7 @@ ALTER TABLE `headmaster_profile`
 -- AUTO_INCREMENT for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `menus`
 --
@@ -930,22 +1020,22 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4359;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4366;
 --
 -- AUTO_INCREMENT for table `questionnaire`
 --
 ALTER TABLE `questionnaire`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `question_answer`
 --
 ALTER TABLE `question_answer`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21755;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21790;
 --
 -- AUTO_INCREMENT for table `question_reference`
 --
 ALTER TABLE `question_reference`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `school`
 --
@@ -960,32 +1050,32 @@ ALTER TABLE `school_admin`
 -- AUTO_INCREMENT for table `solve_test`
 --
 ALTER TABLE `solve_test`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `student_answer`
 --
 ALTER TABLE `student_answer`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT for table `student_profile`
 --
 ALTER TABLE `student_profile`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `teacher_course`
 --
 ALTER TABLE `teacher_course`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `teacher_profile`
 --
 ALTER TABLE `teacher_profile`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `test`
 --
 ALTER TABLE `test`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `testimoni`
 --
@@ -995,17 +1085,17 @@ ALTER TABLE `testimoni`
 -- AUTO_INCREMENT for table `test_result`
 --
 ALTER TABLE `test_result`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
