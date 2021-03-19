@@ -231,7 +231,7 @@
   function next(number) {
     var uncertain = $('#uncertain').val();
     var student_answer = $('input:radio[name=answer]:checked').val();
-    if (student_answer == undefined)
+    if (student_answer == undefined && CKEDITOR.instances['editor'])
         var student_answer = CKEDITOR.instances['editor'].getData();
     if (student_answer != undefined && student_answer != '' && uncertain != '1') {
         var id = $('#question_id').val();

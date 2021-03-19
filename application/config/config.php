@@ -24,8 +24,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'https://5b271d53e889.ngrok.io/lexam/';
-$config['base_url'] = 'http://192.168.1.129/lexam/';
-// $config['base_url'] = 'http://localhost/lexam/';
+// $config['base_url'] = 'http://192.168.1.129/lexam/';
+$config['base_url'] = 'http://localhost/lexam/';
 
 /*
 |--------------------------------------------------------------------------
