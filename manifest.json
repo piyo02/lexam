@@ -1,0 +1,16 @@
+{
+  "name": "LEXAM",
+  "short_name": "Lexam",
+  "start_url": "http://localhost/lexam",
+  "display": "standalone",
+  "background_color": "#FFE9D2",
+  "theme_color": "#FFE1C4",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "http://localhost/lexam/assets/logo/coreigniter.png",
+      "type": "image/png",
+      "sizes": "108X108"
+    }
+  ]
+}
