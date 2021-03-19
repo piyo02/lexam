@@ -77,11 +77,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
-<<<<<<< HEAD
 	'password' => 'VXMkp0lxv9YkF6SL',
-=======
-	'password' => 'alzidni00',
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 	'database' => 'lexam',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

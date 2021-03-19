@@ -24,11 +24,6 @@ class Student_profile_model extends MY_Model
 
       $this->db->insert($this->table, $data);
       $id = $this->db->insert_id($this->table . '_id_seq');
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
       if( isset($id) )
       {
         $this->set_message("berhasil");
@@ -109,10 +104,7 @@ class Student_profile_model extends MY_Model
   {
     $this->select($this->table . '.*');
     $this->select('classroom.name AS classroom_name');
-<<<<<<< HEAD
     $this->select('classroom.class_ladder_id AS class_ladder_id');
-=======
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
     if (isset($user_id))
     {
       $this->where($this->table.'.user_id', $user_id);

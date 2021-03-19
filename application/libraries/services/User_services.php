@@ -11,11 +11,6 @@ class User_services
 	protected $address;
 	protected $email;
   protected $group_id;
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
   function __construct()
   {
       $this->id		      ='';
@@ -284,29 +279,17 @@ class User_services
 			"email" => array(
 			  'type' => 'text',
 			  'label' => "Email",
-<<<<<<< HEAD
 			  'value' => $this->form_validation->set_value('email', $this->email),
-=======
-			  'value' => $this->form_validation->set_value('email', $this->email),			  
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			),
 			"address" => array(
 				'type' => 'text',
 				'label' => "Alamat",
-<<<<<<< HEAD
 				'value' => $this->form_validation->set_value('address', $this->address),
-=======
-				'value' => $this->form_validation->set_value('address', $this->address),			  
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			  ),
 			"phone" => array(
 			  'type' => 'number',
 			  'label' => "Nomor Telepon",
-<<<<<<< HEAD
 			  'value' => $this->form_validation->set_value('phone', $this->phone),
-=======
-			  'value' => $this->form_validation->set_value('phone', $this->phone),			  
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			),
 			"group_name" => array(
 				'type' => 'text',

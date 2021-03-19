@@ -1,11 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-<<<<<<< HEAD
 class Users extends School_admin_Controller
-=======
-class Users extends School_admin_Controller 
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 {
 	private $services = null;
     private $name = null;
@@ -35,11 +31,7 @@ class Users extends School_admin_Controller
 		);
 		$this->data[ "menu_list_id" ] =  'users_index';
 		$this->school_id = $this->ion_auth->get_school_id();
-<<<<<<< HEAD
 	}
-=======
-	} 
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 	public function index()
 	{
 		$page = ($this->uri->segment(4)) ? ($this->uri->segment(4) -  1 ) : 0;
@@ -80,11 +72,7 @@ class Users extends School_admin_Controller
 			'data' => NULL
 		);
 
-<<<<<<< HEAD
 		$add_menu= $this->load->view('templates/actions/modal_form', $add_menu, true );
-=======
-		$add_menu= $this->load->view('templates/actions/modal_form', $add_menu, true ); 
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 		// $this->data[ "header_button" ] =  $add_menu;
 		// return;
@@ -99,11 +87,7 @@ class Users extends School_admin_Controller
 		$this->render( "templates/contents/plain_content" );
 	}
 	public function users( $users_group = NULL )
-<<<<<<< HEAD
 	{		 //
-=======
-	{		 // 
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		 if($users_group == 3){
 			$table = $this->services->get_table_teacher_config( $this->current_page );
 			$table[ "rows" ] = $this->teacher_profile_model->teacher_by_school_id($this->school_id)->result();
@@ -119,20 +103,12 @@ class Users extends School_admin_Controller
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
 
-<<<<<<< HEAD
 		$link_add =
-=======
-		$link_add = 
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		array(
 			"name" => "Tambah",
 			"type" => "link",
 			"url" => site_url( $this->current_page."add/".$users_group),
-<<<<<<< HEAD
 			"button_color" => "primary",
-=======
-			"button_color" => "primary",	
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			"data" => NULL,
 		);
 		if($users_group != 4)
@@ -155,45 +131,27 @@ class Users extends School_admin_Controller
 		$page = ($this->uri->segment(4 + 1)) ? ($this->uri->segment(4 + 1) -  1 ) : 0;
 		// echo $page; return;
         //pagination parameter
-<<<<<<< HEAD
         $pagination['base_url'] = base_url( $this->current_page ) .'classroom/'.$classroom_id;
         $pagination['total_records'] = $this->student_profile_model->student_by_classroom_id( NULL, NULL, $this->school_id, $classroom_id )->num_rows();
-=======
-        $pagination['base_url'] = base_url( $this->current_page ) .'/classroom';
-        $pagination['total_records'] = $this->group_model->record_count() ;
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
         $pagination['limit_per_page'] = 10;
         $pagination['start_record'] = $page*$pagination['limit_per_page'];
         $pagination['uri_segment'] = 5;
 		//set pagination
 		if ($pagination['total_records'] > 0 ) $this->data['pagination_links'] = $this->setPagination($pagination);
 
-<<<<<<< HEAD
 		$table = $this->services->get_table_student_config( $this->current_page, $pagination['start_record']+1 );
-=======
-		$table = $this->services->get_table_student_config( $this->current_page, $pagination['start_record'] );
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$table[ "rows" ] = $this->student_profile_model->student_by_classroom_id( $pagination['start_record'], $pagination['limit_per_page'], $this->school_id, $classroom_id )->result();
 		// var_dump($table[ "rows" ]); die;
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
-<<<<<<< HEAD
 		// var_dump($table); die;
 
 		$link_add =
-=======
-
-		$link_add = 
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		array(
 			"name" => "Tambah Siswa",
 			"type" => "link",
 			"url" => site_url( $this->current_page."add/" . $users_group . '?classroom_id=' . $classroom_id ),
-<<<<<<< HEAD
 			"button_color" => "primary",
-=======
-			"button_color" => "primary",	
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			"data" => NULL,
 		);
 		$btn_add =  $this->load->view('templates/actions/link', $link_add, TRUE ); ;
@@ -202,11 +160,7 @@ class Users extends School_admin_Controller
 			"name" => "Import Siswa",
 			'modal_id' => 'btn_import_',
 			"url" => site_url( 'import/import_student/' ),
-<<<<<<< HEAD
 			"button_color" => "success",
-=======
-			"button_color" => "success",	
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			"form_data" => array(
 				'file' => array(
 					'type' => 'file',
@@ -278,11 +232,6 @@ class Users extends School_admin_Controller
 				'address' => $this->input->post('address'),
 			);
 		}
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$identity_mode = NULL;
 
     if ($this->form_validation->run() === TRUE && ( $user_id =  $this->ion_auth->register($identity, $password, $email,$additional_data, [$group_id], $identity_mode ) ) )
@@ -296,11 +245,6 @@ class Users extends School_admin_Controller
 
         $this->student_profile_model->create( $student_profile );
       }
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
       if($this->input->post('users_group') == 3){
 		$teacher_profile = array(
           'user_id' => $user_id,
@@ -310,17 +254,10 @@ class Users extends School_admin_Controller
 
         $this->teacher_profile_model->create( $teacher_profile );
       }
-<<<<<<< HEAD
 
 	  if( $this->input->post('classroom_id') ){
 			$data['user_id'] = $user_id;
 
-=======
-	  
-	  if( $this->input->post('classroom_id') ){
-			$data['user_id'] = $user_id;
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			$data_param['id'] = $this->input->post('classroom_id');
 			$this->classroom_model->update( $data, $data_param );
 	  }
@@ -332,11 +269,6 @@ class Users extends School_admin_Controller
 		);
 	  }
 
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$this->teacher_course_model->create( $teacher_course );
 
       $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->ion_auth->messages() ) );
@@ -415,11 +347,6 @@ class Users extends School_admin_Controller
 		$form_data = $this->load->view('templates/form/plain_form', $form_data , TRUE ) ;
 
 		$this->data[ "contents" ] =  $form_data;
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$this->render( "school_admin/user/add" );
     }
 	}
@@ -443,24 +370,14 @@ class Users extends School_admin_Controller
         $this->form_validation->set_rules('phone', "No Telepon", 'trim|required');
 		if ( $this->input->post('password') )
         {
-<<<<<<< HEAD
             $this->form_validation->set_rules( 'password',"Kata Sandi",'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]' );
             $this->form_validation->set_rules( 'password_confirm',"konfirmasi Kata Sandi",'trim|required');
-=======
-            $this->form_validation->set_rules( 'password',"Kata Sandi",'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]' );            
-            $this->form_validation->set_rules( 'password_confirm',"konfirmasi Kata Sandi",'trim|required'); 
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
         }
         if ( $this->form_validation->run() === TRUE )
         {
 			$user_id = $this->input->post('id');
 			$group_id = $this->input->post('group_id');
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
             $data = array(
               'first_name' => $this->input->post('first_name'),
               'last_name' => $this->input->post('last_name'),
@@ -468,11 +385,6 @@ class Users extends School_admin_Controller
               'phone' => $this->input->post('phone'),
               'group_id' => $this->input->post('group_id'),
             );
-<<<<<<< HEAD
-
-=======
-			
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			if($group_id == 3){
 				$teacher_profile = array(
 					'nip' => $this->input->post('nip'),
@@ -484,11 +396,6 @@ class Users extends School_admin_Controller
 					$guardian['user_id'] = $user_id;
 					$classroom_param['id'] = $classroom_id;
 					$this->classroom_model->update( $guardian, $classroom_param );
-<<<<<<< HEAD
-
-=======
-					
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 					$old_classroom = $this->input->post('old_classroom_id');
 					if( $old_classroom && $old_classroom != $classroom_id ){
 						$guardian['user_id'] = null;
@@ -504,11 +411,7 @@ class Users extends School_admin_Controller
 					}
 				}
 				$total_course = $this->input->post('total_course');
-<<<<<<< HEAD
 				for ($i=0; $i < $total_course; $i++) {
-=======
-				for ($i=0; $i < $total_course; $i++) { 
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 					$teacher_course[] = array(
 						'id' => $this->input->post('teacher_course_id_' . $i),
 						'course_id' => $this->input->post('course_id_' . $i),
@@ -636,11 +539,7 @@ class Users extends School_admin_Controller
 					"name" => "Tambah Mata Pelajaran",
 					'modal_id' => 'add_course_',
 					"url" => site_url( $this->current_page . 'add_teacher_course/' ),
-<<<<<<< HEAD
 					"button_color" => "primary",
-=======
-					"button_color" => "primary",	
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 					"form_data" => array(
 						"course_id" => array(
 							'type' => 'select',
@@ -656,20 +555,11 @@ class Users extends School_admin_Controller
 					"data" => NULL,
 				);
 				$add_course =  $this->load->view('templates/actions/modal_form', $add_course, TRUE );
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 				$delete_course = array(
 					"name" => "Hapus Mata Pelajaran",
 					'modal_id' => 'delete_course_',
 					"url" => site_url( $this->current_page . 'delete_teacher_course/' ),
-<<<<<<< HEAD
 					"button_color" => "danger",
-=======
-					"button_color" => "danger",	
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 					"form_data" => array(
 						"course_id" => array(
 							'type' => 'select',
@@ -685,11 +575,6 @@ class Users extends School_admin_Controller
 					"data" => NULL,
 				);
 				$delete_course =  $this->load->view('templates/actions/modal_form', $delete_course, TRUE );
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 				$this->data[ "header_button" ] =  $delete_course . ' ' .$add_course;
 			}
 			elseif( $form_data['form_data']['group_id']['selected'] == 4 ){
@@ -712,13 +597,8 @@ class Users extends School_admin_Controller
 			$form_data[ 'form_data' ] = array_merge( $form_data[ 'form_data' ] , $form_password[ 'form_data' ] );
 			$form_data = $this->load->view('templates/form/plain_form', $form_data , TRUE ) ;
 			$this->data[ "contents" ] =  $form_data;
-<<<<<<< HEAD
 
 
-=======
-			
-			
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			$alert = $this->session->flashdata('alert');
 			$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
             $this->render( "templates/contents/plain_content_form" );
@@ -726,13 +606,8 @@ class Users extends School_admin_Controller
 	}
 
 	public function detail( $user_id = NULL )
-<<<<<<< HEAD
 	{
 		if( !($user_id) ) redirect(site_url('uadmin'));
-=======
-	{		
-		if( !($user_id) ) redirect(site_url('uadmin'));  
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 		$form_data = $this->services->get_form_data_readonly(  $user_id );
 
@@ -788,11 +663,6 @@ class Users extends School_admin_Controller
 		$form_data = $this->load->view('templates/form/plain_form_readonly', $form_data , TRUE ) ;
 
 		$this->data[ "contents" ] =  $form_data;
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$alert = $this->session->flashdata('alert');
 		$this->data["key"] = $this->input->get('key', FALSE);
 		$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
@@ -805,37 +675,21 @@ class Users extends School_admin_Controller
 	}
 	public function delete(  )
 	{
-<<<<<<< HEAD
 		if( !($_POST) ) redirect(site_url('uadmin'));
-=======
-		if( !($_POST) ) redirect(site_url('uadmin'));  
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 		$group_id 	= $this->input->post('group_id');
 		$id_user 	= $this->input->post('id');
 		$models = array();
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		if($group_id == 3 ){
 			$models = array(
 				'teacher_course_model',
 				'teacher_profile_model',
 				'questionnaire_model',
 			);
-<<<<<<< HEAD
 
 			$data['user_id'] = NULL;
 			$data_param = $this->classroom_model->classroom_by_user_id( $id_user )->row();
 
-=======
-		
-			$data['user_id'] = NULL;
-			$data_param = $this->classroom_model->classroom_by_user_id( $id_user )->row();
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			$this->classroom_model->update( $data, $data_param );
 		}
 		if($group_id == 4){
@@ -851,11 +705,6 @@ class Users extends School_admin_Controller
 			if($group_id == 3 ){
 				$data['user_id'] = $id_user;
 				$data_param = $this->classroom_model->classroom( $data_param['id'] )->row();
-<<<<<<< HEAD
-
-=======
-			
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 				$this->classroom_model->update( $data, $data_param );
 			}
 			$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->ion_auth->errors() ) );
@@ -871,11 +720,6 @@ class Users extends School_admin_Controller
 			'course_id' => $this->input->post('course_id'),
 		);
 		$this->teacher_course_model->create( $data );
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, 'Mata Pelajaran Berhasil ditambahkan' ) );
 		redirect( site_url( $this->current_page . 'edit/' . $user_id ) );
 	}

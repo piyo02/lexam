@@ -12,11 +12,6 @@ class Test_services
   {
     return get_instance()->$var;
   }
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
   public function list_course( $user_id = null )
 	{
     $this->load->model('teacher_course_model');
@@ -38,7 +33,6 @@ class Test_services
 		return $list_classroom;
 	}
 
-<<<<<<< HEAD
   public function list_class_ladder_id( $school_id = null )
 	{
     $this->load->model('class_ladder_model');
@@ -50,8 +44,6 @@ class Test_services
 		return $list_class_ladder;
 	}
 
-=======
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
   public function get_table_config( $_page, $start_number = 1 )
   {
       $table["header"] = array(
@@ -201,11 +193,6 @@ class Test_services
           'rules' =>  'trim|required',
         ),
     );
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
     return $config;
   }
 
@@ -216,10 +203,7 @@ class Test_services
       $id = $data->id;
       $name = $data->name;
       $classroom_id = $data->classroom_id;
-<<<<<<< HEAD
       $class_ladder_id = $data->class_ladder_id;
-=======
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
       $course_id = $data->course_id;
       $date = $data->date;
       $duration = $data->duration;
@@ -230,26 +214,17 @@ class Test_services
       $id = null;
       $name = null;
       $classroom_id = null;
-<<<<<<< HEAD
       $class_ladder_id = null;
-=======
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
       $course_id = null;
       $date = null;
       $duration = null;
       $kkm = null;
       $max_value = null;
     }
-<<<<<<< HEAD
 
     $list_course = $this->list_course( $user_id );
     $list_classroom = $this->list_classroom( $school_id );
     $list_class_ladder_id = $this->list_class_ladder_id();
-=======
-    
-    $list_course = $this->list_course( $user_id );
-    $list_classroom = $this->list_classroom( $school_id );
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
     $form_data = array(
       'id' => array(
         'type' => 'hidden',
@@ -267,15 +242,12 @@ class Test_services
         'options' => $list_classroom,
         'selected' => $classroom_id
       ),
-<<<<<<< HEAD
       'class_ladder_id' => array(
         'type' => 'select',
         'label' => 'Jenjang Kelas',
         'options' => $list_class_ladder_id,
         'selected' => $class_ladder_id
       ),
-=======
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
       'course_id' => array(
         'type' => 'select',
         'label' => 'Mata Pelajaran',
@@ -312,20 +284,12 @@ class Test_services
     $id = $data->id;
     $name = $data->name;
     $classroom_name = $data->classroom_name;
-<<<<<<< HEAD
     $class_ladder_name = $data->class_ladder_name;
-=======
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
     $course_name = $data->course_name;
     $date = $data->date;
     $duration = $data->duration;
     $kkm = $data->kkm;
     $max_value = $data->max_value;
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
     $form_data = array(
       'name' => array(
         'type' => 'text',
@@ -337,14 +301,11 @@ class Test_services
         'label' => 'Kelas',
         'value' => $classroom_name
       ),
-<<<<<<< HEAD
       'class_ladder_id' => array(
         'type' => 'text',
         'label' => 'Jenjang Kelas',
         'value' => $class_ladder_name
       ),
-=======
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
       'course_id' => array(
         'type' => 'text',
         'label' => 'Mata Pelajaran',

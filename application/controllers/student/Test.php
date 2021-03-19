@@ -6,11 +6,6 @@ class Test extends Student_Controller {
     private $name = null;
     private $parent_page = 'student';
 	private $current_page = 'student/test/';
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('services/Test_services');
@@ -37,11 +32,7 @@ class Test extends Student_Controller {
 		// echo $page; return;
         //pagination parameter
         $pagination['base_url'] = base_url( $this->current_page ) .'/index';
-<<<<<<< HEAD
         $pagination['total_records'] = $this->test_model->test_by_classroom_id( $student->classroom_id, $student->class_ladder_id, $student->school_id )->num_rows();
-=======
-        $pagination['total_records'] = $this->test_model->test_by_classroom_id( $student->classroom_id, $student->school_id )->num_rows();
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
         $pagination['limit_per_page'] = 3;
         $pagination['start_record'] = $page*$pagination['limit_per_page'];
         $pagination['uri_segment'] = 4;
@@ -51,18 +42,11 @@ class Test extends Student_Controller {
 
 		#################################################################3
 		$table = $this->services->get_table_config( $this->current_page );
-<<<<<<< HEAD
 		$table[ "rows" ] = $this->test_model->test_by_classroom_id( $student->classroom_id, $student->class_ladder_id, $student->school_id, $this->user_id, $pagination['start_record'], $pagination['limit_per_page'] )->result();
 		// var_dump($student); die;
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
 
-=======
-		$table[ "rows" ] = $this->test_model->test_by_classroom_id( $student->classroom_id, $student->school_id, $this->user_id, $pagination['start_record'], $pagination['limit_per_page'] )->result();
-		$table = $this->load->view('templates/tables/plain_table', $table, true);
-		$this->data[ "contents" ] = $table;
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		// return;
 		#################################################################3
 		$alert = $this->session->flashdata('alert');
@@ -78,21 +62,11 @@ class Test extends Student_Controller {
 	public function solve()
 	{
 		$test_id = $this->input->post( 'id' );
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		if( !$test_id ) redirect( $this->current_page );
 
 		//session test id
 		$session['test_id'] = $test_id;
 		$this->session->set_userdata( $session );
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		// apakah siswa sudah pernah mengerjakan atau belum
 		$solve_test = $this->solve_test_model->solve_test_by_student_id( $test_id, $this->user_id )->row();
 		if( $solve_test->is_break ){ //jika sedang di hentikan
@@ -108,11 +82,6 @@ class Test extends Student_Controller {
 				$this->solve_test_model->update( $update, $data_param );
 
 			}
-<<<<<<< HEAD
-
-=======
-			
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			redirect('student/test/test');
 		}
 
@@ -124,32 +93,19 @@ class Test extends Student_Controller {
 		];
 		// die;
 		$solve_id = $this->solve_test_model->create( $solve_test );
-<<<<<<< HEAD
 
 		// mendapatkan questionnaire_id dari test
 		$references = $this->question_reference_model->question_reference_by_test_id( $test_id )->result();
 
-=======
-		
-		// mendapatkan questionnaire_id dari test
-		$references = $this->question_reference_model->question_reference_by_test_id( $test_id )->result();
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$lists_mc = []; //multiple choice (mc)
 		$lists_sa = []; //short answer (sa)
 		$lists_es = []; //essay (es)
 
 		foreach ($references as $key => $reference) {
 			$total = $this->question_reference_model->get_total_references( $test_id, $reference->questionnaire_id )->row();
-<<<<<<< HEAD
 			$lists_mc = array_merge($lists_mc, $this->question_answer_model->question_id_mc( $reference->questionnaire_id, $total->multiple_choice )->result());
 			$lists_sa = array_merge($lists_sa, $this->question_answer_model->question_id_sa( $reference->questionnaire_id, $total->short_answer )->result());
 			$lists_es = array_merge($lists_es, $this->question_answer_model->question_id_es( $reference->questionnaire_id, $total->essay )->result());
-=======
-			$lists_mc = array_merge($lists_mc, $this->question_answer_model->question_id_mc( $reference->questionnaire_id, $total->multiple_choice )->result()); 
-			$lists_sa = array_merge($lists_sa, $this->question_answer_model->question_id_sa( $reference->questionnaire_id, $total->short_answer )->result()); 
-			$lists_es = array_merge($lists_es, $this->question_answer_model->question_id_es( $reference->questionnaire_id, $total->essay )->result()); 
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		}
 
 		// merge lists
@@ -173,27 +129,15 @@ class Test extends Student_Controller {
 		$test_id = $this->session->userdata( 'test_id' );
 		$test = $this->test_model->test( $test_id )->row();
 		// die;
-<<<<<<< HEAD
 
 		// question in db which student will answer
 		$lists_question = $this->student_answer_model->student_answer_by_test_id( $test_id, $this->user_id )->result();
 
-=======
-		
-		// question in db which student will answer
-		$lists_question = $this->student_answer_model->student_answer_by_test_id( $test_id, $this->user_id )->result();
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		// data test student => time_start
 		$solve_test = $this->solve_test_model->solve_test_by_student_id( $test_id, $this->user_id )->row();
 
 		//question id and number of question
 		if( null !== $this->input->get('id') ){
-<<<<<<< HEAD
-
-=======
-			
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			$question_id = $this->input->get('id');
 
 			$questions = $this->question_model->question( $question_id )->result();
@@ -205,13 +149,8 @@ class Test extends Student_Controller {
 			$questions = $this->question_model->question( $question_id )->result();
 			$number = 1;
 		}
-<<<<<<< HEAD
 		// var_dump( $test_id );
 
-=======
-		// var_dump( $test_id ); 
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$this->data["alert"] = (isset($alert)) ? $alert : NULL ;
 		$this->data["current_page"] = $this->current_page;
 		$this->data["solve_test"] = $solve_test;
@@ -221,11 +160,6 @@ class Test extends Student_Controller {
 		$this->data["questions"] = $questions;
 		$this->data[ "lists_question" ] = $lists_question;
 		$this->render( "student/solve", 'test_master' );
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 	}
 
 	public function answer()
@@ -237,20 +171,10 @@ class Test extends Student_Controller {
 			'test_id' => $test_id,
 			'question_id' => $question_id,
 		];
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$type_option = $this->input->post('type_option');
 
 		if( $type_option == 'image' || $type_option == 'text'){
 			$answer = $this->input->post('answer');
-<<<<<<< HEAD
-
-=======
-			
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			$separate = strpos($answer, '-');
 			$choice = substr($answer, ($separate + 1));
 			$answer = substr($answer, 0, $separate);
@@ -275,20 +199,10 @@ class Test extends Student_Controller {
 			'test_id' => $test_id,
 			'question_id' => $question_id,
 		];
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$type_option = $this->input->post('type_option');
 
 		if( $type_option == 'image' || $type_option == 'text'){
 			$answer = $this->input->post('answer');
-<<<<<<< HEAD
-
-=======
-			
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			$separate = strpos($answer, '-');
 			$choice = substr($answer, ($separate + 1));
 			$answer = substr($answer, 0, $separate);
@@ -309,17 +223,11 @@ class Test extends Student_Controller {
 	{
 		$test_id = $this->session->userdata( 'test_id' );
 		$test = $this->test_model->test( $test_id )->row();
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$value = $this->check( $test->max_value );
 		$data = [
 			'user_id' 	 => $this->user_id,
 			'test_id' => $test_id,
 		];
-<<<<<<< HEAD
 
 		//hapus data kerja siswa
 		if ( $solve_test = $this->solve_test_model->solve_test_by_student_id( $test_id, $this->user_id )->row() ) {
@@ -333,21 +241,6 @@ class Test extends Student_Controller {
 		$data['value'] = $value['value'];
 		$this->test_result_model->create($data);
 
-=======
-		
-		//hapus data kerja siswa
-		if ( $solve_test = $this->solve_test_model->solve_test_by_student_id( $test_id, $this->user_id )->row() ) {
-			
-			$data_param['test_id'] = $test_id;
-			$data_param['user_id'] = $this->user_id;
-			
-			$this->solve_test_model->delete( $data_param );
-		}
-		
-		$data['value'] = $value['value'];
-		$this->test_result_model->create($data);
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$this->data["value"] = $value;
 		$this->data["test"] = $test;
 
@@ -374,11 +267,7 @@ class Test extends Student_Controller {
 				if ($skor)
 				$correct++;
 				$value += 1;
-<<<<<<< HEAD
 			}
-=======
-			} 
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 			else {
 				$choice = $this->question_answer_model->question_answer_by_question_id( $answer->question_id )->row();
 				if ($answer->answer == $choice->answer) {
@@ -404,11 +293,6 @@ class Test extends Student_Controller {
 
 	public function is_break(  )
 	{
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$user_id = $this->session->userdata('user_id');
 		$solve = $this->solve_test_model->solve_test_by_student_id( NULL, $user_id )->row();
 
@@ -447,10 +331,5 @@ class Test extends Student_Controller {
 			$this->data['test'] = $test;
 			$this->render("student/break");
 		}
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 	}
 }

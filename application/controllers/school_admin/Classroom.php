@@ -7,11 +7,6 @@ class Classroom extends School_admin_Controller {
 	private $current_page = 'school_admin/classroom/';
     private $school_id = null;
     private $edu_ladder_id = null;
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('services/Classroom_services');
@@ -75,11 +70,7 @@ class Classroom extends School_admin_Controller {
 			'data' => NULL
 		);
 
-<<<<<<< HEAD
 		$add_menu= $this->load->view('templates/actions/modal_form', $add_menu, true );
-=======
-		$add_menu= $this->load->view('templates/actions/modal_form', $add_menu, true ); 
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 		$this->data[ "header_button" ] =  $add_menu;
 		// return;
@@ -97,11 +88,7 @@ class Classroom extends School_admin_Controller {
 
 	public function add(  )
 	{
-<<<<<<< HEAD
 		if( !($_POST) ) redirect(site_url(  $this->current_page ));
-=======
-		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 		// echo var_dump( $data );return;
 		$this->form_validation->set_rules( $this->services->validation_config() );
@@ -123,21 +110,12 @@ class Classroom extends School_admin_Controller {
           $this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->classroom_model->errors() : $this->session->flashdata('message')));
           if(  validation_errors() || $this->classroom_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
 		}
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		redirect( site_url($this->current_page)  );
 	}
 
 	public function edit(  )
 	{
-<<<<<<< HEAD
 		if( !($_POST) ) redirect(site_url(  $this->current_page ));
-=======
-		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 		// echo var_dump( $data );return;
 		$this->form_validation->set_rules( $this->services->validation_config() );
@@ -159,21 +137,11 @@ class Classroom extends School_admin_Controller {
           $this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->classroom_model->errors() : $this->session->flashdata('message')));
           if(  validation_errors() || $this->classroom_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
 		}
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		redirect( site_url($this->current_page)  );
 	}
 
 	public function delete(  ) {
 		if( !($_POST) ) redirect( site_url($this->current_page) );
-<<<<<<< HEAD
-
-=======
-	  
->>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 		$data_param['id'] 	= $this->input->post('id');
 		if( $this->classroom_model->delete( $data_param ) ){
 		  $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->classroom_model->messages() ) );
