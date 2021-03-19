@@ -24,7 +24,11 @@ class Test_model extends MY_Model
 
       $this->db->insert($this->table, $data);
       $id = $this->db->insert_id($this->table . '_id_seq');
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
       if( isset($id) )
       {
         $this->set_message("berhasil");
@@ -115,19 +119,31 @@ class Test_model extends MY_Model
 
       return $this;
   }
+<<<<<<< HEAD
   public function test_by_classroom_id( $classroom_id = NULL, $class_ladder_id = NULL, $school_id = NULL, $student_id = NULL, $start = 0, $limit = NULL  )
+=======
+  public function test_by_classroom_id( $classroom_id = NULL, $school_id = NULL, $student_id = NULL, $start = 0, $limit = NULL  )
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
   {
     if($student_id){
       $this->select("(SELECT value FROM test_result WHERE test_result.test_id = test.id AND test_result.user_id = $student_id) result_student");
     }
       if (isset($classroom_id))
       {
+<<<<<<< HEAD
         $this->db->where($this->table.'.classroom_id', $classroom_id);
         $this->db->or_where($this->table.'.class_ladder_id', $class_ladder_id);
       }
       if($school_id)
         $this->where('teacher_profile.school_id', $school_id);
 
+=======
+        $this->where($this->table.'.classroom_id', $classroom_id);
+      }
+      if($school_id)
+        $this->where('teacher_profile.school_id', $school_id);
+      
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
       $this->join(
         'teacher_profile',
         'teacher_profile.user_id = test.user_id',
@@ -151,8 +167,11 @@ class Test_model extends MY_Model
     $this->select('CONCAT( users.first_name, " ", users.last_name ) as user_fullname');
     $this->select($this->table . '.*');
     $this->select('classroom.name AS classroom_name');
+<<<<<<< HEAD
     $this->select("(SELECT name FROM class_ladder WHERE id = test.class_ladder_id) class_ladder_name");
     $this->select("(SELECT id FROM class_ladder WHERE id = test.class_ladder_id) class_ladder_id");
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
     $this->select('courses.name AS course_name');
       if (isset( $limit ))
       {

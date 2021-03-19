@@ -24,7 +24,11 @@ class Test_result_model extends MY_Model
 
       $this->db->insert($this->table, $data);
       $id = $this->db->insert_id($this->table . '_id_seq');
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
       if( isset($id) )
       {
         $this->set_message("berhasil");
@@ -71,11 +75,19 @@ class Test_result_model extends MY_Model
   {
     //foreign
     //delete_foreign( $data_param. $models[]  )
+<<<<<<< HEAD
     // if( !$this->delete_foreign( $data_param, ['menu_model'] ) )
     // {
     //   $this->set_error("gagal");//('group_delete_unsuccessful');
     //   return FALSE;
     // }
+=======
+    if( !$this->delete_foreign( $data_param, ['menu_model'] ) )
+    {
+      $this->set_error("gagal");//('group_delete_unsuccessful');
+      return FALSE;
+    }
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
     //foreign
     $this->db->trans_begin();
 
@@ -130,7 +142,11 @@ class Test_result_model extends MY_Model
   //  */
   // public function test_results(  )
   // {
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
   //     $this->order_by($this->table.'.id', 'asc');
   //     return $this->fetch_data();
   // }
@@ -158,8 +174,13 @@ class Test_result_model extends MY_Model
     $this->db->select('CONCAT( users.first_name, " ", users.last_name ) as user_fullname');
     $this->db->from(
       "(
+<<<<<<< HEAD
         SELECT test_result.*, test.name, test.date, test.kkm, courses.name AS course_name
         FROM test
+=======
+        SELECT test_result.*, test.name, test.date, test.kkm, courses.name AS course_name 
+        FROM test 
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
         INNER JOIN courses ON courses.id = test.course_id
         INNER JOIN test_result ON test_result.test_id = test.id
         ) test_result"

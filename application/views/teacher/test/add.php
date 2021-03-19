@@ -41,7 +41,11 @@
             </div>
           </div>
 
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
           <?php echo form_open( site_url( 'teacher/test/add?cr=' . $cr ) );  ?>
           <div class="row">
@@ -148,4 +152,8 @@
             })
         });
     </script>
+<<<<<<< HEAD
 <?php endfor; ?>
+=======
+<?php endfor; ?>
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b

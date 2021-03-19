@@ -1,4 +1,5 @@
 -- phpMyAdmin SQL Dump
+<<<<<<< HEAD
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
@@ -9,6 +10,17 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
+=======
+-- version 4.6.6deb5ubuntu0.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: 16 Mar 2021 pada 16.47
+-- Versi Server: 5.7.33-0ubuntu0.18.04.1
+-- PHP Version: 7.2.24-0ubuntu0.18.04.7
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 SET time_zone = "+00:00";
 
 
@@ -24,7 +36,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `classroom`
+=======
+-- Struktur dari tabel `classroom`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `classroom` (
@@ -37,6 +53,7 @@ CREATE TABLE `classroom` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `classroom`
 --
 
@@ -52,11 +69,26 @@ INSERT INTO `classroom` (`id`, `school_id`, `user_id`, `class_ladder_id`, `name`
 (13, 1, NULL, 11, 'XII IPS 3', '-'),
 (14, 1, NULL, 11, 'XII IPS 4', '-'),
 (16, 1, NULL, 12, 'XII IBB', '-');
+=======
+-- Dumping data untuk tabel `classroom`
+--
+
+INSERT INTO `classroom` (`id`, `school_id`, `user_id`, `class_ladder_id`, `name`, `description`) VALUES
+(1, 1, NULL, 4, 'X IPA 1', 'Kelas 10'),
+(2, 1, NULL, 5, 'X IPS 1', 'Kelas 10'),
+(3, 1, NULL, 6, 'XI IPA 1', 'Kelas 11'),
+(4, 1, NULL, 7, 'XI IPS 1', 'Kelas 11'),
+(5, 1, NULL, 8, 'XII IPA 1', 'Kelas 12');
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `class_ladder`
+=======
+-- Struktur dari tabel `class_ladder`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `class_ladder` (
@@ -66,7 +98,11 @@ CREATE TABLE `class_ladder` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `class_ladder`
+=======
+-- Dumping data untuk tabel `class_ladder`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 INSERT INTO `class_ladder` (`id`, `name`, `description`) VALUES
@@ -86,7 +122,11 @@ INSERT INTO `class_ladder` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `comment`
+=======
+-- Struktur dari tabel `comment`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `comment` (
@@ -98,7 +138,11 @@ CREATE TABLE `comment` (
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `courses`
+=======
+-- Struktur dari tabel `courses`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `courses` (
@@ -109,6 +153,7 @@ CREATE TABLE `courses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `courses`
 --
 
@@ -140,11 +185,23 @@ INSERT INTO `courses` (`id`, `school_id`, `name`, `description`) VALUES
 (27, 1, 'Lintas Minat Geografi', '-'),
 (28, 1, 'Lintas Minat Bahasa & Sastra Inggris', '-'),
 (29, 1, 'Bahasa Indonesia (Wajib)', '-');
+=======
+-- Dumping data untuk tabel `courses`
+--
+
+INSERT INTO `courses` (`id`, `school_id`, `name`, `description`) VALUES
+(3, 1, 'Matematika', '-'),
+(4, 1, 'Biologi', '-');
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `edu_ladder`
+=======
+-- Struktur dari tabel `edu_ladder`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `edu_ladder` (
@@ -154,7 +211,11 @@ CREATE TABLE `edu_ladder` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `edu_ladder`
+=======
+-- Dumping data untuk tabel `edu_ladder`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 INSERT INTO `edu_ladder` (`id`, `name`, `description`) VALUES
@@ -169,7 +230,11 @@ INSERT INTO `edu_ladder` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `groups`
+=======
+-- Struktur dari tabel `groups`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `groups` (
@@ -179,7 +244,11 @@ CREATE TABLE `groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `groups`
+=======
+-- Dumping data untuk tabel `groups`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 INSERT INTO `groups` (`id`, `name`, `description`) VALUES
@@ -193,7 +262,11 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `headmaster_profile`
+=======
+-- Struktur dari tabel `headmaster_profile`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `headmaster_profile` (
@@ -204,7 +277,11 @@ CREATE TABLE `headmaster_profile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `headmaster_profile`
+=======
+-- Dumping data untuk tabel `headmaster_profile`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 INSERT INTO `headmaster_profile` (`id`, `school_id`, `user_id`, `nip`) VALUES
@@ -213,7 +290,11 @@ INSERT INTO `headmaster_profile` (`id`, `school_id`, `user_id`, `nip`) VALUES
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `login_attempts`
+=======
+-- Struktur dari tabel `login_attempts`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `login_attempts` (
@@ -224,16 +305,30 @@ CREATE TABLE `login_attempts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `login_attempts`
 --
 
 INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
 (7, '::1', 'abdulkhalikkendari@gmail.com', 1616037083);
+=======
+-- Dumping data untuk tabel `login_attempts`
+--
+
+INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
+(3, '192.168.1.191', 'farisadnanadrian072@gmail.com', 1615881497),
+(4, '192.168.1.191', 'farisadnanadrian072@gmail.com', 1615881517),
+(5, '192.168.1.191', 'farisadnanadrian072@gmail.com', 1615881535);
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `menus`
+=======
+-- Struktur dari tabel `menus`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `menus` (
@@ -249,7 +344,11 @@ CREATE TABLE `menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `menus`
+=======
+-- Dumping data untuk tabel `menus`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 INSERT INTO `menus` (`id`, `menu_id`, `name`, `link`, `list_id`, `icon`, `status`, `position`, `description`) VALUES
@@ -288,7 +387,11 @@ INSERT INTO `menus` (`id`, `menu_id`, `name`, `link`, `list_id`, `icon`, `status
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `question`
+=======
+-- Struktur dari tabel `question`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `question` (
@@ -302,6 +405,7 @@ CREATE TABLE `question` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `question`
 --
 
@@ -324,11 +428,34 @@ INSERT INTO `question` (`id`, `code`, `questionnaire_id`, `type`, `text`, `image
 (4381, 'S-6', 10, 'text', 'Fakta yang diperlukan untuk pendapat-pendapat yang ada pada kutipan itu adalah ….', NULL, NULL),
 (4382, 'S-7', 10, 'text', 'Cermati teks berikut! (1)Saat ini literasi bukan hanya sekadar mampu membaca dan menulis. (2) Melainkan, kemampuan lebih dari sekadar itu. (3) Padahal, pemahaman literasi yang mana berarti seorang individu mampu dalam mengolah informasi dan pengetahuan untuk kecakapan hidup. (4) Dalam konteks pengajaran, literasi merupakan kemampuan mengakses, memahami, dan menggunakan sesuatu secara cerdas melalui berbagai aktivitas. (5) Aktivitas tersebut di antaranya, membaca, berhitung, menyimak, menulis, berbicara dan berbudaya. \nKalimat yang tidak efektif dari paragraf tersebut adalah kalimat nomor …. ', NULL, NULL),
 (4383, 'S-8', 10, 'text', 'Cermati keterangan berikut! \nJudul : Problematika Budaya Menyontek di Indonesia \n(1) Berbagai aspek yang melandasi seseorang untuk menyontek. \n(2) Kebudayaan menyontek semakin marak di Indonesia. \n(3) Pemerolehan hasil atau nilai yang tinggi dan memuaskan \n(4) Berbagai fakta ditemukan pada setiap tingkat jenjang pendidikan. \n(5) Simpulan budaya menyontek dengan budaya korupsi di Indonesia \nUrutan kerangka yang sesuai dengan judul adalah nomor …. ', NULL, NULL);
+=======
+-- Dumping data untuk tabel `question`
+--
+
+INSERT INTO `question` (`id`, `code`, `questionnaire_id`, `type`, `text`, `image`, `audio`) VALUES
+(1, 'S-1', 1, 'text', '<p>soal pertama</p>', NULL, NULL),
+(11, 'S-3', 1, 'image', '<p>a</p>', 'S-3_1578212008_533093.jpg', NULL),
+(12, 'S-4', 1, 'image', '<p>soa</p>', 'S-4_1578212113_533090.jpg', NULL),
+(19, 'S-8', 1, 'text', '<p>soal esai</p>', NULL, NULL),
+(4355, 'S-1', 2, 'text', 'soal pilihan ganda', NULL, NULL),
+(4356, 'S-2', 2, 'text', 'soal isian singkat', NULL, NULL),
+(4357, 'S-3', 2, 'text', 'deskripsikan diri anda', NULL, NULL),
+(4358, 'S-4', 1, 'text', '<p>soal perdana</p>', NULL, NULL),
+(4359, 'S-5', 3, 'text', '<p>Soal Mudah</p>', NULL, NULL),
+(4362, 'S-6', 1, 'image', '<p>Sebuah balok kecil mempunyai dimensi panjang , lebar dan tinggi seperti yang ditunjukkan oleh jangka sorong seperti di bawah ini. Volume dari balok tersebut adalah ....</p>', 'S-6_1615882724_soal-3.png', NULL),
+(4363, 'S-7', 5, 'image', '<p>Sebuah balok kecil mempunyai dimensi panjang , lebar dan tinggi seperti yang ditunjukkan oleh jangka sorong seperti di bawah ini. Volume dari balok tersebut adalah ....</p>', 'S-7_1615883392_soal-3.png', NULL),
+(4364, 'S-8', 5, 'image', '<p>Gambar berikut adalah pengukuran massa benda dengan menggunakan neraca Ohauss lengan tiga. Hasil pengukuran massa yang benar adalah.....</p>', 'S-8_1615883474_soal4.png', NULL),
+(4365, 'S-9', 5, 'text', 'The bills are folded in an origami style in a_______', NULL, NULL);
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `questionnaire`
+=======
+-- Struktur dari tabel `questionnaire`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `questionnaire` (
@@ -342,17 +469,36 @@ CREATE TABLE `questionnaire` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `questionnaire`
 --
 
 INSERT INTO `questionnaire` (`id`, `user_id`, `classroom_id`, `course_id`, `name`, `description`, `status`) VALUES
 (9, 423, 5, 3, 'Matematika (Wajib)', '-', 0),
 (10, 428, 5, 29, 'Bahasa Indonesia (Wajib)', '-', 0);
+=======
+-- Dumping data untuk tabel `questionnaire`
+--
+
+INSERT INTO `questionnaire` (`id`, `user_id`, `classroom_id`, `course_id`, `name`, `description`, `status`) VALUES
+(1, 18, 5, 3, 'Bank Soal Matematika Kelas XII IPA 1', 'Materi Algoritma', 1),
+(2, 18, 5, 4, 'Bank Soal Biologi Kelas XII IPA 1', 'Bank Soal Mid', 1),
+(3, 20, 2, 3, 'Bank Soal Matematika Kelas X IPS 1', '-', 1),
+(4, 18, 1, 4, 'Bank Soal Biologi', '-', 1),
+(5, 18, 5, 4, 'Paket 1', '-', 0),
+(6, 18, 5, 4, 'Paket 2', '-', 0),
+(7, 18, 5, 4, 'P1', '-', 0),
+(8, 18, 5, 4, 'Paket 3', '-', 0);
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `question_answer`
+=======
+-- Struktur dari tabel `question_answer`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `question_answer` (
@@ -364,6 +510,7 @@ CREATE TABLE `question_answer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `question_answer`
 --
 
@@ -458,11 +605,69 @@ INSERT INTO `question_answer` (`id`, `question_id`, `type`, `answer`, `value`) V
 (21877, 4383, 'text', '(3), (2), (3), (1), (5)', 0),
 (21878, 4383, 'text', '(3), (4), (2), (1), (5) ', 0),
 (21879, 4383, 'text', '(4), (1), (3), (2), (5) ', 0);
+=======
+-- Dumping data untuk tabel `question_answer`
+--
+
+INSERT INTO `question_answer` (`id`, `question_id`, `type`, `answer`, `value`) VALUES
+(1, 1, 'text', 'soal', 0),
+(2, 1, 'text', 'pertama', 0),
+(3, 1, 'text', 'ini', 0),
+(4, 1, 'text', 'jawabannya', 0),
+(5, 1, 'text', 'pilihan e', 1),
+(61, 11, 'text', 'a', 0),
+(62, 11, 'text', 'b', 0),
+(63, 11, 'text', 'c', 1),
+(64, 11, 'text', 'd', 0),
+(65, 11, 'text', 'r', 0),
+(80, 19, 'short_answer', 'Soal Esai', 10),
+(21743, 4355, 'text', 'pilihan a', 0),
+(21744, 4355, 'text', 'pilihan b', 0),
+(21745, 4355, 'text', 'pilihan c', 0),
+(21746, 4355, 'text', 'pilihan d', 1),
+(21747, 4355, 'text', 'pilihan e', 0),
+(21748, 4356, 'short_answer', 'jawab saja sembarang', 6),
+(21749, 4357, 'essay', 'deskripsi diri', 50),
+(21750, 4358, 'text', 'ini pilihan', 0),
+(21751, 4358, 'text', 'ini juga', 0),
+(21752, 4358, 'text', 'ini lagi', 0),
+(21753, 4358, 'text', 'dan ini juga', 1),
+(21754, 4358, 'text', 'ini juga', 0),
+(21755, 4359, 'text', 'A', 0),
+(21756, 4359, 'text', 'B', 0),
+(21757, 4359, 'text', 'C', 0),
+(21758, 4359, 'text', 'D', 1),
+(21759, 4359, 'text', 'E', 0),
+(21770, 4362, 'text', '43,1 cm3', 0),
+(21771, 4362, 'text', '43,2 cm3', 1),
+(21772, 4362, 'text', '43,3 cm3', 0),
+(21773, 4362, 'text', '43,4 cm3', 0),
+(21774, 4362, 'text', '43,5 cm3', 0),
+(21775, 4363, 'text', '43,1 cm3 ', 1),
+(21776, 4363, 'text', '43,2 cm3 ', 0),
+(21777, 4363, 'text', '43,3 cm3 ', 0),
+(21778, 4363, 'text', '43,4 cm3 ', 0),
+(21779, 4363, 'text', '43,5 cm3 ', 0),
+(21780, 4364, 'text', '350 gram ', 0),
+(21781, 4364, 'text', '321,5 gram', 0),
+(21782, 4364, 'text', '240 gram', 1),
+(21783, 4364, 'text', '173 gram', 0),
+(21784, 4364, 'text', '170,3 gram ', 0),
+(21785, 4365, 'text', 'there-dimensionals frame', 0),
+(21786, 4365, 'text', 'Three-Dimensional frame', 1),
+(21787, 4365, 'text', 'Three-Dimensional frame', 0),
+(21788, 4365, 'text', 'Three-frames dimensional', 0),
+(21789, 4365, 'text', 'Three-frames dimensional', 0);
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `question_reference`
+=======
+-- Struktur dari tabel `question_reference`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `question_reference` (
@@ -475,6 +680,7 @@ CREATE TABLE `question_reference` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `question_reference`
 --
 
@@ -482,11 +688,34 @@ INSERT INTO `question_reference` (`id`, `test_id`, `questionnaire_id`, `multiple
 (16, 15, 9, 10, 0, 0),
 (17, 16, 10, 8, 0, 0),
 (18, 17, 9, 4, 0, 0);
+=======
+-- Dumping data untuk tabel `question_reference`
+--
+
+INSERT INTO `question_reference` (`id`, `test_id`, `questionnaire_id`, `multiple_choice`, `short_answer`, `essay`) VALUES
+(3, 4, 1, 3, 1, 0),
+(4, 5, 2, 1, 1, 1),
+(5, 6, 2, 1, 1, 1),
+(6, 7, 2, 1, 1, 1),
+(7, 8, 2, 1, 1, 1),
+(8, 9, 2, 1, 1, 1),
+(9, 10, 2, 1, 1, 1),
+(10, 11, 2, 1, 1, 1),
+(11, 12, 2, 1, 1, 1),
+(12, 13, 1, 3, 1, 0),
+(13, 13, 2, 1, 1, 1),
+(14, 13, 1, 2, 0, 0),
+(15, 14, 5, 2, 0, 0);
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `school`
+=======
+-- Struktur dari tabel `school`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `school` (
@@ -497,7 +726,11 @@ CREATE TABLE `school` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `school`
+=======
+-- Dumping data untuk tabel `school`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 INSERT INTO `school` (`id`, `edu_ladder_id`, `name`, `description`) VALUES
@@ -507,7 +740,11 @@ INSERT INTO `school` (`id`, `edu_ladder_id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `school_admin`
+=======
+-- Struktur dari tabel `school_admin`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `school_admin` (
@@ -517,7 +754,11 @@ CREATE TABLE `school_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `school_admin`
+=======
+-- Dumping data untuk tabel `school_admin`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 INSERT INTO `school_admin` (`id`, `user_id`, `school_id`) VALUES
@@ -526,7 +767,11 @@ INSERT INTO `school_admin` (`id`, `user_id`, `school_id`) VALUES
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `solve_test`
+=======
+-- Struktur dari tabel `solve_test`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `solve_test` (
@@ -534,6 +779,7 @@ CREATE TABLE `solve_test` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `test_id` int(10) UNSIGNED NOT NULL,
   `time_start` int(11) NOT NULL,
+<<<<<<< HEAD
   `is_break` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -541,6 +787,23 @@ CREATE TABLE `solve_test` (
 
 --
 -- Table structure for table `student_answer`
+=======
+  `is_break` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `solve_test`
+--
+
+INSERT INTO `solve_test` (`id`, `user_id`, `test_id`, `time_start`, `is_break`) VALUES
+(3, 19, 12, 1615277079, 0),
+(5, 26, 4, 1615780454, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `student_answer`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `student_answer` (
@@ -549,12 +812,17 @@ CREATE TABLE `student_answer` (
   `test_id` int(10) UNSIGNED NOT NULL,
   `question_id` int(10) UNSIGNED NOT NULL,
   `choice` char(1) DEFAULT NULL,
+<<<<<<< HEAD
   `answer` text DEFAULT NULL,
+=======
+  `answer` text,
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
   `skor` int(11) DEFAULT NULL,
   `uncertain` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `student_answer`
 --
 
@@ -569,11 +837,68 @@ INSERT INTO `student_answer` (`id`, `user_id`, `test_id`, `question_id`, `choice
 (68, 46, 15, 4368, NULL, NULL, 0, NULL),
 (69, 46, 15, 4366, NULL, NULL, 0, NULL),
 (70, 46, 15, 4374, NULL, NULL, 0, NULL);
+=======
+-- Dumping data untuk tabel `student_answer`
+--
+
+INSERT INTO `student_answer` (`id`, `user_id`, `test_id`, `question_id`, `choice`, `answer`, `skor`, `uncertain`) VALUES
+(5, 19, 4, 11, 'D', '64', 0, 0),
+(6, 19, 4, 1, 'E', '5', 1, 0),
+(7, 19, 4, 12, 'C', '68', 0, 0),
+(8, 19, 4, 19, '', '<p>Jawabanku di ganti</p>', 5, 1),
+(9, 19, 5, 4355, 'C', '21745', 0, 0),
+(10, 19, 5, 4356, '', '<p>abc</p>', 0, 0),
+(11, 19, 5, 4357, '', '<p>oke gaes</p>', 0, 0),
+(12, 19, 6, 4355, 'D', '21746', 1, 0),
+(13, 19, 6, 4356, NULL, NULL, 0, NULL),
+(14, 19, 6, 4357, NULL, NULL, 0, NULL),
+(15, 19, 7, 4355, NULL, NULL, 0, NULL),
+(16, 19, 7, 4356, NULL, NULL, 0, NULL),
+(17, 19, 7, 4357, NULL, NULL, 0, NULL),
+(18, 19, 8, 4355, NULL, NULL, 0, NULL),
+(19, 19, 8, 4356, NULL, NULL, 0, NULL),
+(20, 19, 8, 4357, NULL, NULL, 0, NULL),
+(30, 19, 9, 4355, NULL, NULL, 0, NULL),
+(31, 19, 9, 4356, NULL, NULL, 0, NULL),
+(32, 19, 9, 4357, NULL, NULL, 0, NULL),
+(33, 19, 10, 4355, 'A', '21743', 0, 0),
+(34, 19, 10, 4356, NULL, NULL, 0, NULL),
+(35, 19, 10, 4357, NULL, NULL, 0, NULL),
+(36, 19, 11, 4355, NULL, NULL, 0, NULL),
+(37, 19, 11, 4356, NULL, NULL, 0, NULL),
+(38, 19, 11, 4357, NULL, NULL, 0, NULL),
+(39, 19, 12, 4355, 'C', '21745', NULL, 1),
+(40, 19, 12, 4356, NULL, NULL, NULL, NULL),
+(41, 19, 12, 4357, NULL, NULL, NULL, NULL),
+(42, 26, 13, 12, NULL, NULL, 0, NULL),
+(43, 26, 13, 4358, 'A', '21750', 0, 0),
+(44, 26, 13, 11, NULL, NULL, 0, NULL),
+(45, 26, 13, 1, NULL, NULL, 0, NULL),
+(46, 26, 13, 4355, NULL, NULL, 0, NULL),
+(47, 26, 13, 11, NULL, NULL, 0, NULL),
+(48, 26, 13, 1, NULL, NULL, 0, NULL),
+(49, 26, 13, 4358, 'A', '21750', 0, 0),
+(50, 26, 13, 12, NULL, NULL, 0, NULL),
+(51, 26, 13, 19, NULL, NULL, 0, NULL),
+(52, 26, 13, 4356, NULL, NULL, 0, NULL),
+(53, 26, 13, 19, NULL, NULL, 0, NULL),
+(54, 26, 13, 4357, '', '<p>sdfsldf</p>', 0, 0),
+(55, 26, 4, 12, NULL, NULL, NULL, NULL),
+(56, 26, 4, 4358, NULL, NULL, NULL, NULL),
+(57, 26, 4, 11, NULL, NULL, NULL, NULL),
+(58, 26, 4, 19, NULL, NULL, NULL, NULL),
+(59, 19, 14, 4364, 'A', '21780', 0, 1),
+(60, 19, 14, 4363, 'C', '21777', 0, 0);
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `student_profile`
+=======
+-- Struktur dari tabel `student_profile`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `student_profile` (
@@ -584,6 +909,7 @@ CREATE TABLE `student_profile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `student_profile`
 --
 
@@ -923,11 +1249,26 @@ INSERT INTO `student_profile` (`id`, `user_id`, `school_id`, `classroom_id`) VAL
 (412, 420, 1, 14),
 (414, 421, 1, 14),
 (415, 422, 1, 14);
+=======
+-- Dumping data untuk tabel `student_profile`
+--
+
+INSERT INTO `student_profile` (`id`, `user_id`, `school_id`, `classroom_id`) VALUES
+(2, 19, 1, 5),
+(10, 24, 1, 5),
+(11, 25, 1, 5),
+(12, 26, 1, 5),
+(13, 29, 1, 1);
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `teacher_course`
+=======
+-- Struktur dari tabel `teacher_course`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `teacher_course` (
@@ -937,6 +1278,7 @@ CREATE TABLE `teacher_course` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `teacher_course`
 --
 
@@ -968,11 +1310,23 @@ INSERT INTO `teacher_course` (`id`, `user_id`, `course_id`) VALUES
 (32, 429, 27),
 (33, 426, 28),
 (34, 425, 12);
+=======
+-- Dumping data untuk tabel `teacher_course`
+--
+
+INSERT INTO `teacher_course` (`id`, `user_id`, `course_id`) VALUES
+(5, 18, 4),
+(6, 20, 3);
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `teacher_profile`
+=======
+-- Struktur dari tabel `teacher_profile`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `teacher_profile` (
@@ -983,6 +1337,7 @@ CREATE TABLE `teacher_profile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `teacher_profile`
 --
 
@@ -994,18 +1349,33 @@ INSERT INTO `teacher_profile` (`id`, `user_id`, `school_id`, `nip`) VALUES
 (9, 427, 1, '198105182008012012'),
 (10, 428, 1, '198211132006042012'),
 (11, 429, 1, '197912172010012011');
+=======
+-- Dumping data untuk tabel `teacher_profile`
+--
+
+INSERT INTO `teacher_profile` (`id`, `user_id`, `school_id`, `nip`) VALUES
+(2, 18, 1, '192 168 1 2'),
+(3, 20, 1, '192 168 1 1');
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `test`
+=======
+-- Struktur dari tabel `test`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `test` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `classroom_id` int(10) UNSIGNED NOT NULL,
+<<<<<<< HEAD
   `class_ladder_id` int(10) UNSIGNED DEFAULT NULL,
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
   `course_id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `date` date NOT NULL,
@@ -1015,6 +1385,7 @@ CREATE TABLE `test` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `test`
 --
 
@@ -1022,11 +1393,32 @@ INSERT INTO `test` (`id`, `user_id`, `classroom_id`, `class_ladder_id`, `course_
 (15, 423, 5, NULL, 3, 'Simulasi Matematika Wajib XII MIPA 1', '2021-03-27', 25, 75, 100),
 (16, 428, 5, NULL, 29, 'Simulasi Bahasa Indonesia (Wajib)', '2021-03-27', 25, 75, 100),
 (17, 423, 6, 10, 3, 'tes', '2021-03-20', 10, 75, 100);
+=======
+-- Dumping data untuk tabel `test`
+--
+
+INSERT INTO `test` (`id`, `user_id`, `classroom_id`, `course_id`, `name`, `date`, `duration`, `kkm`, `max_value`) VALUES
+(4, 18, 5, 3, 'Ulangan Harian', '2020-08-05', 60, 75, 100),
+(5, 18, 5, 4, 'Ulangan 1', '2020-02-01', 60, 75, 100),
+(6, 18, 5, 4, 'Ulangan 2', '2020-02-01', 60, 75, 100),
+(7, 18, 5, 4, 'Ulangan 3', '2020-02-01', 60, 75, 100),
+(8, 18, 5, 4, 'Ulangan 4', '2020-02-01', 5, 75, 100),
+(9, 18, 5, 4, 'Ulangan 5', '2020-02-01', 60, 75, 100),
+(10, 18, 5, 4, 'Ulangan 6', '2020-02-01', 60, 75, 100),
+(11, 18, 5, 4, 'Ulangan 7', '2020-02-01', 60, 75, 100),
+(12, 18, 5, 4, 'Ulangan 8', '2020-02-01', 60, 75, 100),
+(13, 18, 5, 4, 'MIID TEST', '2020-02-26', 60, 75, 100),
+(14, 18, 5, 4, 'Ulangan Fisika', '2021-03-16', 5, 75, 100);
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `testimoni`
+=======
+-- Struktur dari tabel `testimoni`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `testimoni` (
@@ -1040,7 +1432,11 @@ CREATE TABLE `testimoni` (
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `test_result`
+=======
+-- Struktur dari tabel `test_result`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `test_result` (
@@ -1050,10 +1446,33 @@ CREATE TABLE `test_result` (
   `value` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
+=======
+--
+-- Dumping data untuk tabel `test_result`
+--
+
+INSERT INTO `test_result` (`id`, `user_id`, `test_id`, `value`) VALUES
+(2, 19, 4, 46.1538),
+(3, 19, 5, 0),
+(4, 19, 6, 1.75439),
+(5, 19, 7, 0),
+(6, 19, 8, 0),
+(10, 19, 9, 0),
+(11, 19, 10, 0),
+(12, 19, 11, 0),
+(13, 26, 13, 0),
+(14, 19, 14, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `users`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `users` (
@@ -1071,7 +1490,11 @@ CREATE TABLE `users` (
   `remember_code` varchar(255) DEFAULT NULL,
   `created_on` int(11) UNSIGNED NOT NULL,
   `last_login` int(11) UNSIGNED DEFAULT NULL,
+<<<<<<< HEAD
   `is_login` int(11) NOT NULL DEFAULT 0,
+=======
+  `is_login` int(11) NOT NULL DEFAULT '0',
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
   `active` tinyint(1) UNSIGNED DEFAULT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
@@ -1081,20 +1504,31 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `users`
+=======
+-- Dumping data untuk tabel `users`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `is_login`, `active`, `first_name`, `last_name`, `phone`, `image`, `address`) VALUES
 (1, '127.0.0.1', 'admin@fixl.com', '$2y$12$XpBgMvQ5JzfvN3PTgf/tA.XwxbCOs3mO0a10oP9/11qi1NUpv46.u', 'admin@fixl.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1615871695, 0, 1, 'Admin', 'istrator', '081232578168', 'USER_1_1614003280.png', 'admin'),
 (13, '::1', 'uadmin@gmail.com', '$2y$10$78SZyvKRKMU7nPCew9w4nOpEUmJ1SeTV4L4ZG2NXXSfbEaswqoepq', 'uadmin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1568678256, 1615780755, 0, 1, 'admin', 'Dinas', '00', 'USER_13_1568678463.jpg', 'jln mutiara no 8'),
+<<<<<<< HEAD
 (17, '::1', 'smanam@gmail.com', '$2y$10$NIx.vGJvX.a/6J1/Yha1beTeSpb8xvMr5q2mbgpcZ2/2gOMk5.KIS', 'smanam@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575916410, 1616040675, 0, 1, 'Admin SMA', 'Negeri 6 Kendari', '081234567890', 'USER_17_1578449627.jpg', 'Jalan Banda'),
 (18, '::1', 'zidni@gmail.com', '$2y$10$554DNYTB6fzLJoaWdKsFwOSt5v88LAdqO1SlxqRB1JjTYrvT4yMky', 'zidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575919985, 1615884433, 0, 1, 'Al Zidni', 'Kasim', '081232578168', 'USER_18_1577108725.jpg', 'BTN Graha Mandiri Permai Blok K/07'),
 (19, '::1', 'alzidni@gmail.com', '$2y$10$CpC0kMgMDYXYtag4Ba4pEe2KMzz2WKsVi4Tk.csIUi6dtrcTsO1oa', 'alzidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575920027, 1616035883, 0, 1, 'Al Zidni', 'Kasim', '081232578167', 'USER_19_1615873888.png', 'BTN Graha Mandiri Permai Blok K/07'),
+=======
+(17, '::1', 'smanam@gmail.com', '$2y$10$NIx.vGJvX.a/6J1/Yha1beTeSpb8xvMr5q2mbgpcZ2/2gOMk5.KIS', 'smanam@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575916410, 1615884111, 0, 1, 'Admin SMA', 'Negeri 6 Kendari', '081234567890', 'USER_17_1578449627.jpg', 'Jalan Banda'),
+(18, '::1', 'zidni@gmail.com', '$2y$10$554DNYTB6fzLJoaWdKsFwOSt5v88LAdqO1SlxqRB1JjTYrvT4yMky', 'zidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575919985, 1615884433, 0, 1, 'Al Zidni', 'Kasim', '081232578168', 'USER_18_1577108725.jpg', 'BTN Graha Mandiri Permai Blok K/07'),
+(19, '::1', 'alzidni@gmail.com', '$2y$10$CpC0kMgMDYXYtag4Ba4pEe2KMzz2WKsVi4Tk.csIUi6dtrcTsO1oa', 'alzidni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1575920027, 1615883681, 0, 1, 'Al Zidni', 'Kasim', '081232578167', 'USER_19_1615873888.png', 'BTN Graha Mandiri Permai Blok K/07'),
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 (20, '::1', 'abdul_samad@gmail.com', '$2y$10$fDq9A4muW0tMHxEFTOOelergR2R0jGgsOcUV1yOY8dCNatoqhkrbq', 'abdul_samad@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578920748, 1615780235, 0, 1, 'Abdul Samad', 'S.Pd., M.Pd', '0321241414', 'default.jpg', 'Lorong Koila Puuwatu'),
 (24, '::1', 'fiki@gmail.com', '$2y$10$zqQMQTEzCquoNaxgTUoNAOQFUOcCukdnTaqgge1YE0sjWBY04/AKq', 'fiki@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, NULL, 0, 1, 'Muh. Fiki', 'Ramadhan', '081234567890', 'default.jpg', 'Lorong Koila'),
 (25, '::1', 'beni@gmail.com', '$2y$10$MN.fwpricYHFfD8/IZgzHuYI8yYHD4QHM4PmMRxWsbziQitZuDnk.', 'beni@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, NULL, 0, 1, 'Muh. Benni', 'Barakati', '081234567890', 'default.jpg', 'Jalan THR'),
 (26, '::1', 'sindy@gmail.com', '$2y$10$I1JsK.p19F9j/vMmvBx40OCfeI5kmbO2Ltpi8HxYFGL370bd6rrdC', 'sindy@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578923029, 1615780363, 0, 1, 'Sindy M.', 'Konggoasa', '081234567890', 'default.jpg', 'Jalan Konggoasa'),
 (27, '::1', 'headmaster@gmail.com', '$2y$10$KpIBh8M3Te9JAypcooL94.bEkUNMi8ghUcCmPJDLQJMCbByxQVzVi', 'headmaster@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1581400377, 1615230938, 0, 1, 'Kepala Sekolah', 'ku', '081232578168', 'default.jpg', 'jalan'),
+<<<<<<< HEAD
 (29, '127.0.0.1', 'kharismayunitra@gmail.com', '$2y$10$j3fM.dzpMXtY9rT9As1x/OaufsF8IgN3FFlIff0pNvcdX8ODmQvpq', 'kharismayunitra@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1615230796, 1615230853, 0, 1, 'Kharisma', 'Yunitra', '081232678168', 'default.jpg', 'Lorong Manggis'),
 (34, '::1', 'abrisal@yahoo.com', '$2y$10$TptmQ.0DT1DPd/NJ6LXaoekkR7mQIQXSElRVKkrhz9jBXy7nOrBMq', 'abrisal@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1615962837, NULL, 0, 1, 'ABRISAL', '.', '082346245702', 'default.jpg', '-'),
 (35, '::1', 'putri@yahoo.com', '$2y$10$I3odScU7qqdweeD0D7lp.OgUFG4RqNAZWUnqYbN.G7PJvTslUVRf6', 'putri@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1615962837, 1616036076, 0, 1, 'AGRIZIA ANGELVLYN PUTRI RONGKALOE', '.', '082269107537', 'default.jpg', '-'),
@@ -1439,11 +1873,18 @@ INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activ
 (427, '::1', 'ik.verawati@gmail.com', '$2y$10$GaKXlHtTZfZa7aJVmLvUv.F4EqRXecGpvQnC.p0YwybVxoAyZWqLa', 'ik.verawati@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1615969912, 1616037072, 0, 1, 'Ika', 'Verawati', '085241638098', 'default.jpg', 'jalan'),
 (428, '::1', 'samihaulfa706@gmail.com', '$2y$10$kjmMg/k9rdVBwhrO3I/0t.NSsCHceT7DcxVFUu16S4UE03IXsLJPa', 'samihaulfa706@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1615970120, 1615972713, 0, 1, 'Samiha', 'Ulfa', '085241778288', 'default.jpg', 'jalan'),
 (429, '::1', 'syaddad2006@gmail.com', '$2y$10$qOKIrDACcnz93FByBevFg.UJw9UWpQNjW7H7ac1T8t4wHleivUyFm', 'syaddad2006@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1615970365, NULL, 0, 1, 'Naowati', 'Naowati', '085327427715', 'default.jpg', 'jalan');
+=======
+(29, '127.0.0.1', 'kharismayunitra@gmail.com', '$2y$10$j3fM.dzpMXtY9rT9As1x/OaufsF8IgN3FFlIff0pNvcdX8ODmQvpq', 'kharismayunitra@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1615230796, 1615230853, 0, 1, 'Kharisma', 'Yunitra', '081232678168', 'default.jpg', 'Lorong Manggis');
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `users_groups`
+=======
+-- Struktur dari tabel `users_groups`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 CREATE TABLE `users_groups` (
@@ -1453,7 +1894,11 @@ CREATE TABLE `users_groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `users_groups`
+=======
+-- Dumping data untuk tabel `users_groups`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
@@ -1467,6 +1912,7 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (41, 25, 4),
 (73, 26, 4),
 (70, 27, 6),
+<<<<<<< HEAD
 (72, 29, 4),
 (78, 34, 4),
 (79, 35, 4),
@@ -1810,6 +2256,9 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (494, 427, 3),
 (500, 428, 3),
 (498, 429, 3);
+=======
+(72, 29, 4);
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 --
 -- Indexes for dumped tables
@@ -1970,8 +2419,12 @@ ALTER TABLE `test`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `classroom_id` (`classroom_id`),
+<<<<<<< HEAD
   ADD KEY `course_id` (`course_id`),
   ADD KEY `class_ladder_id` (`class_ladder_id`);
+=======
+  ADD KEY `course_id` (`course_id`);
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 --
 -- Indexes for table `testimoni`
@@ -2014,150 +2467,238 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `classroom`
 --
 ALTER TABLE `classroom`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `class_ladder`
 --
 ALTER TABLE `class_ladder`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `edu_ladder`
 --
 ALTER TABLE `edu_ladder`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
   MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `headmaster_profile`
 --
 ALTER TABLE `headmaster_profile`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
+<<<<<<< HEAD
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
+=======
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4384;
 
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4366;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `questionnaire`
 --
 ALTER TABLE `questionnaire`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `question_answer`
 --
 ALTER TABLE `question_answer`
+<<<<<<< HEAD
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21880;
 
+=======
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21790;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `question_reference`
 --
 ALTER TABLE `question_reference`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `school`
 --
 ALTER TABLE `school`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `school_admin`
 --
 ALTER TABLE `school_admin`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `solve_test`
 --
 ALTER TABLE `solve_test`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `student_answer`
 --
 ALTER TABLE `student_answer`
+<<<<<<< HEAD
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
+=======
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `student_profile`
 --
 ALTER TABLE `student_profile`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=416;
 
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `teacher_course`
 --
 ALTER TABLE `teacher_course`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `teacher_profile`
 --
 ALTER TABLE `teacher_profile`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `test`
 --
 ALTER TABLE `test`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `testimoni`
 --
 ALTER TABLE `testimoni`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `test_result`
 --
 ALTER TABLE `test_result`
+<<<<<<< HEAD
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
+=======
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
+<<<<<<< HEAD
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=430;
 
+=======
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
+<<<<<<< HEAD
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=505;
 
 --
@@ -2166,6 +2707,15 @@ ALTER TABLE `users_groups`
 
 --
 -- Constraints for table `classroom`
+=======
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `classroom`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `classroom`
   ADD CONSTRAINT `classroom_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`),
@@ -2173,26 +2723,42 @@ ALTER TABLE `classroom`
   ADD CONSTRAINT `classroom_ibfk_3` FOREIGN KEY (`class_ladder_id`) REFERENCES `class_ladder` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `courses`
+=======
+-- Ketidakleluasaan untuk tabel `courses`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `courses`
   ADD CONSTRAINT `courses_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `headmaster_profile`
+=======
+-- Ketidakleluasaan untuk tabel `headmaster_profile`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `headmaster_profile`
   ADD CONSTRAINT `headmaster_profile_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`),
   ADD CONSTRAINT `headmaster_profile_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `question`
+=======
+-- Ketidakleluasaan untuk tabel `question`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `question`
   ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`questionnaire_id`) REFERENCES `questionnaire` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `questionnaire`
+=======
+-- Ketidakleluasaan untuk tabel `questionnaire`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `questionnaire`
   ADD CONSTRAINT `questionnaire_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
@@ -2200,34 +2766,54 @@ ALTER TABLE `questionnaire`
   ADD CONSTRAINT `questionnaire_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `question_reference`
+=======
+-- Ketidakleluasaan untuk tabel `question_reference`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `question_reference`
   ADD CONSTRAINT `question_reference_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `test` (`id`),
   ADD CONSTRAINT `question_reference_ibfk_2` FOREIGN KEY (`questionnaire_id`) REFERENCES `questionnaire` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `school`
+=======
+-- Ketidakleluasaan untuk tabel `school`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `school`
   ADD CONSTRAINT `school_ibfk_1` FOREIGN KEY (`edu_ladder_id`) REFERENCES `edu_ladder` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `school_admin`
+=======
+-- Ketidakleluasaan untuk tabel `school_admin`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `school_admin`
   ADD CONSTRAINT `school_admin_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `school_admin_ibfk_2` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `solve_test`
+=======
+-- Ketidakleluasaan untuk tabel `solve_test`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `solve_test`
   ADD CONSTRAINT `solve_test_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `solve_test_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `test` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `student_answer`
+=======
+-- Ketidakleluasaan untuk tabel `student_answer`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `student_answer`
   ADD CONSTRAINT `student_answer_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
@@ -2235,7 +2821,11 @@ ALTER TABLE `student_answer`
   ADD CONSTRAINT `student_answer_ibfk_3` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `student_profile`
+=======
+-- Ketidakleluasaan untuk tabel `student_profile`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `student_profile`
   ADD CONSTRAINT `student_profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
@@ -2243,20 +2833,29 @@ ALTER TABLE `student_profile`
   ADD CONSTRAINT `student_profile_ibfk_3` FOREIGN KEY (`classroom_id`) REFERENCES `classroom` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `teacher_course`
+=======
+-- Ketidakleluasaan untuk tabel `teacher_course`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `teacher_course`
   ADD CONSTRAINT `teacher_course_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `teacher_course_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `teacher_profile`
+=======
+-- Ketidakleluasaan untuk tabel `teacher_profile`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `teacher_profile`
   ADD CONSTRAINT `teacher_profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `teacher_profile_ibfk_2` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `test`
 --
 ALTER TABLE `test`
@@ -2264,18 +2863,28 @@ ALTER TABLE `test`
 
 --
 -- Constraints for table `test_result`
+=======
+-- Ketidakleluasaan untuk tabel `test_result`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `test_result`
   ADD CONSTRAINT `test_result_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `test` (`id`),
   ADD CONSTRAINT `test_result_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
+<<<<<<< HEAD
 -- Constraints for table `users_groups`
+=======
+-- Ketidakleluasaan untuk tabel `users_groups`
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 --
 ALTER TABLE `users_groups`
   ADD CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+<<<<<<< HEAD
 COMMIT;
+=======
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

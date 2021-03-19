@@ -24,7 +24,11 @@ class Class_ladder_model extends MY_Model
 
       $this->db->insert($this->table, $data);
       $id = $this->db->insert_id($this->table . '_id_seq');
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
       if( isset($id) )
       {
         $this->set_message("berhasil");
@@ -124,7 +128,11 @@ class Class_ladder_model extends MY_Model
   //  */
   // public function class_ladders(  )
   // {
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 42332a0e48ecc13a82f50de7f793532a18e12f0b
   //     $this->order_by($this->table.'.id', 'asc');
   //     return $this->fetch_data();
   // }
