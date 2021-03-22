@@ -115,11 +115,6 @@ class Questionnaire_services
   public function validation_config( ){
     $config = array(
       array(
-        'field' => 'user_id',
-        'label' => 'Id Pengguna',
-        'rules' =>  'trim|required',
-      ),
-      array(
         'field' => 'classroom_id',
         'label' => 'Kelas',
         'rules' =>  'trim|required',
