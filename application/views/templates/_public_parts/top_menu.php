@@ -10,7 +10,13 @@
                 </li>
             <?php else : ?>
                 <li class="nav-item d-sm-inline-block">
-                    <a href="<?= site_url().$this->ion_auth->group( $this->ion_auth->user()->row()->group_id )->row()->name ?>" class="btn btn-default nav-link">Dashboard</a>
+                    <?php if( $this->ion_auth->user()->row()->group_id == 6){ ?>
+                        <a href="<?= site_url("headmaster/student") ?>" class="btn btn-default nav-link">Dashboard</a>
+                    <?php } else if( $this->ion_auth->user()->row()->group_id == 5){ ?>
+                        <a href="<?= site_url("student/test") ?>" class="btn btn-default nav-link">Dashboard</a>
+                    <?php } else{ ?>
+                        <a href="<?= site_url().$this->ion_auth->group( $this->ion_auth->user()->row()->group_id )->row()->name ?>" class="btn btn-default nav-link">Dashboard</a>
+                    <?php } ?>
                 </li>
             <?php endif; ?>
         </ul>

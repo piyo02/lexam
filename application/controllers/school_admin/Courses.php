@@ -27,11 +27,11 @@ class Courses extends School_admin_Controller {
         $pagination['total_records'] = $this->courses_model->record_count() ;
         $pagination['limit_per_page'] = 10;
         $pagination['start_record'] = $page*$pagination['limit_per_page'];
-        $pagination['uri_segment'] = 4;
+		$pagination['uri_segment'] = 4;
 		//set pagination
 		if ($pagination['total_records'] > 0 ) $this->data['pagination_links'] = $this->setPagination($pagination);
 		#################################################################3
-		$table = $this->services->get_table_config( $this->current_page );
+		$table = $this->services->get_table_config( $this->current_page, $pagination['start_record']+1 );
 		$table[ "rows" ] = $this->courses_model->courses_by_school_id( $pagination['start_record'], $pagination['limit_per_page'], $this->school_id )->result();
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;

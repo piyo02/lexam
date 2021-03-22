@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Courses_model extends MY_Model
+class Login_model extends MY_Model
 {
-  protected $table = "courses";
+  protected $table = "login_attempts";
 
   function __construct() {
       parent::__construct( $this->table );
-      parent::set_join_key( 'course_id' );
+      parent::set_join_key( 'login_id' );
   }
 
   /**
@@ -24,7 +24,6 @@ class Courses_model extends MY_Model
 
       $this->db->insert($this->table, $data);
       $id = $this->db->insert_id($this->table . '_id_seq');
-    
       if( isset($id) )
       {
         $this->set_message("berhasil");
@@ -69,14 +68,6 @@ class Courses_model extends MY_Model
    */
   public function delete( $data_param  )
   {
-    //foreign
-    //delete_foreign( $data_param. $models[]  )
-    if( !$this->delete_foreign( $data_param, ['questionnaire_model', 'teacher_course_model', 'test_model'] ) )
-    {
-      $this->set_error("gagal");//('course_delete_unsuccessful');
-      return FALSE;
-    }
-    //foreign
     $this->db->trans_begin();
 
     $this->db->delete($this->table, $data_param );
@@ -94,67 +85,21 @@ class Courses_model extends MY_Model
     return TRUE;
   }
 
-    /**
-   * group
-   *
-   * @param int|array|null $id = id_groups
-   * @return static
-   * @author madukubah
-   */
-  public function course( $id = NULL  )
-  {
-      if (isset($id))
-      {
-        $this->where($this->table.'.id', $id);
-      }
-
-      $this->limit(1);
-      $this->order_by($this->table.'.id', 'desc');
-
-      $this->courses(  );
-
-      return $this;
-  }
-  public function courses_by_school_id( $start = 0 , $limit = NULL, $school_id = NULL  )
-  {
-      if (isset($school_id))
-      {
-        $this->where($this->table.'.school_id', $school_id);
-      }
-
-      $this->order_by($this->table.'.id', 'desc');
-
-      $this->courses( $start, $limit );
-
-      return $this;
-  }
-  // /**
-  //  * courses
-  //  *
-  //  *
-  //  * @return static
-  //  * @author madukubah
-  //  */
-  // public function courses(  )
-  // {
-      
-  //     $this->order_by($this->table.'.id', 'asc');
-  //     return $this->fetch_data();
-  // }
-
   /**
-   * courses
+   * class_ladders
    *
    *
    * @return static
    * @author madukubah
    */
-  public function courses( $start = 0 , $limit = NULL )
+  public function login_attemps( $start = 0 , $limit = NULL )
   {
+    $this->select($this->table . '.*');
       if (isset( $limit ))
       {
         $this->limit( $limit );
       }
+      $this->db->group_by("login");
       $this->offset( $start );
       $this->order_by($this->table.'.id', 'asc');
       return $this->fetch_data();

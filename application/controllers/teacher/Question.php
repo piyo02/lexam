@@ -464,8 +464,8 @@ class Question extends Teacher_Controller {
 		
 		if ( ! $this->upload->do_upload( $userfile ) )
 		{
-			// $this->set_error( $this->upload->display_errors() );
-			// $this->set_error( 'upload_unsuccessful' );
+			$this->set_error( $this->upload->display_errors() );
+			$this->set_error( 'upload_unsuccessful' );
 			return FALSE;
 		}
 		else

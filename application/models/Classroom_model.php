@@ -77,7 +77,7 @@ class Classroom_model extends MY_Model
     }
     //foreign
     // delete_foreign( $data_param. $models[]  )
-    if( !$this->delete_foreign( $data_param, ['student_profile_model'] ) )
+    if( !$this->delete_foreign( $data_param, ['questionnaire_model', 'student_profile_model', 'test_model'] ) )
     {
       $this->set_error("gagal");//('group_delete_unsuccessful');
       return FALSE;
