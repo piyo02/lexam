@@ -181,6 +181,8 @@ class Result_test extends Teacher_Controller {
 	public function export( $test_id = NULL )
 	{
 		if( !($test_id) ) redirect( site_url($this->current_page) );
+		$data_param[ "id" ] 	= $test_id;
+		$this->test_model->update( ['has_print'=> 1], $data_param );
 		
 		$detail = $this->test_model->test( $test_id )->row();
 		$subbab = '';
@@ -198,7 +200,7 @@ class Result_test extends Teacher_Controller {
             'detail' => $detail,
 		];
         #################################################################
-        $this->excel->excel_config($_data);
+		$this->excel->excel_config($_data);
 		redirect( site_url($this->current_page) . 'detail/'. $test_id );
 	}
 

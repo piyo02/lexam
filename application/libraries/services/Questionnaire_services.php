@@ -39,7 +39,6 @@ class Questionnaire_services
       'course_name' => 'Mata Pelajaran',
       'description' => 'Materi',
       'classroom_name' => 'Kelas',
-      // 'status' => 'Status',
     );
     $table["number"] = $start_number;
     $table[ "action" ] = array(
@@ -81,14 +80,6 @@ class Questionnaire_services
             'type' => 'textarea',
             'label' => "Materi",
           ),
-          "status" => array(
-            'type' => 'select',
-            'label' => "Status",
-            'options' => array(
-              0 => 'Tidak Aktif',
-              1 => 'Aktif',
-            ),
-          ),
         ),
         "title" => "Group",
         "data_name" => "name",
@@ -100,6 +91,7 @@ class Questionnaire_services
         "url" => site_url( $_page."delete/"),
         "button_color" => "danger",
         "param" => "id",
+        "message" => "<b>Menghapus Bank Soal akan menghapus data-data lainnya yang berhubungan!!!</b><br/>Apakah Anda yakin ingin menghapus Bank Soal?",
         "form_data" => array(
           "id" => array(
             'type' => 'hidden',
@@ -134,11 +126,6 @@ class Questionnaire_services
         'label' => 'Materi Bank Soal',
         'rules' =>  'trim|required',
       ),
-      array(
-        'field' => 'status',
-        'label' => 'status',
-        'rules' =>  'trim|required',
-      ),
     );
     
     return $config;
@@ -171,14 +158,6 @@ class Questionnaire_services
         'type' => 'textarea',
         'label' => "Materi",
         'value' => "-",
-      ),
-      "status" => array(
-        'type' => 'select',
-        'label' => "Status",
-        'options' => array(
-          0 => 'Tidak Aktif',
-          1 => 'Aktif',
-        ),
       ),
     );
     return $form_data;

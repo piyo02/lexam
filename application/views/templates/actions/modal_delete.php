@@ -20,7 +20,11 @@ $data_param = ($data != '') ? $data->$param : '';
             <div class="modal-body">
                 <div style="word-wrap: break-word;" class="alert alert-danger">
                     <div style="word-wrap: break-word !important;">
-                        Apa Anda Yakin menghapus <b><?php echo $data->$data_name ?></b> ?
+                        <?php if (isset( $message )){ 
+                            echo $message;
+                         } else { ?>
+                            Apa Anda Yakin menghapus <b><?php echo $data->$data_name ?></b> ?
+                        <?php } ?>
                     </div>
                 </div>
                 <!--  -->

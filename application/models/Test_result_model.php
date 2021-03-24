@@ -68,15 +68,21 @@ class Test_result_model extends MY_Model
    */
   public function delete( $data_param  )
   {
-    //foreign
-    //delete_foreign( $data_param. $models[]  )
-    // if( !$this->delete_foreign( $data_param, ['menu_model'] ) )
-    // {
-    //   $this->set_error("gagal");//('group_delete_unsuccessful');
-    //   return FALSE;
-    // }
-    //foreign
+    if( isset($data_param['test_id'] ) ){
+      if( !$this->db->query("SELECT * FROM test WHERE has_print = 0 AND id = ". $data_param['test_id'])->num_rows() )
+      {
+        $this->set_error("Anda belum mengexport hasil ulangan ini. Export terlebih dahulu untuk menghapus");//('group_delete_unsuccessful');
+        return FALSE;
+      }
+    }
+
     $this->db->trans_begin();
+    
+    if( isset( $data_param['id'] ) ){
+      $result = $this->db->query("SELECT user_id FROM test_result WHERE id =" . $data_param['id'])->row();
+      $this->db->query( "DELETE FROM student_answer WHERE user_id = " . $result->user_id );
+    }
+
 
     $this->db->delete($this->table, $data_param );
     if ($this->db->trans_status() === FALSE)

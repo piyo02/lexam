@@ -103,55 +103,55 @@ class Test_services
       );
       $table["number"] = $start_number;
       $table[ "action" ] = array(
-              array(
-                "name" => 'Status',
-                "modal_id" => "status_",
-                "type" => "modal_form",
-                "url" => site_url( $_page."break/"),
-                "button_color" => "primary",
-                "param" => "id",
-                "form_data" => array(
-                  "id" => array(
-                    'type' => 'hidden',
-                    'label' => "id",
-                  ),
-                  "test_id" => array(
-                    'type' => 'hidden',
-                    'label' => "id",
-                  ),
-                  "is_break" => array(
-                    'type' => 'select',
-                    'label' => "Status",
-                    'options' => array(
-                      '1' => 'Berhentikan',
-                      '0' => 'Aktifkan',
-                    )
-                  )
-                ),
-                "title" => "Group",
-                "data_name" => "name",
-              ),
-              array(
-                "name" => 'X',
-                "type" => "modal_delete",
-                "modal_id" => "delete_",
-                "url" => site_url( $_page."delete_work/"),
-                "button_color" => "danger",
-                "param" => "id",
-                "form_data" => array(
-                  "id" => array(
-                    'type' => 'hidden',
-                    'label' => "id",
-                  ),
-                  "model" => array(
-                    'type' => 'hidden',
-                    'label' => "model",
-                    'value' => "solve_test_model",
-                  ),
-                ),
-                "title" => "Group",
-                "data_name" => "name",
-              ),
+              // array(
+              //   "name" => 'Status',
+              //   "modal_id" => "status_",
+              //   "type" => "modal_form",
+              //   "url" => site_url( $_page."break/"),
+              //   "button_color" => "primary",
+              //   "param" => "id",
+              //   "form_data" => array(
+              //     "id" => array(
+              //       'type' => 'hidden',
+              //       'label' => "id",
+              //     ),
+              //     "test_id" => array(
+              //       'type' => 'hidden',
+              //       'label' => "id",
+              //     ),
+              //     "is_break" => array(
+              //       'type' => 'select',
+              //       'label' => "Status",
+              //       'options' => array(
+              //         '1' => 'Berhentikan',
+              //         '0' => 'Aktifkan',
+              //       )
+              //     )
+              //   ),
+              //   "title" => "Group",
+              //   "data_name" => "name",
+              // ),
+              // array(
+              //   "name" => 'X',
+              //   "type" => "modal_delete",
+              //   "modal_id" => "delete_",
+              //   "url" => site_url( $_page."delete_work/"),
+              //   "button_color" => "danger",
+              //   "param" => "id",
+              //   "form_data" => array(
+              //     "id" => array(
+              //       'type' => 'hidden',
+              //       'label' => "id",
+              //     ),
+              //     "model" => array(
+              //       'type' => 'hidden',
+              //       'label' => "model",
+              //       'value' => "solve_test_model",
+              //     ),
+              //   ),
+              //   "title" => "Group",
+              //   "data_name" => "name",
+              // ),
     );
     return $table;
   }
@@ -209,7 +209,7 @@ class Test_services
       $duration = $data->duration;
       $kkm = $data->kkm;
       $max_value = $data->max_value;
-
+      $status = $data->status;
     } else {
       $id = null;
       $name = null;
@@ -220,6 +220,7 @@ class Test_services
       $duration = null;
       $kkm = null;
       $max_value = null;
+      $status = 1;
     }
 
     $list_course = $this->list_course( $user_id );
@@ -274,6 +275,15 @@ class Test_services
         'label' => 'Nilai Maksimal',
         'value' => $max_value
       ),
+      'status' => array(
+        'type' => 'select',
+        'label' => 'Status',
+        'options' => [
+          1 => "Aktif",
+          0 => "Tidak Aktif",
+        ],
+        'selected' => $status
+      ),
     );
 
     return $form_data;
@@ -290,6 +300,7 @@ class Test_services
     $duration = $data->duration;
     $kkm = $data->kkm;
     $max_value = $data->max_value;
+    $status = $data->status;
     $form_data = array(
       'name' => array(
         'type' => 'text',
@@ -330,6 +341,15 @@ class Test_services
         'type' => 'number',
         'label' => 'Nilai Maksimal',
         'value' => $max_value
+      ),
+      'status' => array(
+        'type' => 'select',
+        'label' => 'Status',
+        'options' => [
+          1 => "Aktif",
+          0 => "Tidak Aktif",
+        ],
+        'selected' => $status
       ),
     );
     return $form_data;

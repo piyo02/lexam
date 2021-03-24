@@ -287,6 +287,39 @@ class Question extends Teacher_Controller {
 		redirect( site_url( $this->current_page . 'detail/' . $data_param['id'] ) );
 	}
 
+	public function edit_option(){
+		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
+
+		// echo var_dump( $data );return;
+		$this->form_validation->set_rules( 'id', 'Option', 'required|trim' );
+        if ($this->form_validation->run() === TRUE )
+        {
+			$question_id = $this->input->post( 'question_id' );
+			$type = $this->input->post( 'type' );
+
+			if( $type == "image" ){
+				$data['answer'] = $this->input->post( 'answer' );
+			} else {
+				$data['answer'] = $this->input->post( 'answer' );
+			}
+
+			$data_param['id'] = $this->input->post( 'id' );
+
+			if( $this->question_answer_model->update( $data, $data_param  ) ){
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::SUCCESS, $this->question_model->messages() ) );
+			}else{
+				$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->question_model->errors() ) );
+			}
+		}
+        else
+        {
+          $this->data['message'] = (validation_errors() ? validation_errors() : ($this->m_account->errors() ? $this->question_model->errors() : $this->session->flashdata('message')));
+          if(  validation_errors() || $this->question_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
+		}
+		
+		redirect( site_url( $this->current_page . 'detail/' . $question_id ) );
+	}
+
 	public function edit_answer(  )
 	{
 		if( !($_POST) ) redirect(site_url(  $this->current_page ));  
@@ -478,7 +511,7 @@ class Question extends Teacher_Controller {
 			return $file_data['file_name'];
 		}
 	}
-	public function upload_image_option( $code, $index = 0 )
+	public function upload_image_option( $code, $index )
 	{
 		$label = ['A', 'B', 'C', 'D', 'E'];
 		$upload = $this->config->item('upload', 'ion_auth');
@@ -496,8 +529,7 @@ class Question extends Teacher_Controller {
 		$config['upload_path']	= './' . $upload_path;
 		
 		$this->load->library('upload', $config);
-		
-		if ( ! $this->upload->do_multi_upload( 'option' ) )
+		if ( ! $this->upload->do_upload( 'option[]' ) )
 		{
 			// $this->set_error( $this->upload->display_errors() );
 			// $this->set_error( 'upload_unsuccessful' );
@@ -506,7 +538,8 @@ class Question extends Teacher_Controller {
 		else
 		{
 			$file_data = $this->upload->data();
-			return $filename;
+			var_dump( $file_data ); die;
+			return $file_data['file_name'];
 		}
 	}
 }

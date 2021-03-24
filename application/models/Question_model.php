@@ -70,15 +70,17 @@ class Question_model extends MY_Model
   public function delete( $data_param )
   {
     //exists
-    if( !$this->exist_data( $data_param, ['question_answer', 'student_answer'] ) )
-    {
-      $this->set_error("Soal ini memiliki data yang penting");//('group_delete_unsuccessful');
-      return FALSE;
+    if( isset($data_param['id']) ){
+      if( $this->db->query("SELECT * FROM student_answer WHERE question_id = ". $data_param['id'])->num_rows() )
+      {
+        $this->set_error("Soal ini memiliki data yang penting");//('group_delete_unsuccessful');
+        return FALSE;
+      }
     }
 
     //foreign
     //delete_foreign( $data_param. $models[]  )
-    if( !$this->delete_foreign( $data_param, ['question_answer_model'] ) )
+    if( !$this->delete_foreign( $data_param, ['question_answer_model', 'student_answer_model'] ) )
     {
       $this->set_error("gagal");//('group_delete_unsuccessful');
       return FALSE;

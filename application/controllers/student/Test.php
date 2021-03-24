@@ -43,7 +43,6 @@ class Test extends Student_Controller {
 		#################################################################3
 		$table = $this->services->get_table_config( $this->current_page );
 		$table[ "rows" ] = $this->test_model->test_by_classroom_id( $student->classroom_id, $student->class_ladder_id, $student->school_id, $this->user_id, $pagination['start_record'], $pagination['limit_per_page'] )->result();
-		// var_dump($student); die;
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
 
@@ -64,12 +63,13 @@ class Test extends Student_Controller {
 		$test_id = $this->input->post( 'id' );
 		if( !$test_id ) redirect( $this->current_page );
 
+
 		//session test id
 		$session['test_id'] = $test_id;
 		$this->session->set_userdata( $session );
 		// apakah siswa sudah pernah mengerjakan atau belum
 		$solve_test = $this->solve_test_model->solve_test_by_student_id( $test_id, $this->user_id )->row();
-		if( $solve_test->is_break ){ //jika sedang di hentikan
+		if( false ){ //jika sedang di hentikan   $solve_test->is_break
 			redirect('student/test/break'); //lempar ke halaman break
 		}
 		elseif( $solve_test ){

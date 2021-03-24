@@ -31,7 +31,9 @@
 
         <div class="col-12">
           <div class="row">
-            <?php foreach ($rows as $key => $row) : ?>
+            <?php foreach ($rows as $key => $row) : 
+              if( $row->status ){
+              ?>
               <div class="col-lg-4">
                 <div class="info-box">
                   <span class="info-box-icon bg-info"><i class="fas fa-file-signature"></i></span>
@@ -68,7 +70,8 @@
                   </div>
                 </div>
               </div>
-              <?php endforeach; ?>          
+              <?php }
+            endforeach; ?>          
           </div>
           <?php echo (isset($pagination_links)) ? $pagination_links : '';  ?>
 

@@ -94,6 +94,11 @@
                           'label' => "id option",
                           'value' => $option->id
                         ),
+                        "type" => array(
+                          'type' => 'hidden',
+                          'label' => "type",
+                          'value' => $option->type
+                        ),
                         "question_id" => array(
                           'type' => 'hidden',
                           'label' => "id option",

@@ -87,6 +87,7 @@ class Test extends Teacher_Controller {
 			$data['classroom_id'] = $this->input->post( 'classroom_id' );
 			$data['class_ladder_id'] = $this->input->post( 'class_ladder_id' );
 			$data['course_id'] = $this->input->post( 'course_id' );
+			$data['status'] = $this->input->post( 'status' );
 
 			// var_dump($data); die;
 
@@ -242,6 +243,7 @@ class Test extends Teacher_Controller {
 			$data['duration'] = $this->input->post( 'duration' );
 			$data['kkm'] = $this->input->post( 'kkm' );
 			$data['max_value'] = $this->input->post( 'max_value' );
+			$data['status'] = $this->input->post( 'status' );
 
 			$data_param['id'] = $this->input->post( 'id' );
 

@@ -70,7 +70,16 @@ class Test_model extends MY_Model
   {
     //foreign
     //delete_foreign( $data_param. $models[]  )
-    if( !$this->delete_foreign( $data_param, ['question_reference_model'] ) )
+
+    if( isset($data_param['id']) ){
+      if( $this->db->query("SELECT * FROM test_result WHERE test_id = ". $data_param['id'])->num_rows() )
+      {
+        $this->set_error("Ulangan ini memiliki data yang penting");//('group_delete_unsuccessful');
+        return FALSE;
+      }
+    }
+
+    if( !$this->delete_foreign( $data_param, ['question_reference_model', 'test_result_model', 'solve_test_model'] ) )
     {
       $this->set_error("gagal");//('group_delete_unsuccessful');
       return FALSE;
@@ -117,7 +126,7 @@ class Test_model extends MY_Model
   public function test_by_classroom_id( $classroom_id = NULL, $class_ladder_id = NULL, $school_id = NULL, $student_id = NULL, $start = 0, $limit = NULL  )
   {
     if($student_id){
-      $this->select("(SELECT value FROM test_result WHERE test_result.test_id = test.id AND test_result.user_id = $student_id) result_student");
+      $this->select("(SELECT value FROM test_result WHERE test_result.test_id = test.id AND test_result.user_id = $student_id LIMIT 1) result_student");
     }
       if (isset($classroom_id))
       {
@@ -147,12 +156,14 @@ class Test_model extends MY_Model
 
   public function tests( $start = 0 , $limit = NULL, $user_id = NULL )
   {
+    $this->select("question_reference.test_id AS question_reference_id");
     $this->select('CONCAT( users.first_name, " ", users.last_name ) as user_fullname');
     $this->select($this->table . '.*');
     $this->select('classroom.name AS classroom_name');
     $this->select("(SELECT name FROM class_ladder WHERE id = test.class_ladder_id) class_ladder_name");
     $this->select("(SELECT id FROM class_ladder WHERE id = test.class_ladder_id) class_ladder_id");
     $this->select('courses.name AS course_name');
+    $this->select('status');
       if (isset( $limit ))
       {
         $this->limit( $limit );
@@ -172,12 +183,18 @@ class Test_model extends MY_Model
         'courses.id = test.course_id',
         'inner'
       );
+      $this->join(
+        'question_reference',
+        'question_reference.test_id = test.id',
+        'inner'
+      );
       if (isset($user_id))
       {
         $this->where($this->table.'.user_id', $user_id);
       }
       $this->offset( $start );
       $this->order_by($this->table.'.id', 'asc');
+      $this->db->group_by( 'question_reference_id' );
       return $this->fetch_data();
   }
 

@@ -62,7 +62,7 @@
                 <input type="hidden" name="question_id" id="question_id" value="<?= $questions[0]->id ?>">
                 <input type="hidden" name="type_option" id="type_option" value="<?= $questions[0]->type_option ?>">
                 <?php if( $questions[0]->type == 'image' ) : ?>
-                    <img src="<?= $questions[0]->image_quest; ?>" alt="Gambar Soal <?= $questions[0]->code ?>" height="150">
+                    <img src="<?= $questions[0]->image_quest; ?>" alt="Gambar Soal <?= $questions[0]->code ?>" height="150" style="max-width: 100%;">
                 <?php endif; ?>
                 <p>
                     <?= $questions[0]->text; ?>
