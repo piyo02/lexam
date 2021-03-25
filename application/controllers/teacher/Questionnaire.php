@@ -107,6 +107,7 @@ class Questionnaire extends Teacher_Controller {
         {
 			$data['name'] = $this->input->post( 'name' );
 			$data['description'] = $this->input->post( 'description' );
+			$data['course_id'] = $this->input->post( 'course_id' );
 
 			$data_param['id'] = $this->input->post( 'id' );
 

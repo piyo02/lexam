@@ -29,16 +29,16 @@ class Question extends Teacher_Controller {
 		$page = ($this->uri->segment(4 + 1)) ? ($this->uri->segment(4 + 1) -  1 ) : 0;
 		// echo $page; return;
         //pagination parameter
-        $pagination['base_url'] = base_url( $this->current_page ) .'/index';
-        $pagination['total_records'] = $this->question_model->record_count_by_questionnaire_id( $questionnaire_id ) ;
-        $pagination['limit_per_page'] = 10;
-        $pagination['start_record'] = $page*$pagination['limit_per_page'];
-        $pagination['uri_segment'] = 4;
-		//set pagination
-		if ($pagination['total_records'] > 0 ) $this->data['pagination_links'] = $this->setPagination($pagination);
+        // $pagination['base_url'] = base_url( $this->current_page ) .'/questionnaire/'. $questionnaire_id;
+        // $pagination['total_records'] = $this->question_model->record_count_by_questionnaire_id( $questionnaire_id ) ;
+        // $pagination['limit_per_page'] = 10;
+        // $pagination['start_record'] = $page*$pagination['limit_per_page'];
+        // $pagination['uri_segment'] = 4;
+		// //set pagination
+		// if ($pagination['total_records'] > 0 ) $this->data['pagination_links'] = $this->setPagination($pagination);
 		#################################################################3
 		$table = $this->services->get_table_config( $this->current_page );
-		$table[ "rows" ] = $this->question_model->question_by_questionnaire_id( $pagination['start_record'], $pagination['limit_per_page'], $questionnaire_id )->result();
+		$table[ "rows" ] = $this->question_model->question_by_questionnaire_id( NULL, NULL, $questionnaire_id )->result();
 		// var_dump( $table[ "rows" ] ); die;
 		$table = $this->load->view('templates/tables/plain_table_question', $table, true);
 		$this->data[ "contents" ] = $table;
