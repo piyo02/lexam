@@ -298,7 +298,8 @@ class Question extends Teacher_Controller {
 			$type = $this->input->post( 'type' );
 
 			if( $type == "image" ){
-				$data['answer'] = $this->input->post( 'answer' );
+				$filename = $this->upload_image( "A", 'answer', 'answer' );
+				$data['answer'] = $filename;
 			} else {
 				$data['answer'] = $this->input->post( 'answer' );
 			}
@@ -529,7 +530,7 @@ class Question extends Teacher_Controller {
 		$config['upload_path']	= './' . $upload_path;
 		
 		$this->load->library('upload', $config);
-		if ( ! $this->upload->do_upload( 'option[]' ) )
+		if ( ! $this->upload->do_multi_upload( 'option' ) )
 		{
 			// $this->set_error( $this->upload->display_errors() );
 			// $this->set_error( 'upload_unsuccessful' );

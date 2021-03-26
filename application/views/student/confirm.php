@@ -24,7 +24,7 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-lg-6 col-sm-12 row">
-            <div class="col-4">
+            <!-- <div class="col-4">
                 <div class="card">
                     <div class="card-body">
                         <?= $value['correct'] ?> Benar
@@ -44,7 +44,8 @@
                         <?= $value['total_quest'] - $value['correct'] ?> Salah
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <a href="<?= base_url('student/test'); ?>" class="btn btn-primary btn-sn">Kembali</a>
         </div>
       </div>
     </div>

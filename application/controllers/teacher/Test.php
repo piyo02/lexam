@@ -38,7 +38,7 @@ class Test extends Teacher_Controller {
 		if ($pagination['total_records'] > 0 ) $this->data['pagination_links'] = $this->setPagination($pagination);
 		#################################################################3
 		$table = $this->services->get_table_config( $this->current_page );
-		$table[ "rows" ] = $this->test_model->tests( $pagination['start_record'], $pagination['limit_per_page'] )->result();
+		$table[ "rows" ] = $this->test_model->tests( $pagination['start_record'], $pagination['limit_per_page'], $this->user_id )->result();
 		$table = $this->load->view('templates/tables/plain_table', $table, true);
 		$this->data[ "contents" ] = $table;
 		$add_menu = array(
@@ -116,7 +116,7 @@ class Test extends Teacher_Controller {
         {
 			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->test_model->errors() ? $this->test_model->errors() : $this->session->flashdata('message')));
 			if(  validation_errors() || $this->test_model->errors() ) $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, $this->data['message'] ) );
-			$questionnaires = $this->questionnaire_model->questionnaires_by_user_id( $this->user_id )->result();
+			$questionnaires = $this->questionnaire_model->questionnaires_by_user_id( 0, NULL, $this->user_id )->result();
 
 			$list_questionnaire[] = "-- Pilih Bank Soal --";
 			foreach ($questionnaires as $key => $questionnaire) {

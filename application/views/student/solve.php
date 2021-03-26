@@ -97,7 +97,7 @@
                         <div class="card-header">
                             <?php switch ($question->type_option) {
                                 case 'image': ?>
-                                    <img src="<?= $question->image_answer; ?>" alt="Gambar Option <?= $question->code ?>" height="150">
+                                    <img src="<?= $question->image_answer; ?>" alt="Gambar Option <?= $question->code ?>" height="150" style="max-width: 100%;">
                             <?php   break;
                                 case 'short_answer': 
                                 case 'essay':?>
